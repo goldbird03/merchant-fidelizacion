@@ -528,19 +528,28 @@ async function createClient(name, email){
   await saveClients(); await window.storage.set('goldbird:my_client_id', id, false);
   render();
 }
+let actionLock = false;
 async function addStamp(id){
-  const c = state.clients.find(x=>x.id===id);
-  if (!c || c.stamps >= BUSINESS.maxStamps) return;
-  c.stamps += 1; c.plumas += BUSINESS.pointsPerStamp;
-  state.activity.push({ type:'stamp', clientId:id, name:c.name, ts: Date.now() });
-  await saveClients(); await saveActivity(); showToast(`Sello agregado a ${c.name}`); render();
+  if (actionLock) return;
+  actionLock = true;
+  try{
+    const c = state.clients.find(x=>x.id===id);
+    if (!c || c.stamps >= BUSINESS.maxStamps) return;
+    c.stamps += 1; c.plumas += BUSINESS.pointsPerStamp;
+    state.activity.push({ type:'stamp', clientId:id, name:c.name, ts: Date.now() });
+    await saveClients(); await saveActivity(); showToast(`Sello agregado a ${c.name}`); render();
+  } finally { actionLock = false; }
 }
 async function redeem(id){
-  const c = state.clients.find(x=>x.id===id);
-  if (!c || c.stamps < BUSINESS.maxStamps) return;
-  c.stamps = 0; c.cyclesCompleted += 1;
-  state.activity.push({ type:'redeem', clientId:id, name:c.name, ts: Date.now() });
-  await saveClients(); await saveActivity(); showToast(`Recompensa canjeada — ${c.name}`); render();
+  if (actionLock) return;
+  actionLock = true;
+  try{
+    const c = state.clients.find(x=>x.id===id);
+    if (!c || c.stamps < BUSINESS.maxStamps) return;
+    c.stamps = 0; c.cyclesCompleted += 1;
+    state.activity.push({ type:'redeem', clientId:id, name:c.name, ts: Date.now() });
+    await saveClients(); await saveActivity(); showToast(`Recompensa canjeada — ${c.name}`); render();
+  } finally { actionLock = false; }
 }
 function findClient(query){
   const q = query.trim().toLowerCase(); if (!q) return null;
