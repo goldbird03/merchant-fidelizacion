@@ -201,6 +201,18 @@
   .scanrow input{flex:1;}
   select{width:100%; background:var(--surface-2); border:1px solid var(--border-soft); color:var(--text); border-radius:var(--radius-md); padding:11px 13px; font-size:14px; font-family:'Inter',sans-serif; outline:none; cursor:pointer;}
   .foundcard{margin-top:1.25rem; background:var(--surface-2); border:1px solid var(--border-soft); border-radius:var(--radius-md); padding:1.1rem 1.25rem;}
+  .scan-instruction{
+    margin-top:1.25rem; border-radius:var(--radius-md); padding:1.4rem 1.5rem; text-align:center;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    border:1px solid var(--border); animation:instructionPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes instructionPulse{
+    0%,100%{ background:rgba(201,162,39,0.05); box-shadow:0 0 0 0 rgba(201,162,39,0.12); border-color:rgba(201,162,39,0.22);}
+    50%{ background:rgba(201,162,39,0.15); box-shadow:0 0 26px 4px rgba(201,162,39,0.28); border-color:rgba(232,200,116,0.55);}
+  }
+  .scan-instruction .ic{font-size:20px; animation:instructionBounce 2.4s ease-in-out infinite;}
+  @keyframes instructionBounce{0%,100%{transform:translateY(0);} 50%{transform:translateY(-3px);}}
+  .scan-instruction p{font-size:13.5px; font-weight:600; color:var(--gold-pale); letter-spacing:0.2px;}
   .foundtop{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;}
   .foundname{font-family:'Fraunces',serif; font-size:17px; font-weight:500;}
   .foundmeta{font-size:12px; color:var(--text-dim); margin-top:2px;}
@@ -771,7 +783,7 @@ function renderMerchantView(){
             <button class="btn btn-outline" onclick="redeem('${found.id}')" ${found.stamps<BUSINESS.maxStamps ? 'disabled' : ''}>Canjear recompensa</button>
           </div>
           ${found.stamps < BUSINESS.maxStamps ? `<button class="btn btn-outline btn-full" style="margin-top:10px; font-size:12px;" onclick="simulateBurst('${found.id}')">🎬 Simular 3 compras seguidas (demo rápida)</button>` : ''}
-        </div>` : `<div class="empty" style="border:1px dashed var(--border); margin-top:1rem; border-radius:8px; padding:1.25rem;">Elige un cliente arriba para asignar sellos o canjear una recompensa.</div>`}
+        </div>` : `<div class="scan-instruction"><span class="ic">👆</span><p>Selecciona el cliente para asignar sellos y canjear la recompensa</p></div>`}
     </div>
     <div class="sectiontitle">Clientes registrados</div>
     ${state.clients.length ? `
