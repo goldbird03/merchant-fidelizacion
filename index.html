@@ -44,9 +44,10 @@
   .logo-mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#B9852E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(231,181,73,0.35);flex-shrink:0;}
   .logo-word{font-weight:800;font-size:16px;letter-spacing:-.01em;}
   .logo-word span{color:var(--gold-light);}
-  .navlinks{display:flex;gap:1.75rem;font-size:13.5px;color:var(--text-dim);}
+  .navlinks{display:flex;gap:1.75rem;font-size:13.5px;color:var(--text-dim);align-items:center;}
   .navlinks a:hover{color:var(--gold-light);}
-  @media(max-width:720px){.navlinks{display:none;}}
+  .navlinks .navlink-login{color:var(--gold-light);font-weight:700;}
+  @media(max-width:720px){.navlinks a:not(.navlink-login){display:none;}}
 
   .btn{border:none;border-radius:var(--radius-md);padding:12px 22px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.2px;transition:all .2s;}
   .btn:active{transform:scale(.98);}
@@ -207,7 +208,7 @@
   .card .sub{font-size:13px;color:var(--text-dim);margin-bottom:1.25rem;}
   label{display:block;font-size:12px;color:var(--text-dim);margin-bottom:5px;margin-top:14px;}
   label:first-of-type{margin-top:0;}
-  input[type=text],input[type=email],select{width:100%;background:var(--surface-2);border:1px solid var(--border-soft);color:var(--text);border-radius:var(--radius-md);padding:11px 13px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+  input[type=text],input[type=email],input[type=password],select{width:100%;background:var(--surface-2);border:1px solid var(--border-soft);color:var(--text);border-radius:var(--radius-md);padding:11px 13px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
   input:focus,select:focus{border-color:var(--gold);}
   select{cursor:pointer;}
 
@@ -275,11 +276,52 @@
   footer{padding:3rem 0 2.5rem;text-align:center;}
   footer .logo{justify-content:center;margin-bottom:8px;}
   footer p{font-size:12px;color:var(--text-faint);}
+
+  /* ===== AUTH SHELL (usado por #login y #panel) ===== */
+  .auth-shell{display:flex;flex-direction:column;min-height:100vh;}
+  .authnav{position:sticky;top:0;z-index:50;background:rgba(11,15,23,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);}
+  .authnav .navrow{padding:1rem 1.5rem;}
+  .authnav .navlinks{gap:1rem;}
+
+  /* LOGIN */
+  .login-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;position:relative;z-index:1;}
+  .login-card{width:100%;max-width:380px;}
+  .login-card h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;margin-bottom:4px;}
+  .login-card .sub{font-size:13px;color:var(--text-dim);margin-bottom:1.5rem;}
+  .roleswitch{display:flex;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:999px;padding:4px;margin-bottom:1.5rem;}
+  .roleswitch button{flex:1;border:none;background:transparent;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;padding:9px 12px;border-radius:999px;cursor:pointer;transition:all .2s;}
+  .roleswitch button.active{background:var(--gold);color:#1A1400;}
+  .login-error{font-size:12.5px;color:var(--danger);margin-top:10px;display:none;}
+  .login-error.show{display:block;}
+  .login-footnote{font-size:11.5px;color:var(--text-faint);text-align:center;margin-top:1.25rem;line-height:1.5;}
+  .login-footnote a{color:var(--gold-light);border-bottom:1px solid transparent;}
+  .login-footnote a:hover{border-color:var(--gold-light);}
+  .back-home{position:fixed;top:20px;left:20px;font-size:12.5px;color:var(--text-dim);display:flex;align-items:center;gap:5px;z-index:5;}
+  .back-home:hover{color:var(--gold-light);}
+  @media(max-width:600px){.back-home{position:static;margin-bottom:1.5rem;align-self:flex-start;}
+    .login-wrap{flex-direction:column;align-items:stretch;}}
+
+  /* PANEL */
+  .panel-shell{flex:1;}
+  .panelnav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1080px;margin:0 auto;}
+  .panel-userchip{display:flex;align-items:center;gap:10px;}
+  .panel-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#B9852E);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#1A1400;flex-shrink:0;}
+  .panel-username{font-size:13px;font-weight:700;}
+  .panel-userrole{font-size:11px;color:var(--text-faint);}
+  .panel-logout{font-size:12.5px;color:var(--text-dim);border:1px solid var(--border-soft);border-radius:999px;padding:8px 16px;cursor:pointer;background:transparent;font-family:'Inter',sans-serif;transition:all .2s;}
+  .panel-logout:hover{color:var(--danger);border-color:var(--danger);}
+  .panel-hero{padding:2.5rem 0 1rem;}
+  .panel-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;}
+  .panel-hero p{font-size:13.5px;color:var(--text-dim);margin-top:4px;}
+  .panel-body{padding-bottom:4rem;}
 </style>
 </head>
 <body>
 
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div>
+
+<!-- ===================== VISTA: LANDING (/) ===================== -->
+<div id="view-landing">
 
 <nav>
   <div class="navrow">
@@ -292,6 +334,7 @@
       <a href="#modelo">Por qué te conviene</a>
       <a href="#prueba-social">Resultados</a>
       <a href="#features">Funciones</a>
+      <a href="/login" class="navlink-login" data-link>Iniciar sesión</a>
     </div>
     <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Probar demo gratis</a>
   </div>
@@ -471,6 +514,62 @@
   <p>Un producto ExpandeLab · Lima, Perú</p>
 </footer>
 
+</div>
+<!-- ===================== FIN VISTA LANDING ===================== -->
+
+<!-- ===================== VISTA: LOGIN (/login) ===================== -->
+<div id="view-login" class="auth-shell" style="display:none;">
+  <a href="/" class="back-home" data-link>← Volver al inicio</a>
+  <div class="login-wrap">
+    <div class="login-card card">
+      <h1>Ingresa a tu cuenta</h1>
+      <p class="sub">Accede al panel de tu comercio o a tu billetera de cliente.</p>
+      <div class="roleswitch">
+        <button type="button" id="login-tab-merchant" class="active" onclick="setLoginRole('merchant')">Soy comercio</button>
+        <button type="button" id="login-tab-client" onclick="setLoginRole('client')">Soy cliente</button>
+      </div>
+      <label>Correo o teléfono</label>
+      <input type="text" id="login-user" placeholder="nombre@correo.com">
+      <label>Código / Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••">
+      <p class="login-error" id="login-error">Completa ambos campos para continuar.</p>
+      <button class="btn btn-gold btn-full" style="margin-top:1.4rem" onclick="doLogin()">Ingresar</button>
+      <p class="login-footnote">¿Aún no tienes cuenta? <a href="/" data-link>Prueba la demo gratis</a> para ver cómo funciona antes de registrarte.</p>
+    </div>
+  </div>
+</div>
+<!-- ===================== FIN VISTA LOGIN ===================== -->
+
+<!-- ===================== VISTA: PANEL (/panel) ===================== -->
+<div id="view-panel" class="auth-shell" style="display:none;">
+  <nav class="authnav">
+    <div class="panelnav">
+      <div class="logo">
+        <div class="logo-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="logo-word">expande<span>Money</span></div>
+      </div>
+      <div class="panel-userchip">
+        <div class="panel-avatar" id="panel-avatar">?</div>
+        <div>
+          <div class="panel-username" id="panel-username">—</div>
+          <div class="panel-userrole" id="panel-userrole">—</div>
+        </div>
+        <button class="panel-logout" onclick="doLogout()">Cerrar sesión</button>
+      </div>
+    </div>
+  </nav>
+  <div class="panel-shell">
+    <div class="container panel-hero">
+      <h1>Panel de comercio</h1>
+      <p>Gestiona tus clientes, abona saldo y revisa la actividad en tiempo real.</p>
+    </div>
+    <div class="container panel-body">
+      <div id="panel-app" style="max-width:680px;margin:0 auto;"></div>
+    </div>
+  </div>
+</div>
+<!-- ===================== FIN VISTA PANEL ===================== -->
+
 <div class="activity-notif-wrap" id="activity-notif-wrap"></div>
 <div class="toast" id="toast"></div>
 
@@ -491,6 +590,7 @@ if (!window.storage){
 
 const BUSINESS = { name:"expandeMoney", maxCoins:10, valuePerCoin:2 };
 let state = { role:'merchant', myClientId:null, clients:[], activity:[], merchantFoundId:null, prevCoins:{}, prevTier:{}, usingMockData:false, settingsOpen:false, seenActivityLen:null };
+let loginRole = 'merchant';
 
 function uid(){ return 'EM' + Math.random().toString(36).slice(2,8).toUpperCase(); }
 function code6(id){ let h=0; for(let i=0;i<id.length;i++){ h=(h*31+id.charCodeAt(i))>>>0; } return (h%900000+100000).toString(); }
@@ -826,11 +926,109 @@ function doScanSelect(id){ if(!id) return; state.merchantFoundId=id; render(); }
 
 function render(){
   checkNewActivity();
-  document.getElementById('tab-client').classList.toggle('active', state.role==='client');
-  document.getElementById('tab-merchant').classList.toggle('active', state.role==='merchant');
-  const app = document.getElementById('app'); app.innerHTML='';
-  app.appendChild(state.role==='client' ? renderClientView() : renderMerchantView());
+  const tabClient = document.getElementById('tab-client');
+  const tabMerchant = document.getElementById('tab-merchant');
+  if (tabClient) tabClient.classList.toggle('active', state.role==='client');
+  if (tabMerchant) tabMerchant.classList.toggle('active', state.role==='merchant');
+  const app = document.getElementById('app');
+  if (app){ app.innerHTML=''; app.appendChild(state.role==='client' ? renderClientView() : renderMerchantView()); }
+  const panelApp = document.getElementById('panel-app');
+  if (panelApp && router.current === '/panel'){ panelApp.innerHTML=''; panelApp.appendChild(renderMerchantView()); }
 }
+
+/* =========================================================================
+   ROUTER — enrutamiento por historial (pushState) para /, /login y /panel.
+   NOTA DE DESPLIEGUE: si este archivo se sube a un hosting estático
+   (Netlify, Vercel, S3, Nginx, Apache), configura un "SPA fallback" para
+   que /login y /panel respondan con este mismo index.html en un refresh
+   directo o al compartir el link. Ejemplos:
+     Netlify  -> archivo _redirects con:  /*    /index.html   200
+     Vercel   -> vercel.json con "rewrites": [{"source":"/(.*)","destination":"/index.html"}]
+     Nginx    -> try_files $uri $uri/ /index.html;
+     Apache   -> .htaccess con mod_rewrite hacia index.html
+   Sin esa regla, entrar directo a expandemoney.com/panel devolverá 404
+   porque el servidor busca un archivo físico que no existe.
+   ========================================================================= */
+const router = {
+  current: '/',
+  routes: ['/', '/login', '/panel'],
+  resolve(path){
+    return this.routes.includes(path) ? path : '/';
+  },
+  async go(path, replace){
+    const target = this.resolve(path);
+    if (target === '/panel'){
+      const session = await getSession();
+      if (!session){ return this.go('/login', replace); }
+    }
+    this.current = target;
+    if (replace) history.replaceState({}, '', target);
+    else if (location.pathname !== target) history.pushState({}, '', target);
+    this.renderView();
+  },
+  async renderView(){
+    document.getElementById('view-landing').style.display = this.current === '/' ? 'block' : 'none';
+    document.getElementById('view-login').style.display = this.current === '/login' ? 'flex' : 'none';
+    document.getElementById('view-panel').style.display = this.current === '/panel' ? 'flex' : 'none';
+    if (this.current === '/panel'){
+      await hydratePanelHeader();
+      await loadShared(); render();
+    }
+    if (this.current === '/') window.scrollTo(0,0);
+  }
+};
+
+async function getSession(){
+  try{ const s = await window.storage.get('expandemoney:session', false); return s && s.value ? JSON.parse(s.value) : null; }
+  catch(e){ return null; }
+}
+async function setSession(session){ await window.storage.set('expandemoney:session', JSON.stringify(session), false); }
+async function clearSession(){ try{ await window.storage.delete('expandemoney:session', false); }catch(e){} }
+
+function setLoginRole(r){
+  loginRole = r;
+  document.getElementById('login-tab-merchant').classList.toggle('active', r==='merchant');
+  document.getElementById('login-tab-client').classList.toggle('active', r==='client');
+}
+
+async function doLogin(){
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  const errEl = document.getElementById('login-error');
+  if (!user || !pass){ errEl.textContent = 'Completa ambos campos para continuar.'; errEl.classList.add('show'); return; }
+  errEl.classList.remove('show');
+  const displayName = user.includes('@') ? user.split('@')[0] : user;
+  await setSession({ user: displayName, role: loginRole, ts: Date.now() });
+  showToast('Bienvenido de nuevo');
+  if (loginRole === 'client'){ await setRole('client'); await router.go('/'); }
+  else { await router.go('/panel'); }
+}
+
+async function hydratePanelHeader(){
+  const session = await getSession();
+  const nameEl = document.getElementById('panel-username');
+  const roleEl = document.getElementById('panel-userrole');
+  const avatarEl = document.getElementById('panel-avatar');
+  if (session){
+    nameEl.textContent = session.user;
+    roleEl.textContent = session.role === 'merchant' ? 'Cuenta de comercio' : 'Cuenta de cliente';
+    avatarEl.textContent = session.user.slice(0,1).toUpperCase();
+  }
+}
+
+async function doLogout(){
+  await clearSession();
+  showToast('Sesión cerrada');
+  await router.go('/');
+}
+
+document.addEventListener('click', (e)=>{
+  const link = e.target.closest('[data-link]');
+  if (!link) return;
+  e.preventDefault();
+  router.go(link.getAttribute('href'));
+});
+window.addEventListener('popstate', ()=>router.go(location.pathname, true));
 
 async function init(){
   document.getElementById('hero-qr').innerHTML = qrSvg('preview');
@@ -838,6 +1036,7 @@ async function init(){
   await loadPersonal(); await loadShared(); render();
   setInterval(async ()=>{ if (state.settingsOpen) return; await loadShared(); render(); }, 2500);
   setInterval(()=>resetDemo(), 180000);
+  await router.go(location.pathname, true);
 }
 init();
 </script>
