@@ -66,6 +66,8 @@
   h1.hero-h em{font-style:normal;color:var(--emerald);}
   .hero-sub{font-size:16px;color:var(--text-dim);margin-top:1.15rem;max-width:540px;line-height:1.6;}
   .hero-ctas{display:flex;gap:12px;margin-top:1.9rem;flex-wrap:wrap;justify-content:center;}
+  .hero-link-secondary{display:inline-block;margin-top:14px;font-size:13px;color:var(--text-dim);border-bottom:1px solid transparent;transition:all .2s;}
+  .hero-link-secondary:hover{color:var(--gold-light);border-color:var(--gold-light);}
   @media(max-width:600px){h1.hero-h{font-size:32px;}}
 
   .hero-visual{margin-top:3.5rem;display:flex;justify-content:center;}
@@ -139,10 +141,18 @@
   .trustitem p{font-size:12px;color:var(--text-faint);margin-top:4px;}
   @media(max-width:720px){.trustrow{grid-template-columns:1fr;}}
 
+  .statsgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
+  .statcard{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);padding:1.75rem 1.5rem;text-align:center;backdrop-filter:blur(18px);}
+  .stat-num{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:28px;color:var(--gold-light);}
+  .stat-label{font-size:12.5px;color:var(--text-dim);margin-top:6px;line-height:1.4;}
+  .stats-note{font-size:11px;color:var(--text-faint);text-align:center;margin-top:1.5rem;}
+  @media(max-width:720px){.statsgrid{grid-template-columns:1fr;}}
+
   #demo{background:var(--bg-alt);border-top:1px solid var(--border-soft);}
   .demohead{text-align:center;margin-bottom:2.5rem;}
   .demohead h2, .demohead .sect-sub{margin-left:auto;margin-right:auto;}
   .roletabs{display:flex;background:var(--surface);border:1px solid var(--border-soft);border-radius:999px;padding:4px;width:max-content;margin:1.5rem auto 0;}
+  .demo-reset-note{display:inline-block;font-size:12px;color:var(--gold-pale);background:rgba(231,181,73,0.10);border:1px solid var(--border);border-radius:999px;padding:6px 16px;margin-top:10px;}
   .roletab{border:none;background:transparent;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:9px 20px;border-radius:999px;cursor:pointer;transition:all .2s;}
   .roletab.active{background:var(--gold);color:#1A1400;box-shadow:0 2px 8px rgba(231,181,73,.25);}
 
@@ -280,6 +290,7 @@
     <div class="navlinks">
       <a href="#funciona">Cómo funciona</a>
       <a href="#modelo">Por qué te conviene</a>
+      <a href="#prueba-social">Resultados</a>
       <a href="#features">Funciones</a>
     </div>
     <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Probar demo gratis</a>
@@ -289,12 +300,12 @@
 <section class="hero">
   <div class="container" style="display:flex;flex-direction:column;align-items:center;">
     <span class="badge"><span class="dot"></span>Disponible en Lima · un producto ExpandeLab</span>
-    <h1 class="hero-h">Tus clientes se van y no regresan por falta de incentivos reales. Dales cashback y multiplica tus ventas.</h1>
-    <p class="hero-sub">Billetera digital de fidelización: tu cliente ve su plata acumularse en soles reales, tú ves cada visita y cada sol que retienes en caja. Sin apps que instalar, sin puntos que nadie entiende.</p>
+    <h1 class="hero-h">Deja de perder clientes con nuestro Cashback.</h1>
+    <p class="hero-sub">Billetera digital de fidelización: tu cliente acumula dinero, tú obtienes retienes más en cada visita. Sin apps que instalar.</p>
     <div class="hero-ctas">
-      <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Quiero vender más recurrencia</a>
-      <a href="#demo" class="btn btn-outline" onclick="setRole('client')">Recuperar mi plata como cliente</a>
+      <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Quiero ver como comercio</a>
     </div>
+    <a href="#demo" class="hero-link-secondary" onclick="setRole('client')">¿Eres cliente? Descubre tu saldo aquí →</a>
     <div class="hero-visual">
       <div class="mock b">
         <div class="mock-eyebrow">Saldo</div>
@@ -323,7 +334,7 @@
     <div class="eyebrow-lbl">Cómo funciona</div>
     <h2 class="sect-h">Activo en minutos, no en semanas.</h2>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><h3>Configura tu billetera</h3><p>Define cuánto abonas por visita, la recompensa y los niveles. Sin desarrollo.</p></div>
+      <div class="step"><div class="step-num">01</div><h3>Configura tu billetera</h3><p>Define cuánto abonas por visita, la recompensa y los niveles en menos de 10 minutos. Sin desarrollo.</p></div>
       <div class="step"><div class="step-num">02</div><h3>El cliente muestra su QR</h3><p>El comercio escanea desde el navegador. Nada que instalar.</p></div>
       <div class="step"><div class="step-num">03</div><h3>Ambos ven el saldo crecer</h3><p>El abono se refleja al instante en la billetera del cliente.</p></div>
     </div>
@@ -374,7 +385,7 @@
           </div>
           <div class="vc-item">
             <div class="vc-num">03</div>
-            <div><h4>Retención a bajo costo</h4><p>Fidelizar a quien ya te conoce cuesta una fracción de lo que cuesta captar un cliente nuevo en pauta publicitaria.</p></div>
+            <div><h4>Retención a bajo costo</h4><p>Fidelizar a quien ya te conoce puede costar hasta 5 veces menos que captar un cliente nuevo en pauta publicitaria.</p></div>
           </div>
         </div>
       </div>
@@ -414,6 +425,19 @@
   </div>
 </section>
 
+<section id="prueba-social">
+  <div class="container">
+    <div class="eyebrow-lbl" style="text-align:center;">Impacto real</div>
+    <h2 class="sect-h" style="margin-left:auto;margin-right:auto;text-align:center;">Los números que mueven a un comercio.</h2>
+    <div class="statsgrid">
+      <div class="statcard"><div class="stat-num">+10</div><div class="stat-label">comercios activos</div></div>
+      <div class="statcard"><div class="stat-num">S/ 1,000</div><div class="stat-label">en cashback entregado a clientes</div></div>
+      <div class="statcard"><div class="stat-num">+50%</div><div class="stat-label">más frecuencia de visita</div></div>
+    </div>
+    <p class="stats-note">*Cifras de referencia — reemplázalas con tus datos reales antes de publicar.</p>
+  </div>
+</section>
+
 <div class="trust">
   <div class="container">
     <div class="trustrow">
@@ -430,7 +454,7 @@
       <div class="eyebrow-lbl" style="text-align:center;">Prueba el producto</div>
       <h2 class="sect-h">Así se ve tu plata creciendo.</h2>
       <p class="sect-sub">Cambia de vista y prueba el flujo completo, cliente y comercio comparten el mismo saldo. Ya dejamos clientes de ejemplo cargados para que lo veas funcionando.</p>
-      <p class="sect-sub" style="margin-top:6px;font-size:12px;color:var(--text-faint);">Esta demo se reinicia sola cada 3 minutos para que puedas volver a probarla.</p>
+      <p class="demo-reset-note">⏱ Esta demo se reinicia sola cada 3 minutos para que puedas volver a probarla.</p>
       <div class="roletabs">
         <button class="roletab" id="tab-merchant" onclick="setRole('merchant')">Comercio</button>
         <button class="roletab" id="tab-client" onclick="setRole('client')">Cliente</button>
