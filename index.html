@@ -128,6 +128,16 @@
   .modelo-ctas .btn{padding:14px 26px;font-size:14px;}
   @media(max-width:520px){.modelo-ctas{flex-direction:column;align-items:stretch;}.modelo-ctas .btn{text-align:center;}}
 
+  .releaserules-head{text-align:center;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border-soft);}
+  .releaserules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem;}
+  .releaserule-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;backdrop-filter:blur(18px);}
+  .releaserule-card-gold{background:rgba(231,181,73,0.08);border-color:var(--border);}
+  .rr-medal{font-size:28px;margin-bottom:.5rem;}
+  .rr-tier{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;}
+  .rr-desc{font-size:12.5px;color:var(--text-dim);margin-top:.5rem;line-height:1.5;}
+  .rr-desc b{color:var(--text);}
+  @media(max-width:720px){.releaserules-grid{grid-template-columns:1fr;}}
+
   .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);border-radius:var(--radius-lg);overflow:hidden;margin-top:2.5rem;}
   .feat{background:var(--bg);padding:1.6rem 1.4rem;}
   .feat .ic{width:30px;height:30px;margin-bottom:14px;}
@@ -198,6 +208,16 @@
   @keyframes coinDrop{0%{transform:scale(.2) rotate(-45deg) translateY(-14px);opacity:0;}60%{transform:scale(1.3) rotate(10deg) translateY(2px);opacity:1;}100%{transform:scale(1) rotate(0) translateY(0);opacity:1;}}
   .progresstext{margin-top:10px;font-size:12.5px;color:var(--text-dim);}
   .rewardbanner{margin-top:1rem;background:var(--emerald-dim);border:1px solid var(--emerald);border-radius:var(--radius-md);padding:.85rem 1rem;font-size:13px;color:var(--gold-pale);display:flex;align-items:center;gap:8px;}
+
+  .releasebox{margin-top:1rem;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:.9rem 1rem;}
+  .releasebox-oro{background:rgba(231,181,73,0.10);border-color:var(--border);}
+  .releasebar{height:6px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:.7rem;}
+  .releasebar-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--gold-light));border-radius:999px;transition:width .4s ease;}
+  .releaserow{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--text-dim);padding:2px 0;}
+  .releaserow .mono{font-family:'JetBrains Mono',monospace;font-weight:700;}
+  .releaserow .lib{color:var(--emerald);}
+  .releaserow .bloq{color:var(--text-faint);}
+  .release-note{font-size:11.5px;color:var(--text-faint);margin-top:.5rem;line-height:1.45;}
   .qrbox{width:118px;height:118px;background:#000;border-radius:8px;padding:8px;}
   .qrbox svg{width:100%;height:100%;}
   .codetext{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;color:var(--gold-light);text-align:center;}
@@ -434,6 +454,29 @@
       </div>
     </div>
 
+    <div class="releaserules-head">
+      <div class="eyebrow-lbl" style="text-align:center;">Regla de liberación de saldo</div>
+      <h3 class="sect-h" style="font-size:20px;margin-left:auto;margin-right:auto;text-align:center;max-width:560px;">Mientras más alto tu nivel, más rápido usas tu plata.</h3>
+      <p class="sect-sub" style="margin-left:auto;margin-right:auto;text-align:center;">La tarjeta se completa en S/20. Al llegar a la mitad (S/10) se libera una parte para gastar de inmediato en el comercio — el resto se libera al completar la tarjeta, momento en que esta se reinicia.</p>
+    </div>
+    <div class="releaserules-grid">
+      <div class="releaserule-card">
+        <div class="rr-medal">🥉</div>
+        <h4 class="rr-tier" style="color:var(--bronze);">Bronce</h4>
+        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/5</b>. El saldo restante se libera al completar la tarjeta.</p>
+      </div>
+      <div class="releaserule-card">
+        <div class="rr-medal">🥈</div>
+        <h4 class="rr-tier" style="color:var(--silver);">Plata</h4>
+        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/8</b>. El saldo restante se libera al completar la tarjeta.</p>
+      </div>
+      <div class="releaserule-card releaserule-card-gold">
+        <div class="rr-medal">🥇</div>
+        <h4 class="rr-tier" style="color:var(--gold-light);">Oro</h4>
+        <p class="rr-desc">Liberación inmediata. Todo el cashback se suma a favor desde el inicio — no hay dinero por liberar.</p>
+      </div>
+    </div>
+
     <div class="modelo-strip">Cada abono, canje y nivel se refleja en tiempo real — <b>el mismo saldo, para ambos lados.</b></div>
 
     <div class="modelo-ctas">
@@ -495,7 +538,7 @@
   <div class="container">
     <div class="demohead">
       <div class="eyebrow-lbl" style="text-align:center;">Prueba el producto</div>
-      <h2 class="sect-h">Los puntos son dinero que va creciendo.</h2>
+      <h2 class="sect-h">Así se ve tu plata creciendo.</h2>
       <p class="sect-sub">Cambia de vista y prueba el flujo completo, cliente y comercio comparten el mismo saldo. Ya dejamos clientes de ejemplo cargados para que lo veas funcionando.</p>
       <p class="demo-reset-note">⏱ Esta demo se reinicia sola cada 3 minutos para que puedas volver a probarla.</p>
       <div class="roletabs">
@@ -595,14 +638,98 @@ let loginRole = 'merchant';
 function uid(){ return 'EM' + Math.random().toString(36).slice(2,8).toUpperCase(); }
 function code6(id){ let h=0; for(let i=0;i<id.length;i++){ h=(h*31+id.charCodeAt(i))>>>0; } return (h%900000+100000).toString(); }
 function tierFor(cycles){ return cycles>=3 ? 'Oro' : cycles>=1 ? 'Plata' : 'Bronce'; }
+function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈' : '🥉'; }
+
+/* ==========================================================================
+   REGLA DE NEGOCIO: liberación de saldo por nivel
+   La tarjeta se llena hasta maxCoins (10 abonos = S/20 en total).
+   Al llegar a la mitad (5 abonos = S/10 acumulados) se libera una porción
+   del saldo para consumo inmediato en el comercio afiliado, según el nivel
+   del cliente. El resto queda "por liberar" hasta completar los S/20,
+   momento en el que se libera el 100% y la tarjeta se reinicia.
+     - Bronce: al acumular S/10 se liberan S/5 (el resto al completar la tarjeta)
+     - Plata:  al acumular S/10 se liberan S/8 (el resto al completar la tarjeta)
+     - Oro:    liberación inmediata de Cashback — no existen saldos "por liberar"
+   ========================================================================== */
+const RELEASE_RULES = { Bronce: 6, Plata: 8 }; // soles liberados al llegar a la mitad de la tarjeta
+function computeSaldoState(c){
+  const tier = tierFor(c.cyclesCompleted);
+  const acumuladoCiclo = c.coins * BUSINESS.valuePerCoin;   // S/ acumulados en la tarjeta actual (0–20)
+  const mitad = (BUSINESS.maxCoins * BUSINESS.valuePerCoin) / 2; // S/10
+  let liberado, bloqueado;
+  if (tier === 'Oro'){
+    liberado = acumuladoCiclo; bloqueado = 0;
+  } else if (c.coins >= BUSINESS.maxCoins){
+    liberado = acumuladoCiclo; bloqueado = 0; // tarjeta completa: libera el 100%
+  } else if (acumuladoCiclo >= mitad){
+    liberado = RELEASE_RULES[tier]; bloqueado = acumuladoCiclo - liberado;
+  } else {
+    liberado = 0; bloqueado = acumuladoCiclo;
+  }
+  return { tier, liberado, bloqueado, acumuladoCiclo, mitad };
+}
+function releaseBlockHtml(c){
+  const s = computeSaldoState(c);
+  const pctLib = s.acumuladoCiclo>0 ? Math.round((s.liberado/s.acumuladoCiclo)*100) : 0;
+  if (s.tier === 'Oro'){
+    return `<div class="releasebox releasebox-oro">
+      <div class="releaserow"><span>🥇 Liberación íntegra</span><span class="mono">${soles(s.liberado)} disponibles</span></div>
+      <p class="release-note">Nivel Oro: todo lo que acumulas se libera de inmediato. No hay saldo por liberar.</p>
+    </div>`;
+  }
+  return `<div class="releasebox">
+    <div class="releasebar"><div class="releasebar-fill" style="width:${pctLib}%"></div></div>
+    <div class="releaserow"><span>Disponible ahora</span><span class="mono lib">${soles(s.liberado)}</span></div>
+    <div class="releaserow"><span>Por liberar</span><span class="mono bloq">${soles(s.bloqueado)}</span></div>
+    <p class="release-note">${s.acumuladoCiclo < s.mitad
+      ? `Nivel ${s.tier}: al llegar a ${soles(s.mitad)} se liberan ${soles(RELEASE_RULES[s.tier])} para usar en caja.`
+      : `El resto se libera al completar ${soles(BUSINESS.maxCoins*BUSINESS.valuePerCoin)} — ahí la tarjeta se reinicia.`}</p>
+  </div>`;
+}
+function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈' : '🥉'; }
+
+/* =========================================================================
+   REGLA DE NEGOCIO — Liberación de saldo por nivel
+   Tarjeta completa = 10 abonos x S/2 = S/20 (BUSINESS.maxCoins x valuePerCoin)
+   Punto medio de la tarjeta = S/10 acumulados (5 abonos)
+
+   - Bronce 🥉: al llegar a S/10, se liberan S/5 (50%). El saldo queda "por liberar" junto con todo lo que se acumule, hasta
+     completar la tarjeta — En ese momento se libera el 100% y la tarjeta se reinicia.
+   - Plata 🥈: al llegar a S/10, se liberan S/8 (80%). El saldo queda "por liberar" junto con todo lo que se acumule, hasta
+     completar la tarjeta, En ese momento se libera el 100% y la tarjeta se reinicia.
+   - Oro 🥇: no tiene monto "por liberar" — todo lo que acumula se libera
+     de inmediato y es de libre disposición desde el primer abono.
+   ========================================================================= */
+const TIER_RELEASE_PCT = { Bronce: 0.6, Plata: 0.8, Oro: 1 };
+const CARD_HALF_SOLES = (BUSINESS.maxCoins * BUSINESS.valuePerCoin) / 2; // S/10
+const CARD_TOTAL_SOLES = BUSINESS.maxCoins * BUSINESS.valuePerCoin;      // S/20
+
+function computeCycle(c){
+  const tier = tierFor(c.cyclesCompleted);
+  const acumulado = c.coins * BUSINESS.valuePerCoin;
+  let disponibleTotal, porLiberar;
+  if (tier === 'Oro'){
+    disponibleTotal = acumulado; porLiberar = 0;
+  } else {
+    const pct = TIER_RELEASE_PCT[tier];
+    if (acumulado < CARD_HALF_SOLES){ disponibleTotal = 0; porLiberar = acumulado; }
+    else if (acumulado < CARD_TOTAL_SOLES){
+      const liberadoAlMedio = CARD_HALF_SOLES * pct;
+      disponibleTotal = liberadoAlMedio; porLiberar = acumulado - liberadoAlMedio;
+    } else { disponibleTotal = acumulado; porLiberar = 0; }
+  }
+  const spent = c.cycleSpent || 0;
+  const disponibleAhora = Math.max(0, disponibleTotal - spent);
+  return { tier, acumulado, disponibleAhora, porLiberar, isComplete: acumulado >= CARD_TOTAL_SOLES };
+}
 function fmtTime(ts){ return new Date(ts).toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}); }
 function soles(n){ return 'S/ ' + n.toFixed(2); }
 
 function injectMockData(){
   if (state.clients.length === 0){
-    const m1 = { id:'EMAAAA', name:'Carlos Mendoza', email:'carlos@gmail.com', coins:6, cyclesCompleted:0, saldo:12, createdAt:Date.now()-3600000 };
-    const m2 = { id:'EMBBBB', name:'Lucía Fernández', email:'lucia@hotmail.com', coins:9, cyclesCompleted:1, saldo:38, createdAt:Date.now()-7200000 };
-    const m3 = { id:'EMCCCC', name:'Mauricio Ortiz', email:'mori@outlook.com', coins:2, cyclesCompleted:3, saldo:64, createdAt:Date.now()-12000000 };
+    const m1 = { id:'EMAAAA', name:'Carlos Mendoza', email:'carlos@gmail.com', coins:6, cyclesCompleted:0, saldo:12, cycleSpent:0, createdAt:Date.now()-3600000 };
+    const m2 = { id:'EMBBBB', name:'Lucía Fernández', email:'lucia@hotmail.com', coins:9, cyclesCompleted:1, saldo:38, cycleSpent:0, createdAt:Date.now()-7200000 };
+    const m3 = { id:'EMCCCC', name:'Mauricio Ortiz', email:'mori@outlook.com', coins:2, cyclesCompleted:3, saldo:64, cycleSpent:0, createdAt:Date.now()-12000000 };
     state.clients = [m1,m2,m3];
     if (!state.myClientId) state.myClientId = m2.id;
     state.activity = [
@@ -648,9 +775,12 @@ function playChime(kind){
 function notifyActivity(a){
   const wrap = document.getElementById('activity-notif-wrap'); if (!wrap) return;
   const isCanje = a.type === 'canje';
+  const isParcial = a.type === 'canje_parcial';
   const el = document.createElement('div'); el.className = 'activity-notif';
-  el.innerHTML = isCanje ? `<span style="font-size:16px;">🎉</span><span>Cashback canjeado — <b>${a.name}</b></span>` : `<span style="font-size:16px;">🪙</span><span>+S/${BUSINESS.valuePerCoin} de saldo — <b>${a.name}</b></span>`;
-  wrap.appendChild(el); playChime(isCanje ? 'canje' : 'abono');
+  el.innerHTML = isCanje ? `<span style="font-size:16px;">🎉</span><span>Cashback canjeado — <b>${a.name}</b></span>`
+    : isParcial ? `<span style="font-size:16px;">💸</span><span>Canje disponible S/${(a.monto||0).toFixed(2)} — <b>${a.name}</b></span>`
+    : `<span style="font-size:16px;">🪙</span><span>+S/${BUSINESS.valuePerCoin} de saldo — <b>${a.name}</b></span>`;
+  wrap.appendChild(el); playChime(isCanje || isParcial ? 'canje' : 'abono');
   setTimeout(()=>{ el.classList.add('leaving'); setTimeout(()=>el.remove(),320); }, 2800);
 }
 function checkNewActivity(){
@@ -721,7 +851,7 @@ async function setRole(r){ state.role=r; await window.storage.set('expandemoney:
 async function createClient(name, email){
   if (!name.trim()){ showToast('Ingresa tu nombre'); return; }
   const id = uid();
-  const client = { id, name:name.trim(), email:email.trim(), coins:0, cyclesCompleted:0, saldo:0, createdAt:Date.now() };
+  const client = { id, name:name.trim(), email:email.trim(), coins:0, cyclesCompleted:0, saldo:0, cycleSpent:0, createdAt:Date.now() };
   if (state.usingMockData){ state.clients=[]; state.activity=[]; state.usingMockData=false; }
   state.clients.push(client); state.myClientId = id;
   await saveClients(); await window.storage.set('expandemoney:my_client_id', id, false);
@@ -730,16 +860,27 @@ async function createClient(name, email){
 let actionQueue = Promise.resolve();
 function addCoin(id){ actionQueue = actionQueue.then(()=>doAddCoin(id)).catch(err=>console.error(err)); return actionQueue; }
 function redeem(id){ actionQueue = actionQueue.then(()=>doRedeem(id)).catch(err=>console.error(err)); return actionQueue; }
+function redeemDisponible(id){ actionQueue = actionQueue.then(()=>doRedeemDisponible(id)).catch(err=>console.error(err)); return actionQueue; }
 
 async function doAddCoin(id){
   const c = state.clients.find(x=>x.id===id); if (!c || c.coins>=BUSINESS.maxCoins) return;
+  if (c.cycleSpent === undefined) c.cycleSpent = 0;
   c.coins += 1; c.saldo += BUSINESS.valuePerCoin;
   state.activity.push({ type:'abono', clientId:id, name:c.name, ts:Date.now() });
   await saveClients(); await saveActivity(); showToast(`+S/${BUSINESS.valuePerCoin} abonados a ${c.name}`); render();
 }
+async function doRedeemDisponible(id){
+  const c = state.clients.find(x=>x.id===id); if (!c) return;
+  const { disponibleAhora, isComplete } = computeCycle(c);
+  if (isComplete){ return doRedeem(id); } // en la tarjeta completa se usa el canje total
+  if (disponibleAhora <= 0){ showToast('Aún no hay saldo liberado para canjear'); return; }
+  c.cycleSpent = (c.cycleSpent || 0) + disponibleAhora;
+  state.activity.push({ type:'canje_parcial', clientId:id, name:c.name, ts:Date.now(), monto:disponibleAhora });
+  await saveClients(); await saveActivity(); showToast(`Canjeado S/${disponibleAhora.toFixed(2)} disponible de ${c.name}`); render();
+}
 async function doRedeem(id){
   const c = state.clients.find(x=>x.id===id); if (!c || c.coins<BUSINESS.maxCoins) return;
-  c.coins = 0; c.cyclesCompleted += 1;
+  c.coins = 0; c.cyclesCompleted += 1; c.cycleSpent = 0;
   state.activity.push({ type:'canje', clientId:id, name:c.name, ts:Date.now() });
   await saveClients(); await saveActivity(); showToast(`Cashback canjeado — ${c.name}`); render();
 }
@@ -804,9 +945,10 @@ function renderClientView(){
         <div class="pass-main">
           <div class="eyebrow">Billetera digital</div>
           <div class="clientname">${c.name}</div>
-          <div class="tierrow"><span class="tierbadge tier-${tier}">${tier}</span><span class="saldo" id="saldo-anchor">Saldo: <b class="saldo-hero" id="saldo-num">${soles(c.saldo)}</b></span></div>
+          <div class="tierrow"><span class="tierbadge tier-${tier}">${tierMedal(tier)} ${tier}</span><span class="saldo" id="saldo-anchor">Saldo: <b class="saldo-hero" id="saldo-num">${soles(c.saldo)}</b></span></div>
           ${renderCoinRow(c, animateIndex)}
           <div class="progresstext">${c.coins} de ${BUSINESS.maxCoins} abonos ${full ? '— ¡completa!' : 'para tu próximo cashback'}</div>
+          ${releaseBlockHtml(c)}
           ${full ? `<div class="rewardbanner">Tienes cashback listo. Muéstrale tu código al comercio.</div>` : ''}
           ${justRedeemed ? `<div class="rewardbanner">🎉 ¡Cashback canjeado! Tu ciclo empieza de nuevo.</div>` : ''}
         </div>
@@ -877,9 +1019,10 @@ function renderMerchantView(){
         <div class="foundcard" id="found-card">
           <div class="foundtop">
             <div><div class="foundname">${found.name}</div><div class="foundmeta">${found.coins}/${BUSINESS.maxCoins} abonos · <span class="saldo" id="saldo-anchor">Saldo: <b class="saldo-hero" id="saldo-num">${soles(found.saldo)}</b></span> · nivel ${foundTier}</div></div>
-            <span class="tierbadge tier-${foundTier}">${foundTier}</span>
+            <span class="tierbadge tier-${foundTier}">${tierMedal(foundTier)} ${foundTier}</span>
           </div>
           ${renderCoinRow(found, animateIndex)}
+          ${releaseBlockHtml(found)}
           ${justRedeemed ? `<div class="rewardbanner">🎉 Cashback canjeado para ${found.name}. Ciclo reiniciado.</div>` : ''}
           <div class="actionrow">
             <button class="btn btn-gold" onclick="addCoin('${found.id}')" ${found.coins>=BUSINESS.maxCoins?'disabled':''}>+S/${BUSINESS.valuePerCoin} (compra)</button>
@@ -890,8 +1033,8 @@ function renderMerchantView(){
     </div>
     <div class="sectiontitle">Clientes registrados</div>
     ${state.clients.length ? `
-      <table><tr><th>Cliente</th><th>Abonos</th><th>Saldo</th><th>Nivel</th></tr>
-        ${state.clients.map(c=>`<tr><td>${c.name}</td><td class="num">${c.coins}/${BUSINESS.maxCoins}</td><td class="num">${soles(c.saldo)}</td><td>${tierFor(c.cyclesCompleted)}</td></tr>`).join('')}
+      <table><tr><th>Cliente</th><th>Abonos</th><th>Saldo</th><th>Disponible</th><th>Nivel</th></tr>
+        ${state.clients.map(c=>`<tr><td>${c.name}</td><td class="num">${c.coins}/${BUSINESS.maxCoins}</td><td class="num">${soles(c.saldo)}</td><td class="num">${soles(computeSaldoState(c).liberado)}</td><td>${tierMedal(tierFor(c.cyclesCompleted))} ${tierFor(c.cyclesCompleted)}</td></tr>`).join('')}
       </table>` : '<div class="empty">Aún no hay clientes. Crea uno desde la vista Cliente.</div>'}
     <div class="sectiontitle">Actividad del negocio</div>
     <div class="activity" style="margin-top:0">
