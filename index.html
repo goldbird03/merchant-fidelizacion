@@ -334,6 +334,35 @@
   .panel-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;}
   .panel-hero p{font-size:13.5px;color:var(--text-dim);margin-top:4px;}
   .panel-body{padding-bottom:4rem;}
+
+  /* ===== EFECTOS / MICROINTERACCIONES ===== */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-stagger.in{transition-delay:var(--rd,0ms);}
+
+  .hoverlift{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s ease,border-color .28s ease;}
+  .hoverlift:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(0,0,0,.4);border-color:var(--border);}
+
+  .text-shimmer{background:linear-gradient(100deg,var(--emerald) 20%,var(--gold-light) 50%,var(--emerald) 80%);background-size:220% auto;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerMove 5s linear infinite;}
+  @keyframes shimmerMove{to{background-position:-220% center;}}
+
+  /* Spotlight de cursor en botones dorados */
+  .btn-gold{position:relative;overflow:hidden;}
+  .btn-gold::before{content:'';position:absolute;inset:0;background:radial-gradient(160px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.35),transparent 60%);opacity:0;transition:opacity .3s ease;pointer-events:none;}
+  .btn-gold:hover::before{opacity:1;}
+
+  /* Ticker de cifras en movimiento (estilo marquee) */
+  .ticker{border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);background:var(--bg-alt);overflow:hidden;padding:14px 0;position:relative;z-index:1;}
+  .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
+  .ticker::before{left:0;background:linear-gradient(90deg,var(--bg-alt),transparent);}
+  .ticker::after{right:0;background:linear-gradient(-90deg,var(--bg-alt),transparent);}
+  .ticker-track{display:flex;width:max-content;gap:2.5rem;animation:tickerScroll 32s linear infinite;}
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
+  .ticker-item b{color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-weight:700;}
+  .ticker-dot{color:var(--gold);opacity:.6;}
+  @keyframes tickerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media(prefers-reduced-motion: reduce){.ticker-track{animation:none;}.reveal{opacity:1;transform:none;transition:none;}}
 </style>
 </head>
 <body>
@@ -363,7 +392,7 @@
 <section class="hero">
   <div class="container" style="display:flex;flex-direction:column;align-items:center;">
     <span class="badge"><span class="dot"></span>Disponible en Lima · un producto ExpandeLab</span>
-    <h1 class="hero-h">Deja de perder clientes con nuestro Cashback.</h1>
+    <h1 class="hero-h">Deja de perder clientes con nuestro <span class="text-shimmer">Cashback</span>.</h1>
     <p class="hero-sub">Billetera digital de fidelización: tu cliente acumula dinero, tú obtienes retienes más en cada visita. Sin apps que instalar.</p>
     <div class="hero-ctas">
       <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Quiero ver como comercio</a>
@@ -392,14 +421,18 @@
   </div>
 </section>
 
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track"></div>
+</div>
+
 <section id="funciona">
   <div class="container">
     <div class="eyebrow-lbl">Cómo funciona</div>
     <h2 class="sect-h">Activo en minutos, no en semanas.</h2>
     <div class="steps">
-      <div class="step"><div class="step-num">01</div><h3>Configura tu billetera</h3><p>Define cuánto abonas por visita, la recompensa y los niveles en menos de 10 minutos. Sin desarrollo.</p></div>
-      <div class="step"><div class="step-num">02</div><h3>El cliente muestra su QR</h3><p>El comercio escanea desde el navegador. Nada que instalar.</p></div>
-      <div class="step"><div class="step-num">03</div><h3>Ambos ven el saldo crecer</h3><p>El abono se refleja al instante en la billetera del cliente.</p></div>
+      <div class="step reveal"><div class="step-num">01</div><h3>Configura tu billetera</h3><p>Define cuánto abonas por visita, la recompensa y los niveles en menos de 10 minutos. Sin desarrollo.</p></div>
+      <div class="step reveal"><div class="step-num">02</div><h3>El cliente muestra su QR</h3><p>El comercio escanea desde el navegador. Nada que instalar.</p></div>
+      <div class="step reveal"><div class="step-num">03</div><h3>Ambos ven el saldo crecer</h3><p>El abono se refleja al instante en la billetera del cliente.</p></div>
     </div>
   </div>
 </section>
@@ -413,7 +446,7 @@
     </div>
 
     <div class="valuegrid">
-      <div class="valuecard client">
+      <div class="valuecard client reveal hoverlift">
         <div class="vc-icon">👤</div>
         <h3>Para el cliente</h3>
         <div class="vc-tag">Lo que gana cada vez que vuelve</div>
@@ -433,7 +466,7 @@
         </div>
       </div>
 
-      <div class="valuecard merchant">
+      <div class="valuecard merchant reveal hoverlift">
         <div class="vc-icon">🏪</div>
         <h3>Para el comercio</h3>
         <div class="vc-tag">Lo que gana cada vez que retiene</div>
@@ -460,20 +493,20 @@
       <p class="sect-sub" style="margin-left:auto;margin-right:auto;text-align:center;">La tarjeta se completa en S/20. Al llegar a la mitad (S/10) se libera una parte para gastar de inmediato en el comercio — el resto se libera al completar la tarjeta, momento en que esta se reinicia.</p>
     </div>
     <div class="releaserules-grid">
-      <div class="releaserule-card">
+      <div class="releaserule-card reveal hoverlift">
         <div class="rr-medal">🥉</div>
         <h4 class="rr-tier" style="color:var(--bronze);">Bronce</h4>
-        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/5</b>. El saldo restante se libera al completar la tarjeta.</p>
+        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/6</b>. Los S/4 restantes se liberan al completar los S/20.</p>
       </div>
-      <div class="releaserule-card">
+      <div class="releaserule-card reveal hoverlift">
         <div class="rr-medal">🥈</div>
         <h4 class="rr-tier" style="color:var(--silver);">Plata</h4>
-        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/8</b>. El saldo restante se libera al completar la tarjeta.</p>
+        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/8</b>. Los S/2 restantes se liberan al completar los S/20.</p>
       </div>
-      <div class="releaserule-card releaserule-card-gold">
+      <div class="releaserule-card releaserule-card-gold reveal hoverlift">
         <div class="rr-medal">🥇</div>
         <h4 class="rr-tier" style="color:var(--gold-light);">Oro</h4>
-        <p class="rr-desc">Liberación inmediata. Todo el cashback se suma a favor desde el inicio — no hay dinero por liberar.</p>
+        <p class="rr-desc">Liberación íntegra e inmediata. Todo el saldo se suma a favor — no hay dinero por liberar.</p>
       </div>
     </div>
 
@@ -491,19 +524,19 @@
     <div class="eyebrow-lbl">Funciones</div>
     <h2 class="sect-h">Lo esencial, sin ruido.</h2>
     <div class="feats">
-      <div class="feat">
+      <div class="feat reveal hoverlift">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/></svg>
         <h3>QR por cliente</h3><p>Código único, se muestra desde el celular sin app.</p>
       </div>
-      <div class="feat">
+      <div class="feat reveal hoverlift">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><circle cx="6" cy="12" r="2.3"/><circle cx="12" cy="12" r="2.3"/><circle cx="18" cy="12" r="2.3"/></svg>
         <h3>Saldo y niveles</h3><p>Cada visita suma soles. Los niveles motivan la siguiente.</p>
       </div>
-      <div class="feat">
+      <div class="feat reveal hoverlift">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><path d="M4 19V9M12 19V4M20 19v-6"/></svg>
         <h3>Actividad en vivo</h3><p>El comercio ve quién vuelve y cuánto acumula.</p>
       </div>
-      <div class="feat">
+      <div class="feat reveal hoverlift">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><path d="M12 3l2.4 6.5L21 12l-6.6 2.5L12 21l-2.4-6.5L3 12l6.6-2.5z"/></svg>
         <h3>Cashback automático</h3><p>Se habilita solo al completar la billetera.</p>
       </div>
@@ -516,9 +549,9 @@
     <div class="eyebrow-lbl" style="text-align:center;">Impacto real</div>
     <h2 class="sect-h" style="margin-left:auto;margin-right:auto;text-align:center;">Los números que mueven a un comercio.</h2>
     <div class="statsgrid">
-      <div class="statcard"><div class="stat-num">+10</div><div class="stat-label">comercios activos</div></div>
-      <div class="statcard"><div class="stat-num">S/ 1,000</div><div class="stat-label">en cashback entregado a clientes</div></div>
-      <div class="statcard"><div class="stat-num">+50%</div><div class="stat-label">más frecuencia de visita</div></div>
+      <div class="statcard reveal hoverlift"><div class="stat-num" data-target="10" data-prefix="+">0</div><div class="stat-label">comercios activos</div></div>
+      <div class="statcard reveal hoverlift"><div class="stat-num" data-target="1000" data-prefix="S/ ">0</div><div class="stat-label">en cashback entregado a clientes</div></div>
+      <div class="statcard reveal hoverlift"><div class="stat-num" data-target="50" data-prefix="+" data-suffix="%">0</div><div class="stat-label">más frecuencia de visita</div></div>
     </div>
     <p class="stats-note">*Cifras de referencia — reemplázalas con tus datos reales antes de publicar.</p>
   </div>
@@ -647,9 +680,9 @@ function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈'
    del saldo para consumo inmediato en el comercio afiliado, según el nivel
    del cliente. El resto queda "por liberar" hasta completar los S/20,
    momento en el que se libera el 100% y la tarjeta se reinicia.
-     - Bronce: al acumular S/10 se liberan S/5 (el resto al completar la tarjeta)
-     - Plata:  al acumular S/10 se liberan S/8 (el resto al completar la tarjeta)
-     - Oro:    liberación inmediata de Cashback — no existen saldos "por liberar"
+     - Bronce: al llegar a S/10 se liberan S/6 (el resto se libera al completar S/20)
+     - Plata:  al llegar a S/10 se liberan S/8 (el resto se libera al completar S/20)
+     - Oro:    liberación íntegra e inmediata — no existe saldo "por liberar"
    ========================================================================== */
 const RELEASE_RULES = { Bronce: 6, Plata: 8 }; // soles liberados al llegar a la mitad de la tarjeta
 function computeSaldoState(c){
@@ -693,10 +726,11 @@ function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈'
    Tarjeta completa = 10 abonos x S/2 = S/20 (BUSINESS.maxCoins x valuePerCoin)
    Punto medio de la tarjeta = S/10 acumulados (5 abonos)
 
-   - Bronce 🥉: al llegar a S/10, se liberan S/5 (50%). El saldo queda "por liberar" junto con todo lo que se acumule, hasta
-     completar la tarjeta — En ese momento se libera el 100% y la tarjeta se reinicia.
-   - Plata 🥈: al llegar a S/10, se liberan S/8 (80%). El saldo queda "por liberar" junto con todo lo que se acumule, hasta
-     completar la tarjeta, En ese momento se libera el 100% y la tarjeta se reinicia.
+   - Bronce 🥉: al llegar a S/10, se liberan S/6 (60%). Los S/4 restantes
+     quedan "por liberar" junto con todo lo que se siga acumulando, hasta
+     completar los S/20 — recién ahí se libera el 100% y la tarjeta se reinicia.
+   - Plata 🥈: al llegar a S/10, se liberan S/8 (80%). Los S/2 restantes
+     quedan "por liberar" igual que en Bronce, hasta completar los S/20.
    - Oro 🥇: no tiene monto "por liberar" — todo lo que acumula se libera
      de inmediato y es de libre disposición desde el primer abono.
    ========================================================================= */
@@ -1173,12 +1207,76 @@ document.addEventListener('click', (e)=>{
 });
 window.addEventListener('popstate', ()=>router.go(location.pathname, true));
 
+/* ===== EFECTOS: reveal on scroll ===== */
+function initReveal(){
+  const els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  els.forEach((el,i)=>{ el.classList.add('reveal-stagger'); el.style.setProperty('--rd', Math.min(i%4,4)*80+'ms'); });
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el=>io.observe(el));
+}
+
+/* ===== EFECTOS: contadores animados ===== */
+function animateCount(el){
+  const target = parseFloat(el.getAttribute('data-target')||'0');
+  const prefix = el.getAttribute('data-prefix')||'';
+  const suffix = el.getAttribute('data-suffix')||'';
+  const duration = 1400; const start = performance.now();
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function tick(now){
+    const p = Math.min((now-start)/duration, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = prefix + fmt(target*eased) + suffix;
+    if (p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+function initCounters(){
+  const grid = document.querySelector('.statsgrid'); if (!grid) return;
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if (entry.isIntersecting){
+        entry.target.querySelectorAll('.stat-num[data-target]').forEach(animateCount);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  io.observe(grid);
+}
+
+/* ===== EFECTOS: ticker de cifras (marquee) ===== */
+function initTicker(){
+  const track = document.getElementById('ticker-track'); if (!track) return;
+  const facts = [
+    'S/2 de saldo por cada visita','Niveles Bronce, Plata y Oro','Cashback disponible desde la mitad de la tarjeta',
+    'QR anti-fraude por cliente','Saldo en tiempo real, sin apps','Nivel Oro libera el 100% de inmediato'
+  ];
+  const itemsHtml = facts.map(f=>`<span class="ticker-item"><b>●</b> ${f}</span><span class="ticker-dot">◆</span>`).join('');
+  track.innerHTML = itemsHtml + itemsHtml; // duplicado para loop continuo
+}
+
+/* ===== EFECTOS: spotlight de cursor en botones dorados ===== */
+function initButtonGlow(){
+  document.addEventListener('pointermove', (e)=>{
+    const btn = e.target.closest && e.target.closest('.btn-gold');
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    btn.style.setProperty('--mx', (e.clientX-r.left)+'px');
+    btn.style.setProperty('--my', (e.clientY-r.top)+'px');
+  });
+}
+
 async function init(){
   document.getElementById('hero-qr').innerHTML = qrSvg('preview');
   document.querySelectorAll('.mock-coin.on').forEach(el=>{ el.style.boxShadow = '0 0 6px rgba(231,181,73,.4)'; });
   await loadPersonal(); await loadShared(); render();
   setInterval(async ()=>{ if (state.settingsOpen) return; await loadShared(); render(); }, 2500);
   setInterval(()=>resetDemo(), 180000);
+  initTicker(); initReveal(); initCounters(); initButtonGlow();
   await router.go(location.pathname, true);
 }
 init();
