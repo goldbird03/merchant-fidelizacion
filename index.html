@@ -748,8 +748,8 @@ function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈'
 /* ==========================================================================
    REGLA DE NEGOCIO: liberación de saldo por nivel
    ========================================================================== */
-const RELEASE_RULES = { Bronce: 4, Plata: 8 };
-const TIER_RELEASE_PCT = { Bronce: 0.4, Plata: 0.8, Oro: 1 };
+const RELEASE_RULES = { Bronce: 4, Plata: 6 };
+const TIER_RELEASE_PCT = { Bronce: 0.4, Plata: 0.6, Oro: 1 };
 const CARD_HALF_SOLES = (BUSINESS.maxCoins * BUSINESS.valuePerCoin) / 2;
 const CARD_TOTAL_SOLES = BUSINESS.maxCoins * BUSINESS.valuePerCoin;
 
