@@ -521,12 +521,12 @@
       <div class="releaserule-card reveal hoverlift">
         <div class="rr-medal">🥉</div>
         <h4 class="rr-tier" style="color:var(--bronze);">Bronce</h4>
-        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/6</b>. Los S/4 restantes se liberan al completar los S/20.</p>
+        <p class="rr-desc">Al acumular 5 puntos o S/10, se liberan <b>S/4</b>. Los S/16 restantes se liberan al completar todos los puntos de tu tarjeta.</p>
       </div>
       <div class="releaserule-card reveal hoverlift">
         <div class="rr-medal">🥈</div>
         <h4 class="rr-tier" style="color:var(--silver);">Plata</h4>
-        <p class="rr-desc">Al llegar a S/10, se liberan <b>S/8</b>. Los S/2 restantes se liberan al completar los S/20.</p>
+        <p class="rr-desc">Al acumular 5 puntos o S/10, se liberan <b>S/8</b>. Los S/12 restantes se liberan al completar todos los puntos de tu tarjeta.</p>
       </div>
       <div class="releaserule-card releaserule-card-gold reveal hoverlift">
         <div class="rr-medal">🥇</div>
@@ -748,8 +748,8 @@ function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈'
 /* ==========================================================================
    REGLA DE NEGOCIO: liberación de saldo por nivel
    ========================================================================== */
-const RELEASE_RULES = { Bronce: 6, Plata: 8 };
-const TIER_RELEASE_PCT = { Bronce: 0.6, Plata: 0.8, Oro: 1 };
+const RELEASE_RULES = { Bronce: 4, Plata: 8 };
+const TIER_RELEASE_PCT = { Bronce: 0.4, Plata: 0.8, Oro: 1 };
 const CARD_HALF_SOLES = (BUSINESS.maxCoins * BUSINESS.valuePerCoin) / 2;
 const CARD_TOTAL_SOLES = BUSINESS.maxCoins * BUSINESS.valuePerCoin;
 
