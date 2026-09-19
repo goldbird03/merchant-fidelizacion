@@ -16,6 +16,14 @@
     --text:#EAEDF3; --text-dim:#9AA1B4; --text-faint:#5B6478;
     --bronze:#B08D57; --silver:#C7CAD1; --danger:#F87171;
     --radius-lg:20px; --radius-md:12px;
+    /* Paleta premium fintech — usada en header/hero */
+    --pf-bg-1:#080B10; --pf-bg-2:#0B0F14; --pf-bg-3:#0F141C;
+    --pf-green:#00FF85; --pf-green-2:#20E68A;
+    --pf-gold:#F5C542; --pf-gold-bright:#FFD95A;
+    --pf-text-1:#FFFFFF; --pf-text-2:#A1A1AA; --pf-text-3:#71717A;
+    --pf-border:rgba(255,255,255,0.08);
+    --pf-glow-green:rgba(0,255,133,0.18);
+    --pf-glow-gold:rgba(245,197,66,0.20);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -38,7 +46,7 @@
   ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-track{background:transparent;} ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:8px;}
 
   /* NAV */
-  nav{position:sticky;top:0;z-index:50;background:rgba(11,15,23,0.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);}
+  nav{position:sticky;top:0;z-index:50;background:rgba(8,11,16,0.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--pf-border);}
   .navrow{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1080px;margin:0 auto;}
   .logo{display:flex;align-items:center;gap:9px;}
   .logo-mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#B9852E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(231,181,73,0.35);flex-shrink:0;}
@@ -52,36 +60,61 @@
   .btn{border:none;border-radius:var(--radius-md);padding:12px 22px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.2px;transition:all .2s;}
   .btn:active{transform:scale(.98);}
   .btn-gold{background:var(--gold);color:#1A1400;box-shadow:0 4px 14px rgba(231,181,73,0.28);}
-  .btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);}
+  .btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 22px -2px var(--pf-glow-gold);}
   .btn-outline{background:transparent;border:1px solid var(--border);color:var(--gold-light);}
   .btn-outline:hover{background:rgba(231,181,73,0.08);transform:translateY(-1px);}
   .btn:disabled{opacity:.35;cursor:not-allowed;}
   .btn-full{width:100%;}
 
-  /* HERO */
-  .hero{padding-top:4.5rem;padding-bottom:3rem;text-align:center;display:flex;flex-direction:column;align-items:center;}
-  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--gold-light);background:rgba(231,181,73,0.10);border:1px solid var(--border);padding:5px 14px;border-radius:999px;margin-bottom:1.5rem;}
-  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-light);animation:pulse 2s infinite;}
+  /* HERO — premium fintech */
+  .hero{padding-top:4rem;padding-bottom:3rem;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;background:
+      radial-gradient(480px circle at 24% 8%, var(--pf-glow-gold), transparent 60%),
+      radial-gradient(560px circle at 78% 55%, var(--pf-glow-green), transparent 60%);
+  }
+  .hero::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:42px 42px; mask-image:radial-gradient(ellipse 70% 60% at 50% 20%,#000 40%,transparent 80%);}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--pf-green);background:rgba(0,255,133,0.08);border:1px solid rgba(0,255,133,0.22);padding:6px 14px;border-radius:999px;margin-bottom:1.6rem;letter-spacing:.2px;}
+  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--pf-green);box-shadow:0 0 8px var(--pf-glow-green);animation:pulse 2s infinite;}
   @keyframes pulse{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
-  h1.hero-h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:44px;line-height:1.14;letter-spacing:-.5px;max-width:680px;}
-  h1.hero-h em{font-style:normal;color:var(--emerald);}
-  .hero-sub{font-size:16px;color:var(--text-dim);margin-top:1.15rem;max-width:540px;line-height:1.6;}
-  .hero-ctas{display:flex;gap:12px;margin-top:1.9rem;flex-wrap:wrap;justify-content:center;}
-  .hero-link-secondary{display:inline-block;margin-top:14px;font-size:13px;color:var(--text-dim);border-bottom:1px solid transparent;transition:all .2s;}
-  .hero-link-secondary:hover{color:var(--gold-light);border-color:var(--gold-light);}
-  @media(max-width:600px){h1.hero-h{font-size:32px;}}
+  h1.hero-h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,58px);line-height:1.06;letter-spacing:-1.2px;max-width:760px;color:var(--pf-text-1);}
+  .hero-sub-wrap{display:flex;align-items:flex-start;justify-content:center;gap:12px;margin-top:1.25rem;max-width:580px;}
+  .hero-sub-bar{display:none;}
+  .hero-sub{font-size:clamp(16px,1.9vw,18px);color:var(--pf-text-2);line-height:1.6;text-align:center;}
+  .hero-sub .hl-gold{color:var(--pf-gold);font-weight:700;}
+  .hero-sub .hl-green{color:var(--pf-green);font-weight:600;}
+  @media(min-width:761px){.hero-sub-bar{display:block;width:3px;align-self:stretch;border-radius:2px;background:linear-gradient(180deg,var(--pf-green),transparent);flex-shrink:0;margin-top:5px;}.hero-sub{text-align:left;}.hero-sub-wrap{justify-content:center;}}
+  .hero-ctas{display:flex;gap:12px;margin-top:2rem;flex-wrap:wrap;justify-content:center;}
+  .hero-ctas .btn{border-radius:16px;padding:15px 26px;font-size:15px;font-weight:700;}
+  .hero-ctas .btn-gold{box-shadow:0 8px 28px -4px var(--pf-glow-gold),0 2px 8px rgba(0,0,0,.35);}
+  .hero-ctas .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 34px -4px var(--pf-glow-gold),0 4px 10px rgba(0,0,0,.4);}
+  .hero-ctas .btn-outline{border-color:rgba(0,255,133,0.28);color:var(--pf-text-1);background:rgba(255,255,255,0.02);}
+  .hero-ctas .btn-outline:hover{background:rgba(0,255,133,0.06);border-color:rgba(0,255,133,0.5);transform:translateY(-2px);}
+  .hero-ico{display:inline-block;margin-left:2px;}
+  .hero-link-secondary{display:inline-block;margin-top:16px;font-size:13.5px;color:var(--pf-text-3);border-bottom:1px solid transparent;transition:all .2s;}
+  .hero-link-secondary:hover{color:var(--pf-text-1);border-color:var(--pf-text-3);}
+  .hero-link-secondary .hl-green{color:var(--pf-green);font-weight:600;}
+  @media(max-width:600px){h1.hero-h{letter-spacing:-.6px;} .hero-ctas{width:100%;} .hero-ctas .btn{width:100%;} .hero-sub-wrap{max-width:100%;}}
 
-  .hero-visual{margin-top:3.5rem;display:flex;justify-content:center;}
-  .mock{width:224px;background:var(--stub);border:1px solid var(--border);border-radius:22px;padding:1.1rem;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);}
-  .mock.b{margin-left:-40px;margin-top:56px;transform:rotate(4deg);}
-  .mock.a{transform:rotate(-3deg);z-index:2;}
-  .mock-eyebrow{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint);}
-  .mock-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-top:3px;}
+  .hero-visual{margin-top:3.75rem;display:flex;justify-content:center;position:relative;width:100%;padding:0 1rem;}
+  .hero-visual-glow{position:absolute;width:340px;height:340px;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;}
+  .hero-visual-glow.g{background:var(--pf-glow-green);left:50%;top:10%;transform:translateX(-78%);}
+  .hero-visual-glow.gd{background:var(--pf-glow-gold);left:50%;top:20%;transform:translateX(20%);}
+  .mock{width:224px;background:rgba(15,20,28,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--pf-border);border-radius:26px;padding:1.15rem;box-shadow:0 30px 70px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(0,255,133,0.06), 0 0 34px -6px var(--pf-glow-green);position:relative;z-index:1;animation:cardFloat 7s ease-in-out infinite;}
+  .mock.b{margin-left:-40px;margin-top:56px;transform:rotate(4deg);animation-delay:.4s;}
+  .mock.a{transform:rotate(-4deg);z-index:2;box-shadow:0 30px 70px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(245,197,66,0.08), 0 0 34px -6px var(--pf-glow-gold);}
+  @keyframes cardFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-9px) rotate(var(--r,0deg));}}
+  .mock.b{--r:4deg;} .mock.a{--r:-4deg;}
+  @media(prefers-reduced-motion: reduce){.mock{animation:none;}}
+  @media(max-width:600px){.mock{width:170px;} .hero-visual-glow{width:220px;height:220px;filter:blur(50px);}}
+  .mock-eyebrow{font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--pf-green);font-weight:700;}
+  .mock.a .mock-eyebrow{color:var(--pf-gold);}
+  .mock-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-top:4px;color:var(--pf-text-1);}
   .mock-coins{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap;}
-  .mock-coin{width:18px;height:18px;border-radius:50%;border:1px solid var(--border-soft);}
-  .mock-coin.on{background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 70%);border-color:var(--gold);}
-  .mock-balance{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;color:var(--gold-light);}
-  .mock-qr{width:100%;aspect-ratio:1;background:#000;border-radius:8px;margin-top:14px;padding:8px;}
+  .mock-coin{width:18px;height:18px;border-radius:50%;border:1px solid var(--pf-border);}
+  .mock-coin.on{background:radial-gradient(circle at 35% 30%,var(--pf-green-2),var(--pf-green) 70%);border-color:var(--pf-green);}
+  .mock-balance{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:800;color:var(--pf-green);}
+  .mock-qr{width:100%;aspect-ratio:1;background:#000;border-radius:10px;margin-top:14px;padding:8px;border:1px solid var(--pf-border);}
   .mock-qr svg{width:100%;height:100%;}
   @media(max-width:600px){.mock{width:170px;}}
 
@@ -344,7 +377,7 @@
   .hoverlift{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s ease,border-color .28s ease;}
   .hoverlift:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(0,0,0,.4);border-color:var(--border);}
 
-  .text-shimmer{background:linear-gradient(100deg,var(--emerald) 20%,var(--gold-light) 50%,var(--emerald) 80%);background-size:220% auto;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerMove 5s linear infinite;}
+  .text-shimmer{background:linear-gradient(100deg,var(--pf-gold-bright) 10%,var(--pf-green) 55%,var(--pf-gold-bright) 100%);background-size:220% auto;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerMove 6s linear infinite;}
   @keyframes shimmerMove{to{background-position:-220% center;}}
 
   /* Spotlight de cursor en botones dorados */
@@ -409,7 +442,7 @@
       <a href="#features">Funciones</a>
       <a href="/login" class="navlink-login" data-link>Iniciar sesión</a>
     </div>
-    <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Probar demo gratis</a>
+    <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Probar demo gratis <span class="hero-ico" aria-hidden="true">→</span></a>
   </div>
 </nav>
 
@@ -417,13 +450,18 @@
   <div class="container" style="display:flex;flex-direction:column;align-items:center;">
     <span class="badge"><span class="dot"></span>Disponible en Lima · un producto ExpandeLab</span>
     <h1 class="hero-h">Fideliza a tus clientes mediante <span class="text-shimmer">link de cobro</span>.</h1>
-    <p class="hero-sub">Cobra por tus servicios o productos al instante a través de QR con una tasa que baja del 5% al 3.5% conforme escalas tus ventas, y un motor de fidelización automático que hace que tus clientes siempre vuelvan.</p>
-    <div class="hero-ctas">
-      <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Quiero ver como comercio</a>
-      <a href="#paycreators" class="btn btn-outline">Crear mi link de cobro (5%)</a>
+    <div class="hero-sub-wrap">
+      <span class="hero-sub-bar" aria-hidden="true"></span>
+      <p class="hero-sub">Cobra por tus servicios o productos al instante a través de QR con una tasa que baja del <span class="hl-gold">5%</span> al <span class="hl-gold">3.5%</span> conforme escalas tus ventas, y un <span class="hl-green">motor de fidelización automático</span> que hace que tus clientes siempre vuelvan.</p>
     </div>
-    <a href="#demo" class="hero-link-secondary" onclick="setRole('client')">¿Eres cliente? Descubre tu saldo aquí →</a>
+    <div class="hero-ctas">
+      <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Quiero ver como comercio <span class="hero-ico" aria-hidden="true">→</span></a>
+      <a href="#paycreators" class="btn btn-outline"><span class="hero-ico" aria-hidden="true">🔗</span> Crear mi link de cobro (5%)</a>
+    </div>
+    <a href="#demo" class="hero-link-secondary" onclick="setRole('client')">¿Eres cliente? <span class="hl-green">Descubre tu saldo</span> aquí →</a>
     <div class="hero-visual">
+      <div class="hero-visual-glow g" aria-hidden="true"></div>
+      <div class="hero-visual-glow gd" aria-hidden="true"></div>
       <div class="mock b">
         <div class="mock-eyebrow">Saldo</div>
         <div class="mock-name">Camila Ruiz</div>
@@ -514,24 +552,24 @@
 
     <div class="releaserules-head">
       <div class="eyebrow-lbl" style="text-align:center;">Regla de liberación de saldo</div>
-      <h3 class="sect-h" style="font-size:20px;margin-left:auto;margin-right:auto;text-align:center;max-width:560px;">Mientras más alto tu nivel, más rápido usas tu plata.</h3>
-      <p class="sect-sub" style="margin-left:auto;margin-right:auto;text-align:center;">La tarjeta se completa en S/20. Al llegar a la mitad (S/10) se libera una parte para gastar de inmediato en el comercio — el resto se libera al completar la tarjeta, momento en que esta se reinicia.</p>
+      <h3 class="sect-h" style="font-size:20px;margin-left:auto;margin-right:auto;text-align:center;max-width:560px;">Mientras más visitas acumulas, más rápido usas tu plata.</h3>
+      <p class="sect-sub" style="margin-left:auto;margin-right:auto;text-align:center;">Tu nivel depende de tus visitas totales al comercio. Bronce y Plata liberan su recompensa al completar la tarjeta (10 visitas); Oro no tiene tarjeta — libera saldo en cada visita, sin esperas.</p>
     </div>
     <div class="releaserules-grid">
       <div class="releaserule-card reveal hoverlift">
         <div class="rr-medal">🥉</div>
         <h4 class="rr-tier" style="color:var(--bronze);">Bronce</h4>
-        <p class="rr-desc">Al completar tu tarjeta, desbloqueas S/4 de consumo listos para gastar en tu próxima visita.</p>
+        <p class="rr-desc">De 0 a 9 visitas. Al completar la tarjeta, te liberamos <b>S/6</b> para gastar en tu siguiente consumo.</p>
       </div>
       <div class="releaserule-card reveal hoverlift">
         <div class="rr-medal">🥈</div>
         <h4 class="rr-tier" style="color:var(--silver);">Plata</h4>
-        <p class="rr-desc">Al completar tu tarjeta, desbloqueas S/6 de consumo listos para gastar en tu próxima visita.</p>
+        <p class="rr-desc">De 10 a 29 visitas. Al completar la tarjeta, te liberamos <b>S/8</b> para gastar en tu siguiente consumo.</p>
       </div>
       <div class="releaserule-card releaserule-card-gold reveal hoverlift">
         <div class="rr-medal">🥇</div>
         <h4 class="rr-tier" style="color:var(--gold-light);">Oro</h4>
-        <p class="rr-desc">Llévate S/ 1 de cashback o descuento directo en cada visita a tu comercio favorito.</p>
+        <p class="rr-desc">+30 visitas. Liberación inmediata de <b>S/1</b> a favor en cada nueva visita al comercio, sin esperas.</p>
       </div>
     </div>
 
@@ -547,8 +585,8 @@
 <section id="paycreators">
   <div class="container">
     <div class="eyebrow-lbl">Nuevo · expandeMoney Pay</div>
-    <h2 class="sect-h">Cobra por tus servicios con un link — sin regalarle hasta 9.9% a otras plataformas</h2>
-    <p class="sect-sub">Con expandeMoney, tu plata está disponible en 24h, con comisiones que van desde <b style="color:var(--gold-light);">el 5%</b> al 3.5% conforme escalas, y fidelizas a tus clientes sin gastar en pauta.</p>
+    <h2 class="sect-h">Cobra asesorías, talleres y mentorías con un link — sin la comisión de las plataformas grandes.</h2>
+    <p class="sect-sub">Hotmart y otras pasarelas te cobran hasta 9.9% + IVA por transacción y retienen tu dinero por días. expandeMoney Pay cobra una <b style="color:var(--gold-light);">tarifa plana del 5%</b> y te paga sin retenciones — y de paso, registra a tu comprador en tu ecosistema de fidelización.</p>
     <div class="pay-compare">
       <span class="pay-fee-badge">✓ 5% flat, sin retención</span>
       <span class="pay-fee-old">vs. 9.9%+ IVA y fondos retenidos</span>
@@ -742,77 +780,56 @@ let loginRole = 'merchant';
 
 function uid(){ return 'EM' + Math.random().toString(36).slice(2,8).toUpperCase(); }
 function code6(id){ let h=0; for(let i=0;i<id.length;i++){ h=(h*31+id.charCodeAt(i))>>>0; } return (h%900000+100000).toString(); }
-function tierFor(cycles){ return cycles>=3 ? 'Oro' : cycles>=1 ? 'Plata' : 'Bronce'; }
+function tierForVisits(v){ v = v||0; if (v >= 30) return 'Oro'; if (v >= 10) return 'Plata'; return 'Bronce'; }
 function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈' : '🥉'; }
+function visitsToNextTier(v){ v = v||0; if (v < 10) return 10 - v; if (v < 30) return 30 - v; return 0; }
 
 /* ==========================================================================
-   REGLA DE NEGOCIO: liberación de saldo por nivel
+   REGLA DE NEGOCIO: liberación de saldo por nivel (basada en visitas totales)
+     - Bronce (0 a 9 visitas): al completar la tarjeta (10 visitas), se liberan
+       S/6 para el siguiente consumo.
+     - Plata (10 a 29 visitas): al completar la tarjeta, se liberan S/8 para
+       el siguiente consumo.
+     - Oro (+30 visitas): liberación inmediata de S/1 a favor en cada nueva
+       visita, sin tarjeta que completar ni esperas.
    ========================================================================== */
-const RELEASE_RULES = { Bronce: 4, Plata: 6 };
-const TIER_RELEASE_PCT = { Bronce: 0.4, Plata: 0.6, Oro: 1 };
-const CARD_HALF_SOLES = (BUSINESS.maxCoins * BUSINESS.valuePerCoin) / 2;
-const CARD_TOTAL_SOLES = BUSINESS.maxCoins * BUSINESS.valuePerCoin;
+const CARD_REWARD = { Bronce: 6, Plata: 8 };
+const ORO_INSTANT_RELEASE = 1;
 
-function computeSaldoState(c){
-  const tier = tierFor(c.cyclesCompleted);
-  const acumuladoCiclo = c.coins * BUSINESS.valuePerCoin;
-  const mitad = CARD_HALF_SOLES;
-  let liberado, bloqueado;
-  if (tier === 'Oro'){ liberado = acumuladoCiclo; bloqueado = 0; }
-  else if (c.coins >= BUSINESS.maxCoins){ liberado = acumuladoCiclo; bloqueado = 0; }
-  else if (acumuladoCiclo >= mitad){ liberado = RELEASE_RULES[tier]; bloqueado = acumuladoCiclo - liberado; }
-  else { liberado = 0; bloqueado = acumuladoCiclo; }
-  return { tier, liberado, bloqueado, acumuladoCiclo, mitad };
-}
 function releaseBlockHtml(c){
-  const s = computeSaldoState(c);
-  const pctLib = s.acumuladoCiclo>0 ? Math.round((s.liberado/s.acumuladoCiclo)*100) : 0;
-  if (s.tier === 'Oro'){
+  const totalVisits = c.totalVisits || 0;
+  const disponible = c.disponible || 0;
+  const tier = tierForVisits(totalVisits);
+  if (tier === 'Oro'){
     return `<div class="releasebox releasebox-oro">
-      <div class="releaserow"><span>🥇 Liberación íntegra</span><span class="mono">${soles(s.liberado)} disponibles</span></div>
-      <p class="release-note">Nivel Oro: todo lo que acumulas se libera de inmediato. No hay saldo por liberar.</p>
+      <div class="releaserow"><span>🥇 Liberación inmediata</span><span class="mono lib">S/${ORO_INSTANT_RELEASE} por visita</span></div>
+      <div class="releaserow"><span>Disponible para gastar</span><span class="mono lib">${soles(disponible)}</span></div>
+      <div class="releaserow"><span>Visitas totales</span><span class="mono">${totalVisits}</span></div>
+      <p class="release-note">Nivel Oro: cada visita libera S/${ORO_INSTANT_RELEASE} al instante, sin esperar a completar tarjeta.</p>
     </div>`;
   }
+  const remaining = visitsToNextTier(totalVisits);
+  const nextTier = tier === 'Bronce' ? 'Plata' : 'Oro';
   return `<div class="releasebox">
-    <div class="releasebar"><div class="releasebar-fill" style="width:${pctLib}%"></div></div>
-    <div class="releaserow"><span>Disponible ahora</span><span class="mono lib">${soles(s.liberado)}</span></div>
-    <div class="releaserow"><span>Por liberar</span><span class="mono bloq">${soles(s.bloqueado)}</span></div>
-    <p class="release-note">${s.acumuladoCiclo < s.mitad
-      ? `Nivel ${s.tier}: al llegar a ${soles(s.mitad)} se liberan ${soles(RELEASE_RULES[s.tier])} para usar en caja.`
-      : `El resto se libera al completar ${soles(CARD_TOTAL_SOLES)} — ahí la tarjeta se reinicia.`}</p>
+    <div class="releaserow"><span>Disponible para gastar</span><span class="mono lib">${soles(disponible)}</span></div>
+    <p class="release-note">Nivel ${tier}: al completar tu tarjeta (10/10) se liberan ${soles(CARD_REWARD[tier])} para tu siguiente consumo.</p>
+    <p class="release-note">Te faltan <b style="color:var(--text);">${remaining}</b> visitas para nivel ${nextTier}.</p>
   </div>`;
-}
-function computeCycle(c){
-  const tier = tierFor(c.cyclesCompleted);
-  const acumulado = c.coins * BUSINESS.valuePerCoin;
-  let disponibleTotal, porLiberar;
-  if (tier === 'Oro'){ disponibleTotal = acumulado; porLiberar = 0; }
-  else {
-    const pct = TIER_RELEASE_PCT[tier];
-    if (acumulado < CARD_HALF_SOLES){ disponibleTotal = 0; porLiberar = acumulado; }
-    else if (acumulado < CARD_TOTAL_SOLES){
-      const liberadoAlMedio = CARD_HALF_SOLES * pct;
-      disponibleTotal = liberadoAlMedio; porLiberar = acumulado - liberadoAlMedio;
-    } else { disponibleTotal = acumulado; porLiberar = 0; }
-  }
-  const spent = c.cycleSpent || 0;
-  const disponibleAhora = Math.max(0, disponibleTotal - spent);
-  return { tier, acumulado, disponibleAhora, porLiberar, isComplete: acumulado >= CARD_TOTAL_SOLES };
 }
 function fmtTime(ts){ return new Date(ts).toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}); }
 function soles(n){ return 'S/ ' + n.toFixed(2); }
 
 function injectMockData(){
   if (state.clients.length === 0){
-    const m1 = { id:'EMAAAA', name:'Carlos Mendoza', email:'carlos@gmail.com', coins:6, cyclesCompleted:0, saldo:12, cycleSpent:0, createdAt:Date.now()-3600000 };
-    const m2 = { id:'EMBBBB', name:'Lucía Fernández', email:'lucia@hotmail.com', coins:9, cyclesCompleted:1, saldo:38, cycleSpent:0, createdAt:Date.now()-7200000 };
-    const m3 = { id:'EMCCCC', name:'Mauricio Ortiz', email:'mori@outlook.com', coins:2, cyclesCompleted:3, saldo:64, cycleSpent:0, createdAt:Date.now()-12000000 };
+    const m1 = { id:'EMAAAA', name:'Carlos Mendoza', email:'carlos@gmail.com', coins:6, totalVisits:6, disponible:0, cyclesCompleted:0, saldo:12, createdAt:Date.now()-3600000 };
+    const m2 = { id:'EMBBBB', name:'Lucía Fernández', email:'lucia@hotmail.com', coins:9, totalVisits:19, disponible:8, cyclesCompleted:1, saldo:38, createdAt:Date.now()-7200000 };
+    const m3 = { id:'EMCCCC', name:'Mauricio Ortiz', email:'mori@outlook.com', coins:0, totalVisits:32, disponible:6, cyclesCompleted:3, saldo:64, createdAt:Date.now()-12000000 };
     state.clients = [m1,m2,m3];
     if (!state.myClientId) state.myClientId = m2.id;
     state.activity = [
       { type:'abono', clientId:m1.id, name:m1.name, ts:Date.now()-1800000 },
-      { type:'canje', clientId:m2.id, name:m2.name, ts:Date.now()-900000 },
-      { type:'abono', clientId:m3.id, name:m3.name, ts:Date.now()-360000 }
+      { type:'tarjeta_completa', clientId:m2.id, name:m2.name, ts:Date.now()-900000, monto:8 },
+      { type:'oro_release', clientId:m3.id, name:m3.name, ts:Date.now()-360000, monto:1 }
     ];
     state.usingMockData = true;
   } else { state.usingMockData = false; }
@@ -851,16 +868,29 @@ function playChime(kind){
 
 function notifyActivity(a){
   const wrap = document.getElementById('activity-notif-wrap'); if (!wrap) return;
-  const isCanje = a.type === 'canje';
-  const isParcial = a.type === 'canje_parcial';
-  const isVenta = a.type === 'venta';
+  let icon='🪙', text=`+S/${BUSINESS.valuePerCoin} de saldo — <b>${a.name}</b>`, sound='abono';
+  if (a.type==='tarjeta_completa'){ icon='🎉'; text=`Tarjeta completa — S/${(a.monto||0).toFixed(2)} liberados — <b>${a.name}</b>`; sound='canje'; }
+  else if (a.type==='oro_release'){ icon='⚡'; text=`+S/${(a.monto||ORO_INSTANT_RELEASE).toFixed(2)} liberado al instante — <b>${a.name}</b>`; sound='canje'; }
+  else if (a.type==='canje_parcial'){ icon='💸'; text=`Usó S/${(a.monto||0).toFixed(2)} en caja — <b>${a.name}</b>`; sound='canje'; }
+  else if (a.type==='venta'){ icon='🔗'; text=`Venta por link, neto S/${(a.monto||0).toFixed(2)} — <b>${a.name}</b>`; sound='canje'; }
+  else if (a.type==='canje'){ icon='🎉'; text=`Cashback canjeado — <b>${a.name}</b>`; sound='canje'; }
   const el = document.createElement('div'); el.className = 'activity-notif';
-  el.innerHTML = isCanje ? `<span style="font-size:16px;">🎉</span><span>Cashback canjeado — <b>${a.name}</b></span>`
-    : isParcial ? `<span style="font-size:16px;">💸</span><span>Canje disponible S/${(a.monto||0).toFixed(2)} — <b>${a.name}</b></span>`
-    : isVenta ? `<span style="font-size:16px;">🔗</span><span>Venta por link, neto S/${(a.monto||0).toFixed(2)} — <b>${a.name}</b></span>`
-    : `<span style="font-size:16px;">🪙</span><span>+S/${BUSINESS.valuePerCoin} de saldo — <b>${a.name}</b></span>`;
-  wrap.appendChild(el); playChime(isCanje || isParcial || isVenta ? 'canje' : 'abono');
+  el.innerHTML = `<span style="font-size:16px;">${icon}</span><span>${text}</span>`;
+  wrap.appendChild(el); playChime(sound);
   setTimeout(()=>{ el.classList.add('leaving'); setTimeout(()=>el.remove(),320); }, 2800);
+}
+function activityLabel(type){
+  if (type==='tarjeta_completa') return 'Tarjeta completa';
+  if (type==='oro_release') return `+S/${ORO_INSTANT_RELEASE} Oro`;
+  if (type==='canje_parcial') return 'Usado en caja';
+  if (type==='venta') return 'Venta Pay';
+  if (type==='canje') return 'Canje';
+  return '+S/'+BUSINESS.valuePerCoin;
+}
+function activityTagClass(type){
+  if (type==='tarjeta_completa' || type==='canje' || type==='canje_parcial') return 'tag-canje';
+  if (type==='venta') return 'tag-venta';
+  return 'tag-abono';
 }
 function checkNewActivity(){
   if (state.seenActivityLen === null){ state.seenActivityLen = state.activity.length; return; }
@@ -920,7 +950,7 @@ function qrSvg(id){
   for(let y=0;y<size;y++){ for(let x=0;x<size;x++){
     const corner=(x<3&&y<3)||(x>size-4&&y<3)||(x<3&&y>size-4);
     const on = corner ? true : bits[y*size+x];
-    if (on) rects += `<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="#F4CB6B"/>`;
+    if (on) rects += `<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="#00FF85"/>`;
   }}
   return `<svg viewBox="0 0 100 100">${rects}</svg>`;
 }
@@ -930,7 +960,7 @@ async function setRole(r){ state.role=r; await window.storage.set('expandemoney:
 async function createClient(name, email){
   if (!name.trim()){ showToast('Ingresa tu nombre'); return; }
   const id = uid();
-  const client = { id, name:name.trim(), email:email.trim(), coins:0, cyclesCompleted:0, saldo:0, cycleSpent:0, createdAt:Date.now() };
+  const client = { id, name:name.trim(), email:email.trim(), coins:0, totalVisits:0, disponible:0, cyclesCompleted:0, saldo:0, createdAt:Date.now() };
   if (state.usingMockData){ state.clients=[]; state.activity=[]; state.usingMockData=false; }
   state.clients.push(client); state.myClientId = id;
   await saveClients(); await window.storage.set('expandemoney:my_client_id', id, false);
@@ -942,26 +972,47 @@ function redeem(id){ actionQueue = actionQueue.then(()=>doRedeem(id)).catch(err=
 function redeemDisponible(id){ actionQueue = actionQueue.then(()=>doRedeemDisponible(id)).catch(err=>console.error(err)); return actionQueue; }
 
 async function doAddCoin(id){
-  const c = state.clients.find(x=>x.id===id); if (!c || c.coins>=BUSINESS.maxCoins) return;
-  if (c.cycleSpent === undefined) c.cycleSpent = 0;
-  c.coins += 1; c.saldo += BUSINESS.valuePerCoin;
-  state.activity.push({ type:'abono', clientId:id, name:c.name, ts:Date.now() });
-  await saveClients(); await saveActivity(); showToast(`+S/${BUSINESS.valuePerCoin} abonados a ${c.name}`); render();
+  const c = state.clients.find(x=>x.id===id); if (!c) return;
+  if (c.totalVisits === undefined) c.totalVisits = 0;
+  if (c.disponible === undefined) c.disponible = 0;
+  const tierBefore = tierForVisits(c.totalVisits);
+  if (tierBefore !== 'Oro' && c.coins >= BUSINESS.maxCoins) return; // debe liberar la recompensa antes de seguir sumando
+  c.totalVisits += 1;
+  c.saldo += BUSINESS.valuePerCoin;
+  const tierAfter = tierForVisits(c.totalVisits);
+  if (tierAfter === 'Oro'){
+    if (tierBefore !== 'Oro' && c.coins > 0){
+      const pendiente = c.coins * BUSINESS.valuePerCoin;
+      c.disponible += pendiente; c.coins = 0;
+      state.activity.push({ type:'tarjeta_completa', clientId:id, name:c.name, ts:Date.now(), monto:pendiente });
+    }
+    c.disponible += ORO_INSTANT_RELEASE;
+    state.activity.push({ type:'oro_release', clientId:id, name:c.name, ts:Date.now(), monto:ORO_INSTANT_RELEASE });
+    await saveClients(); await saveActivity();
+    showToast(`+S/${ORO_INSTANT_RELEASE} liberado al instante para ${c.name}`);
+  } else {
+    c.coins += 1;
+    state.activity.push({ type:'abono', clientId:id, name:c.name, ts:Date.now() });
+    await saveClients(); await saveActivity();
+    showToast(`+S/${BUSINESS.valuePerCoin} abonados a ${c.name}`);
+  }
+  render();
 }
 async function doRedeemDisponible(id){
   const c = state.clients.find(x=>x.id===id); if (!c) return;
-  const { disponibleAhora, isComplete } = computeCycle(c);
-  if (isComplete){ return doRedeem(id); }
-  if (disponibleAhora <= 0){ showToast('Aún no hay saldo liberado para canjear'); return; }
-  c.cycleSpent = (c.cycleSpent || 0) + disponibleAhora;
-  state.activity.push({ type:'canje_parcial', clientId:id, name:c.name, ts:Date.now(), monto:disponibleAhora });
-  await saveClients(); await saveActivity(); showToast(`Canjeado S/${disponibleAhora.toFixed(2)} disponible de ${c.name}`); render();
+  const amt = c.disponible || 0;
+  if (amt <= 0){ showToast('Aún no hay saldo disponible para usar'); return; }
+  c.disponible = 0;
+  state.activity.push({ type:'canje_parcial', clientId:id, name:c.name, ts:Date.now(), monto:amt });
+  await saveClients(); await saveActivity(); showToast(`Usado S/${amt.toFixed(2)} disponible de ${c.name}`); render();
 }
 async function doRedeem(id){
   const c = state.clients.find(x=>x.id===id); if (!c || c.coins<BUSINESS.maxCoins) return;
-  c.coins = 0; c.cyclesCompleted += 1; c.cycleSpent = 0;
-  state.activity.push({ type:'canje', clientId:id, name:c.name, ts:Date.now() });
-  await saveClients(); await saveActivity(); showToast(`Cashback canjeado — ${c.name}`); render();
+  const tier = tierForVisits(c.totalVisits||0);
+  const reward = CARD_REWARD[tier] ?? 0;
+  c.coins = 0; c.cyclesCompleted = (c.cyclesCompleted||0) + 1; c.disponible = (c.disponible||0) + reward;
+  state.activity.push({ type:'tarjeta_completa', clientId:id, name:c.name, ts:Date.now(), monto:reward });
+  await saveClients(); await saveActivity(); showToast(`Tarjeta completa — S/${reward} liberados para ${c.name}`); render();
 }
 async function simulateBurst(id){ for(let i=0;i<3;i++){ addCoin(id); await new Promise(r=>setTimeout(r,550)); } }
 function findClient(query){ const q=query.trim().toLowerCase(); if(!q) return null; return state.clients.find(c=>c.id.toLowerCase()===q||code6(c.id)===q||c.name.toLowerCase().includes(q)); }
@@ -1011,12 +1062,12 @@ function renderClientView(){
       </div>`;
     return container;
   }
-  const tier = tierFor(c.cyclesCompleted);
-  const full = c.coins >= BUSINESS.maxCoins;
+  const tier = tierForVisits(c.totalVisits||0);
+  const full = tier !== 'Oro' && c.coins >= BUSINESS.maxCoins;
   const prevCoins = state.prevCoins[c.id]; const prevTier = state.prevTier[c.id];
-  let animateIndex = -1; if (prevCoins!==undefined && c.coins>prevCoins) animateIndex = c.coins-1;
+  let animateIndex = -1; if (tier !== 'Oro' && prevCoins!==undefined && c.coins>prevCoins) animateIndex = c.coins-1;
   const myActivity = state.activity.filter(a=>a.clientId===c.id).slice(-5).reverse();
-  const justRedeemed = prevCoins!==undefined && prevCoins>=BUSINESS.maxCoins && c.coins===0;
+  const justRedeemed = tier !== 'Oro' && prevCoins!==undefined && prevCoins>=BUSINESS.maxCoins && c.coins===0;
   container.innerHTML = `
     <div class="clientwrap">
       <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button class="gearbtn" onclick="toggleSettings()" title="Configuración">⚙</button></div>
@@ -1024,12 +1075,14 @@ function renderClientView(){
         <div class="pass-main">
           <div class="eyebrow">Billetera digital</div>
           <div class="clientname">${c.name}</div>
-          <div class="tierrow"><span class="tierbadge tier-${tier}">${tierMedal(tier)} ${tier}</span><span class="saldo" id="saldo-anchor">Saldo: <b class="saldo-hero" id="saldo-num">${soles(c.saldo)}</b></span></div>
+          <div class="tierrow"><span class="tierbadge tier-${tier}">${tierMedal(tier)} ${tier}</span><span class="saldo" id="saldo-anchor">Saldo total: <b class="saldo-hero" id="saldo-num">${soles(c.saldo)}</b></span></div>
+          ${tier !== 'Oro' ? `
           ${renderCoinRow(c, animateIndex)}
-          <div class="progresstext">${c.coins} de ${BUSINESS.maxCoins} abonos ${full ? '— ¡completa!' : 'para tu próximo cashback'}</div>
+          <div class="progresstext">${c.coins} de ${BUSINESS.maxCoins} visitas ${full ? '— ¡completa!' : 'para tu próxima recompensa'}</div>
+          ` : `<div class="progresstext">Visitas totales: <b style="color:var(--text);">${c.totalVisits||0}</b></div>`}
           ${releaseBlockHtml(c)}
-          ${full ? `<div class="rewardbanner">Tienes cashback listo. Muéstrale tu código al comercio.</div>` : ''}
-          ${justRedeemed ? `<div class="rewardbanner">🎉 ¡Cashback canjeado! Tu ciclo empieza de nuevo.</div>` : ''}
+          ${full ? `<div class="rewardbanner">Tienes S/${CARD_REWARD[tier]} listos. Muéstrale tu código al comercio para liberarlos.</div>` : ''}
+          ${justRedeemed ? `<div class="rewardbanner">🎉 ¡Tarjeta completa! Tu recompensa ya está disponible.</div>` : ''}
         </div>
         <div class="perf"></div>
         <div class="pass-stub">
@@ -1051,7 +1104,7 @@ function renderClientView(){
     </div>
     <div class="activity">
       <h3>Actividad reciente</h3>
-      ${myActivity.length ? myActivity.map(a=>`<div class="arow"><span class="tag ${a.type==='canje'?'tag-canje':'tag-abono'}">${a.type==='canje'?'Canje':'+S/'+BUSINESS.valuePerCoin}</span><span class="when">${fmtTime(a.ts)}</span></div>`).join('') : '<div class="empty">Aún no tienes movimientos.</div>'}
+      ${myActivity.length ? myActivity.map(a=>`<div class="arow"><span class="tag ${activityTagClass(a.type)}">${activityLabel(a.type)}</span><span class="when">${fmtTime(a.ts)}</span></div>`).join('') : '<div class="empty">Aún no tienes movimientos.</div>'}
     </div>`;
 
   if (prevCoins!==undefined && c.coins>prevCoins){
@@ -1080,12 +1133,13 @@ function renderMerchantView(){
   const container = document.createElement('div');
   const found = state.clients.find(x=>x.id===state.merchantFoundId);
   const clientOptions = state.clients.map(c=>`<option value="${c.id}" ${c.id===state.merchantFoundId?'selected':''}>${c.name} — ${code6(c.id)}</option>`).join('');
-  let foundTier, prevCoins, prevTier, animateIndex=-1, justRedeemed=false;
+  let foundTier, prevCoins, prevTier, animateIndex=-1, justRedeemed=false, cardFull=false;
   if (found){
-    foundTier = tierFor(found.cyclesCompleted);
+    foundTier = tierForVisits(found.totalVisits||0);
+    cardFull = foundTier !== 'Oro' && found.coins >= BUSINESS.maxCoins;
     prevCoins = state.prevCoins[found.id]; prevTier = state.prevTier[found.id];
-    if (prevCoins!==undefined && found.coins>prevCoins) animateIndex = found.coins-1;
-    justRedeemed = prevCoins!==undefined && prevCoins>=BUSINESS.maxCoins && found.coins===0;
+    if (foundTier !== 'Oro' && prevCoins!==undefined && found.coins>prevCoins) animateIndex = found.coins-1;
+    justRedeemed = foundTier !== 'Oro' && prevCoins!==undefined && prevCoins>=BUSINESS.maxCoins && found.coins===0;
   }
   container.innerHTML = `
     <div class="card">
@@ -1097,27 +1151,28 @@ function renderMerchantView(){
       ${found ? `
         <div class="foundcard" id="found-card">
           <div class="foundtop">
-            <div><div class="foundname">${found.name}</div><div class="foundmeta">${found.coins}/${BUSINESS.maxCoins} abonos · <span class="saldo" id="saldo-anchor">Saldo: <b class="saldo-hero" id="saldo-num">${soles(found.saldo)}</b></span> · nivel ${foundTier}</div></div>
+            <div><div class="foundname">${found.name}</div><div class="foundmeta">${found.totalVisits||0} visitas · <span class="saldo" id="saldo-anchor">Saldo total: <b class="saldo-hero" id="saldo-num">${soles(found.saldo)}</b></span> · nivel ${foundTier}</div></div>
             <span class="tierbadge tier-${foundTier}">${tierMedal(foundTier)} ${foundTier}</span>
           </div>
-          ${renderCoinRow(found, animateIndex)}
+          ${foundTier !== 'Oro' ? renderCoinRow(found, animateIndex) : ''}
           ${releaseBlockHtml(found)}
-          ${justRedeemed ? `<div class="rewardbanner">🎉 Cashback canjeado para ${found.name}. Ciclo reiniciado.</div>` : ''}
+          ${justRedeemed ? `<div class="rewardbanner">🎉 Tarjeta completa para ${found.name}. Ciclo reiniciado.</div>` : ''}
           <div class="actionrow">
-            <button class="btn btn-gold" onclick="addCoin('${found.id}')" ${found.coins>=BUSINESS.maxCoins?'disabled':''}>+S/${BUSINESS.valuePerCoin} (compra)</button>
-            <button class="btn btn-outline" onclick="redeem('${found.id}')" ${found.coins<BUSINESS.maxCoins?'disabled':''}>Canjear cashback</button>
+            <button class="btn btn-gold" onclick="addCoin('${found.id}')" ${cardFull?'disabled':''}>+S/${BUSINESS.valuePerCoin} (compra)</button>
+            ${foundTier !== 'Oro' ? `<button class="btn btn-outline" onclick="redeem('${found.id}')" ${found.coins<BUSINESS.maxCoins?'disabled':''}>Liberar S/${CARD_REWARD[foundTier]}</button>` : ''}
           </div>
-          ${found.coins<BUSINESS.maxCoins ? `<button class="btn btn-outline btn-full" style="margin-top:10px;font-size:12px;" onclick="simulateBurst('${found.id}')">🎬 Simular 3 compras seguidas (demo rápida)</button>` : ''}
+          ${(found.disponible||0) > 0 ? `<button class="btn btn-outline btn-full" style="margin-top:10px;" onclick="redeemDisponible('${found.id}')">Usar disponible (${soles(found.disponible)}) en caja</button>` : ''}
+          ${!cardFull ? `<button class="btn btn-outline btn-full" style="margin-top:10px;font-size:12px;" onclick="simulateBurst('${found.id}')">🎬 Simular 3 compras seguidas (demo rápida)</button>` : ''}
         </div>` : `<div class="scan-instruction"><span class="ic">👆</span><p>Selecciona el cliente para abonar saldo y canjear el cashback</p></div>`}
     </div>
     <div class="sectiontitle">Clientes registrados</div>
     ${state.clients.length ? `
-      <table><tr><th>Cliente</th><th>Abonos</th><th>Saldo</th><th>Disponible</th><th>Nivel</th></tr>
-        ${state.clients.map(c=>`<tr><td>${c.name}</td><td class="num">${c.coins}/${BUSINESS.maxCoins}</td><td class="num">${soles(c.saldo)}</td><td class="num">${soles(computeSaldoState(c).liberado)}</td><td>${tierMedal(tierFor(c.cyclesCompleted))} ${tierFor(c.cyclesCompleted)}</td></tr>`).join('')}
+      <table><tr><th>Cliente</th><th>Visitas</th><th>Disponible</th><th>Nivel</th></tr>
+        ${state.clients.map(c=>{ const t = tierForVisits(c.totalVisits||0); return `<tr><td>${c.name}</td><td class="num">${c.totalVisits||0}</td><td class="num">${soles(c.disponible||0)}</td><td>${tierMedal(t)} ${t}</td></tr>`; }).join('')}
       </table>` : '<div class="empty">Aún no hay clientes. Crea uno desde la vista Cliente.</div>'}
     <div class="sectiontitle">Actividad del negocio</div>
     <div class="activity" style="margin-top:0">
-      ${state.activity.length ? state.activity.slice(-10).reverse().map(a=>`<div class="arow"><span class="who">${a.name}</span><span class="tag ${a.type==='canje'?'tag-canje':(a.type==='venta'?'tag-venta':'tag-abono')}">${a.type==='canje'?'Canje':(a.type==='venta'?'Venta Pay':'+S/'+BUSINESS.valuePerCoin)}</span><span class="when">${fmtTime(a.ts)}</span></div>`).join('') : '<div class="empty">Sin movimientos todavía.</div>'}
+      ${state.activity.length ? state.activity.slice(-10).reverse().map(a=>`<div class="arow"><span class="who">${a.name}</span><span class="tag ${activityTagClass(a.type)}">${activityLabel(a.type)}</span><span class="when">${fmtTime(a.ts)}</span></div>`).join('') : '<div class="empty">Sin movimientos todavía.</div>'}
     </div>`;
 
   if (found){
@@ -1315,8 +1370,8 @@ function initCounters(){
 function initTicker(){
   const track = document.getElementById('ticker-track'); if (!track) return;
   const facts = [
-    'S/2 de saldo por cada visita','Niveles Bronce, Plata y Oro','Cashback disponible desde la mitad de la tarjeta',
-    'QR anti-fraude por cliente','Saldo en tiempo real, sin apps','Nivel Oro libera el 100% de inmediato',
+    'S/2 de saldo por cada visita','Niveles Bronce, Plata y Oro','Bronce y Plata liberan su recompensa al completar la tarjeta',
+    'QR anti-fraude por cliente','Saldo en tiempo real, sin apps','Nivel Oro libera S/1 en cada visita, sin esperas',
     'expandeMoney Pay: 5% flat, sin retención de fondos'
   ];
   const itemsHtml = facts.map(f=>`<span class="ticker-item"><b>●</b> ${f}</span><span class="ticker-dot">◆</span>`).join('');
@@ -1336,7 +1391,7 @@ function initButtonGlow(){
 
 async function init(){
   document.getElementById('hero-qr').innerHTML = qrSvg('preview');
-  document.querySelectorAll('.mock-coin.on').forEach(el=>{ el.style.boxShadow = '0 0 6px rgba(231,181,73,.4)'; });
+  document.querySelectorAll('.mock-coin.on').forEach(el=>{ el.style.boxShadow = '0 0 6px rgba(0,255,133,.45)'; });
   await loadPersonal(); await loadShared(); render();
   setInterval(async ()=>{ if (state.settingsOpen) return; await loadShared(); render(); }, 2500);
   setInterval(()=>resetDemo(), 180000);
