@@ -1,1404 +1,1108 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>expandeMoney — Fidelización que se convierte en plata</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0B0F17; --bg-alt:#0D1220; --stub:#10141d;
-    --surface:rgba(255,255,255,0.055); --surface-2:rgba(255,255,255,0.09);
-    --border:rgba(231,181,73,0.30); --border-soft:rgba(255,255,255,0.09);
-    --gold:#E7B549; --gold-light:#F4CB6B; --gold-pale:#FBE7C8;
-    --emerald:#34D399; --emerald-dim:rgba(52,211,153,0.15);
-    --text:#EAEDF3; --text-dim:#9AA1B4; --text-faint:#5B6478;
-    --bronze:#B08D57; --silver:#C7CAD1; --danger:#F87171;
-    --radius-lg:20px; --radius-md:12px;
-    /* Paleta premium fintech — usada en header/hero */
-    --pf-bg-1:#080B10; --pf-bg-2:#0B0F14; --pf-bg-3:#0F141C;
-    --pf-green:#00FF85; --pf-green-2:#20E68A;
-    --pf-gold:#F5C542; --pf-gold-bright:#FFD95A;
-    --pf-text-1:#FFFFFF; --pf-text-2:#A1A1AA; --pf-text-3:#71717A;
-    --pf-border:rgba(255,255,255,0.08);
-    --pf-glow-green:rgba(0,255,133,0.18);
-    --pf-glow-gold:rgba(245,197,66,0.20);
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden;}
-  a{color:inherit;text-decoration:none;}
-  .container{max-width:1080px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1;}
-  section{padding:5rem 0;position:relative;z-index:1;}
-  .display{font-family:'Plus Jakarta Sans',sans-serif;}
-  .mono{font-family:'JetBrains Mono',monospace;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>expandeMoney — Cupones, Vales de Consumo y Links de Cobro</title>
+  
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 
-  .orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
-  .orb-1{width:520px;height:520px;background:rgba(231,181,73,0.10);top:-180px;left:-120px;}
-  .orb-2{width:440px;height:440px;background:rgba(59,130,246,0.09);top:-80px;right:-160px;}
-  .orb-3{width:560px;height:560px;background:rgba(139,92,246,0.07);bottom:-260px;left:34%;}
-  .orb-4{width:380px;height:380px;background:rgba(52,211,153,0.08);bottom:-120px;right:8%;}
+  <style>
+    /* ==========================================================================
+       1. VARIABLES Y CSS RESET
+       ========================================================================== */
+    :root {
+      --bg-dark: #0B0F17;
+      --bg-alt: #0D1220;
+      --card-bg: rgba(255, 255, 255, 0.055);
+      --border-color: rgba(255, 255, 255, 0.09);
+      --gold: #F5C542;
+      --gold-bright: #FFD95A;
+      --emerald: #00FF85;
+      --text-main: #EAEDF3;
+      --text-dim: #9AA1B4;
+      --text-faint: #5B6478;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --grad-primary: linear-gradient(135deg, var(--gold-bright), var(--emerald));
+    }
 
-  .glass{background:var(--surface);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--border-soft);box-shadow:0 10px 34px rgba(0,0,0,0.35);}
-  .glass:hover{background:var(--surface-2);}
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  ::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-track{background:transparent;} ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:8px;}
+    html {
+      scroll-behavior: smooth;
+    }
 
-  /* NAV */
-  nav{position:sticky;top:0;z-index:50;background:rgba(8,11,16,0.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--pf-border);}
-  .navrow{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1080px;margin:0 auto;}
-  .logo{display:flex;align-items:center;gap:9px;}
-  .logo-mark{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--gold),#B9852E);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(231,181,73,0.35);flex-shrink:0;}
-  .logo-word{font-weight:800;font-size:16px;letter-spacing:-.01em;}
-  .logo-word span{color:var(--gold-light);}
-  .navlinks{display:flex;gap:1.75rem;font-size:13.5px;color:var(--text-dim);align-items:center;}
-  .navlinks a:hover{color:var(--gold-light);}
-  .navlinks .navlink-login{color:var(--gold-light);font-weight:700;}
-  @media(max-width:720px){.navlinks a:not(.navlink-login){display:none;}}
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .btn{border:none;border-radius:var(--radius-md);padding:12px 22px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.2px;transition:all .2s;}
-  .btn:active{transform:scale(.98);}
-  .btn-gold{background:var(--gold);color:#1A1400;box-shadow:0 4px 14px rgba(231,181,73,0.28);}
-  .btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);box-shadow:0 6px 22px -2px var(--pf-glow-gold);}
-  .btn-outline{background:transparent;border:1px solid var(--border);color:var(--gold-light);}
-  .btn-outline:hover{background:rgba(231,181,73,0.08);transform:translateY(-1px);}
-  .btn:disabled{opacity:.35;cursor:not-allowed;}
-  .btn-full{width:100%;}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  /* HERO — premium fintech */
-  .hero{padding-top:4rem;padding-bottom:3rem;text-align:center;display:flex;flex-direction:column;align-items:center;position:relative;background:
-      radial-gradient(480px circle at 24% 8%, var(--pf-glow-gold), transparent 60%),
-      radial-gradient(560px circle at 78% 55%, var(--pf-glow-green), transparent 60%);
-  }
-  .hero::before{content:'';position:absolute;inset:0;z-index:-1;opacity:.5;
-    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-    background-size:42px 42px; mask-image:radial-gradient(ellipse 70% 60% at 50% 20%,#000 40%,transparent 80%);}
-  .badge{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--pf-green);background:rgba(0,255,133,0.08);border:1px solid rgba(0,255,133,0.22);padding:6px 14px;border-radius:999px;margin-bottom:1.6rem;letter-spacing:.2px;}
-  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--pf-green);box-shadow:0 0 8px var(--pf-glow-green);animation:pulse 2s infinite;}
-  @keyframes pulse{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
-  h1.hero-h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(34px,5.4vw,58px);line-height:1.06;letter-spacing:-1.2px;max-width:760px;color:var(--pf-text-1);}
-  .hero-sub-wrap{display:flex;align-items:flex-start;justify-content:center;gap:12px;margin-top:1.25rem;max-width:580px;}
-  .hero-sub-bar{display:none;}
-  .hero-sub{font-size:clamp(16px,1.9vw,18px);color:var(--pf-text-2);line-height:1.6;text-align:center;}
-  .hero-sub .hl-gold{color:var(--pf-gold);font-weight:700;}
-  .hero-sub .hl-green{color:var(--pf-green);font-weight:600;}
-  @media(min-width:761px){.hero-sub-bar{display:block;width:3px;align-self:stretch;border-radius:2px;background:linear-gradient(180deg,var(--pf-green),transparent);flex-shrink:0;margin-top:5px;}.hero-sub{text-align:left;}.hero-sub-wrap{justify-content:center;}}
-  .hero-ctas{display:flex;gap:12px;margin-top:2rem;flex-wrap:wrap;justify-content:center;}
-  .hero-ctas .btn{border-radius:16px;padding:15px 26px;font-size:15px;font-weight:700;}
-  .hero-ctas .btn-gold{box-shadow:0 8px 28px -4px var(--pf-glow-gold),0 2px 8px rgba(0,0,0,.35);}
-  .hero-ctas .btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 34px -4px var(--pf-glow-gold),0 4px 10px rgba(0,0,0,.4);}
-  .hero-ctas .btn-outline{border-color:rgba(0,255,133,0.28);color:var(--pf-text-1);background:rgba(255,255,255,0.02);}
-  .hero-ctas .btn-outline:hover{background:rgba(0,255,133,0.06);border-color:rgba(0,255,133,0.5);transform:translateY(-2px);}
-  .hero-ico{display:inline-block;margin-left:2px;}
-  .hero-link-secondary{display:inline-block;margin-top:16px;font-size:13.5px;color:var(--pf-text-3);border-bottom:1px solid transparent;transition:all .2s;}
-  .hero-link-secondary:hover{color:var(--pf-text-1);border-color:var(--pf-text-3);}
-  .hero-link-secondary .hl-green{color:var(--pf-green);font-weight:600;}
-  @media(max-width:600px){h1.hero-h{letter-spacing:-.6px;} .hero-ctas{width:100%;} .hero-ctas .btn{width:100%;} .hero-sub-wrap{max-width:100%;}}
+    h1, h2, h3, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
 
-  .hero-visual{margin-top:3.75rem;display:flex;justify-content:center;position:relative;width:100%;padding:0 1rem;}
-  .hero-visual-glow{position:absolute;width:340px;height:340px;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0;}
-  .hero-visual-glow.g{background:var(--pf-glow-green);left:50%;top:10%;transform:translateX(-78%);}
-  .hero-visual-glow.gd{background:var(--pf-glow-gold);left:50%;top:20%;transform:translateX(20%);}
-  .mock{width:224px;background:rgba(15,20,28,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid var(--pf-border);border-radius:26px;padding:1.15rem;box-shadow:0 30px 70px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(0,255,133,0.06), 0 0 34px -6px var(--pf-glow-green);position:relative;z-index:1;animation:cardFloat 7s ease-in-out infinite;}
-  .mock.b{margin-left:-40px;margin-top:56px;transform:rotate(4deg);animation-delay:.4s;}
-  .mock.a{transform:rotate(-4deg);z-index:2;box-shadow:0 30px 70px -20px rgba(0,0,0,.75), 0 0 0 1px rgba(245,197,66,0.08), 0 0 34px -6px var(--pf-glow-gold);}
-  @keyframes cardFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-9px) rotate(var(--r,0deg));}}
-  .mock.b{--r:4deg;} .mock.a{--r:-4deg;}
-  @media(prefers-reduced-motion: reduce){.mock{animation:none;}}
-  @media(max-width:600px){.mock{width:170px;} .hero-visual-glow{width:220px;height:220px;filter:blur(50px);}}
-  .mock-eyebrow{font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--pf-green);font-weight:700;}
-  .mock.a .mock-eyebrow{color:var(--pf-gold);}
-  .mock-name{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-top:4px;color:var(--pf-text-1);}
-  .mock-coins{display:flex;gap:4px;margin-top:12px;flex-wrap:wrap;}
-  .mock-coin{width:18px;height:18px;border-radius:50%;border:1px solid var(--pf-border);}
-  .mock-coin.on{background:radial-gradient(circle at 35% 30%,var(--pf-green-2),var(--pf-green) 70%);border-color:var(--pf-green);}
-  .mock-balance{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:19px;font-weight:800;color:var(--pf-green);}
-  .mock-qr{width:100%;aspect-ratio:1;background:#000;border-radius:10px;margin-top:14px;padding:8px;border:1px solid var(--pf-border);}
-  .mock-qr svg{width:100%;height:100%;}
-  @media(max-width:600px){.mock{width:170px;}}
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
 
-  .taglist{display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:center;margin-top:3rem;font-size:12px;color:var(--text-dim);}
-  .taglist span::before{content:"·";margin-right:22px;color:var(--gold);font-weight:bold;}
-  .taglist span:first-child::before{display:none;}
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.4rem;
+    }
 
-  .eyebrow-lbl{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-light);font-weight:700;}
-  h2.sect-h{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;margin-top:6px;max-width:520px;line-height:1.2;}
-  .sect-sub{font-size:14px;color:var(--text-dim);margin-top:8px;max-width:520px;line-height:1.55;}
+    section {
+      padding: 4.5rem 0;
+    }
 
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;margin-top:2.5rem;}
-  .step-num{font-family:'JetBrains Mono',monospace;font-size:24px;color:var(--gold);font-weight:700;}
-  .step h3{font-size:15.5px;font-weight:700;margin-top:10px;}
-  .step p{font-size:13px;color:var(--text-dim);margin-top:5px;line-height:1.5;}
-  @media(max-width:720px){.steps{grid-template-columns:1fr;}}
+    .bg-alt {
+      background: radial-gradient(520px circle at 8% 0, rgba(0, 255, 133, 0.05), transparent 62%),
+                  radial-gradient(520px circle at 95% 100%, rgba(245, 197, 66, 0.06), transparent 62%),
+                  var(--bg-alt);
+    }
 
-  /* MODELO / PROPUESTA DE VALOR */
-  #modelo{background:var(--bg-alt);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);}
-  .modelo-head{text-align:center;}
-  .modelo-head h2, .modelo-head .sect-sub{margin-left:auto;margin-right:auto;max-width:620px;}
-  .valuegrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.75rem;}
-  @media(max-width:820px){.valuegrid{grid-template-columns:1fr;}}
-  .valuecard{border-radius:var(--radius-lg);padding:2rem 1.9rem;position:relative;overflow:hidden;border:1px solid var(--border-soft);backdrop-filter:blur(18px);}
-  .valuecard.client{background:linear-gradient(165deg,rgba(52,211,153,0.09),rgba(255,255,255,0.03));border-color:rgba(52,211,153,0.28);}
-  .valuecard.merchant{background:linear-gradient(165deg,rgba(231,181,73,0.10),rgba(255,255,255,0.03));border-color:var(--border);}
-  .valuecard .vc-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:1.1rem;}
-  .valuecard.client .vc-icon{background:var(--emerald-dim);}
-  .valuecard.merchant .vc-icon{background:rgba(231,181,73,0.16);}
-  .valuecard h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:19px;font-weight:800;}
-  .valuecard .vc-tag{font-size:11.5px;color:var(--text-faint);margin-top:2px;letter-spacing:.2px;}
-  .vc-list{margin-top:1.4rem;display:flex;flex-direction:column;gap:1.15rem;}
-  .vc-item{display:flex;gap:12px;align-items:flex-start;}
-  .vc-item .vc-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--text-faint);border:1px solid var(--border-soft);border-radius:6px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-  .valuecard.client .vc-item .vc-num{color:var(--emerald);border-color:rgba(52,211,153,0.3);}
-  .valuecard.merchant .vc-item .vc-num{color:var(--gold-light);border-color:var(--border);}
-  .vc-item h4{font-size:14px;font-weight:700;}
-  .vc-item p{font-size:12.5px;color:var(--text-dim);margin-top:3px;line-height:1.5;}
-  .modelo-strip{margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;font-size:12.5px;color:var(--text-dim);background:var(--surface);border:1px solid var(--border-soft);border-radius:999px;padding:10px 20px;max-width:max-content;margin-left:auto;margin-right:auto;}
-  .modelo-strip b{color:var(--gold-light);}
-  @media(max-width:600px){.modelo-strip{white-space:normal;text-align:center;}}
+    /* ==========================================================================
+       2. TIPOGRAFÍA Y COMPONENTES
+       ========================================================================== */
+    .eyebrow {
+      font-size: 11.5px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gold-bright);
+      font-weight: 700;
+    }
 
-  .modelo-ctas{display:flex;gap:14px;justify-content:center;margin-top:1.75rem;flex-wrap:wrap;}
-  .modelo-ctas .btn{padding:14px 26px;font-size:14px;}
-  @media(max-width:520px){.modelo-ctas{flex-direction:column;align-items:stretch;}.modelo-ctas .btn{text-align:center;}}
+    h2 {
+      font-size: clamp(25px, 3.4vw, 34px);
+      line-height: 1.15;
+      margin-top: 6px;
+      max-width: 640px;
+    }
 
-  .releaserules-head{text-align:center;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--border-soft);}
-  .releaserules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem;}
-  .releaserule-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);padding:1.5rem;text-align:center;backdrop-filter:blur(18px);}
-  .releaserule-card-gold{background:rgba(231,181,73,0.08);border-color:var(--border);}
-  .rr-medal{font-size:28px;margin-bottom:.5rem;}
-  .rr-tier{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;}
-  .rr-desc{font-size:12.5px;color:var(--text-dim);margin-top:.5rem;line-height:1.5;}
-  .rr-desc b{color:var(--text);}
-  @media(max-width:720px){.releaserules-grid{grid-template-columns:1fr;}}
+    .sub {
+      color: var(--text-dim);
+      margin-top: 10px;
+      max-width: 600px;
+    }
 
-  .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);border-radius:var(--radius-lg);overflow:hidden;margin-top:2.5rem;}
-  .feat{background:var(--bg);padding:1.6rem 1.4rem;}
-  .feat .ic{width:30px;height:30px;margin-bottom:14px;}
-  .feat h3{font-size:14px;font-weight:700;}
-  .feat p{font-size:12.5px;color:var(--text-dim);margin-top:6px;line-height:1.5;}
-  @media(max-width:820px){.feats{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:480px){.feats{grid-template-columns:1fr;}}
+    .text-gradient {
+      background: var(--grad-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  .trust{border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);background:var(--bg-alt);}
-  .trustrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;padding:2.5rem 0;}
-  .trustitem h4{font-size:13.5px;font-weight:700;color:var(--gold-pale);}
-  .trustitem p{font-size:12px;color:var(--text-faint);margin-top:4px;}
-  @media(max-width:720px){.trustrow{grid-template-columns:1fr;}}
+    /* Botones */
+    .btn {
+      display: inline-block;
+      border: 0;
+      border-radius: var(--radius-md);
+      padding: 12px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      text-align: center;
+    }
 
-  .statsgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem;}
-  .statcard{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);padding:1.75rem 1.5rem;text-align:center;backdrop-filter:blur(18px);}
-  .stat-num{font-family:'JetBrains Mono',monospace;font-weight:800;font-size:28px;color:var(--gold-light);}
-  .stat-label{font-size:12.5px;color:var(--text-dim);margin-top:6px;line-height:1.4;}
-  .stats-note{font-size:11px;color:var(--text-faint);text-align:center;margin-top:1.5rem;}
-  @media(max-width:720px){.statsgrid{grid-template-columns:1fr;}}
+    .btn-primary {
+      background: var(--gold);
+      color: #1A1400;
+      box-shadow: 0 6px 22px -6px rgba(245, 197, 66, 0.5);
+    }
 
-  #demo{background:var(--bg-alt);border-top:1px solid var(--border-soft);}
-  .demohead{text-align:center;margin-bottom:2.5rem;}
-  .demohead h2, .demohead .sect-sub{margin-left:auto;margin-right:auto;}
-  .roletabs{display:flex;background:var(--surface);border:1px solid var(--border-soft);border-radius:999px;padding:4px;width:max-content;margin:1.5rem auto 0;}
-  .demo-reset-note{display:inline-block;font-size:12px;color:var(--gold-pale);background:rgba(231,181,73,0.10);border:1px solid var(--border);border-radius:999px;padding:6px 16px;margin-top:10px;}
-  .roletab{border:none;background:transparent;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;padding:9px 20px;border-radius:999px;cursor:pointer;transition:all .2s;}
-  .roletab.active{background:var(--gold);color:#1A1400;box-shadow:0 2px 8px rgba(231,181,73,.25);}
+    .btn-primary:hover {
+      background: var(--gold-bright);
+      transform: translateY(-2px);
+    }
 
-  .pass{display:flex;background:var(--stub);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);position:relative;box-shadow:0 10px 30px rgba(0,0,0,.45);}
-  .pass-main{flex:1;padding:1.6rem 1.6rem 1.4rem;min-width:0;}
-  .pass-stub{width:176px;flex-shrink:0;padding:1.5rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--surface-2);}
-  .perf{width:0;position:relative;flex-shrink:0;border-left:1.5px dashed rgba(234,237,243,.18);}
-  .perf::before,.perf::after{content:'';position:absolute;left:-9px;width:18px;height:18px;border-radius:50%;background:var(--bg-alt);}
-  .perf::before{top:-9px;} .perf::after{bottom:-9px;}
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(0, 255, 133, 0.35);
+      color: var(--text-main);
+    }
 
-  .eyebrow{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-faint);font-weight:600;}
-  .clientname{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;margin-top:4px;}
-  .tierrow{display:flex;align-items:center;gap:8px;margin-top:8px;}
-  .tierbadge{font-size:11px;font-weight:700;letter-spacing:.4px;padding:3px 10px;border-radius:999px;}
-  .tier-Bronce{background:rgba(176,141,87,.2);color:var(--bronze);}
-  .tier-Plata{background:rgba(199,202,209,.2);color:var(--silver);}
-  .tier-Oro{background:rgba(231,181,73,.2);color:var(--gold-light);}
-  .saldo{font-size:12px;color:var(--text-dim);position:relative;display:inline-block;}
-  .saldo b{color:var(--gold-light);font-weight:700;}
-  .saldo-hero{font-family:'JetBrains Mono',monospace;font-weight:800;}
-  .float-plus{position:absolute;left:100%;top:-4px;margin-left:6px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;color:var(--emerald);white-space:nowrap;pointer-events:none;animation:floatUp 1.15s ease-out forwards;}
-  @keyframes floatUp{0%{opacity:0;transform:translateY(4px);}15%{opacity:1;transform:translateY(0);}100%{opacity:0;transform:translateY(-22px);}}
-  .tierbadge.levelup{animation:levelPop .9s cubic-bezier(.34,1.56,.64,1);}
-  @keyframes levelPop{0%{transform:scale(1);}35%{transform:scale(1.4);box-shadow:0 0 16px currentColor;}100%{transform:scale(1);box-shadow:none;}}
-  .pass.flash{animation:flashBorder 1.3s ease;}
-  @keyframes flashBorder{0%{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 0 rgba(231,181,73,0);}30%{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 6px rgba(231,181,73,.28);}100%{box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 0 rgba(231,181,73,0);}}
+    .btn-outline:hover {
+      background: rgba(0, 255, 133, 0.07);
+    }
 
-  .reward-overlay{position:fixed;inset:0;background:rgba(5,6,9,.72);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:9998;opacity:0;animation:overlayFade .35s ease forwards;padding:1.5rem;}
-  @keyframes overlayFade{to{opacity:1;}}
-  .reward-card{background:var(--surface-2);border:1px solid var(--border);border-radius:24px;padding:2.5rem 2rem;text-align:center;max-width:300px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:rewardPop .5s cubic-bezier(.34,1.56,.64,1);backdrop-filter:blur(20px);}
-  @keyframes rewardPop{0%{transform:scale(.6);opacity:0;}100%{transform:scale(1);opacity:1;}}
-  .reward-coin{width:60px;height:60px;margin:0 auto 1.1rem;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 70%);box-shadow:0 8px 24px rgba(231,181,73,.5);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-weight:800;color:#1A1400;font-size:20px;animation:coinFloat 1.8s ease-in-out infinite;}
-  @keyframes coinFloat{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-8px) rotate(4deg);}}
-  .reward-card h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;color:var(--gold-light);margin-bottom:6px;font-weight:800;}
-  .reward-card p{font-size:13px;color:var(--text-dim);line-height:1.5;}
+    /* ==========================================================================
+       3. NAVEGACIÓN Y HERO
+       ========================================================================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 11, 16, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+    }
 
-  .coinrow{display:flex;gap:6px;margin-top:1.15rem;flex-wrap:wrap;}
-  .coin{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border-soft);transition:background .3s,border-color .3s;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#1A1400;}
-  .coin.filled{background:radial-gradient(circle at 35% 30%,var(--gold-light),var(--gold) 70%);border-color:var(--gold);animation:coinGlow 2.8s ease-in-out infinite;}
-  @keyframes coinGlow{0%,100%{box-shadow:0 0 6px rgba(231,181,73,.22),inset 0 0 6px rgba(231,181,73,.15);}50%{box-shadow:0 0 15px rgba(244,203,110,.55),inset 0 0 8px rgba(244,203,110,.25);}}
-  .coin.pop{animation:coinDrop .55s cubic-bezier(.34,1.56,.64,1);}
-  @keyframes coinDrop{0%{transform:scale(.2) rotate(-45deg) translateY(-14px);opacity:0;}60%{transform:scale(1.3) rotate(10deg) translateY(2px);opacity:1;}100%{transform:scale(1) rotate(0) translateY(0);opacity:1;}}
-  .progresstext{margin-top:10px;font-size:12.5px;color:var(--text-dim);}
-  .rewardbanner{margin-top:1rem;background:var(--emerald-dim);border:1px solid var(--emerald);border-radius:var(--radius-md);padding:.85rem 1rem;font-size:13px;color:var(--gold-pale);display:flex;align-items:center;gap:8px;}
+    nav .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-top: 0.9rem;
+      padding-bottom: 0.9rem;
+    }
 
-  .releasebox{margin-top:1rem;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:.9rem 1rem;}
-  .releasebox-oro{background:rgba(231,181,73,0.10);border-color:var(--border);}
-  .releasebar{height:6px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:.7rem;}
-  .releasebar-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--gold-light));border-radius:999px;transition:width .4s ease;}
-  .releaserow{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--text-dim);padding:2px 0;}
-  .releaserow .mono{font-family:'JetBrains Mono',monospace;font-weight:700;}
-  .releaserow .lib{color:var(--emerald);}
-  .releaserow .bloq{color:var(--text-faint);}
-  .release-note{font-size:11.5px;color:var(--text-faint);margin-top:.5rem;line-height:1.45;}
-  .qrbox{width:118px;height:118px;background:#000;border-radius:8px;padding:8px;}
-  .qrbox svg{width:100%;height:100%;}
-  .codetext{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;color:var(--gold-light);text-align:center;}
-  .codelabel{font-size:10px;color:var(--text-faint);text-align:center;letter-spacing:.3px;}
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-  .card{background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-lg);padding:1.75rem;box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(18px);}
-  .card h2{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:19px;margin-bottom:6px;}
-  .card .sub{font-size:13px;color:var(--text-dim);margin-bottom:1.25rem;}
-  label{display:block;font-size:12px;color:var(--text-dim);margin-bottom:5px;margin-top:14px;}
-  label:first-of-type{margin-top:0;}
-  input[type=text],input[type=email],input[type=password],input[type=number],select{width:100%;background:var(--surface-2);border:1px solid var(--border-soft);color:var(--text);border-radius:var(--radius-md);padding:11px 13px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
-  input:focus,select:focus{border-color:var(--gold);}
-  select{cursor:pointer;}
+    .logo i {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background: var(--grad-primary);
+      display: grid;
+      place-items: center;
+      color: var(--bg-dark);
+      font-style: normal;
+      font-weight: 800;
+    }
 
-  .activity{margin-top:1.5rem;}
-  .activity h3{font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;font-weight:700;}
-  .arow{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border-soft);font-size:13px;}
-  .arow:last-child{border-bottom:none;}
-  .arow .who{color:var(--text);}
-  .arow .when{color:var(--text-faint);font-size:11.5px;}
-  .arow .tag{font-size:11px;padding:2px 8px;border-radius:999px;font-weight:700;}
-  .tag-abono{background:rgba(52,211,153,.14);color:var(--emerald);}
-  .tag-canje{background:rgba(248,113,113,.14);color:var(--danger);}
-  .tag-venta{background:rgba(231,181,73,.16);color:var(--gold-light);}
-  .empty{font-size:13px;color:var(--text-faint);padding:1rem 0;text-align:center;}
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 13.5px;
+      color: var(--text-dim);
+    }
 
-  .scanrow{display:flex;gap:8px;margin-bottom:.7rem;}
-  .scanrow input{flex:1;}
-  .foundcard{margin-top:1.25rem;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:1.1rem 1.25rem;}
-  .scan-instruction{margin-top:1.25rem;border-radius:var(--radius-md);padding:1.4rem 1.5rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;border:1px solid var(--border);animation:instructionPulse 2.4s ease-in-out infinite;}
-  @keyframes instructionPulse{0%,100%{background:rgba(231,181,73,.05);box-shadow:0 0 0 0 rgba(231,181,73,.12);border-color:rgba(231,181,73,.22);}50%{background:rgba(231,181,73,.15);box-shadow:0 0 26px 4px rgba(231,181,73,.28);border-color:rgba(244,203,110,.55);}}
-  .scan-instruction .ic{font-size:20px;animation:instructionBounce 2.4s ease-in-out infinite;}
-  @keyframes instructionBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-  .scan-instruction p{font-size:13.5px;font-weight:700;color:var(--gold-pale);}
-  .foundtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-  .foundname{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;}
-  .foundmeta{font-size:12px;color:var(--text-dim);margin-top:2px;}
-  .actionrow{display:flex;gap:10px;margin-top:14px;}
-  .actionrow .btn{flex:1;}
-  table{width:100%;border-collapse:collapse;margin-top:.5rem;}
-  th{text-align:left;font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.4px;padding:8px 6px;border-bottom:1px solid var(--border-soft);font-weight:600;}
-  td{padding:10px 6px;font-size:13px;border-bottom:1px solid var(--border-soft);}
-  td.num{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--gold-light);}
-  .sectiontitle{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;margin:2.25rem 0 .9rem;}
-  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);opacity:0;background:var(--gold);color:#1A1400;padding:10px 22px;border-radius:999px;font-size:13px;font-weight:700;transition:all .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;z-index:999;white-space:nowrap;box-shadow:0 4px 15px rgba(0,0,0,.35);}
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-  @media(max-width:480px){.pass{flex-direction:column;}.pass-stub{width:100%;flex-direction:row;padding:1rem 1.5rem;}.perf{display:none;}.qrbox{width:88px;height:88px;}}
+    .nav-links a:hover {
+      color: var(--gold-bright);
+    }
 
-  .clientwrap{position:relative;}
-  .gearbtn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border-soft);color:var(--text-dim);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-  .gearbtn:hover{color:var(--gold-light);border-color:var(--border);}
-  .settings-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60;}
-  .settings-overlay.open{opacity:1;pointer-events:auto;}
-  .settings-panel{position:fixed;left:50%;bottom:0;transform:translate(-50%,110%);width:100%;max-width:420px;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:20px 20px 0 0;padding:1.5rem 1.5rem 1.75rem;z-index:61;transition:transform .32s cubic-bezier(.34,1.1,.4,1);max-height:80vh;overflow-y:auto;backdrop-filter:blur(20px);}
-  .settings-panel.open{transform:translate(-50%,0);}
-  .settings-handle{width:36px;height:4px;border-radius:2px;background:var(--border-soft);margin:0 auto 1.1rem;}
-  .settings-panel h3{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;margin-bottom:4px;}
-  .settings-panel .sub{font-size:12.5px;color:var(--text-dim);margin-bottom:1rem;}
-  @media(min-width:641px){
-    .settings-overlay{background:transparent;}
-    .settings-panel{position:absolute;left:auto;right:0;top:44px;bottom:auto;width:280px;transform:translateY(-8px) scale(.97);opacity:0;pointer-events:none;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,.4);max-height:none;}
-    .settings-panel.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto;}
-    .settings-handle{display:none;}
-  }
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
 
-  .activity-notif-wrap{position:fixed;top:16px;right:16px;z-index:9997;display:flex;flex-direction:column;gap:8px;max-width:270px;pointer-events:none;}
-  .activity-notif{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 14px;font-size:12.5px;color:var(--text);box-shadow:0 12px 30px rgba(0,0,0,.45);display:flex;align-items:center;gap:9px;animation:notifSlideIn .35s cubic-bezier(.34,1.56,.64,1);backdrop-filter:blur(16px);}
-  .activity-notif.leaving{animation:notifSlideOut .3s ease forwards;}
-  .activity-notif b{color:var(--gold-light);}
-  @keyframes notifSlideIn{from{transform:translateX(30px);opacity:0;}to{transform:translateX(0);opacity:1;}}
-  @keyframes notifSlideOut{to{transform:translateX(30px);opacity:0;}}
-  @media(max-width:640px){.activity-notif-wrap{top:auto;bottom:78px;right:12px;left:12px;max-width:none;}}
+    /* Hero Section */
+    .hero {
+      padding: 4rem 0 3rem;
+      text-align: center;
+      background: radial-gradient(480px circle at 22% 6%, rgba(245, 197, 66, 0.18), transparent 60%),
+                  radial-gradient(540px circle at 80% 50%, rgba(0, 255, 133, 0.14), transparent 60%);
+    }
 
-  .cursor-trail-particle{position:fixed;pointer-events:none;z-index:99999;border-radius:50%;top:0;left:0;background:radial-gradient(circle,rgba(244,231,196,.95) 0%,rgba(231,181,73,.55) 55%,transparent 76%);animation:trailFade .9s ease-out forwards;}
-  @keyframes trailFade{0%{opacity:.8;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--dx,0px),-20px) scale(.25);}}
+    .segmented-control {
+      display: inline-flex;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-pill);
+      padding: 4px;
+      margin-bottom: 1.6rem;
+    }
 
-  footer{padding:3rem 0 2.5rem;text-align:center;}
-  footer .logo{justify-content:center;margin-bottom:8px;}
-  footer p{font-size:12px;color:var(--text-faint);}
+    .segmented-control button {
+      border: 0;
+      background: none;
+      color: var(--text-dim);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 9px 20px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
 
-  /* ===== AUTH SHELL (usado por #login y #panel) ===== */
-  .auth-shell{display:flex;flex-direction:column;min-height:100vh;}
-  .authnav{position:sticky;top:0;z-index:50;background:rgba(11,15,23,0.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft);}
-  .authnav .navrow{padding:1rem 1.5rem;}
-  .authnav .navlinks{gap:1rem;}
+    .segmented-control button.active {
+      background: var(--gold);
+      color: #1A1400;
+    }
 
-  /* LOGIN */
-  .login-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.5rem;position:relative;z-index:1;}
-  .login-card{width:100%;max-width:380px;}
-  .login-card h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:22px;margin-bottom:4px;}
-  .login-card .sub{font-size:13px;color:var(--text-dim);margin-bottom:1.5rem;}
-  .roleswitch{display:flex;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:999px;padding:4px;margin-bottom:1.5rem;}
-  .roleswitch button{flex:1;border:none;background:transparent;color:var(--text-dim);font-family:'Inter',sans-serif;font-size:12.5px;font-weight:700;padding:9px 12px;border-radius:999px;cursor:pointer;transition:all .2s;}
-  .roleswitch button.active{background:var(--gold);color:#1A1400;}
-  .login-error{font-size:12.5px;color:var(--danger);margin-top:10px;display:none;}
-  .login-error.show{display:block;}
-  .login-footnote{font-size:11.5px;color:var(--text-faint);text-align:center;margin-top:1.25rem;line-height:1.5;}
-  .login-footnote a{color:var(--gold-light);border-bottom:1px solid transparent;}
-  .login-footnote a:hover{border-color:var(--gold-light);}
-  .back-home{position:fixed;top:20px;left:20px;font-size:12.5px;color:var(--text-dim);display:flex;align-items:center;gap:5px;z-index:5;}
-  .back-home:hover{color:var(--gold-light);}
-  @media(max-width:600px){.back-home{position:static;margin-bottom:1.5rem;align-self:flex-start;}
-    .login-wrap{flex-direction:column;align-items:stretch;}}
+    h1 {
+      font-size: clamp(34px, 5.4vw, 56px);
+      line-height: 1.07;
+      letter-spacing: -1.2px;
+      max-width: 780px;
+      margin: 0 auto;
+    }
 
-  /* PANEL */
-  .panel-shell{flex:1;}
-  .panelnav{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;max-width:1080px;margin:0 auto;}
-  .panel-userchip{display:flex;align-items:center;gap:10px;}
-  .panel-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#B9852E);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#1A1400;flex-shrink:0;}
-  .panel-username{font-size:13px;font-weight:700;}
-  .panel-userrole{font-size:11px;color:var(--text-faint);}
-  .panel-logout{font-size:12.5px;color:var(--text-dim);border:1px solid var(--border-soft);border-radius:999px;padding:8px 16px;cursor:pointer;background:transparent;font-family:'Inter',sans-serif;transition:all .2s;}
-  .panel-logout:hover{color:var(--danger);border-color:var(--danger);}
-  .panel-hero{padding:2.5rem 0 1rem;}
-  .panel-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:24px;}
-  .panel-hero p{font-size:13.5px;color:var(--text-dim);margin-top:4px;}
-  .panel-body{padding-bottom:4rem;}
+    .hero p {
+      color: #A1A1AA;
+      max-width: 600px;
+      margin: 1.1rem auto 0;
+      font-size: 17px;
+    }
 
-  /* ===== EFECTOS / MICROINTERACCIONES ===== */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);}
-  .reveal.in{opacity:1;transform:translateY(0);}
-  .reveal-stagger.in{transition-delay:var(--rd,0ms);}
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 1.8rem;
+    }
 
-  .hoverlift{transition:transform .28s cubic-bezier(.16,1,.3,1),box-shadow .28s ease,border-color .28s ease;}
-  .hoverlift:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(0,0,0,.4);border-color:var(--border);}
+    .chips {
+      display: flex;
+      gap: 0.5rem 1.4rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.2rem;
+      font-size: 12.5px;
+      color: var(--text-dim);
+    }
 
-  .text-shimmer{background:linear-gradient(100deg,var(--pf-gold-bright) 10%,var(--pf-green) 55%,var(--pf-gold-bright) 100%);background-size:220% auto;background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerMove 6s linear infinite;}
-  @keyframes shimmerMove{to{background-position:-220% center;}}
+    .chips span::before {
+      content: "✓ ";
+      color: var(--emerald);
+    }
 
-  /* Spotlight de cursor en botones dorados */
-  .btn-gold{position:relative;overflow:hidden;}
-  .btn-gold::before{content:'';position:absolute;inset:0;background:radial-gradient(160px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.35),transparent 60%);opacity:0;transition:opacity .3s ease;pointer-events:none;}
-  .btn-gold:hover::before{opacity:1;}
+    /* Mockups Visuales */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-top: 3rem;
+      padding-bottom: 2.6rem;
+    }
 
-  /* Ticker de cifras en movimiento (estilo marquee) */
-  .ticker{border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft);background:var(--bg-alt);overflow:hidden;padding:14px 0;position:relative;z-index:1;}
-  .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
-  .ticker::before{left:0;background:linear-gradient(90deg,var(--bg-alt),transparent);}
-  .ticker::after{right:0;background:linear-gradient(-90deg,var(--bg-alt),transparent);}
-  .ticker-track{display:flex;width:max-content;gap:2.5rem;animation:tickerScroll 32s linear infinite;}
-  .ticker:hover .ticker-track{animation-play-state:paused;}
-  .ticker-item{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
-  .ticker-item b{color:var(--gold-light);font-family:'JetBrains Mono',monospace;font-weight:700;}
-  .ticker-dot{color:var(--gold);opacity:.6;}
-  @keyframes tickerScroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    .hero-visual::before, .hero-visual::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(70px);
+      z-index: 0;
+    }
 
-  /* ===== PAY PARA CREADORES (nuevo vertical) ===== */
-  #paycreators{background:var(--bg);border-top:1px solid var(--border-soft);}
-  .pay-compare{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:1.1rem;}
-  .pay-fee-badge{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:#1A1400;background:var(--emerald);padding:5px 14px;border-radius:999px;}
-  .pay-fee-old{font-size:12.5px;color:var(--text-faint);text-decoration:line-through;}
-  .pay-fee-note{font-size:12.5px;color:var(--text-dim);}
-  .pay-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;margin-top:2.5rem;}
-  @media(max-width:720px){.pay-steps{grid-template-columns:1fr;}}
-  .pay-sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.75rem;align-items:start;}
-  @media(max-width:820px){.pay-sim-grid{grid-template-columns:1fr;}}
-  .pay-output{margin-top:1.4rem;background:var(--surface-2);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:1.1rem 1.25rem;}
-  .pay-link-box{font-family:'JetBrains Mono',monospace;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--radius-md);padding:.8rem 1rem;word-break:break-all;font-size:12px;color:var(--gold-light);display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:.6rem;}
-  .pay-link-box button{flex-shrink:0;border:none;background:rgba(231,181,73,0.14);color:var(--gold-light);font-size:11px;font-weight:700;padding:6px 10px;border-radius:8px;cursor:pointer;font-family:'Inter',sans-serif;}
-  .pay-link-box button:hover{background:rgba(231,181,73,0.24);}
-  .pay-breakdown{margin-top:1rem;display:flex;flex-direction:column;gap:6px;}
-  .pay-brow{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text-dim);padding:6px 0;border-bottom:1px solid var(--border-soft);}
-  .pay-brow:last-child{border-bottom:none;}
-  .pay-brow .mono{font-family:'JetBrains Mono',monospace;font-weight:700;}
-  .pay-brow.total{color:var(--text);}
-  .pay-brow.total .mono{color:var(--emerald);font-size:15px;}
-  .pay-fee-line{color:var(--danger);}
-  @media(prefers-reduced-motion: reduce){.ticker-track{animation:none;}.reveal{opacity:1;transform:none;transition:none;}}
-</style>
+    .hero-visual::before { background: rgba(0, 255, 133, 0.16); left: 16%; top: 8%; }
+    .hero-visual::after { background: rgba(245, 197, 66, 0.18); right: 16%; top: 18%; }
+
+    .mockup-card {
+      position: relative;
+      z-index: 1;
+      width: 210px;
+      background: rgba(15, 20, 28, 0.88);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 1.1rem;
+      text-align: left;
+      box-shadow: 0 30px 60px -20px #000, 0 0 34px -8px rgba(0, 255, 133, 0.35);
+      animation: floatAnimation 7s ease-in-out infinite;
+    }
+
+    .mockup-card.card-b { transform: rotate(-4deg); margin-top: 50px; margin-right: -26px; }
+    .mockup-card.card-a { transform: rotate(4deg); animation-delay: 0.5s; }
+
+    @keyframes floatAnimation {
+      50% { transform: translateY(-9px) rotate(var(--rot, 0deg)); }
+    }
+    .mockup-card.card-b { --rot: -4deg; }
+    .mockup-card.card-a { --rot: 4deg; }
+
+    .mockup-card small {
+      font-size: 9.5px;
+      letter-spacing: 1.2px;
+      font-weight: 700;
+      color: var(--emerald);
+      text-transform: uppercase;
+    }
+
+    .mockup-card.card-a small { color: var(--gold); }
+    .mockup-card > b { display: block; font-size: 15px; margin-top: 3px; }
+
+    .dots { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 12px; }
+    .dots i { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--border-color); }
+    .dots i.active { background: var(--grad-primary); border-color: transparent; box-shadow: 0 0 10px rgba(245, 197, 66, 0.35); }
+
+    .balance { margin-top: 12px; font-size: 19px; color: var(--emerald); font-weight: 800; }
+    .qr-container { aspect-ratio: 1; background: #000; border-radius: 10px; margin-top: 12px; padding: 8px; box-shadow: 0 0 16px rgba(0, 255, 133, 0.3); }
+    .qr-container svg { width: 100%; height: 100%; }
+
+    .pill-notify {
+      position: absolute;
+      z-index: 3;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 20, 28, 0.96);
+      border: 1px solid rgba(0, 255, 133, 0.4);
+      border-radius: var(--radius-pill);
+      padding: 9px 18px;
+      font-size: 12.5px;
+      white-space: nowrap;
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      50% { box-shadow: 0 0 22px rgba(0, 255, 133, 0.45); }
+    }
+
+    .hero-caption { max-width: 560px; margin: 0 auto; color: var(--text-dim); font-size: 14px; }
+
+    /* ==========================================================================
+       4. ESTRUCTURA DE GRILLAS Y TARJETAS
+       ========================================================================== */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 2rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; align-items: start; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+
+    @media (max-width: 860px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .mockup-card { width: 160px; }
+      .pill-notify { font-size: 11px; padding: 8px 12px; }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      backdrop-filter: blur(16px);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .card:hover {
+      border-color: rgba(0, 255, 133, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .card .icon { font-size: 30px; }
+    .card h3 { font-size: 18px; margin: 8px 0 6px; }
+    .card p { color: var(--text-dim); font-size: 13.5px; }
+
+    .who-benefit {
+      margin-top: 12px;
+      font-size: 12.5px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+      color: var(--text-dim);
+    }
+    .who-benefit b { color: var(--emerald); }
+    .who-benefit b.merchant { color: var(--gold-bright); }
+
+    /* Tarjetas de Cupones */
+    .coupon-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+    .coupon-card .img-container {
+      height: 104px;
+      display: grid;
+      place-items: center;
+      font-size: 40px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(245, 197, 66, 0.16), rgba(0, 255, 133, 0.12));
+    }
+
+    .coupon-card .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 800;
+      border-radius: var(--radius-pill);
+      padding: 3px 9px;
+    }
+
+    .coupon-card .card-body { padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+    .coupon-card small { color: var(--emerald); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .coupon-card h3 { font-size: 15px; margin: 0; }
+    .coupon-card .price-row { margin-top: auto; padding-top: 8px; display: flex; align-items: baseline; gap: 8px; }
+    .coupon-card s { color: var(--text-faint); font-size: 12.5px; }
+    .coupon-card b { font-size: 21px; }
+
+    /* Filtros por categoría */
+    .categories { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
+    .cat-btn {
+      border: 1px solid var(--border-color);
+      background: none;
+      color: var(--text-dim);
+      border-radius: var(--radius-pill);
+      padding: 7px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cat-btn.active { background: var(--grad-primary); color: var(--bg-dark); border-color: transparent; }
+
+    /* Vales de Consumo */
+    .vale-banner {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: linear-gradient(135deg, rgba(245, 197, 66, 0.1), rgba(0, 255, 133, 0.08));
+      border: 1px solid rgba(245, 197, 66, 0.3);
+      border-radius: 22px;
+      padding: 1.6rem;
+      margin-top: 2.4rem;
+    }
+
+    .vale-banner h3 { font-size: 22px; margin-bottom: 6px; }
+    .amounts-selector { display: flex; gap: 0.5rem; margin: 12px 0; }
+    .amounts-selector button {
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 10px 18px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .amounts-selector button.active { border-color: var(--gold); background: rgba(245, 197, 66, 0.15); }
+
+    .vale-output { text-align: center; min-width: 230px; }
+    .vale-output .big-text { font-size: 34px; font-weight: 800; }
+
+    /* Formulario y Tablas */
+    label { display: block; font-size: 12px; color: var(--text-dim); margin: 12px 0 5px; }
+    input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 14px;
+      outline: 0;
+    }
+    input:focus { border-color: var(--gold); }
+
+    .link-preview {
+      font-size: 12px;
+      color: var(--gold-bright);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    .table-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 13.5px;
+      color: var(--text-dim);
+    }
+    .table-row:last-child { border: 0; color: var(--text-main); }
+    .table-row b { font-family: 'JetBrains Mono', monospace; }
+    .text-danger { color: #F87171; }
+    .text-success { color: var(--emerald); }
+
+    .tier-card { text-align: center; }
+    .tier-card .icon { font-size: 34px; }
+
+    .stat-card { text-align: center; }
+    .stat-card b { display: block; font-size: 30px; color: var(--gold-bright); }
+    .stat-card span { font-size: 12.5px; color: var(--text-dim); }
+
+    /* Accordion FAQ */
+    details {
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      margin-top: 0.7rem;
+      background: var(--card-bg);
+    }
+    summary { cursor: pointer; font-weight: 600; list-style: none; }
+    summary::after { content: "+"; float: right; color: var(--gold-bright); }
+    details[open] summary::after { content: "–"; }
+    details p { color: var(--text-dim); margin-top: 8px; font-size: 14px; }
+
+    /* Footer & Final CTA */
+    .final-cta {
+      text-align: center;
+      background: radial-gradient(520px circle at 50% 0, rgba(245, 197, 66, 0.16), transparent 62%),
+                  radial-gradient(520px circle at 50% 100%, rgba(0, 255, 133, 0.12), transparent 62%);
+    }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-faint);
+      border-top: 1px solid var(--border-color);
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translate(-50%, 14px);
+      opacity: 0;
+      background: var(--gold);
+      color: #1A1400;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      z-index: 50;
+    }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Modal emergente para la confirmación de cupones */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 360px;
+      width: 90%;
+      text-align: center;
+    }
+    .modal-card h3 { margin-bottom: 8px; }
+    .modal-card .modal-qr { width: 160px; height: 160px; margin: 1rem auto; }
+
+    /* Ocultar dinámicamente según la audiencia activa */
+    body[data-audience="c"] .audience-m,
+    body[data-audience="m"] .audience-c {
+      display: none !important;
+    }
+  </style>
 </head>
-<body>
+<body data-audience="c">
 
-<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div><div class="orb orb-4"></div>
-
-<!-- ===================== VISTA: LANDING (/) ===================== -->
-<div id="view-landing">
-
-<nav>
-  <div class="navrow">
-    <div class="logo">
-      <div class="logo-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-      <div class="logo-word">expande<span>Money</span></div>
-    </div>
-    <div class="navlinks">
-      <a href="#funciona">Cómo funciona</a>
-      <a href="#modelo">Por qué te conviene</a>
-      <a href="#paycreators">Pay para creadores</a>
-      <a href="#prueba-social">Resultados</a>
-      <a href="#features">Funciones</a>
-      <a href="/login" class="navlink-login" data-link>Iniciar sesión</a>
-    </div>
-    <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Probar demo gratis <span class="hero-ico" aria-hidden="true">→</span></a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="container" style="display:flex;flex-direction:column;align-items:center;">
-    <span class="badge"><span class="dot"></span>Disponible en Lima · un producto ExpandeLab</span>
-    <h1 class="hero-h">Fideliza a tus clientes mediante <span class="text-shimmer">link de cobro</span>.</h1>
-    <div class="hero-sub-wrap">
-      <span class="hero-sub-bar" aria-hidden="true"></span>
-      <p class="hero-sub">Cobra por tus servicios o productos al instante a través de QR con una tasa que baja del <span class="hl-gold">4%</span> al <span class="hl-gold">2.5%</span> conforme escalas tus ventas, y un <span class="hl-green">motor de fidelización automático</span> que hace que tus clientes siempre vuelvan.</p>
-    </div>
-    <div class="hero-ctas">
-      <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Quiero ver como comercio <span class="hero-ico" aria-hidden="true">→</span></a>
-      <a href="#paycreators" class="btn btn-outline"><span class="hero-ico" aria-hidden="true">🔗</span> Crear mi link de cobro (4%)</a>
-    </div>
-    <a href="#demo" class="hero-link-secondary" onclick="setRole('client')">¿Eres cliente? <span class="hl-green">Descubre tu saldo</span> aquí →</a>
-    <div class="hero-visual">
-      <div class="hero-visual-glow g" aria-hidden="true"></div>
-      <div class="hero-visual-glow gd" aria-hidden="true"></div>
-      <div class="mock b">
-        <div class="mock-eyebrow">Saldo</div>
-        <div class="mock-name">Camila Ruiz</div>
-        <div class="mock-coins">
-          <div class="mock-coin on"></div><div class="mock-coin on"></div><div class="mock-coin on"></div>
-          <div class="mock-coin on"></div><div class="mock-coin on"></div><div class="mock-coin on"></div>
-          <div class="mock-coin"></div><div class="mock-coin"></div><div class="mock-coin"></div><div class="mock-coin"></div>
-        </div>
-        <div class="mock-balance">S/ 12.00</div>
+  <!-- ==========================================================================
+     NAVEGACIÓN
+     ========================================================================== -->
+  <nav>
+    <div class="wrap">
+      <a href="#" class="logo">
+        <i>$</i>expande<span class="text-gradient">Money</span>
+      </a>
+      <div class="nav-links">
+        <a href="#productos">Productos</a>
+        <a class="audience-c" href="#clientes">Para Clientes</a>
+        <a class="audience-m" href="#comercios">Para Comercios</a>
+        <a href="#fidelizacion">Fidelización</a>
+        <a href="#faq">Preguntas</a>
       </div>
-      <div class="mock a">
-        <div class="mock-eyebrow">Billetera digital</div>
-        <div class="mock-name">David M.</div>
-        <div class="mock-qr" id="hero-qr"></div>
-      </div>
-    </div>
-    <div class="taglist">
-      <span>QR anti-fraude</span><span>Saldo y niveles</span><span>Actividad en vivo</span><span>Cashback automático</span><span>Cero instalación</span>
-    </div>
-  </div>
-</section>
-
-<div class="ticker">
-  <div class="ticker-track" id="ticker-track"></div>
-</div>
-
-<section id="funciona">
-  <div class="container">
-    <div class="eyebrow-lbl">Cómo funciona</div>
-    <h2 class="sect-h">Activo en minutos, no en semanas.</h2>
-    <div class="steps">
-      <div class="step reveal"><div class="step-num">01</div><h3>Configura tu billetera</h3><p>Define cuánto abonas por visita, la recompensa y los niveles en menos de 10 minutos. Sin desarrollo.</p></div>
-      <div class="step reveal"><div class="step-num">02</div><h3>El cliente muestra su QR</h3><p>El comercio escanea desde el navegador. Nada que instalar.</p></div>
-      <div class="step reveal"><div class="step-num">03</div><h3>Ambos ven el saldo crecer</h3><p>El abono se refleja al instante en la billetera del cliente.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="modelo">
-  <div class="container">
-    <div class="modelo-head">
-      <div class="eyebrow-lbl" style="text-align:center;">El modelo de negocio</div>
-      <h2 class="sect-h">Un modelo donde todos ganan: dinero real, no puntos que se olvidan.</h2>
-      <p class="sect-sub">expandeMoney no reparte puntos abstractos que caducan sin usarse. Reparte soles visibles que el cliente entiende de inmediato — y esa claridad es lo que lo hace volver.</p>
-    </div>
-
-    <div class="valuegrid">
-      <div class="valuecard client reveal hoverlift">
-        <div class="vc-icon">👤</div>
-        <h3>Para el cliente</h3>
-        <div class="vc-tag">Lo que gana cada vez que vuelve</div>
-        <div class="vc-list">
-          <div class="vc-item">
-            <div class="vc-num">01</div>
-            <div><h4>Ahorro gamificado</h4><p>Cada recarga es plata visible en soles, no un puntaje abstracto que hay que traducir para saber cuánto vale.</p></div>
-          </div>
-          <div class="vc-item">
-            <div class="vc-num">02</div>
-            <div><h4>Niveles de estatus</h4><p>Bronce, Plata y Oro convierten cada visita en un paso más cerca del siguiente nivel — y motivan la próxima compra.</p></div>
-          </div>
-          <div class="vc-item">
-            <div class="vc-num">03</div>
-            <div><h4>Cero fricción</h4><p>Sin apps pesadas que ocupan espacio. Todo desde el navegador, con un QR que se muestra en segundos.</p></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="valuecard merchant reveal hoverlift">
-        <div class="vc-icon">🏪</div>
-        <h3>Para el comercio</h3>
-        <div class="vc-tag">Lo que gana cada vez que retiene</div>
-        <div class="vc-list">
-          <div class="vc-item">
-            <div class="vc-num">01</div>
-            <div><h4>Más frecuencia de visita</h4><p>El saldo visible crea una razón concreta para volver esta semana, no "algún día".</p></div>
-          </div>
-          <div class="vc-item">
-            <div class="vc-num">02</div>
-            <div><h4>Mayor ticket promedio</h4><p>Cerca de completar su cashback, el cliente compra un poco más para llegar a la meta.</p></div>
-          </div>
-          <div class="vc-item">
-            <div class="vc-num">03</div>
-            <div><h4>Retención a bajo costo</h4><p>Fidelizar a quien ya te conoce puede costar hasta 5 veces menos que captar un cliente nuevo en pauta publicitaria.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="releaserules-head">
-      <div class="eyebrow-lbl" style="text-align:center;">Regla de liberación de saldo</div>
-      <h3 class="sect-h" style="font-size:20px;margin-left:auto;margin-right:auto;text-align:center;max-width:560px;">Mientras más visitas acumulas, más rápido usas tu plata.</h3>
-      <p class="sect-sub" style="margin-left:auto;margin-right:auto;text-align:center;">Tu nivel depende de tus visitas totales al comercio. Bronce y Plata liberan su recompensa al completar la tarjeta (10 visitas); Oro no tiene tarjeta — libera saldo en cada visita, sin esperas.</p>
-    </div>
-    <div class="releaserules-grid">
-      <div class="releaserule-card reveal hoverlift">
-        <div class="rr-medal">🥉</div>
-        <h4 class="rr-tier" style="color:var(--bronze);">Bronce</h4>
-        <p class="rr-desc">De 0 a 9 visitas. Al completar la tarjeta, te liberamos <b>S/6</b> para gastar en tu siguiente consumo.</p>
-      </div>
-      <div class="releaserule-card reveal hoverlift">
-        <div class="rr-medal">🥈</div>
-        <h4 class="rr-tier" style="color:var(--silver);">Plata</h4>
-        <p class="rr-desc">De 10 a 29 visitas. Al completar la tarjeta, te liberamos <b>S/8</b> para gastar en tu siguiente consumo.</p>
-      </div>
-      <div class="releaserule-card releaserule-card-gold reveal hoverlift">
-        <div class="rr-medal">🥇</div>
-        <h4 class="rr-tier" style="color:var(--gold-light);">Oro</h4>
-        <p class="rr-desc">+30 visitas. Liberación inmediata de <b>S/1</b> a favor en cada nueva visita al comercio, sin esperas.</p>
-      </div>
-    </div>
-
-    <div class="modelo-strip">Cada abono, canje y nivel se refleja en tiempo real — <b>el mismo saldo, para ambos lados.</b></div>
-
-    <div class="modelo-ctas">
-      <a href="#demo" class="btn btn-gold" onclick="setRole('client')">Ver billetera de cliente</a>
-      <a href="#demo" class="btn btn-gold" onclick="setRole('merchant')">Ver panel de comercio</a>
-    </div>
-  </div>
-</section>
-
-<section id="paycreators">
-  <div class="container">
-    <div class="eyebrow-lbl">Nuevo · expandeMoney Pay</div>
-    <h2 class="sect-h">Cobra asesorías, talleres y mentorías con un link — sin la comisión de las plataformas grandes.</h2>
-    <p class="sect-sub">Hotmart y otras pasarelas te cobran hasta 9.9% + IVA por transacción y retienen tu dinero por días. expandeMoney Pay cobra una <b style="color:var(--gold-light);">tarifa plana del 4%</b> y te paga sin retenciones — y de paso, registra a tu comprador en tu ecosistema de fidelización.</p>
-    <div class="pay-compare">
-      <span class="pay-fee-badge">✓ 4% flat, sin retención</span>
-      <span class="pay-fee-old">vs. 9.9%+ IVA y fondos retenidos</span>
-      <span class="pay-fee-note">en otras plataformas</span>
-    </div>
-
-    <div class="pay-steps">
-      <div class="step reveal"><div class="step-num">01</div><h3>Configura tu servicio</h3><p>Escribe el nombre de tu consultoría o taller y el precio en soles.</p></div>
-      <div class="step reveal"><div class="step-num">02</div><h3>Comparte tu link</h3><p>Envíalo por WhatsApp, Instagram o en tu próxima llamada de Zoom.</p></div>
-      <div class="step reveal"><div class="step-num">03</div><h3>Cobra y fideliza</h3><p>Solicita tu dinero en 24 HRs — solo se descuenta el 4% de comisión — y tu comprador queda dentro de tu billetera de fidelización.</p></div>
-    </div>
-
-    <div class="pay-sim-grid">
-      <div class="card reveal hoverlift">
-        <h2>Simulador de link de cobro</h2>
-        <p class="sub">Prueba cómo se ve tu link antes de compartirlo.</p>
-        <label>Nombre del servicio</label>
-        <input type="text" id="pay-service-name" placeholder="Ej. Mentoría 1h" oninput="renderPaySim()">
-        <label>Precio (S/)</label>
-        <input type="number" id="pay-service-price" placeholder="200" min="0" step="1" oninput="renderPaySim()">
-        <div class="pay-output">
-          <div class="foundmeta" style="margin-bottom:4px;">Tu link de cobro:</div>
-          <div class="pay-link-box"><span id="pay-link-text">expandemoney.com/pay/tu-usuario/mentoria-1h</span><button onclick="copyPayLink()">Copiar</button></div>
-        </div>
-        <button class="btn btn-gold btn-full" style="margin-top:1.2rem" onclick="simulatePayment()">Simular pago de prueba</button>
-      </div>
-
-      <div class="card reveal hoverlift">
-        <h2>Desglose transparente</h2>
-        <p class="sub">Esto es exactamente lo que recibes — sin sorpresas ni retenciones.</p>
-        <div class="pay-breakdown">
-          <div class="pay-brow"><span>Monto del servicio</span><span class="mono" id="pay-amount">S/ 200.00</span></div>
-          <div class="pay-brow"><span class="pay-fee-line">Comisión de plataforma (4%)</span><span class="mono pay-fee-line" id="pay-fee">– S/ 8.00</span></div>
-          <div class="pay-brow total"><span>Recibes neto, sin retención</span><span class="mono" id="pay-net">S/ 192.00</span></div>
-        </div>
-        <p class="release-note" style="margin-top:1.1rem;">El comprador queda automáticamente registrado en tu billetera de fidelización, listo para volver a comprarte.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="features">
-  <div class="container">
-    <div class="eyebrow-lbl">Funciones</div>
-    <h2 class="sect-h">Lo esencial, sin ruido.</h2>
-    <div class="feats">
-      <div class="feat reveal hoverlift">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 18h3v3h-3z"/></svg>
-        <h3>QR por cliente</h3><p>Código único, se muestra desde el celular sin app.</p>
-      </div>
-      <div class="feat reveal hoverlift">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><circle cx="6" cy="12" r="2.3"/><circle cx="12" cy="12" r="2.3"/><circle cx="18" cy="12" r="2.3"/></svg>
-        <h3>Saldo y niveles</h3><p>Cada visita suma soles. Los niveles motivan la siguiente.</p>
-      </div>
-      <div class="feat reveal hoverlift">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><path d="M4 19V9M12 19V4M20 19v-6"/></svg>
-        <h3>Actividad en vivo</h3><p>El comercio ve quién vuelve y cuánto acumula.</p>
-      </div>
-      <div class="feat reveal hoverlift">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#E7B549" stroke-width="1.4"><path d="M12 3l2.4 6.5L21 12l-6.6 2.5L12 21l-2.4-6.5L3 12l6.6-2.5z"/></svg>
-        <h3>Cashback automático</h3><p>Se habilita solo al completar la billetera.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="prueba-social">
-  <div class="container">
-    <div class="eyebrow-lbl" style="text-align:center;">Impacto real</div>
-    <h2 class="sect-h" style="margin-left:auto;margin-right:auto;text-align:center;">Los números que mueven a un comercio.</h2>
-    <div class="statsgrid">
-      <div class="statcard reveal hoverlift"><div class="stat-num" data-target="10" data-prefix="+">0</div><div class="stat-label">comercios activos</div></div>
-      <div class="statcard reveal hoverlift"><div class="stat-num" data-target="1000" data-prefix="S/ ">0</div><div class="stat-label">en cashback entregado a clientes</div></div>
-      <div class="statcard reveal hoverlift"><div class="stat-num" data-target="50" data-prefix="+" data-suffix="%">0</div><div class="stat-label">más frecuencia de visita</div></div>
-    </div>
-    <p class="stats-note">*Cifras de referencia — reemplázalas con tus datos reales antes de publicar.</p>
-  </div>
-</section>
-
-<div class="trust">
-  <div class="container">
-    <div class="trustrow">
-      <div class="trustitem"><h4>Hecho en Lima</h4><p>Construido para comercios peruanos.</p></div>
-      <div class="trustitem"><h4>Sin apps que instalar</h4><p>Funciona como página web, se guarda en un toque.</p></div>
-      <div class="trustitem"><h4>Dinero en tiempo real</h4><p>Cliente y comercio ven el mismo saldo siempre.</p></div>
-    </div>
-  </div>
-</div>
-
-<section id="demo">
-  <div class="container">
-    <div class="demohead">
-      <div class="eyebrow-lbl" style="text-align:center;">Prueba el producto</div>
-      <h2 class="sect-h">Así se ve tu plata creciendo.</h2>
-      <p class="sect-sub">Cambia de vista y prueba el flujo completo, cliente y comercio comparten el mismo saldo. Ya dejamos clientes de ejemplo cargados para que lo veas funcionando.</p>
-      <p class="demo-reset-note">⏱ Esta demo se reinicia sola cada 3 minutos para que puedas volver a probarla.</p>
-      <div class="roletabs">
-        <button class="roletab" id="tab-merchant" onclick="setRole('merchant')">Comercio</button>
-        <button class="roletab" id="tab-client" onclick="setRole('client')">Cliente</button>
-      </div>
-    </div>
-    <div id="app" style="max-width:680px;margin:0 auto;"></div>
-  </div>
-</section>
-
-<footer>
-  <div class="logo">
-    <div class="logo-mark" style="width:38px;height:38px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-  </div>
-  <p>Un producto ExpandeLab · Lima, Perú</p>
-</footer>
-
-</div>
-<!-- ===================== FIN VISTA LANDING ===================== -->
-
-<!-- ===================== VISTA: LOGIN (/login) ===================== -->
-<div id="view-login" class="auth-shell" style="display:none;">
-  <a href="/" class="back-home" data-link>← Volver al inicio</a>
-  <div class="login-wrap">
-    <div class="login-card card">
-      <h1>Ingresa a tu cuenta</h1>
-      <p class="sub">Accede al panel de tu comercio o a tu billetera de cliente.</p>
-      <div class="roleswitch">
-        <button type="button" id="login-tab-merchant" class="active" onclick="setLoginRole('merchant')">Soy comercio</button>
-        <button type="button" id="login-tab-client" onclick="setLoginRole('client')">Soy cliente</button>
-      </div>
-      <label>Correo o teléfono</label>
-      <input type="text" id="login-user" placeholder="nombre@correo.com">
-      <label>Código / Contraseña</label>
-      <input type="password" id="login-pass" placeholder="••••••••">
-      <p class="login-error" id="login-error">Completa ambos campos para continuar.</p>
-      <button class="btn btn-gold btn-full" style="margin-top:1.4rem" onclick="doLogin()">Ingresar</button>
-      <p class="login-footnote">¿Aún no tienes cuenta? <a href="/" data-link>Prueba la demo gratis</a> para ver cómo funciona antes de registrarte.</p>
-    </div>
-  </div>
-</div>
-<!-- ===================== FIN VISTA LOGIN ===================== -->
-
-<!-- ===================== VISTA: PANEL (/panel) ===================== -->
-<div id="view-panel" class="auth-shell" style="display:none;">
-  <nav class="authnav">
-    <div class="panelnav">
-      <div class="logo">
-        <div class="logo-mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0B0F17" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="logo-word">expande<span>Money</span></div>
-      </div>
-      <div class="panel-userchip">
-        <div class="panel-avatar" id="panel-avatar">?</div>
-        <div>
-          <div class="panel-username" id="panel-username">—</div>
-          <div class="panel-userrole" id="panel-userrole">—</div>
-        </div>
-        <button class="panel-logout" onclick="doLogout()">Cerrar sesión</button>
-      </div>
+      <a id="nav-cta" href="#clientes" class="btn btn-primary">Ver cupones</a>
     </div>
   </nav>
-  <div class="panel-shell">
-    <div class="container panel-hero">
-      <h1>Panel de comercio</h1>
-      <p>Gestiona tus clientes, abona saldo y revisa la actividad en tiempo real.</p>
+
+  <!-- ==========================================================================
+     HERO SECTION
+     ========================================================================== -->
+  <header class="hero">
+    <div class="wrap">
+      <!-- Selector de Audiencia -->
+      <div class="segmented-control" role="tablist">
+        <button id="btn-tab-c" class="active" data-aud="c">Soy cliente</button>
+        <button id="btn-tab-m" data-aud="m">Soy comercio</button>
+      </div>
+
+      <h1 id="hero-title"></h1>
+      <p id="hero-subtitle"></p>
+
+      <div class="cta-group">
+        <a id="hero-btn-primary" class="btn btn-primary"></a>
+        <a id="hero-btn-secondary" class="btn btn-outline"></a>
+      </div>
+
+      <!-- Mockup interactivo -->
+      <div class="hero-visual">
+        <div class="mockup-card card-b">
+          <small>Saldo</small>
+          <b>Camila Ruiz</b>
+          <div class="dots">
+            <i class="active"></i><i class="active"></i><i class="active"></i>
+            <i class="active"></i><i class="active"></i><i class="active"></i>
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="balance">S/ 12.00</div>
+        </div>
+
+        <div class="mockup-card card-a">
+          <small>Billetera Digital</small>
+          <b>David M.</b>
+          <div class="qr-container" id="hero-qr"></div>
+        </div>
+
+        <div class="pill-notify">
+          ☕ Café Alma, Barranco · <b class="font-mono">+S/ 2.00</b> por tu consumo
+        </div>
+      </div>
+
+      <p class="hero-caption">
+        <span class="audience-c">Consume en tus locales favoritos, muestra tu QR y acumula saldo en soles con cada compra.</span>
+        <span class="audience-m">Tus clientes muestran su QR y acumulan saldo en cada compra: vuelven más y tus ventas crecen.</span>
+      </p>
+
+      <div class="chips">
+        <span>Pago protegido</span>
+        <span>QR inmediato</span>
+        <span class="audience-c">Saldo en cada consumo</span>
+        <span class="audience-m">Sin mensualidades</span>
+        <span class="audience-m">Cobro en 24 h</span>
+      </div>
     </div>
-    <div class="container panel-body">
-      <div id="panel-app" style="max-width:680px;margin:0 auto;"></div>
+  </header>
+
+  <!-- ==========================================================================
+     SECCIÓN PRODUCTOS
+     ========================================================================== -->
+  <section id="productos">
+    <div class="wrap">
+      <div class="eyebrow">Tres productos, una sola plataforma</div>
+      <h2>
+        <span class="audience-c">Todo lo que necesitas para comprar mejor</span>
+        <span class="audience-m">Todo lo que necesitas para vender más</span>
+      </h2>
+
+      <div class="grid-3">
+        <a href="#clientes" class="card">
+          <div class="icon">🎟️</div>
+          <h3>Cupones de descuento</h3>
+          <p>Experiencias y servicios con hasta 45% de descuento, validados con QR.</p>
+          <div class="who-benefit">
+            <span class="audience-c"><b>Para ti:</b> paga menos por lo que ya quieres vivir.</span>
+            <span class="audience-m"><b class="merchant">Para tu comercio:</b> llena cupos vacíos con clientes nuevos.</span>
+          </div>
+        </a>
+
+        <a href="#vales" class="card">
+          <div class="icon">💳</div>
+          <h3>Vales de consumo</h3>
+          <p class="audience-c">Compra hoy un vale prepago con bono y consúmelo cuando quieras en el local.</p>
+          <p class="audience-m">Vende vales prepago con bono y cobra hoy un consumo que ocurrirá mañana.</p>
+          <div class="who-benefit">
+            <span class="audience-c"><b>Para ti:</b> recibes más consumo del que pagaste.</span>
+            <span class="audience-m"><b class="merchant">Para tu comercio:</b> cobras por adelantado y aseguras la visita.</span>
+          </div>
+        </a>
+
+        <a href="#comercios" class="card">
+          <div class="icon">🔗</div>
+          <h3>Links de cobro</h3>
+          <p class="audience-c">Paga en 1 clic desde el link que te envía el comercio, con tarjeta o billetera.</p>
+          <p class="audience-m">Cobra por WhatsApp, Instagram o QR sin posnet. Una sola tarifa plana de 5%.</p>
+          <div class="who-benefit">
+            <span class="audience-c"><b>Para ti:</b> pagas rápido y sumas saldo en cada consumo.</span>
+            <span class="audience-m"><b class="merchant">Para tu comercio:</b> recibes tu dinero en 24 h, sin retenciones.</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     SECCIÓN CLIENTES (CUPONES Y VALES)
+     ========================================================================== -->
+  <section id="clientes" class="bg-alt audience-c">
+    <div class="wrap">
+      <div class="eyebrow">Para clientes</div>
+      <h2>Vive más, <span class="text-gradient">paga menos</span></h2>
+      <p class="sub">Elige una experiencia, paga con descuento y recibe tu QR al instante. Reserva, disfruta y vuelve a ganar saldo en la siguiente.</p>
+
+      <div class="categories" id="cat-filters"></div>
+      <div class="grid-3" id="coupons-grid"></div>
+
+      <!-- Banner de Vales -->
+      <div class="vale-banner" id="vales">
+        <div>
+          <div class="eyebrow">Vale de consumo</div>
+          <h3>Paga una vez, consume más</h3>
+          <p class="sub" style="margin:0">Elige el monto de tu vale y mira cuánto consumes en el comercio afiliado.</p>
+          <div class="amounts-selector" id="amounts-selector"></div>
+        </div>
+        <div class="vale-output">
+          <div style="color:var(--text-dim); font-size:12.5px">Consumes en el local</div>
+          <div class="big-text text-gradient" id="vale-get-val">S/ 120.00</div>
+          <div style="color:var(--text-dim); font-size:13px" id="vale-pay-val">Pagas S/ 100.00 · bono +S/ 20.00</div>
+          <button class="btn btn-primary" id="btn-buy-vale" style="margin-top:12px">Comprar vale</button>
+        </div>
+      </div>
+      <p class="hero-caption" style="font-size:11.5px; margin-top:1rem">* Catálogo, precios y 20% de bono de ejemplo para la demo. Confirma descuentos y condiciones antes de publicar.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     SECCIÓN COMERCIOS (LINK DE COBRO)
+     ========================================================================== -->
+  <section id="comercios" class="audience-m">
+    <div class="wrap">
+      <div class="eyebrow">Para comercios afiliados</div>
+      <h2>Más clientes, más ventas y tu plata en 24 horas</h2>
+      <p class="sub">Vende cupones y vales, cobra por link y fideliza a cada comprador. Sin posnet, sin mensualidades, sin desarrollo.</p>
+
+      <div class="grid-4">
+        <div class="card"><div class="icon">👥</div><h3>Clientes nuevos</h3><p>Aparece ante compradores que buscan tu categoría.</p></div>
+        <div class="card"><div class="icon">💰</div><h3>Flujo de caja</h3><p>Los vales se cobran por adelantado.</p></div>
+        <div class="card"><div class="icon">🔁</div><h3>Recompra</h3><p>Saldo y niveles hacen que vuelvan.</p></div>
+        <div class="card"><div class="icon">⚡</div><h3>Cobro simple</h3><p>Un link y el cliente paga en 1 clic.</p></div>
+      </div>
+
+      <div class="grid-3" style="margin-top:2.4rem">
+        <div class="card"><div class="font-mono text-gradient" style="font-size:22px; font-weight:800">01</div><h3>Afíliate</h3><p class="sub" style="margin:0">Registra tu negocio y define tu oferta o vale.</p></div>
+        <div class="card"><div class="font-mono text-gradient" style="font-size:22px; font-weight:800">02</div><h3>Comparte tu link</h3><p class="sub" style="margin:0">Envíalo por WhatsApp o redes. El cliente paga y recibe su QR.</p></div>
+        <div class="card"><div class="font-mono text-gradient" style="font-size:22px; font-weight:800">03</div><h3>Escanea y cobra</h3><p class="sub" style="margin:0">Valida el QR en tu local y recibe tus fondos en 24 horas.</p></div>
+      </div>
+
+      <!-- Simulador de Cobro -->
+      <div class="grid-2">
+        <div class="card">
+          <h3>Simulador de link de cobro</h3>
+          <label for="pay-name">Producto o servicio</label>
+          <input id="pay-name" placeholder="Ej. Pack 4 clases">
+          
+          <label for="pay-price">Precio (S/)</label>
+          <input id="pay-price" type="number" placeholder="200">
+          
+          <div class="link-preview" id="pay-link-output">expandemoney.com/pay/tu-comercio/pack-4-clases</div>
+          <button class="btn btn-primary" id="btn-sim-pay" style="width:100%; margin-top:14px">Simular pago de prueba</button>
+        </div>
+
+        <div class="card">
+          <h3>Desglose transparente</h3>
+          <p>Una sola tarifa. Nada oculto.</p>
+          <div style="margin-top:8px">
+            <div class="table-row"><span>Monto del cobro</span><b id="break-gross">S/ 200.00</b></div>
+            <div class="table-row"><span>Comisión expandeMoney (5%)</span><b class="text-danger" id="break-fee">– S/ 10.00</b></div>
+            <div class="table-row"><span>Recibes neto</span><b class="text-success" id="break-net">S/ 190.00</b></div>
+          </div>
+          <p class="hero-caption" style="font-size:11.5px; margin-top:10px">Hotmart y otras pasarelas pueden cobrar comisiones mayores o retener fondos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     SECCIÓN FIDELIZACIÓN Y ESTADÍSTICAS
+     ========================================================================== -->
+  <section id="fidelizacion" class="bg-alt">
+    <div class="wrap">
+      <div class="eyebrow">Fidelización incluida</div>
+      <h2>
+        <span class="audience-c">Gana saldo cada vez que consumes en tus locales favoritos</span>
+        <span class="audience-m">Cada compra de tu cliente suma y lo trae de vuelta</span>
+      </h2>
+      <p class="sub audience-c">Muestra tu QR al pagar: tu consumo se convierte en saldo en soles, niveles y recompensas automáticas.</p>
+      <p class="sub audience-m">Todo comprador entra a tu billetera de fidelización: saldo en soles, niveles y recompensas automáticas.</p>
+
+      <div class="grid-3">
+        <div class="card tier-card"><div class="icon">🥉</div><h3>Bronce</h3><p>0–9 visitas. Al completar la tarjeta liberas S/6 para tu próximo consumo.</p></div>
+        <div class="card tier-card"><div class="icon">🥈</div><h3>Plata</h3><p>10–29 visitas. Al completar la tarjeta liberas S/8.</p></div>
+        <div class="card tier-card"><div class="icon">🥇</div><h3>Oro</h3><p>+30 visitas. Liberas S/1 al instante en cada visita.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="grid-3">
+        <div class="card stat-card"><b class="font-mono">+10</b><span>comercios afiliados*</span></div>
+        <div class="card stat-card"><b class="font-mono">S/ 1,000</b><span>en cashback entregado*</span></div>
+        <div class="card stat-card"><b class="font-mono">+50%</b><span>más frecuencia de visita*</span></div>
+      </div>
+      <p class="hero-caption" style="text-align:center; font-size:11.5px; margin-top:1rem">*Cifras de referencia: reemplázalas por datos reales antes de publicar.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+     PREGUNTAS FRECUENTES Y CTA FINAL
+     ========================================================================== -->
+  <section id="faq" class="bg-alt">
+    <div class="wrap" style="max-width:760px">
+      <div class="eyebrow">Preguntas frecuentes</div>
+      <h2>Resolvemos tus dudas antes de empezar</h2>
+
+      <details class="audience-m"><summary>¿Cuánto cuesta afiliar mi comercio?</summary><p>Sin mensualidades. Solo pagas 5% por transacción cobrada por link o venta de cupón/vale.</p></details>
+      <details class="audience-m"><summary>¿Cuándo recibo mi dinero?</summary><p>Puedes solicitar tus fondos en 24 horas, sin retenciones adicionales.</p></details>
+      <details class="audience-m"><summary>¿Cómo valido un cupón o vale?</summary><p>El cliente muestra su QR y tú lo escaneas desde el celular. No necesitas instalar nada.</p></details>
+      
+      <details class="audience-c"><summary>¿Cómo uso mi cupón y gano saldo?</summary><p>Muestra tu QR en el local: el comercio lo escanea, valida tu cupón y tu consumo suma saldo en soles en tu billetera.</p></details>
+      <details class="audience-c"><summary>¿Los vales de consumo vencen?</summary><p>La vigencia la define cada comercio y se muestra claramente antes de realizar la compra.</p></details>
+      
+      <details><summary>¿Necesito una app?</summary><p>No. Todo funciona de forma fluida desde el navegador del celular.</p></details>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <div class="eyebrow">Empieza hoy</div>
+      <h2>
+        <span class="audience-c">Tu próxima experiencia te espera, con descuento</span>
+        <span class="audience-m">Empieza a vender más con tu primer link de cobro</span>
+      </h2>
+      <div class="cta-group">
+        <a href="#clientes" class="btn btn-primary audience-c">Ver cupones y vales</a>
+        <a href="#comercios" class="btn btn-primary audience-m">Afiliar mi comercio</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">Un producto ExpandeLab · Lima, Perú</div>
+  </footer>
+
+  <!-- Elementos de Interfaz Dinámicos -->
+  <div id="toast"></div>
+
+  <div class="modal-overlay" id="modal-qr">
+    <div class="modal-card">
+      <h3 id="modal-title">¡Cupón Generado!</h3>
+      <p class="sub" style="margin:0" id="modal-desc">Muestra este código en el establecimiento</p>
+      <div class="modal-qr" id="modal-qr-target"></div>
+      <button class="btn btn-primary" id="btn-close-modal" style="width:100%">Cerrar</button>
     </div>
   </div>
-</div>
-<!-- ===================== FIN VISTA PANEL ===================== -->
 
-<div class="activity-notif-wrap" id="activity-notif-wrap"></div>
-<div class="toast" id="toast"></div>
+  <!-- ==========================================================================
+     LOGICA JS UNIFICADA
+     ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Datos e Inicialización de variables
+      const state = {
+        audience: 'c',
+        selectedCategory: 'Todas',
+        valeAmount: 100,
+        coupons: [
+          ['Gastronomía', '🍷', 'Cata de Vinos', 'Barranco, Lima', 200, 110],
+          ['Barismo', '☕', 'Masterclass de Barismo', 'Miraflores, Lima', 150, 90],
+          ['Fitness', '🧘', 'Pack 4 clases de Pilates', 'Chapinero, Bogotá', 180, 99],
+          ['Salud', '🩺', 'Chequeo preventivo integral', 'San Isidro, Lima', 260, 156],
+          ['Belleza', '💆', 'Facial + spa de manos', 'Surco, Lima', 170, 102],
+          ['Educación', '🎓', 'Taller online de Excel', 'En vivo', 220, 121]
+        ],
+        heroContent: {
+          c: {
+            title: 'Vive más. <span class="text-gradient">Paga menos.</span>',
+            subtitle: 'Cupones con hasta 45% de descuento y vales con bono en tus locales favoritos. Consume con tu billetera y gana saldo en soles en cada compra.',
+            btn1: ['Ver cupones y vales', '#clientes'],
+            btn2: ['Cómo funciona', '#productos']
+          },
+          m: {
+            title: 'Vende más y <span class="text-gradient">cobra al instante.</span>',
+            subtitle: 'Atrae clientes nuevos con cupones, cobra por adelantado con vales y recibe pagos por link sin posnet ni mensualidades. Solo 5% por venta.',
+            btn1: ['Afiliar mi comercio', '#comercios'],
+            btn2: ['Crear link de cobro', '#comercios']
+          }
+        }
+      };
 
-<script>
-if (!window.storage){
-  window.storage = (function(){
-    const mem = {}; let useLocal = true;
-    try{ localStorage.setItem('__em_test__','1'); localStorage.removeItem('__em_test__'); }catch(e){ useLocal = false; }
-    const k = (key, shared) => 'expandemoney_demo::' + (shared ? 'shared::' : 'local::') + key;
-    return {
-      async get(key, shared){ const sk = k(key, shared); const raw = useLocal ? localStorage.getItem(sk) : (sk in mem ? mem[sk] : null); if (raw === null) throw new Error('Key not found: ' + key); return { key, value: raw, shared: !!shared }; },
-      async set(key, value, shared){ const sk = k(key, shared); if (useLocal) localStorage.setItem(sk, value); else mem[sk] = value; return { key, value, shared: !!shared }; },
-      async delete(key, shared){ const sk = k(key, shared); if (useLocal) localStorage.removeItem(sk); else delete mem[sk]; return { key, deleted: true, shared: !!shared }; },
-      async list(prefix, shared){ return { keys: [], prefix, shared: !!shared }; }
-    };
-  })();
-}
+      // 2. Funciones de Utilidad
+      const formatCurrency = num => `S/ ${num.toFixed(2)}`;
+      
+      const showToast = msg => {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2600);
+      };
 
-const BUSINESS = { name:"expandeMoney", maxCoins:10, valuePerCoin:2 };
-const PAY_FEE_PCT = 0.04; // comisión plana de expandeMoney Pay (4%), sin retención de fondos
-let state = { role:'merchant', myClientId:null, clients:[], activity:[], merchantFoundId:null, prevCoins:{}, prevTier:{}, usingMockData:false, settingsOpen:false, seenActivityLen:null };
-let loginRole = 'merchant';
+      const generateQR = id => {
+        let hash = 0;
+        for (const char of id) hash = (hash * 131 + char.charCodeAt(0)) >>> 0;
+        let seed = hash;
+        let rects = '';
+        const grid = 11;
+        const cellSize = 100 / grid;
 
-function uid(){ return 'EM' + Math.random().toString(36).slice(2,8).toUpperCase(); }
-function code6(id){ let h=0; for(let i=0;i<id.length;i++){ h=(h*31+id.charCodeAt(i))>>>0; } return (h%900000+100000).toString(); }
-function tierForVisits(v){ v = v||0; if (v >= 30) return 'Oro'; if (v >= 10) return 'Plata'; return 'Bronce'; }
-function tierMedal(tier){ return tier==='Oro' ? '🥇' : tier==='Plata' ? '🥈' : '🥉'; }
-function visitsToNextTier(v){ v = v||0; if (v < 10) return 10 - v; if (v < 30) return 30 - v; return 0; }
+        for (let y = 0; y < grid; y++) {
+          for (let x = 0; x < grid; x++) {
+            seed = (seed * 1103515245 + 12345) >>> 0;
+            const isCorner = (x < 3 && y < 3) || (x > grid - 4 && y < 3) || (x < 3 && y > grid - 4);
+            if (isCorner || (seed >> 16) % 2) {
+              rects += `<rect x="${x * cellSize}" y="${y * cellSize}" width="${cellSize}" height="${cellSize}" fill="url(#qr-grad)"/>`;
+            }
+          }
+        }
+        return `<svg viewBox="0 0 100 100"><defs><linearGradient id="qr-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD95A"/><stop offset="1" stop-color="#00FF85"/></linearGradient></defs>${rects}</svg>`;
+      };
 
-/* ==========================================================================
-   REGLA DE NEGOCIO: liberación de saldo por nivel (basada en visitas totales)
-     - Bronce (0 a 9 visitas): al completar la tarjeta (10 visitas), se liberan
-       S/6 para el siguiente consumo.
-     - Plata (10 a 29 visitas): al completar la tarjeta, se liberan S/8 para
-       el siguiente consumo.
-     - Oro (+30 visitas): liberación inmediata de S/1 a favor en cada nueva
-       visita, sin tarjeta que completar ni esperas.
-   ========================================================================== */
-const CARD_REWARD = { Bronce: 6, Plata: 8 };
-const ORO_INSTANT_RELEASE = 1;
+      const slugify = text => (text || '').toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '') || 'producto';
 
-function releaseBlockHtml(c){
-  const totalVisits = c.totalVisits || 0;
-  const disponible = c.disponible || 0;
-  const tier = tierForVisits(totalVisits);
-  if (tier === 'Oro'){
-    return `<div class="releasebox releasebox-oro">
-      <div class="releaserow"><span>🥇 Liberación inmediata</span><span class="mono lib">S/${ORO_INSTANT_RELEASE} por visita</span></div>
-      <div class="releaserow"><span>Disponible para gastar</span><span class="mono lib">${soles(disponible)}</span></div>
-      <div class="releaserow"><span>Visitas totales</span><span class="mono">${totalVisits}</span></div>
-      <p class="release-note">Nivel Oro: cada visita libera S/${ORO_INSTANT_RELEASE} al instante, sin esperar a completar tarjeta.</p>
-    </div>`;
-  }
-  const remaining = visitsToNextTier(totalVisits);
-  const nextTier = tier === 'Bronce' ? 'Plata' : 'Oro';
-  return `<div class="releasebox">
-    <div class="releaserow"><span>Disponible para gastar</span><span class="mono lib">${soles(disponible)}</span></div>
-    <p class="release-note">Nivel ${tier}: al completar tu tarjeta (10/10) se liberan ${soles(CARD_REWARD[tier])} para tu siguiente consumo.</p>
-    <p class="release-note">Te faltan <b style="color:var(--text);">${remaining}</b> visitas para nivel ${nextTier}.</p>
-  </div>`;
-}
-function fmtTime(ts){ return new Date(ts).toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}); }
-function soles(n){ return 'S/ ' + n.toFixed(2); }
+      // 3. Renderizadores de UI
+      const setAudience = aud => {
+        state.audience = aud;
+        document.body.dataset.audience = aud;
 
-function injectMockData(){
-  if (state.clients.length === 0){
-    const m1 = { id:'EMAAAA', name:'Carlos Mendoza', email:'carlos@gmail.com', coins:6, totalVisits:6, disponible:0, cyclesCompleted:0, saldo:12, createdAt:Date.now()-3600000 };
-    const m2 = { id:'EMBBBB', name:'Lucía Fernández', email:'lucia@hotmail.com', coins:9, totalVisits:19, disponible:8, cyclesCompleted:1, saldo:38, createdAt:Date.now()-7200000 };
-    const m3 = { id:'EMCCCC', name:'Mauricio Ortiz', email:'mori@outlook.com', coins:0, totalVisits:32, disponible:6, cyclesCompleted:3, saldo:64, createdAt:Date.now()-12000000 };
-    state.clients = [m1,m2,m3];
-    if (!state.myClientId) state.myClientId = m2.id;
-    state.activity = [
-      { type:'abono', clientId:m1.id, name:m1.name, ts:Date.now()-1800000 },
-      { type:'tarjeta_completa', clientId:m2.id, name:m2.name, ts:Date.now()-900000, monto:8 },
-      { type:'oro_release', clientId:m3.id, name:m3.name, ts:Date.now()-360000, monto:1 }
-    ];
-    state.usingMockData = true;
-  } else { state.usingMockData = false; }
-}
+        document.getElementById('btn-tab-c').classList.toggle('active', aud === 'c');
+        document.getElementById('btn-tab-m').classList.toggle('active', aud === 'm');
 
-async function loadShared(){
-  try{ const c = await window.storage.get('expandemoney:clients', true); state.clients = c ? JSON.parse(c.value) : []; }catch(e){ state.clients = []; }
-  try{ const a = await window.storage.get('expandemoney:activity', true); state.activity = a ? JSON.parse(a.value) : []; }catch(e){ state.activity = []; }
-  injectMockData();
-}
-async function saveClients(){ if (state.usingMockData) state.usingMockData = false; await window.storage.set('expandemoney:clients', JSON.stringify(state.clients), true); }
-async function saveActivity(){ state.activity = state.activity.slice(-30); await window.storage.set('expandemoney:activity', JSON.stringify(state.activity), true); }
-async function loadPersonal(){
-  try{ const r = await window.storage.get('expandemoney:my_client_id', false); if (r && r.value) state.myClientId = r.value; }catch(e){}
-  try{ const r2 = await window.storage.get('expandemoney:role', false); if (r2 && r2.value) state.role = r2.value; }catch(e){}
-}
+        const navCta = document.getElementById('nav-cta');
+        navCta.textContent = aud === 'c' ? 'Ver cupones' : 'Afiliar mi comercio';
+        navCta.href = aud === 'c' ? '#clientes' : '#comercios';
 
-function showToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 2200); }
+        const content = state.heroContent[aud];
+        document.getElementById('hero-title').innerHTML = content.title;
+        document.getElementById('hero-subtitle').textContent = content.subtitle;
+        
+        const b1 = document.getElementById('hero-btn-primary');
+        b1.textContent = content.btn1[0];
+        b1.href = content.btn1[1];
 
-let audioCtx = null;
-function playChime(kind){
-  try{
-    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    const now = audioCtx.currentTime;
-    const notes = kind === 'canje' ? [660,880,1320] : [880,1180];
-    notes.forEach((freq,i)=>{
-      const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
-      osc.type = 'sine'; osc.frequency.value = freq;
-      const t0 = now + i*0.09;
-      gain.gain.setValueAtTime(0,t0); gain.gain.linearRampToValueAtTime(0.11,t0+0.015); gain.gain.exponentialRampToValueAtTime(0.001,t0+0.32);
-      osc.connect(gain).connect(audioCtx.destination); osc.start(t0); osc.stop(t0+0.35);
+        const b2 = document.getElementById('hero-btn-secondary');
+        b2.textContent = content.btn2[0];
+        b2.href = content.btn2[1];
+      };
+
+      const renderCoupons = () => {
+        const categories = ['Todas', ...new Set(state.coupons.map(c => c[0]))];
+        const catContainer = document.getElementById('cat-filters');
+        
+        catContainer.innerHTML = categories.map(cat => 
+          `<button class="cat-btn ${cat === state.selectedCategory ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
+        ).join('');
+
+        const gridContainer = document.getElementById('coupons-grid');
+        const filtered = state.coupons.filter(c => state.selectedCategory === 'Todas' || c[0] === state.selectedCategory);
+
+        gridContainer.innerHTML = filtered.map(item => {
+          const discount = Math.round((1 - item[5] / item[4]) * 100);
+          return `
+            <div class="card coupon-card">
+              <div class="img-container">
+                <span class="badge">-${discount}% DCTO</span>
+                ${item[1]}
+              </div>
+              <div class="card-body">
+                <small>${item[0]}</small>
+                <h3>${item[2]}</h3>
+                <div style="font-size:12px; color:var(--text-faint)">📍 ${item[3]}</div>
+                <div class="price-row">
+                  <s>S/ ${item[4]}</s>
+                  <b>S/ ${item[5]}</b>
+                </div>
+                <button class="btn btn-primary btn-coupon-buy" data-title="${item[2]}" style="margin-top:8px">Obtener cupón</button>
+              </div>
+            </div>`;
+        }).join('');
+      };
+
+      const renderVales = () => {
+        const amounts = [50, 100, 200];
+        const selector = document.getElementById('amounts-selector');
+        
+        selector.innerHTML = amounts.map(amt => 
+          `<button class="${amt === state.valeAmount ? 'active' : ''}" data-amt="${amt}">S/ ${amt}</button>`
+        ).join('');
+
+        document.getElementById('vale-get-val').textContent = formatCurrency(state.valeAmount * 1.2);
+        document.getElementById('vale-pay-val').textContent = `Pagas ${formatCurrency(state.valeAmount)} · bono +${formatCurrency(state.valeAmount * 0.2)}`;
+      };
+
+      const calculatePayment = () => {
+        const nameInput = document.getElementById('pay-name').value;
+        const priceInput = Math.max(0, parseFloat(document.getElementById('pay-price').value) || 0) || 200;
+        const fee = +(priceInput * 0.05).toFixed(2);
+
+        document.getElementById('pay-link-output').textContent = `expandemoney.com/pay/tu-comercio/${slugify(nameInput || 'Pack 4 clases')}`;
+        document.getElementById('break-gross').textContent = formatCurrency(priceInput);
+        document.getElementById('break-fee').textContent = `– ${formatCurrency(fee)}`;
+        document.getElementById('break-net').textContent = formatCurrency(priceInput - fee);
+      };
+
+      // 4. Manejador de Eventos Delegado
+      document.addEventListener('click', e => {
+        // Switch de audiencia
+        if (e.target.matches('[data-aud]')) {
+          setAudience(e.target.dataset.aud);
+        }
+
+        // Filtro de categorías
+        if (e.target.matches('.cat-btn')) {
+          state.selectedCategory = e.target.dataset.cat;
+          renderCoupons();
+        }
+
+        // Selección de Vales
+        if (e.target.matches('[data-amt]')) {
+          state.valeAmount = parseInt(e.target.dataset.amt, 10);
+          renderVales();
+        }
+
+        // Comprar Vale
+        if (e.target.id === 'btn-buy-vale') {
+          openModal('Vale de Consumo Reservado', 'Te enviamos la confirmación al correo', 'VALE-' + Math.random().toString(36).substring(2, 8).toUpperCase());
+        }
+
+        // Comprar Cupón
+        if (e.target.matches('.btn-coupon-buy')) {
+          const title = e.target.dataset.title;
+          openModal(title, 'Presenta el código QR en la entrada del local', 'EXP-' + Math.random().toString(36).substring(2, 8).toUpperCase());
+        }
+
+        // Simular Pago
+        if (e.target.id === 'btn-sim-pay') {
+          const priceInput = Math.max(0, parseFloat(document.getElementById('pay-price').value) || 0) || 200;
+          showToast(`Pago simulado: recibes ${formatCurrency(priceInput * 0.95)} en 24 h, sin retención`);
+        }
+
+        // Modal Close
+        if (e.target.id === 'btn-close-modal' || e.target.classList.contains('modal-overlay')) {
+          document.getElementById('modal-qr').classList.remove('active');
+        }
+      });
+
+      // Inputs reactivos
+      document.getElementById('pay-name').addEventListener('input', calculatePayment);
+      document.getElementById('pay-price').addEventListener('input', calculatePayment);
+
+      // Modal Helper
+      const openModal = (title, desc, code) => {
+        document.getElementById('modal-title').textContent = title;
+        document.getElementById('modal-desc').textContent = desc;
+        document.getElementById('modal-qr-target').innerHTML = generateQR(code);
+        document.getElementById('modal-qr').classList.add('active');
+      };
+
+      // Render inicial
+      document.getElementById('hero-qr').innerHTML = generateQR('david-demo');
+      setAudience('c');
+      renderCoupons();
+      renderVales();
+      calculatePayment();
     });
-  }catch(e){}
-}
-
-function notifyActivity(a){
-  const wrap = document.getElementById('activity-notif-wrap'); if (!wrap) return;
-  let icon='🪙', text=`+S/${BUSINESS.valuePerCoin} de saldo — <b>${a.name}</b>`, sound='abono';
-  if (a.type==='tarjeta_completa'){ icon='🎉'; text=`Tarjeta completa — S/${(a.monto||0).toFixed(2)} liberados — <b>${a.name}</b>`; sound='canje'; }
-  else if (a.type==='oro_release'){ icon='⚡'; text=`+S/${(a.monto||ORO_INSTANT_RELEASE).toFixed(2)} liberado al instante — <b>${a.name}</b>`; sound='canje'; }
-  else if (a.type==='canje_parcial'){ icon='💸'; text=`Usó S/${(a.monto||0).toFixed(2)} en caja — <b>${a.name}</b>`; sound='canje'; }
-  else if (a.type==='venta'){ icon='🔗'; text=`Venta por link, neto S/${(a.monto||0).toFixed(2)} — <b>${a.name}</b>`; sound='canje'; }
-  else if (a.type==='canje'){ icon='🎉'; text=`Cashback canjeado — <b>${a.name}</b>`; sound='canje'; }
-  const el = document.createElement('div'); el.className = 'activity-notif';
-  el.innerHTML = `<span style="font-size:16px;">${icon}</span><span>${text}</span>`;
-  wrap.appendChild(el); playChime(sound);
-  setTimeout(()=>{ el.classList.add('leaving'); setTimeout(()=>el.remove(),320); }, 2800);
-}
-function activityLabel(type){
-  if (type==='tarjeta_completa') return 'Tarjeta completa';
-  if (type==='oro_release') return `+S/${ORO_INSTANT_RELEASE} Oro`;
-  if (type==='canje_parcial') return 'Usado en caja';
-  if (type==='venta') return 'Venta Pay';
-  if (type==='canje') return 'Canje';
-  return '+S/'+BUSINESS.valuePerCoin;
-}
-function activityTagClass(type){
-  if (type==='tarjeta_completa' || type==='canje' || type==='canje_parcial') return 'tag-canje';
-  if (type==='venta') return 'tag-venta';
-  return 'tag-abono';
-}
-function checkNewActivity(){
-  if (state.seenActivityLen === null){ state.seenActivityLen = state.activity.length; return; }
-  if (state.activity.length > state.seenActivityLen){ state.activity.slice(state.seenActivityLen).forEach(notifyActivity); state.seenActivityLen = state.activity.length; }
-  else if (state.activity.length < state.seenActivityLen){ state.seenActivityLen = state.activity.length; }
-}
-
-if (window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches){
-  let lastTrail = 0;
-  document.addEventListener('mousemove', (e)=>{
-    const now = performance.now(); if (now - lastTrail < 55) return; lastTrail = now;
-    const p = document.createElement('div'); p.className = 'cursor-trail-particle';
-    const size = 4 + Math.random()*4; const dx = (Math.random()-0.5)*22;
-    p.style.setProperty('--dx', dx+'px'); p.style.width = size+'px'; p.style.height = size+'px';
-    p.style.left = (e.clientX - size/2)+'px'; p.style.top = (e.clientY - size/2)+'px';
-    document.body.appendChild(p); setTimeout(()=>p.remove(), 950);
-  });
-}
-
-function showRewardCelebration(name){
-  const overlay = document.createElement('div'); overlay.className = 'reward-overlay';
-  const firstName = name ? name.split(' ')[0] : '';
-  overlay.innerHTML = `<div class="reward-card"><div class="reward-coin">S/</div><h3>¡Cashback desbloqueado!</h3><p>Tu billetera se reinicia. Sigue sumando saldo${firstName ? ', ' + firstName : ''}.</p></div>`;
-  overlay.addEventListener('click', ()=>overlay.remove());
-  document.body.appendChild(overlay);
-  setTimeout(()=>{ overlay.style.transition = 'opacity .4s'; overlay.style.opacity = '0'; setTimeout(()=>overlay.remove(),400); }, 2600);
-}
-
-function confettiBurst(big, tier){
-  const canvas = document.createElement('canvas');
-  canvas.style.position='fixed'; canvas.style.top=0; canvas.style.left=0; canvas.style.width='100vw'; canvas.style.height='100vh'; canvas.style.pointerEvents='none'; canvas.style.zIndex=9999;
-  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-  document.body.appendChild(canvas); const ctx = canvas.getContext('2d');
-  const palettes = { Bronce:['#B08D57','#D9AF7B','#8C6A3F'], Plata:['#C7CAD1','#E9ECEF','#9AA0A8'], Oro:['#E7B549','#F4CB6B','#FBE7C8'] };
-  const colors = tier && palettes[tier] ? palettes[tier] : ['#E7B549','#F4CB6B','#34D399','#EAEDF3'];
-  const n = big ? 140 : 45;
-  const parts = Array.from({length:n},()=>({
-    x: canvas.width/2 + (Math.random()-0.5)*(big?canvas.width*0.6:120),
-    y: big ? canvas.height*0.3 : canvas.height*0.35,
-    vx:(Math.random()-0.5)*8, vy:-Math.random()*8-3, r:Math.random()*4+2,
-    color: colors[Math.floor(Math.random()*colors.length)], rot:Math.random()*360, vr:(Math.random()-0.5)*10
-  }));
-  let frame=0; const maxFrames = big?90:55;
-  function tick(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    parts.forEach(p=>{ p.vy+=0.22; p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; ctx.fillRect(-p.r,-p.r*0.6,p.r*2,p.r*1.2); ctx.restore(); });
-    frame++; if (frame<maxFrames) requestAnimationFrame(tick); else canvas.remove();
-  }
-  tick();
-}
-
-function qrSvg(id){
-  const size=11; let h=0; for(let i=0;i<id.length;i++){ h=(h*131+id.charCodeAt(i))>>>0; }
-  let bits=[]; let seed=h;
-  for(let i=0;i<size*size;i++){ seed=(seed*1103515245+12345)>>>0; bits.push((seed>>16)%2); }
-  const cell = 100/size; let rects='';
-  for(let y=0;y<size;y++){ for(let x=0;x<size;x++){
-    const corner=(x<3&&y<3)||(x>size-4&&y<3)||(x<3&&y>size-4);
-    const on = corner ? true : bits[y*size+x];
-    if (on) rects += `<rect x="${x*cell}" y="${y*cell}" width="${cell}" height="${cell}" fill="#00FF85"/>`;
-  }}
-  return `<svg viewBox="0 0 100 100">${rects}</svg>`;
-}
-
-async function setRole(r){ state.role=r; await window.storage.set('expandemoney:role', r, false); render(); document.getElementById('demo').scrollIntoView({behavior:'smooth'}); }
-
-async function createClient(name, email){
-  if (!name.trim()){ showToast('Ingresa tu nombre'); return; }
-  const id = uid();
-  const client = { id, name:name.trim(), email:email.trim(), coins:0, totalVisits:0, disponible:0, cyclesCompleted:0, saldo:0, createdAt:Date.now() };
-  if (state.usingMockData){ state.clients=[]; state.activity=[]; state.usingMockData=false; }
-  state.clients.push(client); state.myClientId = id;
-  await saveClients(); await window.storage.set('expandemoney:my_client_id', id, false);
-  render();
-}
-let actionQueue = Promise.resolve();
-function addCoin(id){ actionQueue = actionQueue.then(()=>doAddCoin(id)).catch(err=>console.error(err)); return actionQueue; }
-function redeem(id){ actionQueue = actionQueue.then(()=>doRedeem(id)).catch(err=>console.error(err)); return actionQueue; }
-function redeemDisponible(id){ actionQueue = actionQueue.then(()=>doRedeemDisponible(id)).catch(err=>console.error(err)); return actionQueue; }
-
-async function doAddCoin(id){
-  const c = state.clients.find(x=>x.id===id); if (!c) return;
-  if (c.totalVisits === undefined) c.totalVisits = 0;
-  if (c.disponible === undefined) c.disponible = 0;
-  const tierBefore = tierForVisits(c.totalVisits);
-  if (tierBefore !== 'Oro' && c.coins >= BUSINESS.maxCoins) return; // debe liberar la recompensa antes de seguir sumando
-  c.totalVisits += 1;
-  c.saldo += BUSINESS.valuePerCoin;
-  const tierAfter = tierForVisits(c.totalVisits);
-  if (tierAfter === 'Oro'){
-    if (tierBefore !== 'Oro' && c.coins > 0){
-      const pendiente = c.coins * BUSINESS.valuePerCoin;
-      c.disponible += pendiente; c.coins = 0;
-      state.activity.push({ type:'tarjeta_completa', clientId:id, name:c.name, ts:Date.now(), monto:pendiente });
-    }
-    c.disponible += ORO_INSTANT_RELEASE;
-    state.activity.push({ type:'oro_release', clientId:id, name:c.name, ts:Date.now(), monto:ORO_INSTANT_RELEASE });
-    await saveClients(); await saveActivity();
-    showToast(`+S/${ORO_INSTANT_RELEASE} liberado al instante para ${c.name}`);
-  } else {
-    c.coins += 1;
-    state.activity.push({ type:'abono', clientId:id, name:c.name, ts:Date.now() });
-    await saveClients(); await saveActivity();
-    showToast(`+S/${BUSINESS.valuePerCoin} abonados a ${c.name}`);
-  }
-  render();
-}
-async function doRedeemDisponible(id){
-  const c = state.clients.find(x=>x.id===id); if (!c) return;
-  const amt = c.disponible || 0;
-  if (amt <= 0){ showToast('Aún no hay saldo disponible para usar'); return; }
-  c.disponible = 0;
-  state.activity.push({ type:'canje_parcial', clientId:id, name:c.name, ts:Date.now(), monto:amt });
-  await saveClients(); await saveActivity(); showToast(`Usado S/${amt.toFixed(2)} disponible de ${c.name}`); render();
-}
-async function doRedeem(id){
-  const c = state.clients.find(x=>x.id===id); if (!c || c.coins<BUSINESS.maxCoins) return;
-  const tier = tierForVisits(c.totalVisits||0);
-  const reward = CARD_REWARD[tier] ?? 0;
-  c.coins = 0; c.cyclesCompleted = (c.cyclesCompleted||0) + 1; c.disponible = (c.disponible||0) + reward;
-  state.activity.push({ type:'tarjeta_completa', clientId:id, name:c.name, ts:Date.now(), monto:reward });
-  await saveClients(); await saveActivity(); showToast(`Tarjeta completa — S/${reward} liberados para ${c.name}`); render();
-}
-async function simulateBurst(id){ for(let i=0;i<3;i++){ addCoin(id); await new Promise(r=>setTimeout(r,550)); } }
-function findClient(query){ const q=query.trim().toLowerCase(); if(!q) return null; return state.clients.find(c=>c.id.toLowerCase()===q||code6(c.id)===q||c.name.toLowerCase().includes(q)); }
-
-function toggleSettings(){ state.settingsOpen=!state.settingsOpen; render(); }
-function closeSettings(){ state.settingsOpen=false; render(); }
-async function saveSettings(id){
-  const c = state.clients.find(x=>x.id===id); if(!c) return;
-  const name = document.getElementById('set-name').value.trim();
-  const email = document.getElementById('set-email').value.trim();
-  if (!name){ showToast('El nombre no puede quedar vacío'); return; }
-  c.name = name; c.email = email; await saveClients(); state.settingsOpen=false; showToast('Perfil actualizado'); render();
-}
-async function exitDemo(){ state.myClientId=null; state.settingsOpen=false; try{ await window.storage.delete('expandemoney:my_client_id', false); }catch(e){} render(); }
-
-async function resetDemo(){
-  state.clients=[]; state.activity=[]; state.merchantFoundId=null; state.myClientId=null;
-  state.prevCoins={}; state.prevTier={}; state.settingsOpen=false; state.role='merchant'; state.seenActivityLen=null;
-  try{ await window.storage.set('expandemoney:clients', JSON.stringify([]), true); }catch(e){}
-  try{ await window.storage.set('expandemoney:activity', JSON.stringify([]), true); }catch(e){}
-  try{ await window.storage.delete('expandemoney:my_client_id', false); }catch(e){}
-  try{ await window.storage.set('expandemoney:role', 'merchant', false); }catch(e){}
-  await loadShared(); render(); showToast('Demo reiniciada — puedes probar de nuevo');
-}
-
-function renderCoinRow(c, animateIndex){
-  let html = '<div class="coinrow">';
-  for (let i=0;i<BUSINESS.maxCoins;i++){
-    const filled = i < c.coins; const pop = animateIndex===i ? ' pop' : '';
-    const delayStyle = (filled && i!==animateIndex) ? ` style="animation-delay:${(i*0.22).toFixed(2)}s;"` : '';
-    html += `<div class="coin ${filled?'filled':''}${pop}"${delayStyle}>${filled ? 'S/' : ''}</div>`;
-  }
-  html += '</div>'; return html;
-}
-
-function renderClientView(){
-  const container = document.createElement('div');
-  const c = state.clients.find(x=>x.id===state.myClientId);
-  if (!c){
-    container.innerHTML = `
-      <div class="card">
-        <h2>Únete a expandeMoney</h2>
-        <p class="sub">Crea tu billetera digital y empieza a acumular saldo en soles.</p>
-        <label>Nombre</label><input type="text" id="onb-name" placeholder="Tu nombre completo">
-        <label>Correo</label><input type="email" id="onb-email" placeholder="nombre@correo.com">
-        <button class="btn btn-gold btn-full" style="margin-top:1.4rem" onclick="createClient(document.getElementById('onb-name').value, document.getElementById('onb-email').value)">Crear mi billetera</button>
-      </div>`;
-    return container;
-  }
-  const tier = tierForVisits(c.totalVisits||0);
-  const full = tier !== 'Oro' && c.coins >= BUSINESS.maxCoins;
-  const prevCoins = state.prevCoins[c.id]; const prevTier = state.prevTier[c.id];
-  let animateIndex = -1; if (tier !== 'Oro' && prevCoins!==undefined && c.coins>prevCoins) animateIndex = c.coins-1;
-  const myActivity = state.activity.filter(a=>a.clientId===c.id).slice(-5).reverse();
-  const justRedeemed = tier !== 'Oro' && prevCoins!==undefined && prevCoins>=BUSINESS.maxCoins && c.coins===0;
-  container.innerHTML = `
-    <div class="clientwrap">
-      <div style="display:flex;justify-content:flex-end;margin-bottom:10px;"><button class="gearbtn" onclick="toggleSettings()" title="Configuración">⚙</button></div>
-      <div class="pass">
-        <div class="pass-main">
-          <div class="eyebrow">Billetera digital</div>
-          <div class="clientname">${c.name}</div>
-          <div class="tierrow"><span class="tierbadge tier-${tier}">${tierMedal(tier)} ${tier}</span><span class="saldo" id="saldo-anchor">Saldo total: <b class="saldo-hero" id="saldo-num">${soles(c.saldo)}</b></span></div>
-          ${tier !== 'Oro' ? `
-          ${renderCoinRow(c, animateIndex)}
-          <div class="progresstext">${c.coins} de ${BUSINESS.maxCoins} visitas ${full ? '— ¡completa!' : 'para tu próxima recompensa'}</div>
-          ` : `<div class="progresstext">Visitas totales: <b style="color:var(--text);">${c.totalVisits||0}</b></div>`}
-          ${releaseBlockHtml(c)}
-          ${full ? `<div class="rewardbanner">Tienes S/${CARD_REWARD[tier]} listos. Muéstrale tu código al comercio para liberarlos.</div>` : ''}
-          ${justRedeemed ? `<div class="rewardbanner">🎉 ¡Tarjeta completa! Tu recompensa ya está disponible.</div>` : ''}
-        </div>
-        <div class="perf"></div>
-        <div class="pass-stub">
-          <div class="qrbox">${qrSvg(c.id)}</div>
-          <div class="codetext">${code6(c.id)}</div>
-          <div class="codelabel">Muestra este código en caja</div>
-        </div>
-      </div>
-      <div class="settings-overlay ${state.settingsOpen?'open':''}" onclick="closeSettings()"></div>
-      <div class="settings-panel ${state.settingsOpen?'open':''}" onclick="event.stopPropagation()">
-        <div class="settings-handle"></div>
-        <h3>Configuración</h3>
-        <p class="sub">Edita tu perfil o sal de esta billetera demo.</p>
-        <label>Nombre</label><input type="text" id="set-name" value="${c.name}">
-        <label>Correo</label><input type="email" id="set-email" value="${c.email}">
-        <button class="btn btn-gold btn-full" style="margin-top:1.2rem" onclick="saveSettings('${c.id}')">Guardar cambios</button>
-        <button class="btn btn-outline btn-full" style="margin-top:8px" onclick="exitDemo()">Salir de la demo</button>
-      </div>
-    </div>
-    <div class="activity">
-      <h3>Actividad reciente</h3>
-      ${myActivity.length ? myActivity.map(a=>`<div class="arow"><span class="tag ${activityTagClass(a.type)}">${activityLabel(a.type)}</span><span class="when">${fmtTime(a.ts)}</span></div>`).join('') : '<div class="empty">Aún no tienes movimientos.</div>'}
-    </div>`;
-
-  if (prevCoins!==undefined && c.coins>prevCoins){
-    setTimeout(()=>{
-      const anchor = container.querySelector('#saldo-anchor');
-      if (anchor){ const el=document.createElement('span'); el.className='float-plus'; el.textContent=`+S/${BUSINESS.valuePerCoin}`; anchor.appendChild(el); setTimeout(()=>el.remove(),1200); }
-    }, 40);
-    if (c.coins>=BUSINESS.maxCoins) setTimeout(()=>confettiBurst(true),90); else setTimeout(()=>confettiBurst(false),90);
-  }
-  if (justRedeemed){
-    setTimeout(()=>confettiBurst(true),90);
-    setTimeout(()=>{ const passEl=container.querySelector('.pass'); if(passEl){ passEl.classList.add('flash'); setTimeout(()=>passEl.classList.remove('flash'),1300); } },90);
-    setTimeout(()=>showRewardCelebration(c.name),150);
-  }
-  if (prevTier!==undefined && prevTier!==tier){
-    setTimeout(()=>{
-      const badge=container.querySelector('.tierbadge'); if(badge){ badge.classList.add('levelup'); setTimeout(()=>badge.classList.remove('levelup'),900); }
-      confettiBurst(true, tier); showToast(`¡Subiste a nivel ${tier}!`);
-    },220);
-  }
-  state.prevCoins[c.id]=c.coins; state.prevTier[c.id]=tier;
-  return container;
-}
-
-function renderMerchantView(){
-  const container = document.createElement('div');
-  const found = state.clients.find(x=>x.id===state.merchantFoundId);
-  const clientOptions = state.clients.map(c=>`<option value="${c.id}" ${c.id===state.merchantFoundId?'selected':''}>${c.name} — ${code6(c.id)}</option>`).join('');
-  let foundTier, prevCoins, prevTier, animateIndex=-1, justRedeemed=false, cardFull=false;
-  if (found){
-    foundTier = tierForVisits(found.totalVisits||0);
-    cardFull = foundTier !== 'Oro' && found.coins >= BUSINESS.maxCoins;
-    prevCoins = state.prevCoins[found.id]; prevTier = state.prevTier[found.id];
-    if (foundTier !== 'Oro' && prevCoins!==undefined && found.coins>prevCoins) animateIndex = found.coins-1;
-    justRedeemed = foundTier !== 'Oro' && prevCoins!==undefined && prevCoins>=BUSINESS.maxCoins && found.coins===0;
-  }
-  container.innerHTML = `
-    <div class="card">
-      <h2>Panel del comercio</h2>
-      <p class="sub">Escanea o ingresa el código que el cliente te muestra en su billetera.</p>
-      <div class="scanrow"><input type="text" id="scan-input" placeholder="Código de 6 dígitos o nombre"><button class="btn btn-gold" onclick="doScan()">Buscar</button></div>
-      <label>Simular cámara (elegir cliente demo)</label>
-      <select id="scan-select" onchange="doScanSelect(this.value)"><option value="">Seleccionar cliente registrado…</option>${clientOptions}</select>
-      ${found ? `
-        <div class="foundcard" id="found-card">
-          <div class="foundtop">
-            <div><div class="foundname">${found.name}</div><div class="foundmeta">${found.totalVisits||0} visitas · <span class="saldo" id="saldo-anchor">Saldo total: <b class="saldo-hero" id="saldo-num">${soles(found.saldo)}</b></span> · nivel ${foundTier}</div></div>
-            <span class="tierbadge tier-${foundTier}">${tierMedal(foundTier)} ${foundTier}</span>
-          </div>
-          ${foundTier !== 'Oro' ? renderCoinRow(found, animateIndex) : ''}
-          ${releaseBlockHtml(found)}
-          ${justRedeemed ? `<div class="rewardbanner">🎉 Tarjeta completa para ${found.name}. Ciclo reiniciado.</div>` : ''}
-          <div class="actionrow">
-            <button class="btn btn-gold" onclick="addCoin('${found.id}')" ${cardFull?'disabled':''}>+S/${BUSINESS.valuePerCoin} (compra)</button>
-            ${foundTier !== 'Oro' ? `<button class="btn btn-outline" onclick="redeem('${found.id}')" ${found.coins<BUSINESS.maxCoins?'disabled':''}>Liberar S/${CARD_REWARD[foundTier]}</button>` : ''}
-          </div>
-          ${(found.disponible||0) > 0 ? `<button class="btn btn-outline btn-full" style="margin-top:10px;" onclick="redeemDisponible('${found.id}')">Usar disponible (${soles(found.disponible)}) en caja</button>` : ''}
-          ${!cardFull ? `<button class="btn btn-outline btn-full" style="margin-top:10px;font-size:12px;" onclick="simulateBurst('${found.id}')">🎬 Simular 3 compras seguidas (demo rápida)</button>` : ''}
-        </div>` : `<div class="scan-instruction"><span class="ic">👆</span><p>Selecciona el cliente para abonar saldo y canjear el cashback</p></div>`}
-    </div>
-    <div class="sectiontitle">Clientes registrados</div>
-    ${state.clients.length ? `
-      <table><tr><th>Cliente</th><th>Visitas</th><th>Disponible</th><th>Nivel</th></tr>
-        ${state.clients.map(c=>{ const t = tierForVisits(c.totalVisits||0); return `<tr><td>${c.name}</td><td class="num">${c.totalVisits||0}</td><td class="num">${soles(c.disponible||0)}</td><td>${tierMedal(t)} ${t}</td></tr>`; }).join('')}
-      </table>` : '<div class="empty">Aún no hay clientes. Crea uno desde la vista Cliente.</div>'}
-    <div class="sectiontitle">Actividad del negocio</div>
-    <div class="activity" style="margin-top:0">
-      ${state.activity.length ? state.activity.slice(-10).reverse().map(a=>`<div class="arow"><span class="who">${a.name}</span><span class="tag ${activityTagClass(a.type)}">${activityLabel(a.type)}</span><span class="when">${fmtTime(a.ts)}</span></div>`).join('') : '<div class="empty">Sin movimientos todavía.</div>'}
-    </div>`;
-
-  if (found){
-    if (prevCoins!==undefined && found.coins>prevCoins){
-      setTimeout(()=>{
-        const anchor = container.querySelector('#saldo-anchor');
-        if (anchor){ const el=document.createElement('span'); el.className='float-plus'; el.textContent=`+S/${BUSINESS.valuePerCoin}`; anchor.appendChild(el); setTimeout(()=>el.remove(),1200); }
-      }, 40);
-      if (found.coins>=BUSINESS.maxCoins) setTimeout(()=>confettiBurst(true),90); else setTimeout(()=>confettiBurst(false),90);
-    }
-    if (justRedeemed){
-      setTimeout(()=>confettiBurst(true),90);
-      setTimeout(()=>{ const card=container.querySelector('#found-card'); if(card){ card.classList.add('flash'); setTimeout(()=>card.classList.remove('flash'),1300); } },90);
-    }
-    if (prevTier!==undefined && prevTier!==foundTier){
-      setTimeout(()=>{
-        const badge=container.querySelector('#found-card .tierbadge'); if(badge){ badge.classList.add('levelup'); setTimeout(()=>badge.classList.remove('levelup'),900); }
-        confettiBurst(true, foundTier); showToast(`${found.name} subió a nivel ${foundTier}`);
-      },220);
-    }
-    state.prevCoins[found.id]=found.coins; state.prevTier[found.id]=foundTier;
-  }
-  return container;
-}
-
-function doScan(){ const val=document.getElementById('scan-input').value; const c=findClient(val); if(!c){ showToast('Cliente no encontrado'); return; } state.merchantFoundId=c.id; render(); }
-function doScanSelect(id){ if(!id) return; state.merchantFoundId=id; render(); }
-
-function render(){
-  checkNewActivity();
-  const tabClient = document.getElementById('tab-client');
-  const tabMerchant = document.getElementById('tab-merchant');
-  if (tabClient) tabClient.classList.toggle('active', state.role==='client');
-  if (tabMerchant) tabMerchant.classList.toggle('active', state.role==='merchant');
-  const app = document.getElementById('app');
-  if (app){ app.innerHTML=''; app.appendChild(state.role==='client' ? renderClientView() : renderMerchantView()); }
-  const panelApp = document.getElementById('panel-app');
-  if (panelApp && router.current === '/panel'){ panelApp.innerHTML=''; panelApp.appendChild(renderMerchantView()); }
-}
-
-/* =========================================================================
-   expandeMoney Pay — simulador de link de cobro para infoproductores
-   Comisión plana del 5%, sin retención de fondos: el neto se calcula y
-   muestra al instante, y al "simular pago" se registra al comprador en el
-   ecosistema de fidelización (actividad tipo 'venta').
-   ========================================================================= */
-function slugify(s){
-  return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-    .replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'') || 'servicio';
-}
-function renderPaySim(){
-  const nameEl = document.getElementById('pay-service-name');
-  const priceEl = document.getElementById('pay-service-price');
-  if (!nameEl || !priceEl) return;
-  const name = nameEl.value.trim() || 'Mentoría 1h';
-  const price = Math.max(0, parseFloat(priceEl.value) || 0) || 200;
-  const fee = +(price * PAY_FEE_PCT).toFixed(2);
-  const net = +(price - fee).toFixed(2);
-  const link = `expandemoney.com/pay/tu-usuario/${slugify(name)}`;
-  document.getElementById('pay-link-text').textContent = link;
-  document.getElementById('pay-amount').textContent = soles(price);
-  document.getElementById('pay-fee').textContent = '– ' + soles(fee);
-  document.getElementById('pay-net').textContent = soles(net);
-}
-function copyPayLink(){
-  const text = document.getElementById('pay-link-text').textContent;
-  if (navigator.clipboard) navigator.clipboard.writeText('https://'+text).catch(()=>{});
-  showToast('Link copiado');
-}
-async function simulatePayment(){
-  const priceEl = document.getElementById('pay-service-price');
-  const price = Math.max(0, parseFloat(priceEl.value) || 0) || 200;
-  const fee = +(price*PAY_FEE_PCT).toFixed(2);
-  const net = +(price-fee).toFixed(2);
-  showToast(`Pago simulado: recibes ${soles(net)} al instante, sin retención`);
-  confettiBurst(false);
-  playChime('abono');
-  state.activity.push({ type:'venta', clientId:'PAYDEMO', name:'Comprador de prueba', ts:Date.now(), monto:net });
-  await saveActivity();
-  if (state.role === 'merchant' && router.current === '/') render();
-}
-
-/* =========================================================================
-   ROUTER — enrutamiento por historial (pushState) para /, /login y /panel.
-   ========================================================================= */
-const router = {
-  current: '/',
-  routes: ['/', '/login', '/panel'],
-  resolve(path){ return this.routes.includes(path) ? path : '/'; },
-  async go(path, replace){
-    const target = this.resolve(path);
-    if (target === '/panel'){
-      const session = await getSession();
-      if (!session){ return this.go('/login', replace); }
-    }
-    this.current = target;
-    if (replace) history.replaceState({}, '', target);
-    else if (location.pathname !== target) history.pushState({}, '', target);
-    this.renderView();
-  },
-  async renderView(){
-    document.getElementById('view-landing').style.display = this.current === '/' ? 'block' : 'none';
-    document.getElementById('view-login').style.display = this.current === '/login' ? 'flex' : 'none';
-    document.getElementById('view-panel').style.display = this.current === '/panel' ? 'flex' : 'none';
-    if (this.current === '/panel'){ await hydratePanelHeader(); await loadShared(); render(); }
-    if (this.current === '/') window.scrollTo(0,0);
-  }
-};
-
-async function getSession(){
-  try{ const s = await window.storage.get('expandemoney:session', false); return s && s.value ? JSON.parse(s.value) : null; }
-  catch(e){ return null; }
-}
-async function setSession(session){ await window.storage.set('expandemoney:session', JSON.stringify(session), false); }
-async function clearSession(){ try{ await window.storage.delete('expandemoney:session', false); }catch(e){} }
-
-function setLoginRole(r){
-  loginRole = r;
-  document.getElementById('login-tab-merchant').classList.toggle('active', r==='merchant');
-  document.getElementById('login-tab-client').classList.toggle('active', r==='client');
-}
-
-async function doLogin(){
-  const user = document.getElementById('login-user').value.trim();
-  const pass = document.getElementById('login-pass').value.trim();
-  const errEl = document.getElementById('login-error');
-  if (!user || !pass){ errEl.textContent = 'Completa ambos campos para continuar.'; errEl.classList.add('show'); return; }
-  errEl.classList.remove('show');
-  const displayName = user.includes('@') ? user.split('@')[0] : user;
-  await setSession({ user: displayName, role: loginRole, ts: Date.now() });
-  showToast('Bienvenido de nuevo');
-  if (loginRole === 'client'){ await setRole('client'); await router.go('/'); }
-  else { await router.go('/panel'); }
-}
-
-async function hydratePanelHeader(){
-  const session = await getSession();
-  const nameEl = document.getElementById('panel-username');
-  const roleEl = document.getElementById('panel-userrole');
-  const avatarEl = document.getElementById('panel-avatar');
-  if (session){
-    nameEl.textContent = session.user;
-    roleEl.textContent = session.role === 'merchant' ? 'Cuenta de comercio' : 'Cuenta de cliente';
-    avatarEl.textContent = session.user.slice(0,1).toUpperCase();
-  }
-}
-
-async function doLogout(){ await clearSession(); showToast('Sesión cerrada'); await router.go('/'); }
-
-document.addEventListener('click', (e)=>{
-  const link = e.target.closest('[data-link]');
-  if (!link) return;
-  e.preventDefault();
-  router.go(link.getAttribute('href'));
-});
-window.addEventListener('popstate', ()=>router.go(location.pathname, true));
-
-/* ===== EFECTOS: reveal on scroll ===== */
-function initReveal(){
-  const els = document.querySelectorAll('.reveal');
-  if (!els.length) return;
-  els.forEach((el,i)=>{ el.classList.add('reveal-stagger'); el.style.setProperty('--rd', Math.min(i%4,4)*80+'ms'); });
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{ if (entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); } });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  els.forEach(el=>io.observe(el));
-}
-
-/* ===== EFECTOS: contadores animados ===== */
-function animateCount(el){
-  const target = parseFloat(el.getAttribute('data-target')||'0');
-  const prefix = el.getAttribute('data-prefix')||'';
-  const suffix = el.getAttribute('data-suffix')||'';
-  const duration = 1400; const start = performance.now();
-  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
-  function tick(now){
-    const p = Math.min((now-start)/duration, 1);
-    const eased = 1 - Math.pow(1-p, 3);
-    el.textContent = prefix + fmt(target*eased) + suffix;
-    if (p<1) requestAnimationFrame(tick);
-  }
-  requestAnimationFrame(tick);
-}
-function initCounters(){
-  const grid = document.querySelector('.statsgrid'); if (!grid) return;
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      if (entry.isIntersecting){ entry.target.querySelectorAll('.stat-num[data-target]').forEach(animateCount); io.unobserve(entry.target); }
-    });
-  }, { threshold: 0.4 });
-  io.observe(grid);
-}
-
-/* ===== EFECTOS: ticker de cifras (marquee) ===== */
-function initTicker(){
-  const track = document.getElementById('ticker-track'); if (!track) return;
-  const facts = [
-    'S/2 de saldo por cada visita','Niveles Bronce, Plata y Oro','Bronce y Plata liberan su recompensa al completar la tarjeta',
-    'QR anti-fraude por cliente','Saldo en tiempo real, sin apps','Nivel Oro libera S/1 en cada visita, sin esperas',
-    'expandeMoney Pay: 5% flat, sin retención de fondos'
-  ];
-  const itemsHtml = facts.map(f=>`<span class="ticker-item"><b>●</b> ${f}</span><span class="ticker-dot">◆</span>`).join('');
-  track.innerHTML = itemsHtml + itemsHtml;
-}
-
-/* ===== EFECTOS: spotlight de cursor en botones dorados ===== */
-function initButtonGlow(){
-  document.addEventListener('pointermove', (e)=>{
-    const btn = e.target.closest && e.target.closest('.btn-gold');
-    if (!btn) return;
-    const r = btn.getBoundingClientRect();
-    btn.style.setProperty('--mx', (e.clientX-r.left)+'px');
-    btn.style.setProperty('--my', (e.clientY-r.top)+'px');
-  });
-}
-
-async function init(){
-  document.getElementById('hero-qr').innerHTML = qrSvg('preview');
-  document.querySelectorAll('.mock-coin.on').forEach(el=>{ el.style.boxShadow = '0 0 6px rgba(0,255,133,.45)'; });
-  await loadPersonal(); await loadShared(); render();
-  setInterval(async ()=>{ if (state.settingsOpen) return; await loadShared(); render(); }, 2500);
-  setInterval(()=>resetDemo(), 180000);
-  initTicker(); initReveal(); initCounters(); initButtonGlow(); renderPaySim();
-  await router.go(location.pathname, true);
-}
-init();
-</script>
+  </script>
 </body>
 </html>
