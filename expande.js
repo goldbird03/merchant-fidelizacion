@@ -219,7 +219,7 @@ function injectSprite(){
    La anon key es publica por diseno, pero la seguridad real depende de las politicas RLS de la tabla 'clientes'
    (el rol anon necesita permiso INSERT). Nunca pongas aqui la service_role key. */
 const SUPABASE_URL='https://jcyeynruazezcosqeqos.supabase.co';
-const SUPABASE_ANON_KEY='sb_publishable_l83nEIkAhPtTeZHucNi0jQ_VYn_8vp6';
+const SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjeWV5bnJ1YXplemNvc3FlcW9zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI2Mjk1MjUsImV4cCI6MjEwODIwNTUyNX0.dii03i6WyoD8qyJDBIbcyxX7W3bb3Ebta8HscQ7HCBA';
 let sb=null;
 function initSupabase(){
   if(sb)return sb;
