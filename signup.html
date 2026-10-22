@@ -3,132 +3,383 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registrarse — expandeMoney</title>
-<meta name="description" content="Crea tu billetera expandeMoney gratis: acumula saldo en soles en cada consumo, sube de nivel y canjea cupones.">
+<title>Crea tu billetera gratis &#x2014; expandeMoney</title>
+<meta name="description" content="Reg&#xED;strate gratis en expandeMoney: cupones con descuento y saldo real en soles en tus locales favoritos. Sin apps que instalar.">
 <meta name="theme-color" content="#0b0f17">
 <meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Cdefs%3E%3ClinearGradient id=%27g%27 x1=%270%27 y1=%270%27 x2=%271%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23FFD95A%27/%3E%3Cstop offset=%271%27 stop-color=%27%2300e676%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27url(%23g)%27/%3E%3Ctext x=%2716%27 y=%2723%27 font-size=%2720%27 font-weight=%27800%27 text-anchor=%27middle%27 fill=%27%230b0f17%27 font-family=%27Arial%27%3E$%3C/text%3E%3C/svg%3E">
+<script>document.documentElement.className+=" js";addEventListener("error",function(){document.documentElement.classList.remove("js")});</script>
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="expande.css">
+<style>
+:root{
+  --bg:#0b0f17;--bg-alt:#0d1220;--surface:#121824;--slate:#1e293b;
+  --card:rgba(255,255,255,.055);--line:rgba(255,255,255,.09);
+  --gold:#F5C542;--gold-b:#FFD95A;--em:#00e676;--em-soft:#20E68A;
+  --text:#EAEDF3;--dim:#9AA1B4;--faint:#5B6478;--err:#ff6b6b;
+  --bronze:#E9A867;--silver:#C9D1DC;
+  --r-md:12px;--r-lg:18px;--pill:999px;
+  --grad:linear-gradient(135deg,var(--gold-b),var(--em));
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:15px/1.55 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,.fh{font-family:'Plus Jakarta Sans','Inter',sans-serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+.tg{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.14em;flex:none}
+.eyebrow{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-b);font-weight:700}
+#glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(245,197,66,.10),rgba(245,197,66,.04) 40%,transparent 70%);opacity:0;transition:opacity .4s;will-change:transform}
+#glow.on{opacity:1}
+nav{position:sticky;top:0;z-index:30;background:rgba(8,11,16,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-top:.85rem;padding-bottom:.85rem}
+.logo{display:flex;align-items:center;gap:8px;font:800 17px 'Plus Jakarta Sans',sans-serif}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:var(--bg);font-style:normal}
+.back{font-size:13px;color:var(--dim);display:inline-flex;align-items:center;gap:6px;padding:8px 4px;transition:color .2s}
+.back:hover{color:var(--gold-b)}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:13px 22px;font:600 14px 'Inter',sans-serif;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s;text-align:center;min-height:46px}
+.btn-p{background:var(--gold);color:#1A1400;box-shadow:0 6px 22px -6px rgba(245,197,66,.5)}
+.btn-p::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-120%);transition:transform .7s}
+.btn-p:hover{background:var(--gold-b);transform:translateY(-2px);box-shadow:0 10px 30px -6px rgba(245,197,66,.65),0 0 0 1px rgba(0,230,118,.35)}
+.btn-p:hover::before{transform:translateX(120%)}
+.btn-o{background:none;color:var(--text);border:1px solid var(--line)}
+.btn-o:hover{border-color:rgba(245,197,66,.5);color:var(--gold-b)}
+.btn[disabled]{opacity:.7;cursor:progress;transform:none}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible,input:focus-visible,.back:focus-visible{outline:2px solid rgba(0,230,118,.7);outline-offset:2px}
+
+/* hero + form */
+.hero{position:relative;padding:3.2rem 0 4rem;background:radial-gradient(640px circle at 12% 0,rgba(0,230,118,.09),transparent 62%),radial-gradient(560px circle at 95% 20%,rgba(245,197,66,.09),transparent 62%)}
+.hgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:2.5rem;align-items:start}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,230,118,.35);background:rgba(0,230,118,.08);color:var(--em-soft);border-radius:var(--pill);padding:6px 13px;font-size:12px;font-weight:700;letter-spacing:.4px}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--em);box-shadow:0 0 0 0 rgba(0,230,118,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(0,230,118,0)}100%{box-shadow:0 0 0 0 rgba(0,230,118,0)}}
+h1{font-size:clamp(30px,5.2vw,50px);line-height:1.08;font-weight:800;margin-top:1rem;letter-spacing:-.5px}
+h1 em{font-style:italic}
+.lead{color:var(--dim);margin-top:1rem;max-width:520px;font-size:16px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-top:1.8rem}
+.stat{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:.85rem .6rem;text-align:center}
+.stat b{display:block;font:800 22px 'JetBrains Mono',monospace}
+.stat span{display:block;font-size:11px;color:var(--dim);margin-top:2px;line-height:1.3}
+.quote{margin-top:1.4rem;border-left:3px solid var(--gold);padding:.4rem 0 .4rem 1rem;color:var(--text);font-style:italic;max-width:520px}
+.quote small{display:block;font-style:normal;color:var(--faint);font-size:12px;margin-top:4px}
+.perks{display:flex;flex-wrap:wrap;gap:.45rem 1.2rem;margin-top:1.4rem;font-size:12.5px;color:var(--dim)}
+.perks span::before{content:"\2713  ";color:var(--em)}
+
+.fcardx{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025)),var(--surface);border-radius:22px;padding:1.6rem;box-shadow:0 30px 70px -34px rgba(0,0,0,.8),0 0 60px -30px rgba(245,197,66,.35);overflow:hidden}
+.fcardx::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(300px circle at 100% 0,rgba(245,197,66,.14),transparent 70%)}
+.fcardx h2{font-size:22px;font-weight:800;position:relative}
+.note{font-size:12.5px;color:var(--dim);margin-top:4px;position:relative}
+form{position:relative;margin-top:1.1rem;display:grid;gap:.95rem}
+.f{display:grid;gap:6px}
+.f label,.f .lb{font-size:12.5px;font-weight:600;color:var(--text)}
+.f label i{font-style:normal;color:var(--faint);font-weight:500}
+.inp{width:100%;background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--text);border-radius:var(--r-md);padding:13px 14px;font:16px 'Inter',sans-serif;transition:border-color .2s,box-shadow .2s,background .2s;min-height:48px}
+.inp::placeholder{color:var(--faint)}
+.inp:hover{border-color:rgba(255,255,255,.2)}
+.inp:focus{outline:none;border-color:rgba(245,197,66,.7);box-shadow:0 0 0 3px rgba(245,197,66,.14);background:rgba(255,255,255,.07)}
+.f.bad .inp{border-color:var(--err);box-shadow:0 0 0 3px rgba(255,107,107,.12)}
+.f.ok .inp{border-color:rgba(0,230,118,.5)}
+.hint{font-size:11.5px;color:var(--faint)}.f.bad .hint{display:none}
+input[type=date].inp{color-scheme:dark;appearance:none;-webkit-appearance:none;text-align:left;display:block;min-width:0}input[type=date].inp::-webkit-date-and-time-value{text-align:left}
+.docrow{display:grid;grid-template-columns:132px 1fr;gap:8px}select.inp{color-scheme:dark;appearance:none;-webkit-appearance:none;padding-right:30px;background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);background-position:calc(100% - 17px) 20px,calc(100% - 12px) 20px;background-size:5px 5px;background-repeat:no-repeat}select.inp option{background:#121824;color:#EAEDF3}
+@media(max-width:380px){.docrow{grid-template-columns:112px 1fr}}
+.err{display:none;color:var(--err);font-size:12px}
+.f.bad .err{display:block}
+.phone{display:grid;grid-template-columns:auto 1fr;gap:8px}
+.pre{display:flex;align-items:center;gap:6px;padding:0 13px;border:1px solid var(--line);border-radius:var(--r-md);background:rgba(255,255,255,.03);color:var(--dim);font:600 14px 'JetBrains Mono',monospace;min-height:48px}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{border:1px solid var(--line);background:none;color:var(--dim);border-radius:var(--pill);padding:9px 14px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all .2s;min-height:40px}
+.chip:hover{color:#fff;border-color:rgba(255,255,255,.25)}
+.chip.on{background:var(--grad);color:var(--bg);border-color:transparent}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--dim);cursor:pointer}
+.chk input{appearance:none;-webkit-appearance:none;flex:none;width:20px;height:20px;border:1px solid rgba(255,255,255,.25);border-radius:6px;background:rgba(255,255,255,.04);display:grid;place-items:center;margin-top:1px;cursor:pointer;transition:all .2s}
+.chk input:checked{background:var(--gold);border-color:var(--gold)}
+.chk input:checked::after{content:"";width:5px;height:10px;border:solid #1A1400;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.chk a{color:var(--gold-b);text-decoration:underline;text-underline-offset:2px}
+.f.bad .chk{color:var(--err)}
+.fine{font-size:11.5px;color:var(--faint);text-align:center}
+.spin{width:16px;height:16px;border:2px solid rgba(26,20,0,.3);border-top-color:#1A1400;border-radius:50%;animation:sp .7s linear infinite;display:none}
+.btn.load .spin{display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* success wallet */
+#ok{display:none;position:relative;text-align:center}
+.done #form-wrap{display:none}.done #ok{display:block;animation:pop .5s cubic-bezier(.2,.9,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.check{width:54px;height:54px;border-radius:50%;background:var(--grad);color:var(--bg);display:grid;place-items:center;margin:0 auto 10px;font-size:26px;box-shadow:0 0 0 8px rgba(0,230,118,.1)}
+#ok h2{font-size:22px}
+.wallet{margin:1.1rem auto 0;text-align:left;border-radius:18px;padding:1.1rem;background:linear-gradient(135deg,rgba(245,197,66,.16),rgba(0,230,118,.12)),var(--surface);border:1px solid rgba(245,197,66,.35);display:grid;grid-template-columns:1fr 92px;gap:1rem;align-items:center}
+.wallet small{color:var(--dim);font-size:11px;letter-spacing:.8px;text-transform:uppercase}
+.wallet .nm{font:800 18px 'Plus Jakarta Sans',sans-serif;overflow-wrap:anywhere}
+.wallet .bal{font:800 26px 'JetBrains Mono',monospace;color:var(--em-soft);margin-top:4px}
+.tier{display:inline-flex;align-items:center;gap:6px;margin-top:6px;border-radius:var(--pill);padding:3px 10px;font-size:11.5px;font-weight:700;background:rgba(233,168,103,.15);color:var(--bronze);border:1px solid rgba(233,168,103,.4)}
+.wallet svg{width:92px;height:92px;background:#fff;border-radius:10px;padding:5px}
+.code{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:.9rem;border:1px dashed rgba(255,255,255,.2);border-radius:12px;padding:.6rem .8rem}
+.code b{font:700 15px 'JetBrains Mono',monospace;letter-spacing:1px}
+.meta{display:flex;justify-content:space-between;gap:1rem;margin-top:.8rem;font-size:12px;color:var(--dim)}
+.cta2{display:grid;gap:.6rem;margin-top:1.1rem}
+
+/* sections */
+section{padding:4rem 0;scroll-margin-top:72px}
+.alt{background:radial-gradient(520px circle at 8% 0,rgba(0,230,118,.05),transparent 62%),radial-gradient(520px circle at 95% 100%,rgba(245,197,66,.06),transparent 62%),var(--bg-alt)}
+h2.sh{font-size:clamp(25px,3.4vw,34px);line-height:1.15;margin-top:6px;max-width:640px;font-weight:800}
+.sub{color:var(--dim);margin-top:10px;max-width:600px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2rem}
+.card{border:1px solid var(--line);background:var(--card);border-radius:var(--r-lg);padding:1.3rem;transition:transform .25s,border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(245,197,66,.4);box-shadow:0 20px 44px -24px rgba(245,197,66,.4)}
+.step .n{width:34px;height:34px;border-radius:10px;background:var(--grad);color:var(--bg);display:grid;place-items:center;font:800 15px 'JetBrains Mono',monospace}
+.card h3{margin-top:.9rem;font-size:17px}
+.card p{color:var(--dim);margin-top:6px;font-size:14px}
+.tiers .card{position:relative;overflow:hidden}
+.tiers .card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px}
+.t-b::before{background:var(--bronze)}.t-s::before{background:var(--silver)}.t-g::before{background:var(--gold-b)}
+.tiers .rg{font:700 12px 'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase}
+.t-b .rg{color:var(--bronze)}.t-s .rg{color:var(--silver)}.t-g .rg{color:var(--gold-b)}
+.tiers b.big{display:block;font:800 26px 'JetBrains Mono',monospace;margin-top:6px}
+.tiers .card:hover{transform:translateY(-4px)}
+details{border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin-top:.7rem;background:var(--card)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem;min-height:24px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold-b);font-size:20px;line-height:1;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--dim);margin-top:.6rem;font-size:14px}
+.faqw{max-width:720px}
+.final{text-align:center;padding:4.5rem 0;background:radial-gradient(520px circle at 50% 0,rgba(245,197,66,.12),transparent 70%)}
+.final h2{margin:8px auto 0;font-size:clamp(26px,4vw,38px)}
+footer{border-top:1px solid var(--line);padding:1.6rem 0;color:var(--faint);font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+.rv{transition:opacity .6s,transform .6s}
+.js .rv{opacity:0;transform:translateY(18px)}.js .rv.in{opacity:1;transform:none}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:60;background:var(--surface);border:1px solid rgba(0,230,118,.4);border-radius:18px;padding:11px 18px;font-size:13px;width:max-content;max-width:calc(100vw - 32px);transition:all .3s;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:900px){
+  .hgrid{grid-template-columns:1fr;gap:2rem}
+  .hero{padding:2rem 0 3rem}
+  .g3{grid-template-columns:1fr}
+  #glow{display:none}
+}
+@media(max-width:520px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .fcardx{padding:1.2rem;border-radius:18px}
+  .wallet{grid-template-columns:1fr 78px}.wallet svg{width:78px;height:78px}
+  .back span{display:none}
+  section{padding:3rem 0}
+}
+@media(hover:none){.card:hover,.btn-p:hover{transform:none}.btn-p:active{transform:scale(.98)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}.js .rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-<a class="skip" href="#main">Saltar al contenido</a>
+<div id="glow" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+</defs></svg>
 
-<nav aria-label="Principal">
-  <div class="wrap">
-    <a href="index.html" class="logo"><i>$</i><span>expande<span class="tg">Money</span></span></a>
-    <div class="nl">
-      <a href="index.html">Inicio</a>
-      <a href="shop.html">Tienda / Canje</a>
-      <a href="signup.html" aria-current="page">Registrarse</a>
-      <a href="dashboard.html">Mi Billetera</a>
-      <a href="panel.html">Panel</a>
+<nav><div class="wrap">
+  <a href="index.html" class="logo" aria-label="expandeMoney, inicio"><i>$</i><span>expande<span class="tg">Money</span></span></a>
+  <a href="index.html" class="back"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg><span>Volver al inicio</span></a>
+</div></nav>
+
+<header class="hero"><div class="wrap hgrid">
+  <div class="rv">
+    <span class="badge">REGISTRO ABIERTO &middot; LIMA</span>
+    <h1>Tu billetera con <em class="tg">plata real</em> en soles. Gratis.</h1>
+    <p class="lead">Crea tu cuenta en menos de un minuto, accede a cupones de hasta 45% de descuento y gana saldo en cada visita. Sin apps que instalar: funciona desde tu navegador.</p>
+    <div class="stats">
+      <div class="stat"><b class="tg">S/0</b><span>costo de registro</span></div>
+      <div class="stat"><b class="tg">S/2</b><span>de saldo por visita</span></div>
+      <div class="stat"><b class="tg">45%</b><span>dcto. m&aacute;ximo en cupones</span></div>
+      <div class="stat"><b class="tg">3</b><span>niveles: Bronce, Plata y Oro</span></div>
     </div>
-    <a id="nav-bal" class="btn btn-s btn-sm" href="signup.html">Ingresar</a>
+    <blockquote class="quote">Cada visita suma. Tu saldo no son puntos que se olvidan: es plata que puedes usar.<small>expandeMoney &middot; Tu billetera de fidelidad</small></blockquote>
+    <div class="perks"><span>Sin tarjeta</span><span>Sin descargar nada</span><span>Sin spam</span></div>
   </div>
-</nav>
 
-<main id="main">
-  <div class="wrap pg">
-    <div class="g2" style="margin-top:0;gap:2rem">
-      <div>
-        <div class="pgh">
-          <div class="eyebrow">Crear billetera</div>
-          <h1>Gana saldo en soles <span class="tg">cada vez que consumes</span></h1>
-          <p class="sub">Regístrate gratis, muestra tu QR al pagar y sube de nivel. Sin apps que instalar.</p>
-        </div>
-        <ul class="rules" aria-label="Qué ganas en cada nivel" style="padding:0;max-width:520px">
-          <li><span>Bronce · 0–9 visitas</span><b>+S/ 0.50 · libera S/ 5.00</b></li>
-          <li><span>Plata · 10–29 visitas</span><b>+S/ 0.70 · libera S/ 7.00</b></li>
-          <li><span>Oro · +30 visitas</span><b>+S/ 1.00 al instante</b></li>
-        </ul>
-        <p class="note" style="text-align:left;margin-left:0">Bronce y Plata suman saldo bloqueado que se libera al completar la tarjeta de 10 consumos. Oro libera cada consumo al instante.</p>
+  <div class="fcardx" id="card">
+    <div id="form-wrap">
+      <h2>Crea tu billetera</h2>
+      <p class="note">Solo toma 30 segundos. No pedimos pagos en este formulario.</p>
+      <form id="f" novalidate autocomplete="on">
+        <div class="f" data-f="name"><label for="name">Nombre o apodo</label>
+          <input class="inp" id="name" name="name" autocomplete="given-name" placeholder="Ej. Mar&iacute;a o Mari" required>
+          <span class="err">Ingresa tu nombre o apodo.</span></div>
+        <div class="f" data-f="phone"><label for="phone">WhatsApp</label>
+          <div class="phone"><span class="pre" aria-hidden="true">+51</span>
+          <input class="inp" id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="11" placeholder="987 654 321" required></div>
+          <span class="err">Ingresa un celular peruano de 9 d&iacute;gitos.</span></div>
+        <div class="f" data-f="doc"><label for="doc">Documento de identidad</label>
+          <div class="docrow"><select class="inp" id="dtype" name="dtype" aria-label="Tipo de documento"><option value="DNI">DNI</option><option value="CE">C. Extranjer&iacute;a</option><option value="PAS">Pasaporte</option></select>
+          <input class="inp" id="doc" name="doc" inputmode="numeric" autocomplete="off" maxlength="12" placeholder="12345678" required></div>
+          <span class="hint">Para validar tu cuenta y proteger tu saldo. No lo compartimos.</span>
+          <span class="err" id="doc-err">Ingresa un DNI v&aacute;lido de 8 d&iacute;gitos.</span></div>
+        <div class="f" data-f="email"><label for="email">Correo electr&oacute;nico <i>(opcional)</i></label>
+          <input class="inp" id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com">
+          <span class="err">Revisa que el correo sea v&aacute;lido.</span></div>
+        <div class="f" data-f="dist"><label for="dist">Distrito</label>
+          <input class="inp" id="dist" name="dist" autocomplete="address-level2" placeholder="Ej. Miraflores" required>
+          <span class="err">Cu&eacute;ntanos desde d&oacute;nde escribes.</span></div>
+        <div class="f" data-f="bday"><label for="bday">Fecha de cumplea&ntilde;os <i>(opcional)</i></label>
+          <input class="inp" id="bday" name="bday" type="date" min="1920-01-01" autocomplete="bday">
+          <span class="hint">As&iacute; podremos avisarte de beneficios en tu mes especial.</span>
+          <span class="err">Ingresa una fecha v&aacute;lida.</span></div>
+        <div class="f"><span class="lb" id="lbi">&iquest;Qu&eacute; experiencias te interesan? <i style="font-style:normal;color:var(--faint);font-weight:500">(opcional)</i></span>
+          <div class="chips" id="interests" role="group" aria-labelledby="lbi"></div></div>
+        <div class="f" data-f="terms"><label class="chk"><input type="checkbox" id="terms"><span>Acepto que expandeMoney me contacte por WhatsApp o correo para activar mi billetera y avisarme de cupones. Sin spam.</span></label>
+          <span class="err">Debes aceptar para continuar.</span></div>
+        <button class="btn btn-p" id="go" type="submit"><span class="spin" aria-hidden="true"></span><span id="golbl">Crear mi billetera gratis</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="fine"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg> Tus datos est&aacute;n protegidos y no se comparten.</p>
+      </form>
+    </div>
+
+    <div id="ok" role="status" aria-live="polite">
+      <div class="check" aria-hidden="true">&#10003;</div>
+      <h2>&iexcl;Bienvenido/a, <span id="o-name" class="tg"></span>!</h2>
+      <p class="note">Tu billetera ya est&aacute; creada. Te escribiremos por WhatsApp en las pr&oacute;ximas horas para activarla.</p>
+      <div class="wallet">
+        <div><small>Tu billetera</small><div class="nm" id="w-name"></div><div class="bal" id="w-bal">S/ 0.00</div><span class="tier">&#9679; Nivel Bronce</span></div>
+        <div id="w-qr" aria-label="Tu c&oacute;digo QR personal"></div>
       </div>
-
-      <div id="box">
-        <form class="card flat form" id="form" novalidate aria-labelledby="f-title">
-          <h3 id="f-title" style="margin-top:0">Tus datos</h3>
-          <div class="fld">
-            <label for="f-name">Nombre completo</label>
-            <input id="f-name" name="name" autocomplete="name" placeholder="Ej. María Torres" required aria-describedby="e-name">
-            <div class="err" id="e-name" role="alert">Escribe tu nombre y apellido.</div>
-          </div>
-          <div class="fld">
-            <label for="f-phone">Celular</label>
-            <input id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="9" placeholder="9XXXXXXXX" required aria-describedby="e-phone">
-            <div class="err" id="e-phone" role="alert">Ingresa un celular válido de 9 dígitos que empiece con 9.</div>
-          </div>
-          <div class="fld">
-            <label for="f-email">Correo <span style="color:var(--faint);font-weight:400">(opcional)</span></label>
-            <input id="f-email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" aria-describedby="e-email">
-            <div class="err" id="e-email" role="alert">El correo no parece válido.</div>
-          </div>
-          <label class="check"><input type="checkbox" id="f-terms" required><span>Acepto los términos y la política de privacidad de expandeMoney.</span></label>
-          <div class="err" id="e-terms" role="alert">Debes aceptar los términos para continuar.</div>
-          <div class="btn-row"><button class="btn btn-p btn-lg" type="submit">Crear mi billetera</button></div>
-
-          <div class="divider">¿Ya tienes cuenta?</div>
-          <div class="fld" style="margin-top:0">
-            <label for="f-code">Entra con tu código</label>
-            <div style="display:flex;gap:.6rem">
-              <input id="f-code" placeholder="Ej. CM-4821" autocomplete="off" aria-describedby="e-code">
-              <button class="btn btn-s" type="button" id="login">Entrar</button>
-            </div>
-            <div class="err" id="e-code" role="alert">No encontramos ese código.</div>
-            <small>Códigos de demostración: CM-4821, CR-1093, LP-7730.</small>
-          </div>
-        </form>
-      </div>
+      <div class="code"><div><small style="color:var(--dim);font-size:11px">Tu c&oacute;digo</small><br><b id="w-code"></b></div>
+        <button class="btn btn-o" id="copy" type="button" style="padding:9px 14px;min-height:40px"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg> Copiar</button></div>
+      <div class="meta"><span>Registrado desde: <b id="w-dist" style="color:var(--text)"></b></span><span>Fecha: <b id="w-date" style="color:var(--text)"></b></span></div>
+      <div class="cta2"><a class="btn btn-p" href="index.html#clientes">Explorar cupones con descuento</a>
+        <button class="btn btn-o" id="again" type="button">Registrar a otra persona</button></div>
     </div>
   </div>
-</main>
+</div></header>
 
-<footer><div class="wrap">Un producto ExpandeLab &#xB7; Lima, Per&#xFA;</div></footer>
+<section class="alt" id="como"><div class="wrap">
+  <div class="eyebrow">As&iacute; de simple</div>
+  <h2 class="sh rv">Reg&iacute;strate, consume y <span class="tg">cobra tu saldo</span></h2>
+  <p class="sub rv">Sin apps, sin tarjetas f&iacute;sicas, sin complicaciones.</p>
+  <div class="g3">
+    <div class="card step rv"><div class="n">1</div><h3>Crea tu billetera</h3><p>Llena el formulario con tus datos. Recibes tu c&oacute;digo y tu QR personal al instante.</p></div>
+    <div class="card step rv"><div class="n">2</div><h3>Muestra tu QR en el local</h3><p>El comercio lo escanea desde su celular. Tambi&eacute;n puedes canjear cupones con descuento.</p></div>
+    <div class="card step rv"><div class="n">3</div><h3>Acumula saldo real</h3><p>Cada visita suma S/ 2 a tu saldo. Al completar tu tarjeta, lo recibes disponible en soles.</p></div>
+  </div>
+</div></section>
 
-<script src="expande.js"></script>
+<section id="niveles"><div class="wrap">
+  <div class="eyebrow">Fidelizaci&oacute;n</div>
+  <h2 class="sh rv">Mientras m&aacute;s vuelves, <span class="tg">m&aacute;s ganas</span></h2>
+  <p class="sub rv">Subes de nivel con tus visitas. Empiezas en Bronce desde tu primer d&iacute;a.</p>
+  <div class="g3 tiers">
+    <div class="card t-b rv"><span class="rg">Bronce</span><b class="big">S/ 6</b><p>De recompensa al completar tu tarjeta de 10 visitas. Empiezas aqu&iacute;.</p></div>
+    <div class="card t-s rv"><span class="rg">Plata</span><b class="big">S/ 8</b><p>De recompensa por tarjeta completada. Desde 10 visitas acumuladas.</p></div>
+    <div class="card t-g rv"><span class="rg">Oro</span><b class="big">S/ 1 al instante</b><p>Por cada visita, sin esperar a completar la tarjeta. Desde 30 visitas.</p></div>
+  </div>
+</div></section>
+
+<section class="alt" id="faq"><div class="wrap faqw">
+  <div class="eyebrow">Preguntas frecuentes</div>
+  <h2 class="sh rv">Todo claro antes de empezar</h2>
+  <details><summary>&iquest;Registrarme tiene alg&uacute;n costo?</summary><p>No. Crear tu billetera es gratis y no te pedimos tarjeta ni pagos en este formulario.</p></details>
+  <details><summary>&iquest;Tengo que instalar una app?</summary><p>No. Todo funciona desde el navegador de tu celular. Muestras tu QR y listo.</p></details>
+  <details><summary>&iquest;C&oacute;mo gano saldo?</summary><p>Cada vez que visitas un local afiliado y muestras tu QR, sumas S/ 2 a tu saldo. Al completar tu tarjeta de 10 visitas, ese saldo queda disponible en soles.</p></details>
+  <details><summary>&iquest;Para qu&eacute; piden mi WhatsApp?</summary><p>Para activar tu billetera, enviarte tu c&oacute;digo y avisarte de cupones nuevos. Sin spam, y puedes pedir que dejemos de escribirte cuando quieras.</p></details>
+  <details><summary>&iquest;Tengo un negocio, puedo afiliarlo?</summary><p>S&iacute;. Los comercios venden cupones y cobran por link con solo 5% por transacci&oacute;n. <a href="index.html#comercios" style="color:var(--gold-b);text-decoration:underline">Conoce c&oacute;mo afiliarte</a>.</p></details>
+</div></section>
+
+<section class="final"><div class="wrap">
+  <div class="eyebrow">Empieza hoy</div>
+  <h2 class="sh rv">Tu pr&oacute;xima visita ya puede <span class="tg">sumar saldo</span></h2>
+  <p class="sub rv" style="margin:10px auto 1.4rem">Crea tu billetera gratis y empieza a disfrutar m&aacute;s pagando menos.</p>
+  <a class="btn btn-p" href="#card" id="top">Crear mi billetera gratis <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div></section>
+
+<footer><div class="wrap"><span>&copy; 2026 expandeMoney &middot; ExpandeLab, Lima</span><span>Plata real en soles, no puntos que se olvidan.</span></div></footer>
+<div id="toast" role="status" aria-live="polite"></div>
+
 <script>
-(()=>{
-'use strict';
-const {$,esc,ic,tierFor,TIERS,createClient,findByCode,setSession,qr,paintNav,toast}=EM;
-const f={name:$('#f-name'),phone:$('#f-phone'),email:$('#f-email'),terms:$('#f-terms')};
-const show=(k,bad)=>{const e=$('#e-'+k);e.classList.toggle('show',bad);if(f[k]&&f[k].type!=='checkbox')f[k].setAttribute('aria-invalid',bad)};
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* ---- Configuracion: conecta aqui tu backend / Google Sheet / webhook ---- */
+const ENDPOINT=''; /* ej. 'https://tu-api.com/registro' (POST JSON). Vacio = modo demo local */
+const INTERESTS=['Gastronom\u00eda','Barismo','Fitness','Salud','Belleza','Educaci\u00f3n'];
+const picked=new Set();
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+$('#interests').innerHTML=INTERESTS.map(t=>`<button type="button" class="chip" aria-pressed="false" data-i="${esc(t)}">${t}</button>`).join('');
+$('#interests').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;const k=b.dataset.i,on=!picked.has(k);on?picked.add(k):picked.delete(k);b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
 
-f.phone.addEventListener('input',()=>{f.phone.value=f.phone.value.replace(/\D/g,'').slice(0,9)});
+/* ---- toast ---- */
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2600)}
 
-function validate(){
-  const nameOk=f.name.value.trim().split(/\s+/).filter(w=>w.length>1).length>=2;
-  const phoneOk=/^9\d{8}$/.test(f.phone.value);
-  const email=f.email.value.trim(),emailOk=!email||/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-  const termsOk=f.terms.checked;
-  show('name',!nameOk);show('phone',!phoneOk);show('email',!emailOk);show('terms',!termsOk);
-  const first=[[nameOk,f.name],[phoneOk,f.phone],[emailOk,f.email],[termsOk,f.terms]].find(x=>!x[0]);
-  if(first){first[1].focus();return false}
-  return true;
-}
-function welcome(c,isNew){
-  const T=TIERS[tierFor(c.visits)];
-  $('#box').innerHTML=`<div class="card flat qcard" role="status">
-    <h3 style="margin:0">${isNew?'¡Tu billetera está lista!':'¡Hola de nuevo!'}</h3>
-    <p class="sub" style="margin:6px auto 0">${esc(c.name)} · Nivel <b>${tierFor(c.visits)}</b></p>
-    <div class="mq">${qr(c.code)}</div>
-    <div class="codeline">${esc(c.code)}</div>
-    <p class="sub" style="margin:10px auto 0;font-size:13px">Muestra este QR al pagar. ${T.desc}</p>
-    <div class="btn-row" style="justify-content:center"><a class="btn btn-p" href="dashboard.html">Ir a mi billetera</a><a class="btn btn-s" href="shop.html">Ver la tienda</a></div></div>`;
-  paintNav();
-}
-$('#form').addEventListener('submit',e=>{
-  e.preventDefault();if(!validate())return;
-  const c=createClient({name:f.name.value,phone:f.phone.value,email:f.email.value.trim()});
-  toast('Billetera creada');welcome(c,true);
+/* ---- sonido suave (opcional, tras gesto del usuario) ---- */
+let ac;function chime(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume();
+ [[880,0],[1318.5,.11]].forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;const t=ac.currentTime+d;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.5);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.55)})}catch(e){}}
+
+/* ---- validacion ---- */
+$('#bday').max=new Date().toISOString().slice(0,10);
+const rules={
+ name:v=>v.trim().length>=2,
+ phone:v=>/^9\d{8}$/.test(v.replace(/\D/g,'')),
+ doc:v=>{const t=$('#dtype').value,x=v.trim().toUpperCase();return t==='DNI'?/^\d{8}$/.test(x):t==='CE'?/^[A-Z0-9]{9,12}$/.test(x):/^[A-Z0-9]{6,12}$/.test(x)},
+ email:v=>v.trim()===''||/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+ dist:v=>v.trim().length>=3,
+ bday:v=>{if(!v)return true;const d=new Date(v+'T00:00:00');return !isNaN(d)&&d<=new Date()&&d.getFullYear()>=1920},
+ terms:()=>$('#terms').checked
+};
+function check(k,show){const box=$(`[data-f="${k}"]`);const el=k==='terms'?$('#terms'):$('#'+k);const ok=rules[k](el.value||'');
+ box.classList.toggle('bad',show&&!ok);box.classList.toggle('ok',ok&&k!=='terms'&&el.value.trim()!=='');return ok}
+['name','phone','doc','email','dist','bday'].forEach(k=>{const el=$('#'+k);el.addEventListener('blur',()=>check(k,true));el.addEventListener('input',()=>{if($(`[data-f="${k}"]`).classList.contains('bad'))check(k,true)})});
+const DOC={DNI:['12345678','numeric',8,'Ingresa un DNI v\u00e1lido de 8 d\u00edgitos.'],CE:['001234567','text',12,'Ingresa un carn\u00e9 de extranjer\u00eda v\u00e1lido.'],PAS:['A1234567','text',12,'Ingresa un n\u00famero de pasaporte v\u00e1lido.']};
+function docUI(){const d=DOC[$('#dtype').value],el=$('#doc');el.placeholder=d[0];el.inputMode=d[1];el.maxLength=d[2];$('#doc-err').textContent=d[3];if($('[data-f=doc]').classList.contains('bad'))check('doc',true)}
+$('#dtype').addEventListener('change',()=>{const el=$('#doc');if($('#dtype').value==='DNI')el.value=el.value.replace(/\D/g,'').slice(0,8);docUI()});
+$('#doc').addEventListener('input',e=>{const t=$('#dtype').value;e.target.value=t==='DNI'?e.target.value.replace(/\D/g,'').slice(0,8):e.target.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase()});
+$('#terms').addEventListener('change',()=>check('terms',true));
+$('#phone').addEventListener('input',e=>{let d=e.target.value.replace(/\D/g,'').slice(0,9);e.target.value=d.replace(/(\d{3})(?=\d)/g,'$1 ').trim()});
+
+/* ---- QR decorativo (determinista por codigo) ---- */
+function qr(code){let h=0;for(const c of code)h=(h*131+c.charCodeAt(0))>>>0;let s=h,r='';const n=11,c=100/n;
+ for(let y=0;y<n;y++)for(let x=0;x<n;x++){s=(s*1103515245+12345)>>>0;const k=(x<3&&y<3)||(x>n-4&&y<3)||(x<3&&y>n-4);if(k||(s>>16)%2)r+=`<rect x="${x*c}" y="${y*c}" width="${c}" height="${c}"/>`}
+ return `<svg viewBox="0 0 100 100" role="img" aria-label="C\u00f3digo QR personal"><g fill="#0b0f17">${r}</g></svg>`}
+
+const newCode=()=>'EXP-'+Math.random().toString(36).slice(2,8).toUpperCase();
+const first=s=>s.trim().split(/\s+/)[0].replace(/^./,c=>c.toUpperCase());
+
+/* ---- envio ---- */
+$('#f').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const res=['name','phone','doc','email','dist','bday','terms'].map(k=>check(k,true));
+ if(res.includes(false)){const bad=$('.f.bad .inp,.f.bad input');bad&&bad.focus();return}
+ const btn=$('#go');btn.disabled=true;btn.classList.add('load');$('#golbl').textContent='Creando tu billetera\u2026';
+ const data={name:$('#name').value.trim(),phone:'+51'+$('#phone').value.replace(/\D/g,''),email:$('#email').value.trim(),district:$('#dist').value.trim(),birthday:$('#bday').value||null,docType:$('#dtype').value,docNumber:$('#doc').value.trim().toUpperCase(),interests:[...picked],code:newCode(),createdAt:new Date().toISOString(),source:location.pathname};
+ try{
+  if(ENDPOINT){const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});if(!r.ok)throw new Error('http '+r.status)}
+  else await new Promise(r=>setTimeout(r,reduce?0:700));
+ }catch(err){btn.disabled=false;btn.classList.remove('load');$('#golbl').textContent='Crear mi billetera gratis';toast('No pudimos registrarte. Int\u00e9ntalo de nuevo.');return}
+ $('#o-name').textContent=first(data.name);$('#w-name').textContent=data.name;$('#w-code').textContent=data.code;
+ $('#w-qr').innerHTML=qr(data.code);$('#w-dist').textContent=data.district;
+ $('#w-date').textContent=new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'short',year:'numeric'});
+ $('#card').classList.add('done');chime();
+ if(navigator.vibrate)try{navigator.vibrate(40)}catch(e){}
+ $('#card').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+ btn.disabled=false;btn.classList.remove('load');$('#golbl').textContent='Crear mi billetera gratis';
 });
-function login(){
-  const c=findByCode($('#f-code').value);
-  $('#e-code').classList.toggle('show',!c);$('#f-code').setAttribute('aria-invalid',!c);
-  if(!c)return;setSession(c.id);welcome(c,false);
-}
-$('#login').addEventListener('click',login);
-$('#f-code').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();login()}});
+$('#copy').addEventListener('click',async()=>{const c=$('#w-code').textContent;try{await navigator.clipboard.writeText(c);toast('C\u00f3digo copiado: '+c)}catch(e){toast('Tu c\u00f3digo es '+c)}});
+$('#again').addEventListener('click',()=>{$('#f').reset();picked.clear();document.querySelectorAll('.chip.on').forEach(c=>{c.classList.remove('on');c.setAttribute('aria-pressed','false')});document.querySelectorAll('.f').forEach(f=>f.classList.remove('bad','ok'));$('#card').classList.remove('done');$('#name').focus()});
+
+/* ---- reveal ---- */
+const rv=document.querySelectorAll('.rv');
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:0,rootMargin:'0px 0px -4% 0px'});rv.forEach(el=>io.observe(el));setTimeout(()=>rv.forEach(el=>el.classList.add('in')),3500)}
+else{document.documentElement.classList.remove('js')}
+
+/* ---- glow dorado tenue (solo punteros finos) ---- */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!reduce){const g=$('#glow');let x=innerWidth/2,y=200,cx=x,cy=y,raf;
+ addEventListener('pointermove',e=>{x=e.clientX;y=e.clientY;g.classList.add('on');if(!raf)raf=requestAnimationFrame(tick)},{passive:true});
+ document.addEventListener('pointerleave',()=>g.classList.remove('on'));
+ function tick(){cx+=(x-cx)*.16;cy+=(y-cy)*.16;g.style.transform=`translate(${cx}px,${cy}px)`;raf=(Math.abs(x-cx)+Math.abs(y-cy)>.5)?requestAnimationFrame(tick):0}}
 })();
 </script>
 </body>
