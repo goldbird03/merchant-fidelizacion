@@ -1,4 +1,3 @@
-
 /* expandeMoney — nucleo compartido de la plataforma (reglas, datos y utilidades)
    Lo usan index.html, shop.html, signup.html, dashboard.html y panel.html.
    Los datos viven en localStorage (clave "em_store_v1"): lo que haces en una pagina se ve en las otras. */
