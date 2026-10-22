@@ -196,7 +196,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
     <p class="lead">Crea tu cuenta en menos de un minuto, accede a cupones de hasta 45% de descuento y gana saldo en cada visita. Sin apps que instalar: funciona desde tu navegador.</p>
     <div class="stats">
       <div class="stat"><b class="tg">S/0</b><span>costo de registro</span></div>
-      <div class="stat"><b class="tg">S/2</b><span>de saldo por visita</span></div>
+      <div class="stat"><b class="tg">S/0.50</b><span>de saldo por consumo en Bronce</span></div>
       <div class="stat"><b class="tg">45%</b><span>dcto. m&aacute;ximo en cupones</span></div>
       <div class="stat"><b class="tg">3</b><span>niveles: Bronce, Plata y Oro</span></div>
     </div>
@@ -248,6 +248,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         <div><small>Tu billetera</small><div class="nm" id="w-name"></div><div class="bal" id="w-bal">S/ 0.00</div><span class="tier">&#9679; Nivel Bronce</span></div>
         <div id="w-qr" aria-label="Tu c&oacute;digo QR personal"></div>
       </div>
+      <p class="note" style="margin-top:.8rem;text-align:left">Nivel Bronce: cada consumo suma <b style="color:var(--text)">S/ 0.50 bloqueados</b>. Al completar 10 consumos liberas <b style="color:var(--em-soft)">S/ 5.00</b> a tu saldo disponible.</p>
       <div class="code"><div><small style="color:var(--dim);font-size:11px">Tu c&oacute;digo</small><br><b id="w-code"></b></div>
         <button class="btn btn-o" id="copy" type="button" style="padding:9px 14px;min-height:40px"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg> Copiar</button></div>
       <div class="meta"><span>Registrado desde: <b id="w-dist" style="color:var(--text)"></b></span><span>Fecha: <b id="w-date" style="color:var(--text)"></b></span></div>
@@ -264,7 +265,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   <div class="g3">
     <div class="card step rv"><div class="n">1</div><h3>Crea tu billetera</h3><p>Llena el formulario con tus datos. Recibes tu c&oacute;digo y tu QR personal al instante.</p></div>
     <div class="card step rv"><div class="n">2</div><h3>Muestra tu QR en el local</h3><p>El comercio lo escanea desde su celular. Tambi&eacute;n puedes canjear cupones con descuento.</p></div>
-    <div class="card step rv"><div class="n">3</div><h3>Acumula saldo real</h3><p>Cada visita suma S/ 2 a tu saldo. Al completar tu tarjeta, lo recibes disponible en soles.</p></div>
+    <div class="card step rv"><div class="n">3</div><h3>Acumula saldo real</h3><p>Bronce suma S/ 0.50 y Plata S/ 0.70 bloqueados por consumo; al completar la tarjeta de 10 consumos se liberan S/ 5.00 o S/ 7.00 a tu saldo disponible. En Oro, S/ 1.00 al instante.</p></div>
   </div>
 </div></section>
 
@@ -273,9 +274,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   <h2 class="sh rv">Mientras m&aacute;s vuelves, <span class="tg">m&aacute;s ganas</span></h2>
   <p class="sub rv">Subes de nivel con tus visitas. Empiezas en Bronce desde tu primer d&iacute;a.</p>
   <div class="g3 tiers">
-    <div class="card t-b rv"><span class="rg">Bronce</span><b class="big">S/ 6</b><p>De recompensa al completar tu tarjeta de 10 visitas. Empiezas aqu&iacute;.</p></div>
-    <div class="card t-s rv"><span class="rg">Plata</span><b class="big">S/ 8</b><p>De recompensa por tarjeta completada. Desde 10 visitas acumuladas.</p></div>
-    <div class="card t-g rv"><span class="rg">Oro</span><b class="big">S/ 1 al instante</b><p>Por cada visita, sin esperar a completar la tarjeta. Desde 30 visitas.</p></div>
+    <div class="card t-b rv"><span class="rg">Bronce &middot; 0 a 9 visitas</span><b class="big">+S/ 0.50</b><p>Por consumo, en saldo bloqueado. Al completar la tarjeta de 10 consumos liberas <b style="color:var(--em-soft)">S/ 5.00</b> a tu saldo disponible. Empiezas aqu&iacute;.</p></div>
+    <div class="card t-s rv"><span class="rg">Plata &middot; 10 a 29 visitas</span><b class="big">+S/ 0.70</b><p>Por consumo, en saldo bloqueado. Al completar la tarjeta de 10 consumos liberas <b style="color:var(--em-soft)">S/ 7.00</b> a tu saldo disponible.</p></div>
+    <div class="card t-g rv"><span class="rg">Oro &middot; +30 visitas</span><b class="big">+S/ 1.00</b><p>Disponible al instante en cada consumo, sin saldo bloqueado ni esperas. Beneficio m&aacute;ximo.</p></div>
   </div>
 </div></section>
 
@@ -284,7 +285,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
   <h2 class="sh rv">Todo claro antes de empezar</h2>
   <details><summary>&iquest;Registrarme tiene alg&uacute;n costo?</summary><p>No. Crear tu billetera es gratis y no te pedimos tarjeta ni pagos en este formulario.</p></details>
   <details><summary>&iquest;Tengo que instalar una app?</summary><p>No. Todo funciona desde el navegador de tu celular. Muestras tu QR y listo.</p></details>
-  <details><summary>&iquest;C&oacute;mo gano saldo?</summary><p>Cada vez que visitas un local afiliado y muestras tu QR, sumas S/ 2 a tu saldo. Al completar tu tarjeta de 10 visitas, ese saldo queda disponible en soles.</p></details>
+  <details><summary>&iquest;C&oacute;mo gano saldo?</summary><p>Cada vez que consumes en un local afiliado y muestras tu QR, sumas saldo bloqueado: S/ 0.50 en Bronce (0 a 9 visitas) o S/ 0.70 en Plata (10 a 29 visitas). Al completar la tarjeta de 10 consumos se liberan S/ 5.00 (Bronce) o S/ 7.00 (Plata) a tu saldo disponible. En Oro (+30 visitas) ganas S/ 1.00 disponible al instante en cada consumo, sin esperas.</p></details>
   <details><summary>&iquest;Para qu&eacute; piden mi WhatsApp?</summary><p>Para activar tu billetera, enviarte tu c&oacute;digo y avisarte de cupones nuevos. Sin spam, y puedes pedir que dejemos de escribirte cuando quieras.</p></details>
   <details><summary>&iquest;Tengo un negocio, puedo afiliarlo?</summary><p>S&iacute;. Los comercios venden cupones y cobran por link con solo 5% por transacci&oacute;n. <a href="index.html#comercios" style="color:var(--gold-b);text-decoration:underline">Conoce c&oacute;mo afiliarte</a>.</p></details>
 </div></section>
