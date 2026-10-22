@@ -1,3 +1,4 @@
+
 /* expandeMoney — nucleo compartido de la plataforma (reglas, datos y utilidades)
    Lo usan index.html, shop.html, signup.html, dashboard.html y panel.html.
    Los datos viven en localStorage (clave "em_store_v1"): lo que haces en una pagina se ve en las otras. */
@@ -175,7 +176,7 @@ const buzz=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
 let toastT;
 function toast(m){let t=$('#toast');
   if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');t.setAttribute('aria-live','polite');t.innerHTML=ic('check')+'<span></span>';document.body.appendChild(t)}
-  $('span',t).textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800)}
+  ($('span',t)||t).textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800)}
 
 function initTips(){
   let tip=$('#tip');if(!tip){tip=document.createElement('div');tip.id='tip';tip.setAttribute('role','tooltip');document.body.appendChild(tip)}
@@ -208,8 +209,51 @@ function modal(el){
   return {open,close};
 }
 
+function injectSprite(){
+  const missing=(SPRITE.match(/<symbol id="[^"]+"[\s\S]*?<\/symbol>/g)||[]).filter(sym=>!document.getElementById(sym.match(/id="([^"]+)"/)[1]));
+  if(missing.length)document.body.insertAdjacentHTML('afterbegin',`<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${missing.join('')}</defs></svg>`);
+}
+
+/* ===== SUPABASE (clientes) =====
+   Requiere cargar el SDK antes que este archivo:
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   La anon key es publica por diseno, pero la seguridad real depende de las politicas RLS de la tabla 'clientes'
+   (el rol anon necesita permiso INSERT). Nunca pongas aqui la service_role key. */
+const SUPABASE_URL='https://jcyeynruazezcosqeqos.supabase.co';
+const SUPABASE_ANON_KEY='PEGA_AQUI_TU_ANON_KEY_COPIADA';
+let sb=null;
+function initSupabase(){
+  if(sb)return sb;
+  if(!window.supabase||typeof window.supabase.createClient!=='function'){console.error('[expandeMoney] No se carg\u00f3 el SDK de Supabase (supabase-js@2).');return null}
+  if(!SUPABASE_ANON_KEY||/^PEGA_AQUI/.test(SUPABASE_ANON_KEY)){console.error('[expandeMoney] Falta la SUPABASE_ANON_KEY en expande.js.');return null}
+  sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);return sb;
+}
+const supabaseReady=()=>!!sb||!!initSupabase();
+/* codigo_cliente: iniciales (A-Z) + guion + 4 numeros aleatorios. Ej.: Maria Torres -> MT-4821 */
+function generarCodigoCliente(nombre){
+  const ini=norm(nombre).replace(/[^a-z\s]/g,'').trim().split(/\s+/).filter(Boolean).map(w=>w[0]).slice(0,2).join('').toUpperCase().padEnd(2,'X');
+  return ini+'-'+String(1000+Math.floor(Math.random()*9000));
+}
+/* Inserta el cliente en 'clientes'. Reintenta con otro codigo si choca con uno existente (unique violation 23505).
+   Devuelve {ok:true,cliente} o {ok:false,reason:'config'|'permisos'|'red'|'error',error} */
+async function registrarCliente({nombre,whatsapp}){
+  if(!supabaseReady())return {ok:false,reason:'config'};
+  for(let intento=0;intento<5;intento++){
+    const cliente={codigo_cliente:generarCodigoCliente(nombre),nombre:nombre.trim(),whatsapp,nivel:'Bronce',
+      saldo_disponible:0.00,saldo_bloqueado:0.00,visitas_acumuladas:0};
+    let error;
+    try{({error}=await sb.from('clientes').insert(cliente))}catch(e){error={message:String(e&&e.message||e),code:'NETWORK'}}
+    if(!error)return {ok:true,cliente};
+    if(error.code==='23505'&&/codigo_cliente/i.test(error.message+' '+(error.details||'')))continue;
+    console.error('[expandeMoney] Error al insertar en clientes:',error);
+    const reason=error.code==='42501'||/row-level security|permission denied/i.test(error.message||'')?'permisos':(error.code==='NETWORK'||/fetch|network/i.test(error.message||'')?'red':'error');
+    return {ok:false,reason,error};
+  }
+  return {ok:false,reason:'error',error:{message:'No se pudo generar un c\u00f3digo \u00fanico'}};
+}
+
 function init(){
-  if(!$('#i-lock'))document.body.insertAdjacentHTML('afterbegin',SPRITE);
+  injectSprite();initSupabase();
   load();initTips();paintNav();
   /* sincroniza entre pestanas: si el comercio registra un consumo en otra pestana, esta pagina se actualiza */
   addEventListener('storage',e=>{if(e.key===KEY){load();paintNav();window.EM&&typeof window.EM.onChange==='function'&&window.EM.onChange()}});
@@ -218,5 +262,5 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 window.EM={$,$$,money,r2,esc,norm,ic,reduce,CARD_COINS,TIERS,NEXT,tierFor,blockedOf,applyVisit,COUPONS,
   load,save,reset,state:S,getClient,session,setSession,clearSession,createClient,findByCode,registerVisit,redeem,validateCoupon,
-  initials,timeAgo,qr,animNum,buzz,toast,modal,paintNav,onChange:null};
+  initials,timeAgo,qr,animNum,buzz,toast,modal,paintNav,generarCodigoCliente,registrarCliente,supabaseReady,onChange:null};
 })();
