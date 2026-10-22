@@ -216,6 +216,7 @@ function injectSprite(){
 /* ===== SUPABASE (clientes) =====
    Requiere cargar el SDK antes que este archivo:
    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+   <script src="expande.js"></script>
    La anon key es publica por diseno, pero la seguridad real depende de las politicas RLS de la tabla 'clientes'
    (el rol anon necesita permiso INSERT). Nunca pongas aqui la service_role key. */
 const SUPABASE_URL='https://jcyeynruazezcosqeqos.supabase.co';
