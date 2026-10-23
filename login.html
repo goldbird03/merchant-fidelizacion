@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ingresar &#x2014; expandeMoney</title><meta name="description" content="Todas tus recompensas, un solo lugar. Inicia sesi&#xF3;n o crea tu cuenta gratis en expandeMoney."><meta name="theme-color" content="#0b0f17"><meta name="color-scheme" content="dark"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%278%27 fill=%27%2300e676%27/%3E%3Ctext x=%2716%27 y=%2722.5%27 font-size=%2719%27 font-weight=%27800%27 text-anchor=%27middle%27 fill=%27%230b0f17%27 font-family=%27Arial,sans-serif%27%3E%24%3C/text%3E%3C/svg%3E"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet"><style>/* expandeMoney \B7  estilos compartidos (tokens, navegaci\F3 n, componentes, modal) */
+:root{
+  --bg:#0b0f17;--bg-alt:#0d1220;--surface:#121824;--slate:#1e293b;--bd:#334155;
+  --em:#00e676;--em-d:#00c764;--em-soft:rgba(0,230,118,.12);--em-glow:rgba(0,230,118,.35);
+  --gold:#F5C542;--gold-b:#FFD95A;
+  --text:#ffffff;--dim:#94a3b8;--faint:#64748b;--err:#ff6b6b;
+  --r-md:12px;--r-lg:18px;--pill:999px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body.em{background:var(--bg);color:var(--text);font:15px/1.55 'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100vh}
+.em a{color:inherit;text-decoration:none}
+.em button{font:inherit;color:inherit}
+.em h1,.em h2,.em h3{font-family:'Plus Jakarta Sans','Inter',sans-serif}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.25rem}
+.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.14em;flex:none}
+.emc{color:var(--em)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.em :focus-visible{outline:2px solid var(--em);outline-offset:2px}
+
+/* ===== NAV COMPARTIDA ===== */
+.enav{position:sticky;top:0;z-index:40;background:rgba(11,15,23,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+.enav .wrap{display:flex;align-items:center;gap:1.2rem;min-height:64px}
+.logo{display:flex;align-items:center;gap:8px;font:800 17px 'Plus Jakarta Sans',sans-serif;white-space:nowrap}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--em);display:grid;place-items:center;color:var(--bg);font-style:normal;box-shadow:0 0 18px -4px var(--em-glow)}
+.logo b{color:var(--em)}
+.enl{display:flex;gap:.2rem;margin-left:.6rem}
+.enl a{padding:8px 12px;border-radius:10px;font-size:13.5px;color:var(--dim);transition:color .2s,background .2s;white-space:nowrap}
+.enl a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.enl a[aria-current=page]{color:var(--em);background:var(--em-soft)}
+.eauth{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.walchip{display:flex;flex-direction:column;border:1px solid var(--bd);background:var(--surface);border-radius:12px;padding:4px 12px;line-height:1.15;transition:border-color .2s}
+.walchip:hover{border-color:var(--em)}
+.walchip small{font-size:9.5px;letter-spacing:.7px;text-transform:uppercase;color:var(--dim);font-weight:600}
+.walchip b{font:800 14px 'JetBrains Mono',monospace;color:var(--em)}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--bd);background:var(--surface);cursor:pointer;place-items:center;color:var(--text)}
+.burger .i{font-size:20px}
+.eauth .btn.sm{min-height:40px;padding:8px 14px;font-size:13px}
+@media(max-width:900px){
+  .enav .wrap{gap:.6rem}
+  .burger{display:grid;order:3}
+  .eauth{order:2}
+  .enl{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:.2rem;margin:0;padding:.6rem 1rem 1rem;background:rgba(11,15,23,.98);border-bottom:1px solid var(--bd)}
+  .enav.open .enl{display:flex}
+  .enl a{padding:14px 12px;font-size:15px;min-height:48px;display:flex;align-items:center}
+}
+@media(max-width:520px){.eauth a.btn{display:none}.walchip small{display:none}}
+
+/* ===== BOTONES / FORMS ===== */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:12px 20px;font:600 14px 'Inter',sans-serif;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s;text-align:center;min-height:46px;white-space:nowrap}
+.btn-e{background:var(--em);color:#04130b;box-shadow:0 6px 22px -8px var(--em-glow)}
+.btn-e:hover{background:#33ff94;transform:translateY(-1px);box-shadow:0 10px 30px -8px var(--em-glow),0 0 0 1px rgba(0,230,118,.5)}
+.btn-o{background:transparent;color:var(--text);border:1px solid var(--bd)}
+.btn-o:hover{border-color:var(--em);color:var(--em)}
+.btn-l{background:var(--slate);color:var(--dim);border:1px dashed var(--bd)}
+.btn-l:hover{color:var(--text)}
+.btn[disabled]{opacity:.6;cursor:not-allowed;transform:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;border:1px solid var(--bd);background:var(--surface);color:var(--dim);border-radius:var(--pill);padding:9px 15px;font:600 13px 'Inter',sans-serif;cursor:pointer;transition:all .2s;min-height:40px;white-space:nowrap}
+.chip:hover{color:var(--text);border-color:var(--faint)}
+.chip.on{background:var(--em);border-color:var(--em);color:#04130b;box-shadow:0 0 22px -6px var(--em-glow)}
+.minp{width:100%;background:rgba(255,255,255,.045);border:1px solid var(--bd);color:var(--text);border-radius:var(--r-md);padding:13px 14px;font:16px 'Inter',sans-serif;min-height:48px;transition:border-color .2s,box-shadow .2s,background .2s;color-scheme:dark}
+.minp::placeholder{color:var(--faint)}
+.minp:hover{border-color:var(--faint)}
+.minp:focus{outline:none;border-color:var(--em);box-shadow:0 0 0 3px rgba(0,230,118,.16);background:rgba(255,255,255,.07)}
+select.minp{appearance:none;-webkit-appearance:none;padding-right:30px;background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);background-position:calc(100% - 17px) 20px,calc(100% - 12px) 20px;background-size:5px 5px;background-repeat:no-repeat}
+select.minp option{background:#121824;color:#fff}
+input[type=date].minp{display:block;min-width:0;text-align:left;appearance:none;-webkit-appearance:none}
+.fl{display:grid;gap:6px;margin-top:.9rem}.fl>label,.fl>.lb{font-size:12.5px;font-weight:600}
+.fl>label i,.fl>.lb i{font-style:normal;color:var(--faint);font-weight:500}
+.fl.bad .minp{border-color:var(--err);box-shadow:0 0 0 3px rgba(255,107,107,.12)}
+.fl.ok .minp{border-color:rgba(0,230,118,.5)}
+.err{display:none;color:var(--err);font-size:12px}.fl.bad .err{display:block}
+.hintx{font-size:12px;color:var(--faint)}.hintx b{color:var(--em);font-family:'JetBrains Mono',monospace}
+.fl.bad .hintx{display:none}
+.ph{display:grid;grid-template-columns:auto 1fr;gap:8px}
+.pre{display:flex;align-items:center;padding:0 13px;border:1px solid var(--bd);border-radius:var(--r-md);background:rgba(255,255,255,.03);color:var(--dim);font:600 14px 'JetBrains Mono',monospace;min-height:48px}
+.docrow{display:grid;grid-template-columns:132px 1fr;gap:8px}
+.ferr{color:var(--err);font-size:12.5px;min-height:18px;margin-top:6px}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--dim);cursor:pointer;margin-top:1rem}
+.chk input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;border:1px solid var(--faint);border-radius:6px;background:rgba(255,255,255,.04);display:grid;place-items:center;cursor:pointer;transition:all .2s}
+.chk input:checked{background:var(--em);border-color:var(--em)}
+.chk input:checked::after{content:"";width:5px;height:10px;border:solid #04130b;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.fl.bad .chk{color:var(--err)}
+.lnk{color:var(--em);text-decoration:underline;text-underline-offset:2px;background:none;border:0;cursor:pointer;font:inherit}
+.fine{font-size:11.5px;color:var(--faint);text-align:center;margin-top:.7rem}
+.draft{font-size:11.5px;color:#fcd34d;border:1px solid rgba(252,211,77,.35);border-radius:10px;padding:7px 10px;margin-top:.5rem;background:rgba(252,211,77,.06)}
+
+/* ===== OVERLAY / MODAL / TOAST ===== */
+.scrim{position:fixed;inset:0;background:rgba(5,8,13,.72);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:50;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%) scale(.97);width:min(480px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow-y:auto;background:var(--surface);border:1px solid var(--bd);border-radius:22px;z-index:70;opacity:0;pointer-events:none;transition:all .28s cubic-bezier(.2,.9,.3,1);box-shadow:0 40px 90px -30px #000,0 0 70px -34px var(--em-glow);color:var(--text)}
+.modal.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.mh{display:flex;gap:12px;align-items:flex-start;padding:1.2rem 1.3rem .6rem}
+.mh h2{font-size:19px;line-height:1.25}.mh small{color:var(--dim);font-size:12.5px;display:block;margin-top:3px}
+.mh .x{margin-left:auto;flex:none}
+.mb{padding:.4rem 1.3rem 1.3rem}.mb>.btn{width:100%;margin-top:1rem}
+.x{width:40px;height:40px;border-radius:50%;border:1px solid var(--bd);background:var(--slate);color:var(--dim);display:grid;place-items:center;cursor:pointer;font-size:18px}
+.x:hover{color:var(--text);border-color:var(--faint)}
+.sum{border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin-top:.6rem}
+.sum div{display:flex;justify-content:space-between;gap:1rem;padding:10px 14px;font-size:14px;color:var(--dim)}
+.sum div+div{border-top:1px solid var(--bd)}
+.sum b{color:var(--text);font-family:'JetBrains Mono',monospace;font-weight:700}
+.sum .save,.sum .save b{color:var(--em)}
+.sum .tot{background:var(--em-soft);color:var(--text);font-weight:600}
+.nb{display:flex;gap:10px;align-items:flex-start;border:1px solid rgba(0,230,118,.3);background:var(--em-soft);border-radius:12px;padding:10px 12px;font-size:12.5px;color:var(--dim);margin-top:.4rem}
+.nb .i{color:var(--em);font-size:17px;margin-top:1px}.nb b{color:var(--text)}
+.amts{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.5rem}
+.amts button{border:1px solid var(--bd);background:var(--bg);color:var(--text);border-radius:var(--r-md);padding:11px 4px;font:700 14px 'JetBrains Mono',monospace;cursor:pointer;min-height:46px;transition:all .2s}
+.amts button:hover{border-color:var(--faint)}
+.amts button.on{border-color:var(--em);background:var(--em-soft);color:var(--em);box-shadow:0 0 20px -8px var(--em-glow)}
+.pms{display:grid;gap:.5rem;margin-top:.5rem}
+.pm{display:flex;align-items:center;gap:12px;border:1px solid var(--bd);background:var(--bg);border-radius:var(--r-md);padding:11px 14px;cursor:pointer;font-size:14px;min-height:48px;transition:border-color .2s}
+.pm:hover{border-color:var(--faint)}.pm:has(input:checked){border-color:var(--em);background:var(--em-soft)}
+.pm input{accent-color:var(--em);width:18px;height:18px}.pm small{display:block;color:var(--dim);font-size:11.5px}
+.tc{max-height:46vh;overflow-y:auto;border:1px solid var(--bd);border-radius:14px;padding:.2rem 1rem 1rem;background:var(--bg);margin-top:.5rem;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.tc h3{font-size:14px;margin-top:1rem}.tc p{font-size:13px;color:var(--dim);margin-top:4px;line-height:1.55}
+.okv{text-align:center}
+.okv .ck{width:56px;height:56px;border-radius:50%;background:var(--em);color:#04130b;display:grid;place-items:center;margin:.4rem auto 10px;font-size:28px;box-shadow:0 0 0 9px rgba(0,230,118,.12),0 0 40px -6px var(--em-glow)}
+.okv .qq{width:150px;height:150px;background:#fff;border-radius:14px;padding:9px;margin:1rem auto .4rem}.okv .qq svg{width:100%;height:100%;display:block}
+.okv .code{font:800 17px 'JetBrains Mono',monospace;letter-spacing:1.5px;color:var(--em)}
+.okv .two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1rem}.okv .two .btn{margin-top:0;width:100%}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,30px);opacity:0;pointer-events:none;z-index:90;background:var(--surface);border:1px solid rgba(0,230,118,.45);border-radius:18px;padding:11px 18px;font-size:13px;width:max-content;max-width:calc(100vw - 32px);transition:all .3s;text-align:center;box-shadow:0 10px 40px -10px rgba(0,0,0,.8),0 0 30px -12px var(--em-glow);color:var(--text)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#tip{position:fixed;z-index:95;pointer-events:none;background:#0b0f17;border:1px solid var(--bd);border-radius:10px;padding:8px 11px;font-size:12px;color:var(--dim);max-width:240px;opacity:0;transition:opacity .15s;box-shadow:0 10px 30px -10px #000}
+#tip.on{opacity:1}
+.efoot{border-top:1px solid var(--bd);padding:1.6rem 0 2rem;color:var(--faint);font-size:12.5px}
+.efoot .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.efoot a{color:var(--dim);text-decoration:underline;text-underline-offset:3px}.efoot a:hover{color:var(--em)}
+.bump{animation:bump .5s}@keyframes bump{40%{transform:scale(1.12)}}
+@media(max-width:560px){
+  .wrap{padding:0 1rem}
+  .modal{top:auto;bottom:0;left:0;width:100%;max-height:92dvh;border-radius:22px 22px 0 0;transform:translateY(40px)}.modal.on{transform:none}
+  #toast{bottom:auto;top:calc(14px + env(safe-area-inset-top));transform:translate(-50%,-30px)}#toast.show{transform:translate(-50%,0)}
+  .okv .two{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+<style>
+.gate{min-height:calc(100vh - 64px - 96px);display:grid;place-items:center;padding:2.5rem 0;background:radial-gradient(560px circle at 50% 0,rgba(0,230,118,.13),transparent 62%),radial-gradient(520px circle at 90% 90%,rgba(245,197,66,.07),transparent 62%)}
+.gate .box{width:100%;max-width:440px;margin:0 auto;text-align:center}
+.mem{position:relative;text-align:left;border:1px solid var(--bd);background:linear-gradient(145deg,var(--surface),#0f1623);border-radius:22px;padding:1.2rem 1.3rem;box-shadow:0 30px 60px -30px #000,0 0 40px -14px var(--em-glow);overflow:hidden}
+.mem::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(0,230,118,.22),transparent 70%)}
+.mem .row1{display:flex;justify-content:space-between;align-items:center;gap:1rem;position:relative;z-index:1}
+.mem .tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold-b);border:1px solid rgba(255,217,90,.4);background:rgba(255,217,90,.08);border-radius:var(--pill);padding:3px 10px}
+.mem small.l{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--dim);font-weight:600;display:block;margin-top:1rem;position:relative;z-index:1}
+.mem .bal{font:800 30px 'JetBrains Mono',monospace;color:var(--em);position:relative;z-index:1}
+.mem .ex{position:absolute;right:16px;bottom:12px;font-size:10.5px;color:var(--faint);z-index:1}
+.gate h1{font-size:clamp(28px,6vw,38px);line-height:1.1;font-weight:800;letter-spacing:-.8px;margin-top:1.8rem}
+.gate .lead{color:var(--dim);margin-top:.7rem}
+.gate .go{margin-top:1.6rem;display:grid;gap:.7rem}
+.gate .go .btn{min-height:52px;font-size:15px;width:100%}
+.gate .or{color:var(--dim);font-size:14px;margin-top:1.1rem}.gate .or a{color:var(--em);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.trust{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+.trust span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--dim);border:1px solid var(--bd);border-radius:var(--pill);padding:6px 13px}.trust .i{color:var(--em)}
+.hi{display:none}.in .hi{display:block}.in .lo{display:none}
+.sec{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
+.links{margin-top:1.4rem;font-size:12.5px;color:var(--faint)}.links a{color:var(--dim);text-decoration:underline;text-underline-offset:3px}.links a:hover{color:var(--em)}
+.gate{position:relative;overflow:hidden}
+.gate .wrap{position:relative;z-index:1}
+.fx{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.fx .o{position:absolute;left:var(--x);top:var(--y);transition:transform .5s cubic-bezier(.2,.9,.3,1)}
+.fx .o>span{display:grid;place-items:center;width:var(--s);height:var(--s);border-radius:32%;color:var(--c);background:rgba(255,255,255,.045);border:1px solid color-mix(in srgb,var(--c) 38%,transparent);box-shadow:0 10px 30px -10px color-mix(in srgb,var(--c) 55%,transparent);font-size:calc(var(--s)*.46);animation:fl var(--d) ease-in-out var(--dl) infinite;opacity:.9}
+.fx .o.t>span{width:auto;height:auto;border-radius:var(--pill);padding:6px 12px;font:800 13px 'JetBrains Mono',monospace;background:rgba(18,24,36,.85)}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(var(--r))}50%{transform:translateY(-18px) rotate(calc(var(--r) * -1))}}
+@media(max-width:700px){.fx .o.hm,.fx .o.t{display:none}.fx .o:nth-child(1){left:1%;top:80%}.fx .o:nth-child(2){left:86%;top:72%}.fx .o:nth-child(4){left:90%;top:36%}.fx .o>span{opacity:.4;width:calc(var(--s)*.8);height:calc(var(--s)*.8)}}
+@media(prefers-reduced-motion:reduce){.fx .o>span{animation:none}.fx .o{transition:none}}
+.box{animation:rise .7s cubic-bezier(.16,1,.3,1) both}@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.mem{transition:transform .25s}
+.mem .tag{letter-spacing:1.2px}
+</style>
+</head>
+<body class="em" id="b">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2A2.8 2.2 0 0012 8c-1.4 0-2.6.8-2.6 2s1.1 1.6 2.6 2 2.6.8 2.6 2-1.2 2-2.6 2a2.8 2.2 0 01-2.5-1.2M12 6v2M12 16v2"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol></defs></svg>
+<header class="enav"><div class="wrap"><a class="logo" href="index.html"><i>$</i><span>expande<b>Money</b></span></a><nav class="enl" id="enl" aria-label="Principal"><a href="index.html">Inicio</a><a href="shop.html">Tienda / Canje</a><a href="signup.html">Registrarse</a></nav><div class="eauth" id="eauth"></div><button class="burger" type="button" aria-expanded="false" aria-controls="enl" aria-label="Abrir men&uacute;"><svg class="i" aria-hidden="true"><use href="#i-menu"/></svg></button></div></header>
+<main class="gate"><div class="fx" id="fx" aria-hidden="true">
+  <div class="o" data-d="14" style="--x:8%;--y:14%;--s:54px;--c:#FFD95A;--d:6s;--dl:0s;--r:-12deg"><span><svg class="i" aria-hidden="true"><use href="#i-coin"/></svg></span></div>
+  <div class="o" data-d="22" style="--x:84%;--y:10%;--s:46px;--c:#00e676;--d:7s;--dl:.8s;--r:10deg"><span><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg></span></div>
+  <div class="o hm" data-d="10" style="--x:18%;--y:44%;--s:40px;--c:#00e676;--d:5.5s;--dl:.4s;--r:8deg"><span><svg class="i" aria-hidden="true"><use href="#i-star"/></svg></span></div>
+  <div class="o" data-d="18" style="--x:88%;--y:48%;--s:52px;--c:#FFD95A;--d:6.5s;--dl:1.4s;--r:-8deg"><span><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg></span></div>
+  <div class="o hm" data-d="12" style="--x:6%;--y:72%;--s:44px;--c:#00e676;--d:7.5s;--dl:.2s;--r:14deg"><span><svg class="i" aria-hidden="true"><use href="#i-ticket"/></svg></span></div>
+  <div class="o hm" data-d="20" style="--x:78%;--y:80%;--s:42px;--c:#FFD95A;--d:5.8s;--dl:1s;--r:-14deg"><span><svg class="i" aria-hidden="true"><use href="#i-percent"/></svg></span></div>
+  <div class="o hm" data-d="8" style="--x:25%;--y:2%;--s:34px;--c:#00e676;--d:8s;--dl:1.8s;--r:6deg"><span><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg></span></div>
+  <div class="o t" data-d="16" style="--x:2%;--y:30%;--c:#00e676;--d:6.2s;--dl:.6s;--r:-4deg"><span>+S/ 0.50</span></div>
+  <div class="o t hm" data-d="12" style="--x:76%;--y:30%;--c:#FFD95A;--d:7s;--dl:1.2s;--r:4deg"><span>-40% DCTO</span></div>
+  <div class="o t" data-d="14" style="--x:60%;--y:92%;--c:#00e676;--d:6.8s;--dl:.3s;--r:3deg"><span>+S/ 1.00</span></div>
+</div>
+<div class="wrap"><div class="box">
+  <div class="mem" aria-label="Vista de ejemplo de tu billetera">
+    <div class="row1"><span class="tag"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg> <span id="m-tier">PREMIUM</span></span><span class="logo" style="font-size:15px"><i style="width:24px;height:24px;border-radius:7px;font-size:13px">$</i><span>expande<b>Money</b></span></span></div>
+    <small class="l" id="m-l">Saldo disponible</small><div class="bal" id="m-bal">S/ 24.50</div><span class="ex" id="m-ex">Vista de ejemplo</span>
+  </div>
+  <div class="lo">
+    <h1>Todas tus recompensas, <span style="color:var(--em)">un solo lugar.</span></h1>
+    <p class="lead">Inicia sesi&oacute;n o crea una cuenta para comenzar.</p>
+    <div class="go"><button class="btn btn-e" type="button" data-login>Iniciar sesi&oacute;n</button><a class="btn btn-o" href="signup.html">Comenzar gratis</a></div>
+    <p class="or">&iquest;No tienes cuenta? <a href="signup.html">Reg&iacute;strate gratis</a></p>
+  </div>
+  <div class="hi">
+    <h1>Hola, <span style="color:var(--em)" id="hi-name"></span></h1>
+    <p class="lead">Tu billetera est&aacute; lista. Canjea cupones con tu saldo o revisa tu tarjeta de nivel.</p>
+    <div class="go"><a class="btn btn-e" href="dashboard.html">Ir a Mi Billetera <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="btn btn-o" href="shop.html">Ver cupones y canjear</a></div>
+    <div class="sec"><a class="btn btn-l" href="panel.html">Soy comercio: abrir panel</a><button class="btn btn-l" type="button" data-logout>Cerrar sesi&oacute;n</button></div>
+  </div>
+  <div class="trust"><span><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg> Seguro</span><span><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg> Instant&aacute;neo</span><span><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg> Sin app</span></div>
+  <p class="links"><a href="index.html">Inicio</a> &middot; <a href="shop.html">Tienda</a> &middot; <a href="#" data-terms>T&eacute;rminos de uso</a></p>
+</div></div></main>
+<footer class="efoot"><div class="wrap"><span>Un producto ExpandeLab &middot; Lima, Per&uacute;</span><span><a href="index.html">Inicio</a> &middot; <a href="signup.html">Crear cuenta</a> &middot; <a href="#" data-terms>T&eacute;rminos y condiciones</a></span><span>Demo: datos, precios y comercios de ejemplo.</span></div></footer>
+<script>/* expandeMoney \u00b7 n\u00facleo compartido: estado, reglas, cat\u00e1logo, navegaci\u00f3n y modales (login, recarga, t\u00e9rminos) */
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const EM=window.EM={$,$$};
+EM.reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const reduce=EM.reduce;
+
+/* ---------- utilidades ---------- */
+EM.money=n=>'S/ '+(Math.round(n*100)/100).toFixed(2);
+EM.norm=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+EM.esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+EM.ic=(n,c='')=>`<svg class="i ${c}" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+EM.fdate=ts=>new Date(ts).toLocaleDateString('es-PE',{day:'2-digit',month:'short',year:'numeric'});
+EM.newCode=()=>'EXP-'+Math.random().toString(36).slice(2,8).toUpperCase();
+const {money,esc,ic,fdate}=EM;
+EM.qr=function(code){let h=0;for(const c of code)h=(h*131+c.charCodeAt(0))>>>0;let s=h,r='';const n=11,c=100/n;
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){s=(s*1103515245+12345)>>>0;const k=(x<3&&y<3)||(x>n-4&&y<3)||(x<3&&y>n-4);if(k||(s>>16)%2)r+=`<rect x="${x*c}" y="${y*c}" width="${c}" height="${c}"/>`}
+  return `<svg viewBox="0 0 100 100" role="img" aria-label="C\u00f3digo QR ${esc(code)}"><g fill="#0b0f17">${r}</g></svg>`};
+EM.animNum=function(el,to,bump=true){if(!el)return;const from=parseFloat(el.dataset.v||'0'),t0=performance.now(),d=reduce?0:650;el.dataset.v=to;
+  if(bump&&!reduce&&from!==to){el.classList.remove('bump');void el.offsetWidth;el.classList.add('bump')}
+  (function step(n){const p=d?Math.min(1,(n-t0)/d):1,e=1-Math.pow(1-p,3);el.textContent=money(from+(to-from)*e);if(p<1)requestAnimationFrame(step)})(t0)};
+let tt;EM.toast=function(m){let t=$('#toast');if(!t)return;t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),3000)};
+let ac;EM.ensureAudio=function(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume()}catch(e){}};
+EM.chime=function(big){if(!EM.S.snd)return;try{EM.ensureAudio();if(!ac)return;(big?[[660,0],[880,.1],[1318.5,.2]]:[[880,0],[1318.5,.1]]).forEach(([f,d])=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;const t=ac.currentTime+d;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.06,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.5);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.55)})}catch(e){}};
+EM.buzz=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
+
+/* ---------- reglas (fuente \u00fanica) ---------- */
+EM.R={CARD:10,RATE:[.5,.7,1],CAP:.4,MINPCT:.1}; /* RATE: saldo por consumo seg\u00fan nivel (Bronce, Plata, Oro). Bronce/Plata quedan bloqueados hasta completar 10 consumos; Oro es disponible al instante */
+EM.r2=n=>Math.round(n*100)/100;
+EM.reward=t=>EM.r2(EM.R.CARD*EM.R.RATE[Math.min(t,1)]);
+EM.blocked=w=>{const t=EM.tierOf(w.life);return t===2?0:EM.r2(w.visits*EM.R.RATE[t])};
+EM.TIERS=['Bronce','Plata','Oro'];
+EM.tierOf=v=>v>=30?2:v>=10?1:0;
+
+/* ---------- cat\u00e1logo (demo) ---------- */
+EM.SHOPS={
+ casa:['Casa Vino & Mesa','CV','#86efac'],cafe:['Caf\u00e9 Altura','CA','#fcd34d'],flow:['Studio Flow','SF','#7dd3fc'],vital:['Cl\u00ednica Vital','CL','#fda4af'],
+ aura:['Spa Aura','SA','#f0abfc'],nova:['Academia Nova','AN','#a5b4fc'],auto:['AutoSpa Premium','AP','#00e676'],lubri:['Lubricentro R\u00e1pido','LR','#fdba74'],
+ barber:['Barber Club','BC','#d4d4d8'],tecno:['TecnoPlus','TP','#7dd3fc'],gamer:['Gamer Hub','GH','#c4b5fd'],nonna:['Pizzer\u00eda Nonna','PN','#fca5a5']};
+EM.OFFERS=[
+ {id:1,m:'casa',cat:'Gastronom\u00eda',t:'Cata de Vinos: 4 etiquetas + tabla',loc:'Barranco, Lima',list:200,price:110,img:'vino',pos:'42% 50%'},
+ {id:2,m:'cafe',cat:'Gastronom\u00eda',t:'Masterclass de Barismo',loc:'Miraflores, Lima',list:150,price:90,img:'barismo',pos:'62% 50%'},
+ {id:3,m:'flow',cat:'Estilo de Vida',t:'Pack de 4 clases de Pilates',loc:'Surco, Lima',list:180,price:99,img:'pilates',pos:'38% 50%'},
+ {id:4,m:'vital',cat:'Salud',t:'Chequeo preventivo integral',loc:'San Isidro, Lima',list:260,price:156,img:'salud',pos:'60% 50%'},
+ {id:5,m:'aura',cat:'Estilo de Vida',t:'Facial + spa de manos',loc:'Surco, Lima',list:170,price:102,img:'belleza',pos:'64% 50%'},
+ {id:6,m:'nova',cat:'Educaci\u00f3n',t:'Taller de Excel para tu negocio',loc:'En vivo \u00b7 Online',list:220,price:121,img:'educ',pos:'58% 50%'},
+ {id:7,m:'auto',cat:'Automotriz',t:'Lavado premium + encerado',loc:'San Borja, Lima',list:90,price:63,ic:'car',tile:'auto'},
+ {id:8,m:'lubri',cat:'Automotriz',t:'Cambio de aceite + revisi\u00f3n de 21 puntos',loc:'Surco, Lima',list:160,price:112,ic:'car',tile:'auto'},
+ {id:9,m:'barber',cat:'Estilo de Vida',t:'Corte cl\u00e1sico + arreglo de barba',loc:'Miraflores, Lima',list:70,price:49,ic:'star',tile:'est'},
+ {id:10,m:'tecno',cat:'Tecnolog\u00eda',t:'Limpieza y mantenimiento de laptop',loc:'Lima Centro',list:120,price:78,ic:'laptop',tile:'tec'},
+ {id:11,m:'gamer',cat:'Tecnolog\u00eda',t:'Cabina gamer premium \u00b7 3 horas',loc:'San Miguel, Lima',list:60,price:39,ic:'game',tile:'tec'},
+ {id:12,m:'nonna',cat:'Gastronom\u00eda',t:'Cena para 2: pizza + pasta + bebidas',loc:'Barranco, Lima',list:140,price:84,ic:'fork',tile:'gas'}];
+EM.OFFERS.forEach(o=>{o.dc=Math.round((1-o.price/o.list)*100);o.max=Math.floor(o.price*EM.R.CAP);o.min=Math.max(2,Math.ceil(o.price*EM.R.MINPCT))});
+EM.CATS=['Todas','Gastronom\u00eda','Automotriz','Estilo de Vida','Tecnolog\u00eda','Salud','Educaci\u00f3n'];
+
+/* ---------- estado persistente (compartido entre p\u00e1ginas) ---------- */
+const KEY='em_site_v1';
+const DEF=()=>({auth:false,user:null,disp:0,lock:0,visits:0,life:0,coupons:[],log:[],terms:null,snd:true});
+const S=EM.S=DEF();
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&typeof r.disp==='number'){Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,DEF(),r)}}catch(e){}}
+load();
+const subs=[];EM.on=fn=>subs.push(fn);
+const emit=()=>subs.forEach(f=>{try{f()}catch(e){}});
+EM.save=function(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}renderAuth();emit()};
+addEventListener('storage',e=>{if(e.key===KEY){load();renderAuth();emit()}});
+EM.reset=function(){Object.keys(S).forEach(k=>delete S[k]);Object.assign(S,DEF());EM.save()};
+EM.logAdd=function(k,a,l){S.log.unshift({t:Date.now(),k,a,l});S.log=S.log.slice(0,60)};
+EM.seedDemo=function(phone){Object.assign(S,{user:{name:'Carlos',phone,code:EM.newCode(),demo:true,createdAt:Date.now()},disp:5,lock:3,visits:6,life:6,coupons:[],log:[]})};
+
+EM.createAccount=function(d){Object.assign(S,{auth:true,user:Object.assign({},d,{code:EM.newCode(),createdAt:Date.now()}),disp:0,lock:0,visits:0,life:0,coupons:[],log:[]});EM.acceptTerms();EM.save();return S.user};
+
+/* visita registrada por un comercio (w = billetera con visits/life/lock/disp) */
+EM.applyVisit=function(w,log){
+  const R=EM.R,ev=[],t0=EM.tierOf(w.life),rate=R.RATE[t0];w.life++;
+  if(t0===2){w.disp=EM.r2(w.disp+rate);log&&EM.logAdd('in',rate,'Cashback Oro al instante');ev.push({k:'oro',a:rate,m:`+${money(rate)} disponibles al instante (Oro)`});return ev}
+  w.visits++;ev.push({k:'abono',a:rate,m:`+${money(rate)} bloqueados`});
+  if(w.visits>=R.CARD){const rew=EM.reward(t0);w.disp=EM.r2(w.disp+rew);w.lock=0;w.visits=0;log&&EM.logAdd('in',rew,'Tarjeta completa: saldo liberado');
+    ev.push({k:'tarjeta',a:rew,m:`\u00a1Tarjeta completa! Liberaste ${money(rew)}`})}
+  const t1=EM.tierOf(w.life);
+  if(t1>t0){if(t1===2&&w.visits>0){const p=EM.r2(w.visits*rate);w.disp=EM.r2(w.disp+p);w.visits=0;log&&EM.logAdd('in',p,'Saldo bloqueado liberado al llegar a Oro');ev.push({k:'lvl',a:0,m:`Liberaste ${money(p)} bloqueados`})}
+    ev.push({k:'lvl',a:0,m:'Subiste a nivel '+EM.TIERS[t1]})}
+  w.lock=EM.blocked(w);return ev};
+
+/* ---------- t\u00e9rminos y condiciones (borrador: requiere revisi\u00f3n legal) ---------- */
+EM.TERMS_V='1.0';
+EM.TERMS=[
+ ['1. Qu\u00e9 es tu billetera principal','La billetera principal de expandeMoney es un saldo prepago en soles (S/) que se usa \u00fanicamente dentro de la red de comercios aliados de la plataforma. [RAZ\u00d3N SOCIAL] con RUC [RUC] es la entidad responsable del servicio.'],
+ ['2. C\u00f3mo se fondea','Tu saldo disponible se compone de: (a) recargas directas que t\u00fa realizas con los medios de pago habilitados, y (b) saldo liberado por tu tarjeta de fidelidad (cashback y premios por nivel). El saldo bloqueado por nivel no se puede usar hasta que completes las visitas requeridas.'],
+ ['3. El saldo NO es retirable','El saldo de tu billetera no puede retirarse ni transferirse a una cuenta bancaria, billetera digital, tarjeta ni entregarse en efectivo. Tampoco puede transferirse a otros usuarios. Solo puede usarse para comprar cupones o pagar directamente en los comercios aliados.'],
+ ['4. D\u00f3nde y c\u00f3mo se usa','Puedes usar tu saldo disponible en cualquier comercio aliado de dos formas: (a) canjeando un cup\u00f3n con descuento y pagando el resto en el local, o (b) con compra directa, pagando el total con tu saldo. Los cupones y compras son personales y se validan mediante tu c\u00f3digo QR.'],
+ ['5. Recargas','La recarga m\u00ednima es de S/ 10 y la m\u00e1xima de S/ [M\u00c1XIMO] por operaci\u00f3n. Una vez acreditada, la recarga pasa a ser saldo de consumo y queda sujeta a la regla de no retiro del punto 3. [CONDICIONES DE COMISIONES, SI APLICAN].'],
+ ['6. Cupones no usados, vencidos o cancelados','Si un cup\u00f3n vence sin uso o es cancelado por el comercio o por la plataforma, el saldo que aplicaste regresa a tu billetera principal como saldo disponible, no como dinero en efectivo. Los cupones no son canjeables por dinero.'],
+ ['7. Vigencia del saldo','[DEFINIR PLAZO DE VIGENCIA DEL SALDO Y AVISOS PREVIOS AL VENCIMIENTO].'],
+ ['8. Datos personales','Para crear tu cuenta y proteger tu saldo usamos tus datos de identidad y contacto conforme a nuestra Pol\u00edtica de Privacidad [ENLACE]. No compartimos tu documento de identidad con los comercios.'],
+ ['9. Reclamos y soporte','Puedes escribirnos a [CORREO / WHATSAPP DE SOPORTE]. Atenderemos tus reclamos en los plazos que establece la normativa aplicable.'],
+ ['10. Cambios a estos t\u00e9rminos','Podemos actualizar estos t\u00e9rminos. Te avisaremos antes de que cambien y te pediremos aceptar la nueva versi\u00f3n para seguir recargando saldo. Versi\u00f3n vigente: '+EM.TERMS_V+'.']];
+EM.hasTerms=()=>!!(S.terms&&S.terms.v===EM.TERMS_V);
+EM.acceptTerms=()=>{S.terms={v:EM.TERMS_V,ts:Date.now()}};
+
+/* ---------- modal \u00fanico ---------- */
+let lastFocus=null,curView=null,termsBack=null,pending=null;
+const M=EM.modal={};
+function ensureDom(){
+  if(!$('#scrim')){const s=document.createElement('div');s.id='scrim';s.className='scrim';document.body.appendChild(s);s.addEventListener('click',()=>M.close())}
+  if(!$('#modal')){const m=document.createElement('div');m.id='modal';m.className='modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-labelledby','mtitle');m.setAttribute('aria-hidden','true');document.body.appendChild(m)}
+  if(!$('#toast')){const t=document.createElement('div');t.id='toast';t.setAttribute('role','status');t.setAttribute('aria-live','polite');document.body.appendChild(t)}
+  if(!$('#tip')){const t=document.createElement('div');t.id='tip';t.setAttribute('role','tooltip');document.body.appendChild(t)}
+}
+M.scrim=on=>{$('#scrim').classList.toggle('on',on);document.body.style.overflow=on?'hidden':''};
+M.set=function(html,focusSel){const m=$('#modal');m.innerHTML=html;m.scrollTop=0;const f=(focusSel&&$(focusSel,m))||$('.btn-e',m)||$('.minp',m)||$('.x',m);setTimeout(()=>f&&f.focus&&f.focus(),60)};
+M.open=function(html){lastFocus=document.activeElement;const m=$('#modal');m.classList.add('on');m.setAttribute('aria-hidden','false');M.scrim(true);M.set(html)};
+M.show=function(fn,focusSel){curView=fn;const html=fn();if($('#modal').classList.contains('on'))M.set(html,focusSel);else M.open(html)};
+M.close=function(){const m=$('#modal');if(!m||!m.classList.contains('on'))return;m.classList.remove('on');m.setAttribute('aria-hidden','true');curView=null;M.scrim(false);lastFocus&&lastFocus.focus&&lastFocus.focus()};
+M.isOpen=()=>$('#modal').classList.contains('on');
+EM.XBTN=`<button class="x" type="button" data-close aria-label="Cerrar">${ic('x')}</button>`;
+const XBTN=EM.XBTN;
+
+/* ---------- T\u00e9rminos ---------- */
+const LG={step:1,phone:'',code:'',terms:false,err:''};
+const RC={amt:50,method:'wallet',terms:false,err:'',busy:false};
+const METHODS={wallet:['Billetera digital','Pago con QR'],card:['Tarjeta de d\u00e9bito o cr\u00e9dito','Visa, Mastercard'],bank:['Transferencia bancaria','Confirmaci\u00f3n en minutos']};
+function capture(){const g=id=>document.getElementById(id);
+  if(g('lg-phone'))LG.phone=g('lg-phone').value;if(g('lg-code'))LG.code=g('lg-code').value;if(g('lg-terms'))LG.terms=g('lg-terms').checked;
+  if(g('rc-terms'))RC.terms=g('rc-terms').checked;const cu=g('rc-custom');if(cu&&cu.value!=='')RC.amt=Math.round(+cu.value)||0;
+  const pm=document.querySelector('input[name=pm]:checked');if(pm)RC.method=pm.value}
+function termsHTML(){return `<div class="mh"><div><h2 id="mtitle">T\u00e9rminos y condiciones</h2><small>Billetera principal expandeMoney \u00b7 Versi\u00f3n ${EM.TERMS_V}</small></div>${XBTN}</div>
+ <div class="mb"><div class="draft">Borrador de referencia. Los campos entre [corchetes] deben completarse y el texto debe ser revisado por tu asesor legal antes de publicarse.</div>
+ <div class="tc" tabindex="0">${EM.TERMS.map(([h,p])=>`<h3>${esc(h)}</h3><p>${esc(p)}</p>`).join('')}</div>
+ <button class="btn btn-e" type="button" data-termsback>${ic('check')} Entendido</button></div>`}
+EM.showTerms=function(){capture();const back=M.isOpen()?curView:null;termsBack=back;M.show(termsHTML)};
+
+/* ---------- Login ---------- */
+function loginHTML(){const need=!EM.hasTerms()||!S.user;
+  return `<div class="mh"><div><h2 id="mtitle">Ingresa a tu billetera</h2><small>Accede para canjear cupones o comprar directo con tu saldo.</small></div>${XBTN}</div><div class="mb">
+  ${LG.step===1?`<div class="fl"><label for="lg-phone">Celular</label><div class="ph"><span class="pre" aria-hidden="true">+51</span><input class="minp" id="lg-phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="11" placeholder="987 654 321" value="${esc(LG.phone)}"></div></div>
+   <div class="ferr" id="lg-err" role="alert">${LG.err}</div>
+   <button class="btn btn-e" type="button" data-sendcode>Enviar c\u00f3digo</button>`
+  :`<p class="hintx" style="margin-top:.4rem">Enviamos un c\u00f3digo a +51 ${esc(LG.phone)}. <button class="lnk" type="button" data-lg1>Cambiar n\u00famero</button></p>
+   <div class="fl"><label for="lg-code">C\u00f3digo de 6 d\u00edgitos</label><input class="minp mono" id="lg-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="\u2022\u2022\u2022\u2022\u2022\u2022" value="${esc(LG.code)}"></div>
+   <p class="hintx" style="margin-top:6px">Demo: usa el c\u00f3digo <b>123456</b></p>
+   ${need&&!EM.hasTerms()?`<label class="chk"><input type="checkbox" id="lg-terms" ${LG.terms?'checked':''}><span>Acepto los <button class="lnk" type="button" data-terms>T\u00e9rminos y condiciones</button> de la billetera, incluida la regla de que el saldo <b style="color:var(--text)">no es retirable</b>.</span></label>`:`<p class="hintx" style="margin-top:10px">Aceptaste los t\u00e9rminos v${S.terms?S.terms.v:EM.TERMS_V}${S.terms?' el '+fdate(S.terms.ts):''}.</p>`}
+   <div class="ferr" id="lg-err" role="alert">${LG.err}</div>
+   <button class="btn btn-e" type="button" data-dologin>Ingresar</button>`}
+  <p class="fine">\u00bfA\u00fan no tienes cuenta? <a class="lnk" href="signup.html">Cr\u00e9ala gratis</a></p></div>`}
+EM.openLogin=function(after){pending=after||null;LG.step=1;LG.err='';LG.code='';M.show(loginHTML,'#lg-phone')};
+function doSend(){capture();const d=LG.phone.replace(/\D/g,'');
+  if(!/^9\d{8}$/.test(d)){LG.err='Ingresa un celular peruano de 9 d\u00edgitos.';M.show(loginHTML,'#lg-phone');return}
+  if(S.user&&!S.user.demo&&S.user.phone!==d){LG.err='Este celular no est\u00e1 registrado en este dispositivo. <a class="lnk" href="signup.html">Crea tu cuenta</a>.';M.show(loginHTML,'#lg-phone');return}
+  LG.phone=d.replace(/(\d{3})(?=\d)/g,'$1 ').trim();LG.step=2;LG.err='';M.show(loginHTML,'#lg-code')}
+function doLogin(){capture();
+  if(LG.code.trim()!=='123456'){LG.err='C\u00f3digo incorrecto. En la demo usa 123456.';M.show(loginHTML,'#lg-code');return}
+  if(!EM.hasTerms()&&!LG.terms){LG.err='Debes aceptar los t\u00e9rminos y condiciones para continuar.';M.show(loginHTML);return}
+  if(!EM.hasTerms())EM.acceptTerms();
+  if(!S.user)EM.seedDemo(LG.phone.replace(/\D/g,''));
+  S.auth=true;EM.save();EM.chime();M.close();EM.toast('Bienvenido, '+S.user.name+'. Ya puedes canjear con tu saldo');
+  const p=pending;pending=null;if(p)setTimeout(p,380)}
+EM.logout=function(){S.auth=false;pending=null;EM.save();EM.toast('Sesi\u00f3n cerrada')};
+EM.requireAuth=function(fn){if(S.auth){fn();return true}EM.openLogin(fn);return false};
+
+/* ---------- Recarga ---------- */
+function rechargeHTML(){const a=RC.amt,okAmt=a>=10&&a<=1000,need=!EM.hasTerms(),nb=S.disp+(okAmt?a:0);
+  return `<div class="mh"><div><h2 id="mtitle">Recargar billetera principal</h2><small>Saldo actual: <b style="color:var(--em)">${money(S.disp)}</b></small></div>${XBTN}</div><div class="mb">
+  <div class="nb">${ic('info')}<span>Usa tu saldo para comprar cupones o pagar en <b>cualquier comercio aliado</b>. Es saldo de consumo: <b>no se puede retirar</b> ni transferir.</span></div>
+  <div class="fl"><span class="lb" id="lb-amt">Monto a recargar</span>
+   <div class="amts" role="group" aria-labelledby="lb-amt">${[20,50,100,200].map(v=>`<button type="button" data-amt="${v}" class="${a===v?'on':''}">S/ ${v}</button>`).join('')}</div>
+   <input class="minp" id="rc-custom" type="number" inputmode="numeric" min="10" max="1000" step="1" placeholder="Otro monto (S/ 10 a S/ 1000)" aria-label="Otro monto" value="${[20,50,100,200].includes(a)||!a?'':a}" style="margin-top:.5rem"></div>
+  <div class="fl"><span class="lb" id="lb-pm">Medio de pago</span><div class="pms" role="radiogroup" aria-labelledby="lb-pm">${Object.entries(METHODS).map(([k,[n,d]])=>`<label class="pm"><input type="radio" name="pm" value="${k}" ${RC.method===k?'checked':''}><span>${n}<small>${d}</small></span></label>`).join('')}</div></div>
+  <div class="sum"><div><span>Recargas</span><b id="rc-a">${okAmt?money(a):'\u2014'}</b></div><div class="tot"><span>Nuevo saldo disponible</span><b id="rc-n">${okAmt?money(nb):'\u2014'}</b></div></div>
+  ${need?`<label class="chk"><input type="checkbox" id="rc-terms" ${RC.terms?'checked':''}><span>Acepto los <button class="lnk" type="button" data-terms>T\u00e9rminos y condiciones</button>: el saldo recargado no es retirable.</span></label>`:`<p class="hintx" style="margin-top:.8rem;text-align:center">T\u00e9rminos v${S.terms.v} aceptados el ${fdate(S.terms.ts)} \u00b7 <button class="lnk" type="button" data-terms>Ver</button></p>`}
+  <div class="ferr" id="rc-err" role="alert">${esc(RC.err)}</div>
+  <button class="btn btn-e" type="button" data-dorecharge ${RC.busy?'disabled':''}>${RC.busy?'Procesando\u2026':`${ic('wallet')} Pagar ${okAmt?money(a):''} y recargar`}</button>
+  <p class="fine">Demo: no se realiza ning\u00fan cobro real.</p></div>`}
+EM.openRecharge=function(prefill,after){
+  if(!S.auth){EM.openLogin(()=>EM.openRecharge(prefill,after));return}
+  pending=after||null;RC.err='';RC.busy=false;RC.terms=false;
+  const p=Math.max(10,Math.ceil((prefill||0)/5)*5);RC.amt=prefill?Math.min(p,1000):50;M.show(rechargeHTML)};
+function doRecharge(){capture();const a=RC.amt;
+  if(!(a>=10&&a<=1000)){RC.err='Ingresa un monto entre S/ 10 y S/ 1000.';M.show(rechargeHTML);return}
+  if(!EM.hasTerms()&&!RC.terms){RC.err='Debes aceptar los t\u00e9rminos y condiciones para recargar.';M.show(rechargeHTML);return}
+  if(!EM.hasTerms())EM.acceptTerms();
+  RC.busy=true;RC.err='';M.show(rechargeHTML);
+  setTimeout(()=>{S.disp=Math.round((S.disp+a)*100)/100;EM.logAdd('in',a,'Recarga \u00b7 '+METHODS[RC.method][0]);EM.save();EM.chime(true);EM.buzz(40);RC.busy=false;
+   const p=pending;curView=null;
+   M.set(`<div class="mh"><div></div>${XBTN}</div><div class="mb okv"><div class="ck" aria-hidden="true">${ic('check')}</div><h2 id="mtitle" style="font-size:20px">\u00a1Recarga exitosa!</h2>
+    <p style="color:var(--dim);font-size:13.5px;margin-top:6px">Sumaste <b style="color:var(--text)">${money(a)}</b> a tu billetera principal.</p>
+    <div class="sum" style="text-align:left"><div class="tot"><span>Saldo disponible</span><b>${money(S.disp)}</b></div></div>
+    <p class="fine">Recuerda: este saldo no es retirable. \u00dasalo en cualquier comercio aliado.</p>
+    <button class="btn btn-e" type="button" data-recont>${p?'Continuar con mi canje':'Listo'}</button></div>`,'[data-recont]')},reduce?0:900)}
+
+/* ---------- navegaci\u00f3n + auth en barra ---------- */
+function renderAuth(){
+  const el=$('#eauth');if(!el)return;
+  if(S.auth&&S.user){el.innerHTML=`<a class="walchip" href="dashboard.html" aria-label="Tu saldo disponible: ${money(S.disp)}. Ir a Mi Billetera"><small>Disponible</small><b id="nav-bal">${money(S.disp)}</b></a><button class="btn btn-e sm" type="button" data-recharge="" aria-label="Recargar saldo">${ic('wallet')}<span class="rlb">Recargar</span></button>`}
+  else el.innerHTML=`<a class="btn btn-o sm" href="login.html">Ingresar</a><a class="btn btn-e sm" href="signup.html">Crear cuenta</a>`;
+}
+EM.renderAuth=renderAuth;
+
+/* ---------- tooltip ---------- */
+function bindTip(){const tip=$('#tip');
+  const show=el=>{const r=el.getBoundingClientRect();tip.textContent=el.dataset.tip;tip.classList.add('on');const w=tip.offsetWidth,h=tip.offsetHeight;let x=Math.min(Math.max(8,r.left+r.width/2-w/2),innerWidth-w-8),y=r.bottom+8;if(y+h>innerHeight-8)y=r.top-h-8;tip.style.left=x+'px';tip.style.top=y+'px'};
+  const hide=()=>tip.classList.remove('on');let tT;
+  document.addEventListener('mouseover',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el)show(el)});
+  document.addEventListener('mouseout',e=>{if(e.target.closest&&e.target.closest('[data-tip]'))hide()});
+  document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el)show(el)});
+  document.addEventListener('focusout',hide);
+  document.addEventListener('touchstart',e=>{const el=e.target.closest&&e.target.closest('[data-tip]');if(el&&!el.matches('button,a')){show(el);clearTimeout(tT);tT=setTimeout(hide,2600)}},{passive:true});
+  addEventListener('scroll',hide,{passive:true})}
+
+/* ---------- eventos globales ---------- */
+document.addEventListener('click',e=>{
+  const t=e.target;let el;
+  if(el=t.closest('[data-login]')){EM.ensureAudio();EM.openLogin()}
+  else if(el=t.closest('[data-recharge]')){EM.ensureAudio();const n=+el.dataset.recharge||0,aft=el.dataset.after;if(M.isOpen())capture();EM.openRecharge(n,aft&&EM.afterHook?()=>EM.afterHook(aft):null)}
+  else if(t.closest('[data-sendcode]'))doSend();
+  else if(t.closest('[data-dologin]'))doLogin();
+  else if(t.closest('[data-lg1]')){capture();LG.step=1;M.show(loginHTML,'#lg-phone')}
+  else if(el=t.closest('#modal [data-amt]')){capture();RC.amt=+el.dataset.amt;M.show(rechargeHTML)}
+  else if(t.closest('[data-dorecharge]'))doRecharge();
+  else if(t.closest('[data-recont]')){const p=pending;pending=null;M.close();if(p)setTimeout(p,380)}
+  else if(t.closest('[data-terms]')){e.preventDefault();EM.showTerms()}
+  else if(t.closest('[data-termsback]')){const b=termsBack;termsBack=null;b?M.show(b):M.close()}
+  else if(t.closest('#modal [data-close]'))M.close();
+  else if(t.closest('[data-logout]'))EM.logout();
+  else if(el=t.closest('.burger')){const n=$('.enav');const o=n.classList.toggle('open');el.setAttribute('aria-expanded',o)}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='lg-phone'){const d=e.target.value.replace(/\D/g,'').slice(0,9);e.target.value=d.replace(/(\d{3})(?=\d)/g,'$1 ').trim();return}
+  if(e.target.id==='lg-code'){e.target.value=e.target.value.replace(/\D/g,'').slice(0,6);return}
+  if(e.target.id==='rc-custom'){const a=Math.round(+e.target.value)||0;RC.amt=a;const ok=a>=10&&a<=1000;$$('#modal .amts button').forEach(b=>b.classList.remove('on'));$('#rc-a').textContent=ok?money(a):'\u2014';$('#rc-n').textContent=ok?money(S.disp+a):'\u2014';const bt=$('[data-dorecharge]');bt&&(bt.innerHTML=ic('wallet')+' Pagar '+(ok?money(a):'')+' y recargar')}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.id==='lg-phone'){e.preventDefault();doSend();return}
+  if(e.key==='Enter'&&e.target.id==='lg-code'){e.preventDefault();doLogin();return}
+  if(e.key==='Escape'){if(M.isOpen())M.close();else{const n=$('.enav');n&&n.classList.remove('open')}}
+});
+
+/* ---------- init ---------- */
+EM.init=function(){ensureDom();bindTip();renderAuth()};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',EM.init);else EM.init();
+})();
+</script>
+<script>
+(function(){
+const {$,S,money}=EM;
+function r(){const on=!!(S.auth&&S.user);document.body.classList.toggle('in',on);
+  if(on){$('#hi-name').textContent=S.user.name;$('#m-tier').textContent='Nivel '+EM.TIERS[EM.tierOf(S.life)];$('#m-l').textContent='Saldo disponible';EM.animNum($('#m-bal'),S.disp,false);$('#m-ex').textContent=''}
+  else{$('#m-tier').textContent='PREMIUM';$('#m-bal').textContent='S/ 24.50';$('#m-ex').textContent='Vista de ejemplo'}}
+EM.on(r);r();
+const fx=$('#fx');if(fx&&!EM.reduce&&matchMedia('(pointer:fine)').matches){addEventListener('pointermove',e=>{const cx=(e.clientX/innerWidth-.5),cy=(e.clientY/innerHeight-.5);fx.querySelectorAll('.o').forEach(o=>{const d=+o.dataset.d;o.style.transform=`translate(${cx*d*-1.6}px,${cy*d*-1.6}px)`})},{passive:true})}
+if(location.hash==='#entrar'&&!S.auth)EM.openLogin();
+})();
+</script>
+</body>
+</html>
