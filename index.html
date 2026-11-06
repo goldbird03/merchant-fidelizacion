@@ -292,10 +292,39 @@ details{border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;marg
 @media(max-width:700px){.g2b{grid-template-columns:1fr}section{padding:3.25rem 0}}
 .reg{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid rgba(0,230,118,.35);background:linear-gradient(135deg,rgba(0,230,118,.10),rgba(245,197,66,.06));border-radius:22px;padding:1.6rem;margin-top:2.4rem}
 .reg h3{font-size:22px;margin-bottom:4px}.reg p{color:var(--dim);max-width:520px}
+
+
+/* ===== Secciones nuevas: como funciona, rubros, precios, contacto ===== */
+.mp{margin-top:14px;border:1px dashed var(--bd);border-radius:14px;padding:12px;background:rgba(255,255,255,.03);font-size:12.5px}
+.mp-r{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.mp-r b{display:block;font-size:13.5px;color:var(--text)}.mp-r small{color:var(--faint);font-size:11px}
+.off{background:#ef4444;color:#fff;font-size:10px;font-weight:800;border-radius:99px;padding:2px 8px}
+.mp-p{margin-top:8px}.mp-p s{color:var(--faint);font-size:12px}.mp-p b{font-size:20px;color:var(--text);margin-left:4px}
+.mp.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;border:0;padding:0;background:none;text-align:center}
+.mp.tri span{display:block;background:rgba(255,255,255,.05);border-radius:12px;padding:10px 4px;color:var(--dim)}.mp.tri b{display:block;font-size:13px;margin-bottom:2px}
+.mp.tri .g{background:var(--em-soft)}.mp.tri .g b{color:var(--em)}
+.mp.lk .mono{color:var(--em);font-size:11.5px;overflow-wrap:anywhere}.mp.lk div{display:flex;justify-content:space-between;margin-top:8px;color:var(--faint)}.mp.lk .net{color:var(--text);font-weight:700;border-top:1px solid var(--line);padding-top:8px}
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;margin-top:2rem;padding:0}
+.flow li{position:relative}.flow .no{position:absolute;right:16px;top:14px;font:700 11px 'JetBrains Mono',monospace;color:var(--faint)}
+.flow .i,.rb .i{width:44px;height:44px;padding:11px;border-radius:12px;background:var(--em-soft);color:var(--em);display:block;margin-bottom:8px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}.tags span{border:1px solid var(--bd);border-radius:99px;padding:2px 10px;font-size:11px;color:var(--dim)}
+.rb{grid-template-columns:repeat(4,1fr)}
+.pr{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:880px;margin:2.2rem auto 0}
+.pr .card{display:flex;flex-direction:column;position:relative}.pr .card .btn{margin-top:auto;width:100%}
+.pr .big{margin:14px 0 6px;color:var(--dim)}.pr .big b{font-size:44px;font-weight:800;color:var(--text);line-height:1}
+.pr .pop{border-color:var(--em);box-shadow:0 0 40px -16px var(--em-glow)}.badge{position:absolute;top:-12px;left:22px;background:var(--em);color:#04130b;font-size:11px;font-weight:800;border-radius:99px;padding:3px 12px}
+.ck{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:10px;font-size:13.5px}.ck li{display:flex;gap:10px;align-items:flex-start}.ck .i{color:var(--em);margin-top:2px;flex:none}
+.lead2{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.bn{list-style:none;padding:0;margin-top:1.8rem;display:grid;gap:1.2rem}.bn li{display:flex;gap:14px}.bn b{display:block}.bn p{color:var(--dim);font-size:13.5px}
+.ib{width:44px;height:44px;border-radius:12px;background:var(--em-soft);color:var(--em);display:grid;place-items:center;flex:none;font-size:20px}
+.formc:hover{transform:none}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.okc{text-align:center;padding:2rem 0}.okc .tick{width:56px;height:56px;border-radius:50%;background:var(--em);color:#04130b;display:grid;place-items:center;margin:0 auto;font-size:26px}.okc h3{margin-top:14px}.okc p{color:var(--dim)}
+@media(max-width:1000px){.flow,.rb{grid-template-columns:1fr 1fr}.lead2{grid-template-columns:1fr}}
+@media(max-width:640px){.flow,.rb,.pr,.two{grid-template-columns:1fr}}
+#precios h2{max-width:none;text-align:center}#precios .eyebrow{text-align:center}
 </style>
 </head>
 <body class="em lp" data-aud="c">
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2A2.8 2.2 0 0012 8c-1.4 0-2.6.8-2.6 2s1.1 1.6 2.6 2 2.6.8 2.6 2-1.2 2-2.6 2a2.8 2.2 0 01-2.5-1.2M12 6v2M12 16v2"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol></defs></svg>
 <header class="enav"><div class="wrap"><a class="logo" href="index.html"><i>$</i><span>expande<b>Money</b></span></a><nav class="enl" id="enl" aria-label="Principal"><a href="index.html" aria-current="page">Inicio</a><a href="shop.html">Tienda / Canje</a><a href="signup.html">Registrarse</a></nav><div class="eauth" id="eauth"></div><button class="burger" type="button" aria-expanded="false" aria-controls="enl" aria-label="Abrir men&uacute;"><svg class="i" aria-hidden="true"><use href="#i-menu"/></svg></button></div></header>
 <header class="hero">
   <div class="wrap">
@@ -329,14 +358,37 @@ details{border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;marg
     <h2><span class="c-only">Todo lo que necesitas para comprar mejor</span><span class="m-only">Todo lo que necesitas para vender m&aacute;s</span></h2>
     <div class="g3">
       <a href="shop.html" class="card rv"><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg><h3>Cupones de descuento</h3><p>Experiencias y servicios con hasta 45% de descuento, validados con QR.</p>
+        <div class="mp"><div class="mp-r"><div><b>Cata de Vinos</b><small>Barranco, Lima</small></div><span class="off">-45%</span></div><p class="mp-p"><s>S/ 200</s> <b>S/ 110</b></p></div>
         <div class="wb"><span class="c-only"><b>Para ti:</b> paga menos por lo que ya quieres vivir.</span><span class="m-only"><b class="m">Para tu comercio:</b> llena cupos vac&iacute;os con clientes nuevos.</span></div></a>
       <a href="dashboard.html" class="card rv"><svg class="i" aria-hidden="true"><use href="#i-wallet"/></svg><h3>Billetera y recargas</h3>
         <p class="c-only">Recarga saldo en soles y canj&eacute;alo en cualquier comercio aliado. Tambi&eacute;n lo ganas al consumir.</p><p class="m-only">Tus clientes recargan saldo y lo gastan en tu local: consumo asegurado.</p>
+        <div class="mp tri"><span><b style="color:#E9A867">Bronce</b>S/ 0.50</span><span><b style="color:#C9D1DC">Plata</b>S/ 0.70</span><span class="g"><b>Oro</b>S/ 1.00</span></div>
         <div class="wb"><span class="c-only"><b>Para ti:</b> un solo saldo para toda la red.</span><span class="m-only"><b class="m">Para tu comercio:</b> m&aacute;s visitas de clientes con saldo.</span></div></a>
       <a href="panel.html#cobro" class="card rv"><svg class="i" aria-hidden="true"><use href="#i-link"/></svg><h3>Links de cobro</h3>
         <p class="c-only">Paga en 1 clic desde el link que te env&iacute;a el comercio, con tarjeta o billetera.</p><p class="m-only">Cobra por WhatsApp, Instagram o QR sin posnet. Una sola tarifa plana de 5%.</p>
+        <div class="mp lk"><p class="mono">expandemoney.com/pay/tu-comercio</p><div><span>Cobro S/ 200</span><span>Comisi&oacute;n 5%</span></div><div class="net"><span>Recibes</span><span>S/ 190.00</span></div></div>
         <div class="wb"><span class="c-only"><b>Para ti:</b> pagas r&aacute;pido y sumas saldo en cada consumo.</span><span class="m-only"><b class="m">Para tu comercio:</b> recibes tu dinero en 24 h, sin retenciones.</span></div></a>
     </div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap">
+    <div class="eyebrow">C&oacute;mo funciona</div>
+    <h2><span class="c-only">Ahorra desde la primera visita</span><span class="m-only">Opera tu negocio desde el celular</span></h2>
+    <p class="sub c-only">Cuatro pasos y tu plata empieza a trabajar para ti.</p><p class="sub m-only">Configura tu negocio una vez y opera cada d&iacute;a, sin posnet ni desarrollo.</p>
+    <ol class="flow c-only">
+      <li class="card rv"><span class="no">01</span><svg class="i" aria-hidden="true"><use href="#i-search"/></svg><h3>Descubre</h3><p>Explora cupones y comercios aliados cerca de ti.</p></li>
+      <li class="card rv"><span class="no">02</span><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg><h3>Conecta</h3><p>Crea tu cuenta gratis y obt&eacute;n tu QR personal.</p></li>
+      <li class="card rv"><span class="no">03</span><svg class="i" aria-hidden="true"><use href="#i-star"/></svg><h3>Acumula</h3><p>Cada consumo suma saldo en soles y sube tu nivel.</p></li>
+      <li class="card rv"><span class="no">04</span><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg><h3>Canjea</h3><p>Usa tu saldo en cualquier comercio de la red.</p></li>
+    </ol>
+    <ol class="flow m-only">
+      <li class="card rv"><span class="no">01</span><svg class="i" aria-hidden="true"><use href="#i-store"/></svg><h3>Af&iacute;liate</h3><p>Registra tu negocio en minutos, sin desarrollo.</p></li>
+      <li class="card rv"><span class="no">02</span><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg><h3>Publica tu oferta</h3><p>Crea cupones y define tu programa de fidelizaci&oacute;n.</p></li>
+      <li class="card rv"><span class="no">03</span><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg><h3>Escanea y cobra</h3><p>Valida el QR del cliente y cobra por link, sin posnet.</p></li>
+      <li class="card rv"><span class="no">04</span><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg><h3>Crece</h3><p>Recibe tu dinero en 24 h y mira volver a tus clientes.</p></li>
+    </ol>
   </div>
 </section>
 
@@ -368,10 +420,12 @@ details{border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;marg
       <div class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-repeat"/></svg><h3>Recompra</h3><p>Saldo y niveles hacen que vuelvan.</p></div>
       <div class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg><h3>Cobro simple</h3><p>Un link y el cliente paga en 1 clic.</p></div>
     </div>
-    <div class="reg"><div><div class="eyebrow">Panel de comercio</div><h3>Registra consumos y crea tu link de cobro</h3><p>Escanea el QR de tus clientes, valida cupones y simula tu primer cobro con tarifa plana de 5%.</p></div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-p btn-lg" href="panel.html">Abrir panel <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a><a class="btn btn-o btn-lg" href="panel.html#cobro">Link de cobro</a></div></div>
   </div>
 </section>
+
+<section class="final"><div class="wrap"><div class="eyebrow">Empieza hoy</div>
+  <h2><span class="c-only">Tu pr&oacute;xima experiencia te espera, con descuento</span><span class="m-only">Empieza a vender m&aacute;s con tu primer link de cobro</span></h2>
+  <div class="cta"><a href="signup.html" class="btn btn-p btn-lg c-only">Registrarme gratis</a><a href="shop.html" class="btn btn-o btn-lg c-only">Ver cupones</a><a href="#contacto" class="btn btn-p btn-lg m-only">Afiliar mi comercio</a><a href="signup.html" class="btn btn-o btn-lg m-only">Crear cuenta</a></div></div></section>
 
 <section id="fidelizacion" class="alt">
   <div class="wrap">
@@ -403,20 +457,58 @@ details{border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;marg
     <p class="note">*Cifras de referencia: reempl&aacute;zalas por datos reales antes de publicar.</p></div>
 </section>
 
-<section id="faq">
+<section id="rubros">
+  <div class="wrap">
+    <div class="eyebrow">Rubros</div><h2>Una din&aacute;mica para cada tipo de negocio</h2><p class="sub">Elige la mec&aacute;nica que mejor encaja con tu operaci&oacute;n.</p>
+    <div class="g4 rb"><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-fork"/></svg><h3>Restaurantes</h3><p>Cupones para llenar mesas en horas bajas.</p><div class="tags"><span>Cupones</span><span>Link de cobro</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-star"/></svg><h3>Cafeter&iacute;as</h3><p>Cashback en cada caf&eacute; para que vuelvan.</p><div class="tags"><span>Cashback</span><span>Cupones</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg><h3>Gimnasios</h3><p>Packs de clases cobrados por adelantado.</p><div class="tags"><span>Packs</span><span>Niveles</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg><h3>Belleza y barber&iacute;a</h3><p>Reservas con saldo y fidelizaci&oacute;n por nivel.</p><div class="tags"><span>Fidelizaci&oacute;n</span><span>Cupones</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-car"/></svg><h3>Automotriz</h3><p>Servicios con descuento y cobro por link.</p><div class="tags"><span>Cupones</span><span>Link de cobro</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg><h3>Salud</h3><p>Chequeos y consultas con pago anticipado.</p><div class="tags"><span>Cupones</span><span>Link de cobro</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><h3>Educaci&oacute;n</h3><p>Talleres y cursos cobrados por WhatsApp.</p><div class="tags"><span>Link de cobro</span><span>Cupones</span></div></article><article class="card rv hv"><svg class="i" aria-hidden="true"><use href="#i-laptop"/></svg><h3>Tecnolog&iacute;a</h3><p>Servicios t&eacute;cnicos con descuento y recompra.</p><div class="tags"><span>Cupones</span><span>Cashback</span></div></article></div>
+  </div>
+</section>
+
+<section id="precios" class="alt">
+  <div class="wrap">
+    <div style="text-align:center"><div class="eyebrow">Precios</div><h2>Simple y transparente</h2><p class="sub" style="margin-inline:auto">Sin letras chicas, sin posnet y sin mensualidades.</p></div>
+    <div class="pr">
+      <article class="card"><h3>Cliente</h3><p class="big"><b>S/ 0</b> <span>para siempre</span></p><p>Para quienes quieren pagar menos y ganar saldo.</p><ul class="ck"><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Billetera y QR personal</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cupones con hasta 45% de descuento</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cashback y niveles Bronce, Plata y Oro</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Sin apps: funciona en el navegador</li></ul><a class="btn btn-o btn-lg" href="signup.html">Crear cuenta gratis</a></article>
+      <article class="card pop"><span class="badge">M&aacute;s popular</span><h3>Comercio Pro</h3><p class="big"><b>5%</b> <span>por venta &middot; sin mensualidad</span></p><p>Para negocios que quieren vender y fidelizar.</p><ul class="ck"><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Panel de comercio y escaneo de QR</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Links de cobro ilimitados</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Cobro en 24 h, sin retenciones</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Programa de fidelizaci&oacute;n incluido</li><li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Asesor&iacute;a de activaci&oacute;n</li></ul><a class="btn btn-p btn-lg" href="#contacto">Afiliar mi comercio</a></article>
+    </div>
+    <p class="note">* Tarifas y condiciones de ejemplo: conf&iacute;rmalas antes de publicar.</p>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap lead2">
+    <div><div class="eyebrow">Para negocios</div><h2>Hablemos de tu negocio</h2><p class="sub">D&eacute;janos tus datos y un asesor te contacta para activar tu comercio.</p>
+      <ul class="bn"><li><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-heart"/></svg></span><div><b>Asesor&iacute;a personalizada</b><p>Te ayudamos a dise&ntilde;ar tu oferta, cupones y niveles seg&uacute;n tu rubro.</p></div></li>
+      <li><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg></span><div><b>Activaci&oacute;n en 48 horas</b><p>Sin desarrollo ni instalaci&oacute;n: funciona desde el navegador.</p></div></li>
+      <li><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-trend"/></svg></span><div><b>Sin mensualidades</b><p>Solo pagas 5% cuando vendes. Cobras en 24 horas.</p></div></li></ul></div>
+    <div class="card formc">
+      <form id="lf" novalidate>
+        <div class="fl"><label for="lf-n">Tu nombre</label><input class="minp" id="lf-n" required autocomplete="name" placeholder="Ana Torres"></div>
+        <div class="fl"><label for="lf-b">Nombre del negocio</label><input class="minp" id="lf-b" required autocomplete="organization" placeholder="Caf&eacute; Altura"></div>
+        <div class="two"><div class="fl"><label for="lf-r">Rubro</label><select class="minp" id="lf-r" required><option value="">Selecciona&hellip;</option><option>Cafeter&iacute;a / Restaurante</option><option>Gimnasio / Bienestar</option><option>Belleza / Barber&iacute;a</option><option>Automotriz</option><option>Salud / Educaci&oacute;n</option><option>Otro</option></select></div>
+        <div class="fl"><label for="lf-w">WhatsApp</label><input class="minp" id="lf-w" required type="tel" inputmode="numeric" maxlength="9" autocomplete="tel-national" placeholder="987654321"></div></div>
+        <div class="fl"><label for="lf-e">Correo</label><input class="minp" id="lf-e" required type="email" autocomplete="email" placeholder="ana@minegocio.com"></div>
+        <p class="err" id="lf-err" role="alert" style="margin-top:.7rem"></p>
+        <button class="btn btn-p btn-lg" type="submit" style="width:100%;margin-top:1rem">Quiero que me contacten <svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="note" style="margin-top:.8rem">Respondemos en menos de 24 horas h&aacute;biles.</p>
+      </form>
+      <div id="lf-ok" class="okc" role="status" hidden><span class="tick"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><h3>&iexcl;Gracias! Recibimos tus datos</h3><p>Un asesor te escribir&aacute; por WhatsApp muy pronto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
   <div class="wrap" style="max-width:760px"><div class="eyebrow">Preguntas frecuentes</div><h2>Resolvemos tus dudas antes de empezar</h2>
     <details class="m-only"><summary>&iquest;Cu&aacute;nto cuesta afiliar mi comercio?</summary><p>Sin mensualidades. Solo pagas 5% por transacci&oacute;n cobrada por link o venta de cup&oacute;n.</p></details>
     <details class="m-only"><summary>&iquest;Cu&aacute;ndo recibo mi dinero?</summary><p>Puedes solicitar tus fondos en 24 horas, sin retenciones adicionales.</p></details>
     <details class="m-only"><summary>&iquest;C&oacute;mo valido un cup&oacute;n?</summary><p>El cliente muestra su QR o c&oacute;digo y t&uacute; lo validas desde el celular. No necesitas instalar nada.</p></details>
     <details class="c-only"><summary>&iquest;C&oacute;mo uso mi cup&oacute;n y gano saldo?</summary><p>Muestra tu QR en el local: el comercio lo escanea, valida tu cup&oacute;n y tu consumo suma saldo en soles en tu billetera.</p></details>
     <details class="c-only"><summary>&iquest;Puedo retirar mi saldo?</summary><p>No. El saldo de tu billetera se usa &uacute;nicamente en los comercios aliados y no es retirable. Lo ves completo en los <a href="#" data-terms style="text-decoration:underline">t&eacute;rminos y condiciones</a>.</p></details>
+    <details class="c-only"><summary>&iquest;Cu&aacute;nto cuesta para m&iacute;?</summary><p>Crear tu cuenta es gratis y no pagas mensualidad. Ganas saldo en cada consumo.</p></details>
     <details><summary>&iquest;Necesito una app?</summary><p>No. Todo funciona de forma fluida desde el navegador del celular.</p></details>
   </div>
 </section>
 
-<section class="final"><div class="wrap"><div class="eyebrow">Empieza hoy</div>
-  <h2><span class="c-only">Tu pr&oacute;xima experiencia te espera, con descuento</span><span class="m-only">Empieza a vender m&aacute;s con tu primer link de cobro</span></h2>
-  <div class="cta"><a href="signup.html" class="btn btn-p btn-lg c-only">Registrarme gratis</a><a href="shop.html" class="btn btn-o btn-lg c-only">Ver cupones</a><a href="panel.html" class="btn btn-p btn-lg m-only">Abrir panel de comercio</a><a href="signup.html" class="btn btn-o btn-lg m-only">Crear cuenta</a></div></div></section>
 <footer class="efoot"><div class="wrap"><span>Un producto ExpandeLab &middot; Lima, Per&uacute;</span><span><a href="index.html">Inicio</a> &middot; <a href="signup.html">Crear cuenta</a> &middot; <a href="#" data-terms>T&eacute;rminos y condiciones</a></span><span>Demo: datos, precios y comercios de ejemplo.</span></div></footer>
 <div id="glow" aria-hidden="true"></div>
 <script>/* expandeMoney \u00b7 n\u00facleo compartido: estado, reglas, cat\u00e1logo, navegaci\u00f3n y modales (login, recarga, t\u00e9rminos) */
@@ -613,7 +705,7 @@ function doRecharge(){capture();const a=RC.amt;
 function renderAuth(){
   const el=$('#eauth');if(!el)return;
   if(S.auth&&S.user){el.innerHTML=`<a class="walchip" href="dashboard.html" aria-label="Tu saldo disponible: ${money(S.disp)}. Ir a Mi Billetera"><small>Disponible</small><b id="nav-bal">${money(S.disp)}</b></a><button class="btn btn-e sm" type="button" data-recharge="" aria-label="Recargar saldo">${ic('wallet')}<span class="rlb">Recargar</span></button>`}
-  else el.innerHTML=`<button class="btn btn-o sm" type="button" data-login>Ingresar</button><a class="btn btn-e sm" href="signup.html">Crear cuenta</a>`;
+  else el.innerHTML=`<a class="btn btn-o sm" href="https://www.expandemoney.com/login">Ingresar</a><a class="btn btn-e sm" href="signup.html">Crear cuenta</a>`;
 }
 EM.renderAuth=renderAuth;
 
@@ -691,7 +783,7 @@ function qr(code){let h=0;for(const c of code)h=(h*131+c.charCodeAt(0))>>>0;let 
 /* hero */
 const HERO={
  c:{t:'Disfruta m\u00e1s. <span class="tg">Pagando menos.</span>',s:'Cupones con hasta 45% de descuento en tus locales favoritos. Consume con tu billetera y gana saldo en soles en cada compra.',b1:['Crear cuenta gratis','signup.html'],b2:['Ver cupones','shop.html']},
- m:{t:'Vende m\u00e1s y <span class="tg">cobra al instante.</span>',s:'Atrae clientes nuevos con cupones y recibe pagos por link sin posnet ni mensualidades. Solo 5% por venta.',b1:['Abrir panel de comercio','panel.html'],b2:['Crear link de cobro','panel.html#cobro']}};
+ m:{t:'Vende m\u00e1s y <span class="tg">cobra al instante.</span>',s:'Atrae clientes nuevos con cupones y recibe pagos por link sin posnet ni mensualidades. Solo 5% por venta.',b1:['Abrir panel de comercio','panel.html'],b2:['Afiliar mi comercio','#contacto']}};
 const BADGES=[['globe','Sin apps que instalar \u00b7 Funciona en navegador'],['bolt','QR inmediato \u00b7 Plata real en soles'],['shield','Pago protegido \u00b7 Saldo que no se olvida']];
 let bi=0;const dyn=$('#dyn');
 const setBadge=()=>{const [i,t]=BADGES[bi];dyn.innerHTML=ic(i)+' '+t};
@@ -720,6 +812,21 @@ $$('.rv,[data-count]').forEach(el=>io.observe(el));
 setTimeout(()=>{$$('.rv').forEach(el=>el.classList.add('in'));$$('.pfill[data-w]').forEach(f=>f.style.width=f.dataset.w+'%')},3500);
 $$('.tier').forEach(t=>t.addEventListener('pointermove',e=>{const r=t.getBoundingClientRect();t.style.setProperty('--mx',e.clientX-r.left+'px');t.style.setProperty('--my',e.clientY-r.top+'px')}));
 if(window.IntersectionObserver&&matchMedia('(hover:none)').matches){const lo=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('lit',e.isIntersecting)),{threshold:.65});$$('.tier').forEach(t=>lo.observe(t))}
+
+
+/* formulario de contacto para comercios (demo: no env\u00eda datos hasta configurar ENDPOINT) */
+(function(){
+const ENDPOINT='';/* TODO: URL de tu backend/Supabase/Formspree para recibir los leads */
+const f=$('#lf');if(!f)return;const err=$('#lf-err'),w=$('#lf-w');
+w.addEventListener('input',()=>{w.value=w.value.replace(/\D/g,'').slice(0,9)});
+f.addEventListener('submit',async e=>{e.preventDefault();err.textContent='';
+  const v=id=>$('#'+id).value.trim();
+  if(v('lf-n').length<2||v('lf-b').length<2||!v('lf-r'))return err.textContent='Completa tu nombre, negocio y rubro.';
+  if(!/^9\d{8}$/.test(v('lf-w')))return err.textContent='Ingresa un WhatsApp v\u00e1lido de 9 d\u00edgitos que empiece con 9.';
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('lf-e')))return err.textContent='Ingresa un correo v\u00e1lido.';
+  if(ENDPOINT){try{const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:v('lf-n'),business:v('lf-b'),category:v('lf-r'),whatsapp:v('lf-w'),email:v('lf-e'),ts:Date.now()})});if(!r.ok)throw 0}catch(x){return err.textContent='No pudimos enviar tus datos. Intenta de nuevo.'}}
+  f.hidden=true;$('#lf-ok').hidden=false;EM.chime&&EM.chime(true)});
+})();
 
 /* init */
 let aud='c';try{aud=localStorage.getItem('em_aud')==='m'?'m':'c'}catch(e){}
