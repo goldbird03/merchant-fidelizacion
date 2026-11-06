@@ -705,7 +705,7 @@ function doRecharge(){capture();const a=RC.amt;
 function renderAuth(){
   const el=$('#eauth');if(!el)return;
   if(S.auth&&S.user){el.innerHTML=`<a class="walchip" href="dashboard.html" aria-label="Tu saldo disponible: ${money(S.disp)}. Ir a Mi Billetera"><small>Disponible</small><b id="nav-bal">${money(S.disp)}</b></a><button class="btn btn-e sm" type="button" data-recharge="" aria-label="Recargar saldo">${ic('wallet')}<span class="rlb">Recargar</span></button>`}
-  else el.innerHTML=`<a class="btn btn-o sm" href="https://www.expandemoney.com/login">Ingresar</a><a class="btn btn-e sm" href="signup.html">Crear cuenta</a>`;
+  else el.innerHTML=`<a class="btn btn-o sm" href="login.html">Ingresar</a><a class="btn btn-e sm" href="signup.html">Crear cuenta</a>`;
 }
 EM.renderAuth=renderAuth;
 
