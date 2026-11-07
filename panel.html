@@ -219,10 +219,27 @@ tr.h:hover td{background:rgba(255,255,255,.04)}th:first-child,td:first-child{pad
  .stamp{flex-direction:column}.stamp::after,.stamp .n{display:none}.stamp .rr{width:auto;padding-top:0}.fg{grid-template-columns:1fr}.card{padding:16px}
 }
 @media(max-width:480px){.kg{grid-template-columns:1fr 1fr}.cta .tx{display:none}}
+/* ===== Reportes avanzados ===== */
+.row2e{display:grid;grid-template-columns:1fr 1fr;gap:16px}.row2e>*{min-width:0}
+.rph{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
+.rph h3{display:flex;align-items:center;gap:10px;font:700 16px 'Plus Jakarta Sans',sans-serif}
+.rph h3 .ib{width:34px;height:34px;border-radius:10px;background:rgba(245,197,66,.16);color:var(--gold-b);display:grid;place-items:center;font-size:18px;flex:none}
+.rpbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.rpbar[hidden]{display:none}
+.seg2{display:inline-flex;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:3px;background:rgba(255,255,255,.04)}
+.seg2 button{border:0;background:none;color:var(--dim);font:600 12px 'Inter';padding:6px 12px;border-radius:9px;cursor:pointer}.seg2 button.on{background:var(--em);color:#04130b}
+.chart-sc{overflow-x:auto;padding-bottom:6px}
+.legd{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-size:12px;color:var(--dim);margin-top:10px}.legd i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.bd-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.03);margin-top:10px;flex-wrap:wrap}
+.bd-row .gi{width:36px;height:36px;border-radius:10px;background:rgba(245,197,66,.16);color:var(--gold-b);display:grid;place-items:center;font-size:18px;flex:none}
+.bd-row .nm{font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.bd-row .mt{font-size:12px;color:var(--faint);margin-top:2px}.bd-row .ac{margin-left:auto}
+.cta.gold{background:transparent;color:var(--gold-b);border:1px solid rgba(245,197,66,.45);box-shadow:none}.cta.gold:hover{background:rgba(245,197,66,.1)}
+.cta[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+.chp.gd.on{background:var(--gold);border-color:var(--gold)}
+@media(max-width:1100px){.row2e{grid-template-columns:1fr}}
 </style>
 </head>
 <body class="em pn">
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2A2.8 2.2 0 0012 8c-1.4 0-2.6.8-2.6 2s1.1 1.6 2.6 2 2.6.8 2.6 2-1.2 2-2.6 2a2.8 2.2 0 01-2.5-1.2M12 6v2M12 16v2"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2A2.8 2.2 0 0012 8c-1.4 0-2.6.8-2.6 2s1.1 1.6 2.6 2 2.6.8 2.6 2-1.2 2-2.6 2a2.8 2.2 0 01-2.5-1.2M12 6v2M12 16v2"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></symbol></defs></svg>
 <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
 <div class="app">
 <aside class="side">
@@ -301,7 +318,44 @@ tr.h:hover td{background:rgba(255,255,255,.04)}th:first-child,td:first-child{pad
 </section>
 
 <section class="view" id="v-reportes" aria-label="Reportes">
-  <div class="vh"><div><h1>Reportes</h1><p>Resumen del periodo seleccionado y exportaci&oacute;n de datos.</p></div><div style="display:flex;gap:8px"><button class="cta ghost sm" type="button" data-csv><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Exportar CSV</button><button class="cta ghost sm" type="button" id="reset"><svg class="i" aria-hidden="true"><use href="#i-reset"/></svg>Reiniciar demo</button></div></div>
+  <div class="vh"><div><h1>Reportes</h1><p>Audiencia, visitas y fechas especiales de tus clientes. Datos de ejemplo.</p></div><div style="display:flex;gap:8px"><button class="cta ghost sm" type="button" data-csv><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Exportar CSV</button><button class="cta ghost sm" type="button" id="reset"><svg class="i" aria-hidden="true"><use href="#i-reset"/></svg>Reiniciar demo</button></div></div>
+
+  <div class="glass gc card">
+    <div class="rph"><h3><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>Demograf&iacute;a de Clientes</h3><span class="dim" style="font-size:12px" id="demo-n"></span></div>
+    <div class="row2e">
+      <div><div class="dim" style="text-align:center;font-size:12px;font-weight:600;margin-bottom:6px">G&eacute;nero</div><div id="demo-g"></div></div>
+      <div><div class="dim" style="text-align:center;font-size:12px;font-weight:600;margin-bottom:6px">Rangos Etarios</div><div class="chart-sc" id="demo-a"></div></div>
+    </div>
+  </div>
+
+  <div class="row2e">
+    <div class="glass gc card">
+      <div class="rph"><div><h3>Frecuencia de Visitas</h3><div class="s" id="fq-sub"></div></div>
+        <select class="sel" id="rp-s1" aria-label="Sede"><option value="all">Todas las sedes</option><option value="bar">Barranco</option><option value="mir">Miraflores</option><option value="sis">San Isidro</option></select></div>
+      <div class="rpbar" role="group" aria-label="Periodo"><button type="button" class="chp" data-rp-per="7">7 d&iacute;as</button><button type="button" class="chp" data-rp-per="30">30 d&iacute;as</button><button type="button" class="chp" data-rp-per="mes">Mes</button><button type="button" class="chp" data-rp-per="custom">Custom</button></div>
+      <div class="rpbar" id="rp-cust" hidden><label class="dim" style="font-size:12px">Desde <input type="date" class="in2" id="rp-from" style="width:auto;padding:7px 10px"></label><label class="dim" style="font-size:12px">Hasta <input type="date" class="in2" id="rp-to" style="width:auto;padding:7px 10px"></label></div>
+      <div class="s" id="fq-rng" style="margin-bottom:8px"></div>
+      <div class="chart-sc" id="fq-chart"></div>
+      <div class="legd"><span><i style="background:var(--em)"></i>Actual</span><span><i style="background:#cbd5e1"></i>Per&iacute;odo anterior</span></div>
+    </div>
+    <div class="glass gc card">
+      <div class="rph"><h3><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg></span><span>Horarios de Mayor Flujo<small class="s" id="hr-sub" style="display:block;font:400 12px 'Inter';color:var(--faint)"></small></span></h3></div>
+      <div class="rpbar"><select class="sel" id="rp-s2" aria-label="Sede"><option value="all">Todas las sedes</option><option value="bar">Barranco</option><option value="mir">Miraflores</option><option value="sis">San Isidro</option></select>
+        <div class="seg2" role="group" aria-label="Vista"><button type="button" data-rp-hv="h">Horas</button><button type="button" data-rp-hv="d">D&iacute;as</button></div></div>
+      <div class="chart-sc" id="hr-chart"></div>
+    </div>
+  </div>
+
+  <div class="glass gc card" id="rp-bd">
+    <div class="rph"><h3><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg></span><span>Pr&oacute;ximos Cumplea&ntilde;os<small class="s" style="display:block;font:400 12px 'Inter';color:var(--faint)">Gestiona las fechas especiales de tus clientes</small></span></h3></div>
+    <div class="rpbar" role="group" aria-label="Filtrar cumplea&ntilde;os">
+      <button type="button" class="chp gd" data-bd="hoy">Hoy</button><button type="button" class="chp gd" data-bd="sem">Esta semana</button><button type="button" class="chp gd" data-bd="mes">Este mes</button><button type="button" class="chp gd" data-bd="todos">Todos</button>
+      <select class="sel" id="bd-mes" aria-label="Ver por mes"><option value="">Ver por mes</option><option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option><option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option><option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option><option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option></select>
+      <button type="button" class="cta gold sm" data-gift-all style="margin-left:auto"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg>Enviar cup&oacute;n a todos <span class="pill p-gold" id="bd-n">0</span></button>
+    </div>
+    <div id="bd-list"></div>
+  </div>
+
   <div class="glass gc card" style="max-width:720px" id="rep"></div>
 </section>
 
@@ -656,9 +710,6 @@ function renderRules(){const T=[0,1,2];$('#rules').innerHTML=T.map(t=>`<div clas
 function renderCoupons(){const r=real(),l=r?r.coupons:[];
   $('#tb-cp').innerHTML=l.length?l.map(c=>{const o=EM.OFFERS.find(x=>x.id===c.o);return`<tr class="h"><td class="mono">${esc(c.id)}</td><td>${esc(o?o.t:'Oferta')}</td><td class="mono">${c.mode==='full'?'S/ 0.00 (pagado con saldo)':money(c.pay)}</td><td><span class="pill ${c.status==='act'?'p-em':'p-sl'}">${c.status==='act'?'Activo':'Usado'}</span></td><td>${c.status==='act'?`<button class="cta ghost sm" type="button" data-vcode="${esc(c.id)}">Validar</button>`:''}</td></tr>`}).join(''):`<tr><td colspan="5" class="empty">${r?'Esta cuenta a\u00fan no tiene cupones. Canjea uno en la <a href="shop.html" style="text-decoration:underline">tienda</a>.':'Inicia sesi\u00f3n desde el sitio para ver los cupones de tu cuenta de prueba.'}</td></tr>`}
 function renderLinks(){$('#tb-ln').innerHTML=(P.links||[]).length?P.links.map(l=>`<tr class="h"><td>${esc(l.name)}</td><td class="mono dim" style="font-size:11.5px">${esc(l.url)}</td><td class="mono">${money(l.price)}</td><td class="mono em">${money(l.price*.95)}</td><td><span class="pill ${l.status==='ok'?'p-em':'p-gold'}">${l.status==='ok'?'Pagado':'Pendiente'}</span></td><td>${l.status==='ok'?'':`<button class="cta ghost sm" type="button" data-lpay="${l.id}">Simular pago</button> <button class="cta ghost sm" type="button" data-lcopy="${l.id}">${ic('copy')}</button>`}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">A\u00fan no creaste links. Genera el primero a la izquierda.</td></tr>'}
-function renderReport(){const a=agg(0),cob=a.tx.filter(x=>x.type==='cobro'),fee=cob.reduce((s,x)=>s+x.amount*.05,0),cards=a.tx.filter(x=>x.done).length;
-  const rows=[['Periodo',`\u00daltimos ${days()} d\u00edas`],['Transacciones',a.tx.length],['Ventas registradas',money(a.sales)],['Saldo abonado a clientes',money(a.credit)],['Costo de fidelizaci\u00f3n',(a.sales?a.credit/a.sales*100:0).toFixed(1)+'%'],['Clientes activos',a.clients],['Tarjetas completadas',cards],['Comisi\u00f3n por cobros (5%)',money(fee)]];
-  $('#rep').innerHTML='<h3>Resumen del periodo</h3>'+rows.map(r=>`<div class="tr2"><span>${r[0]}</span><b>${r[1]}</b></div>`).join('')}
 function calcLink(){const p=Math.max(0,parseFloat($('#lp').value)||0);$('#b-g').textContent=money(p);$('#b-f').textContent='\u2013 '+money(p*.05);$('#b-n').textContent=money(p*.95);
   $('#lpv').textContent='expandemoney.com/pay/cafe-alma/'+(norm($('#ln').value||'producto').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'producto')}
 function renderAll(){renderKpis();renderChart();renderPipe();renderStamp();renderTickets();renderLast();renderClients();renderTx();renderRules();renderCoupons();renderLinks();renderReport();
@@ -698,6 +749,100 @@ function payLink(id){const l=(P.links||[]).find(x=>x.id===id);if(!l||l.status===
 function csv(){const rows=[['fecha','cliente','tipo','nivel','monto_S','saldo_abonado_S','estado']].concat(P.tx.map(x=>[new Date(x.ts).toISOString(),x.name,TYPES[x.type],x.tier==null?'':TIERS[x.tier],x.amount.toFixed(2),x.credit.toFixed(2),x.status]));
   const t=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""').replace(/^[=+\-@]/,"'$&")+'"').join(',')).join('\n'),a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\ufeff'+t],{type:'text/csv;charset=utf-8'}));a.download='expandemoney-transacciones.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);EM.toast('CSV descargado')}
+
+/* ===== REPORTES AVANZADOS ===== */
+const DAYN=['domingo','lunes','martes','mi\u00e9rcoles','jueves','viernes','s\u00e1bado'],MESN=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const RP={per:'30',from:'',to:'',s1:'all',s2:'all',hv:'h',bd:'mes',bm:''};
+const hh=(a,b)=>{let x=Math.imul(a,374761393)^Math.imul(b+1,668265263);x=Math.imul(x^(x>>>13),1274126177);return((x^(x>>>16))>>>0)/4294967296};
+const mid=d=>{const x=new Date(d);x.setHours(0,0,0,0);return x};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const flong=d=>d.getDate()+' de '+MESN[d.getMonth()];
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const SI=['all','bar','mir','sis'],SF={all:1,bar:.42,mir:.33,sis:.25};
+const ax=m=>{const st=[1,2,5,10,15,20,25,50,100,200].find(s=>m/s<=4)||250;return{st,max:Math.max(st,Math.ceil(m/st)*st)}};
+
+/* gr\u00e1fico de barras SVG (con l\u00ednea opcional de per\u00edodo anterior). El tooltip usa el [data-tip] global del n\u00facleo */
+function barSvg(o){const n=o.vals.length,bw=o.bw,pl=34,pt=12,pb=26,H=o.H||190,ih=H-pt-pb,A=ax(Math.max(...o.vals,...(o.line||[0]),1)*1.05),w=pl+n*bw+8,ev=o.every||1;
+  let s=`<svg viewBox="0 0 ${w} ${H}" style="width:100%;min-width:${w}px;height:auto" role="img" aria-label="${esc(o.label)}">`;
+  for(let v=0;v<=A.max;v+=A.st){const y=pt+ih-v/A.max*ih;s+=`<line x1="${pl}" x2="${w-8}" y1="${y}" y2="${y}" stroke="rgba(255,255,255,.07)" stroke-dasharray="3 4"/><text x="${pl-6}" y="${y+3}" fill="#64748b" font-size="10" text-anchor="end" font-family="Inter">${v}</text>`}
+  o.vals.forEach((v,i)=>{const x=pl+i*bw+bw*.12,bwid=bw*.76,h=v/A.max*ih,y=pt+ih-h;
+    s+=`<rect x="${x}" y="${y}" width="${bwid}" height="${h}" rx="4" fill="${o.color}" opacity=".95"/>`;
+    if(i%ev===0)s+=`<text x="${x+bwid/2}" y="${H-8}" fill="#64748b" font-size="10" text-anchor="middle" font-family="Inter">${esc(o.labels[i])}</text>`;
+    s+=`<rect x="${pl+i*bw}" y="${pt}" width="${bw}" height="${ih}" fill="transparent" data-tip="${esc(o.tips[i])}"/>`});
+  if(o.line)s+=`<path d="${o.line.map((v,i)=>(i?'L':'M')+(pl+i*bw+bw/2)+','+(pt+ih-v/A.max*ih)).join(' ')}" fill="none" stroke="#cbd5e1" stroke-width="1.6" stroke-dasharray="5 4" opacity=".7" pointer-events="none"/>`;
+  return s+'</svg>'}
+
+/* --- 1) Demograf\u00eda --- */
+const AUD={g:[['Mujer',94,'#f472b6'],['Hombre',60,'#60a5fa'],['Prefiero no decirlo',5,'#94a3b8']],a:[['18-24',56],['25-34',61],['35-44',29],['45-54',7],['55+',6]]};
+function renderDemo(){const tot=AUD.g.reduce((s,x)=>s+x[1],0),C=2*Math.PI*62;let o=0;
+  const arcs=AUD.g.map(x=>{const L=x[1]/tot*C,s=`<circle cx="90" cy="90" r="62" fill="none" stroke="${x[2]}" stroke-width="26" stroke-dasharray="${L-2} ${C-L+2}" stroke-dashoffset="${-o}" transform="rotate(-90 90 90)" data-tip="${x[0]}: ${x[1]} (${Math.round(x[1]/tot*100)}%)"/>`;o+=L;return s}).join('');
+  $('#demo-g').innerHTML=`<div style="display:flex;flex-direction:column;align-items:center"><svg viewBox="0 0 180 180" style="width:190px;height:190px" role="img" aria-label="Distribuci\u00f3n por g\u00e9nero">${arcs}</svg><div class="legd">${AUD.g.map(x=>`<span><i style="background:${x[2]}"></i>${x[0]} (${Math.round(x[1]/tot*100)}%)</span>`).join('')}</div></div>`;
+  $('#demo-a').innerHTML=barSvg({vals:AUD.a.map(x=>x[1]),labels:AUD.a.map(x=>x[0]),tips:AUD.a.map(x=>`${x[0]} a\u00f1os: ${x[1]} personas`),color:'#F5C542',bw:62,H:230,label:'Clientes por rango etario'});
+  $('#demo-n').textContent=tot+' personas'}
+
+/* --- 2) Frecuencia de visitas (actual vs per\u00edodo anterior) --- */
+function visitsOf(d,sd){const f=[0,5,6].includes(d.getDay())?1.35:1,k=d.getFullYear()*372+d.getMonth()*31+d.getDate(),c=i=>Math.round((1.5+hh(k,i)*4)*f);
+  let v=sd==='all'?c(1)+c(2)+c(3):c(SI.indexOf(sd));const t0=+mid(new Date());
+  if(+mid(d)===t0&&(sd==='all'||sd==='bar'))v+=P.tx.filter(x=>x.key&&x.ts>=t0&&x.status==='ok').length; /* hoy suma lo que registras en vivo */
+  return v}
+function rng(){const t=mid(new Date());let a,b=t;
+  if(RP.per==='7')a=addD(t,-6);else if(RP.per==='30')a=addD(t,-29);else if(RP.per==='mes')a=new Date(t.getFullYear(),t.getMonth(),1);
+  else{a=RP.from?mid(RP.from+'T00:00'):addD(t,-13);b=RP.to?mid(RP.to+'T00:00'):t;if(b>t)b=t;if(a>b)a=b;if((b-a)/DAY>89)a=addD(b,-89)}
+  return{a,b,n:Math.round((b-a)/DAY)+1}}
+function renderFreq(){const{a,b,n}=rng(),cur=[],prv=[],lab=[],tip=[];
+  for(let i=0;i<n;i++){const d=addD(a,i);cur.push(visitsOf(d,RP.s1));prv.push(visitsOf(addD(a,i-n),RP.s1));lab.push(d.getDate());
+    tip.push(`${DAYN[d.getDay()]} ${flong(d)} \u00b7 Actual: ${cur[i]} \u00b7 Periodo anterior: ${prv[i]}`)}
+  $('#fq-chart').innerHTML=barSvg({vals:cur,line:prv,labels:lab,tips:tip,color:'#00e676',bw:Math.min(56,Math.max(26,Math.floor(520/n))),every:n>20?2:1,label:'Frecuencia de visitas por d\u00eda'});
+  $('#fq-rng').textContent='Rango: '+flong(a)+' al '+flong(b);
+  $('#fq-sub').textContent={7:'\u00daltimos 7 d\u00edas',30:'\u00daltimos 30 d\u00edas',mes:'Este mes',custom:'Rango personalizado'}[RP.per];
+  $$('[data-rp-per]').forEach(x=>{const on=x.dataset.rpPer===RP.per;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});
+  const cu=$('#rp-cust');cu.hidden=RP.per!=='custom';if(!cu.hidden){$('#rp-from').value=iso(a);$('#rp-to').value=iso(b);$('#rp-to').max=iso(new Date())}
+  $('#rp-s1').value=RP.s1}
+
+/* --- 3) Horarios de mayor flujo --- */
+const HP=[38,20,25,45,27,25,12,14,33,25,32,31,12,20],DP=[62,58,66,74,98,120,85],DL=['Lun','Mar','Mi\u00e9','Jue','Vie','S\u00e1b','Dom'],DF=['lunes','martes','mi\u00e9rcoles','jueves','viernes','s\u00e1bado','domingo'];
+function renderHours(){const sd=RP.s2,k=SI.indexOf(sd),days=RP.hv==='d',base=days?DP:HP;
+  const vals=base.map((v,i)=>Math.round(v*SF[sd]*(sd==='all'?1:.9+hh(i+(days?40:0),k)*.2)));
+  const lab=days?DL:base.map((_,i)=>{const h=8+i;return h<12?h+'am':h===12?'12pm':(h-12)+'pm'});
+  $('#hr-chart').innerHTML=barSvg({vals,labels:lab,tips:vals.map((v,i)=>`${days?DF[i]:lab[i]}: ${v} visitas`),color:'#F5C542',bw:days?64:42,every:days?1:2,label:'Visitas por '+(days?'d\u00eda de la semana':'hora del d\u00eda')});
+  $('#hr-sub').textContent=days?'Visitas por d\u00eda de la semana':'Visitas por hora del d\u00eda';
+  $$('[data-rp-hv]').forEach(x=>x.classList.toggle('on',x.dataset.rpHv===RP.hv));$('#rp-s2').value=sd}
+
+/* --- 4) Pr\u00f3ximos cumplea\u00f1os + regalos --- */
+const BD=[['Luc\u00eda Paredes',0,31,18],['Grecia Curi',2,14,5],['Camila Ruiz',5,12,5],['Carlos Luna',8,4,0],['Diego Salazar',9,2,0],['Valeria Quispe',13,9,0],['Rosa Ch\u00e1vez',17,4,0],['Jorge Salas',21,34,9],['Andrea Torres',24,22,7],['Mateo Vargas',28,7,0],['Sof\u00eda Ramos',34,18,3],['Luis Huam\u00e1n',41,3,0],['Daniela Flores',57,11,0],['Renzo Castillo',83,26,12],['Paola Medina',102,8,0],['Bruno Aguilar',140,40,25],['Fiorella D\u00edaz',171,15,2],['Marco Ortiz',230,5,0],['Alexa Rojas',290,29,8],['Piero N\u00fa\u00f1ez',330,1,0]];
+const GIFTS=[['cup','Cup\u00f3n de 15% de descuento','V\u00e1lido 30 d\u00edas en Caf\u00e9 Alma'],['sal','S/ 5.00 de saldo de regalo','Saldo disponible, no retirable'],['caf','Bebida de cortes\u00eda','Una bebida del d\u00eda en tu sede']];
+const GF={target:'',kind:'cup'};
+function bdList(){const t=mid(new Date());return BD.map((b,i)=>({id:'b'+i,name:b[0],off:b[1],d:addD(t,b[1]),dni:String(70000000+Math.floor(hh(i,99)*9999999)),life:b[2],disp:b[3]}))
+  .filter(x=>RP.bm!==''?x.d.getMonth()===+RP.bm:RP.bd==='hoy'?x.off===0:RP.bd==='sem'?x.off<=6:RP.bd==='mes'?x.d.getMonth()===t.getMonth():true)}
+function renderBd(){const L=bdList(),G=P.gifts||{},pend=L.filter(x=>!G[x.id]).length;
+  $$('[data-bd]').forEach(b=>{const on=RP.bm===''&&b.dataset.bd===RP.bd;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
+  $('#bd-mes').value=RP.bm;$('[data-gift-all]').disabled=!pend;$('#bd-n').textContent=pend;
+  $('#bd-list').innerHTML=L.length?L.map(x=>{const t=tierOf(x.life),bdg=t===2?'<span class="pill p-t2">Oro</span>':`<span class="pill p-t${t}">Tarjeta ${Math.floor(x.life/10)+1}\u00aa</span>`;
+    return`<div class="bd-row"><span class="gi">${ic('gift')}</span><div><div class="nm">${esc(x.name)} ${bdg}</div><div class="mt">${flong(x.d)}${x.off===0?' \u00b7 <b class="em">hoy</b>':''} \u00b7 DNI: ${x.dni}</div><div class="mt">${ic('coin')} Saldo ${money(x.disp)}</div></div><div class="ac">${G[x.id]?'<span class="pill p-em">Regalado \u2713</span>':`<button class="cta gold sm" type="button" data-gift="${x.id}">${ic('gift')}Regalar</button>`}</div></div>`}).join(''):'<div class="empty">No hay cumplea\u00f1os en este periodo.</div>'}
+function giftHTML(){const L=bdList().filter(x=>GF.target==='all'?!(P.gifts||{})[x.id]:x.id===GF.target);
+  return`<div class="mh"><div><h2 id="mtitle">${GF.target==='all'?'Enviar regalo a '+L.length+' clientes':'Regalar a '+esc(L[0]?L[0].name:'')}</h2><small>Elige el regalo de cumplea\u00f1os.</small></div>${EM.XBTN}</div><div class="mb"><div class="pms" role="radiogroup">${GIFTS.map(g=>`<label class="pm"><input type="radio" name="gk" value="${g[0]}" ${GF.kind===g[0]?'checked':''}><span>${g[1]}<small>${g[2]}</small></span></label>`).join('')}</div><button class="btn btn-e" type="button" data-gift-go>${ic('gift')} Confirmar regalo</button></div>`}
+function doGift(){const r=document.querySelector('input[name=gk]:checked'),k=r?r.value:GF.kind;P.gifts=P.gifts||{};
+  const ids=bdList().filter(x=>GF.target==='all'?!P.gifts[x.id]:x.id===GF.target).map(x=>x.id);
+  ids.forEach(id=>P.gifts[id]={k,ts:Date.now()});saveP();EM.modal.close();renderBd();EM.chime();EM.toast(ids.length===1?'Regalo enviado':'Regalo enviado a '+ids.length+' clientes')}
+
+/* --- Reportes: resumen original + nuevos --- */
+function renderReport(){const a=agg(0),cob=a.tx.filter(x=>x.type==='cobro'),fee=cob.reduce((s,x)=>s+x.amount*.05,0),cards=a.tx.filter(x=>x.done).length;
+  const rows=[['Periodo',`\u00daltimos ${days()} d\u00edas`],['Transacciones',a.tx.length],['Ventas registradas',money(a.sales)],['Saldo abonado a clientes',money(a.credit)],['Costo de fidelizaci\u00f3n',(a.sales?a.credit/a.sales*100:0).toFixed(1)+'%'],['Clientes activos',a.clients],['Tarjetas completadas',cards],['Comisi\u00f3n por cobros (5%)',money(fee)]];
+  $('#rep').innerHTML='<h3>Resumen del periodo</h3>'+rows.map(r=>`<div class="tr2"><span>${r[0]}</span><b>${r[1]}</b></div>`).join('');
+  renderDemo();renderFreq();renderHours();renderBd()}
+
+document.addEventListener('click',e=>{const t=e.target;let el;
+  if(el=t.closest('[data-rp-per]')){RP.per=el.dataset.rpPer;renderFreq()}
+  else if(el=t.closest('[data-rp-hv]')){RP.hv=el.dataset.rpHv;renderHours()}
+  else if(el=t.closest('[data-bd]')){RP.bd=el.dataset.bd;RP.bm='';renderBd()}
+  else if(el=t.closest('[data-gift]')){GF.target=el.dataset.gift;GF.kind='cup';EM.modal.show(giftHTML)}
+  else if(t.closest('[data-gift-all]')){GF.target='all';GF.kind='cup';EM.modal.show(giftHTML)}
+  else if(t.closest('[data-gift-go]'))doGift()});
+document.addEventListener('change',e=>{const id=e.target.id;
+  if(id==='rp-s1'){RP.s1=e.target.value;renderFreq()}
+  else if(id==='rp-s2'){RP.s2=e.target.value;renderHours()}
+  else if(id==='bd-mes'){RP.bm=e.target.value;renderBd()}
+  else if(id==='rp-from'||id==='rp-to'){RP.from=$('#rp-from').value;RP.to=$('#rp-to').value;renderFreq()}});
 
 /* ---------- eventos ---------- */
 document.addEventListener('click',e=>{const t=e.target;let el;
