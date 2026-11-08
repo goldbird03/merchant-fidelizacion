@@ -48,7 +48,7 @@ body.em{background:var(--bg);color:var(--text);font:15px/1.55 'Inter',system-ui,
   .enav.open .enl{display:flex}
   .enl a{padding:14px 12px;font-size:15px;min-height:48px;display:flex;align-items:center}
 }
-@media(max-width:520px){.eauth a.btn{display:none}.walchip small{display:none}}
+@media(max-width:520px){.walchip small{display:none}.eauth .btn.sm{padding:8px 12px}}
 
 /* ===== BOTONES / FORMS ===== */
 .btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:var(--r-md);padding:12px 20px;font:600 14px 'Inter',sans-serif;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s,border-color .2s;text-align:center;min-height:46px;white-space:nowrap}
@@ -726,7 +726,7 @@ function doRecharge(){capture();const a=RC.amt;
 function renderAuth(){
   const el=$('#eauth');if(!el)return;
   if(S.auth&&S.user){el.innerHTML=`<a class="walchip" href="dashboard.html" aria-label="Tu saldo disponible: ${money(S.disp)}. Ir a Mi Billetera"><small>Disponible</small><b id="nav-bal">${money(S.disp)}</b></a><button class="btn btn-e sm" type="button" data-recharge="" aria-label="Recargar saldo">${ic('wallet')}<span class="rlb">Recargar</span></button><button class="btn btn-o sm out" type="button" data-logout aria-label="Cerrar sesi\u00f3n">${ic('logout')}<span class="olb">Salir</span></button>`}
-  else el.innerHTML=`<a class="btn btn-o sm" href="login.html">Ingresar</a><a class="btn btn-e sm" href="signup.html">Crear cuenta</a>`;
+  else el.innerHTML=`<a class="btn btn-e sm" href="login.html">Ingresar</a>`;
 }
 EM.renderAuth=renderAuth;
 
