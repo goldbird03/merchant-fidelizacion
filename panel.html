@@ -239,10 +239,21 @@ tr.h:hover td{background:rgba(255,255,255,.04)}th:first-child,td:first-child{pad
 .cfg-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 12px;align-items:start}
 select.in2 option{background:var(--surface);color:var(--text)}
 @media(max-width:900px){.cfg-g{grid-template-columns:1fr 1fr}}@media(max-width:560px){.cfg-g{grid-template-columns:1fr}}
+/* ===== Reglas EM.R, roles y caja ===== */
+body[data-rol=staff] .adm-only{display:none!important}
+.dot2{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.rcard{margin-top:auto;margin-bottom:12px;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.04);font-size:11.5px;color:var(--dim);line-height:1.45}.rcard .rc-h{display:flex;justify-content:space-between;gap:8px;margin-bottom:4px;color:var(--text);font-weight:600}.rcard+.sbot{margin-top:0}
+.steps{display:flex;gap:14px;margin:0 0 14px;padding:0;flex-wrap:wrap}.steps li{list-style:none;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--faint)}.steps b{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.15);font:700 11px 'JetBrains Mono',monospace}.steps li.on{color:var(--text)}.steps li.on b{background:var(--em);color:#04130b;border-color:var(--em)}.steps li.ok b{background:var(--em-soft);color:var(--em);border-color:rgba(0,230,118,.4)}
+.pl{display:grid;gap:6px;margin-top:8px}.pl button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:9px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);cursor:pointer;color:var(--text);font:inherit}.pl button:hover,.pl button.on{border-color:var(--em);background:var(--em-soft)}
+.seq{display:grid;gap:8px;margin:12px 0 0;padding:0;list-style:none}.seq li{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--dim)}.seq li .i{color:var(--em);margin-top:3px;font-size:15px}.seq li.no .i{color:var(--gold-b)}.seq b{color:var(--text)}
+.stm{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}.stm i{aspect-ratio:1;border-radius:10px;border:1.5px dashed rgba(0,230,118,.45);display:grid;place-items:center;font-style:normal;color:#04130b}.stm i.on{background:var(--em);border:0;box-shadow:0 0 10px var(--em-glow)}.stm i.gift{border-color:rgba(245,197,66,.6);color:var(--gold-b)}
+.bal2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bal2>div{border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;background:rgba(255,255,255,.04)}.bal2 b{display:block;font:800 20px 'JetBrains Mono',monospace;margin-top:2px}
+.enr{background:#fff;border-radius:14px;padding:10px;width:150px;height:150px;flex:none}.enr svg{width:100%;height:100%;display:block}
+@media(max-width:900px){.net-t{display:none}.rcard{display:none}.stm{grid-template-columns:repeat(5,1fr)}}
 </style>
 </head>
 <body class="em pn">
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2A2.8 2.2 0 0012 8c-1.4 0-2.6.8-2.6 2s1.1 1.6 2.6 2 2.6.8 2.6 2-1.2 2-2.6 2a2.8 2.2 0 01-2.5-1.2M12 6v2M12 16v2"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 019.9-1"/></symbol><symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20h1"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9l1-5h16l1 5M3 9v11h18V9M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0M9 20v-6h6v6"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 010-4h12v4M4 6v12a2 2 0 002 2h14v-4M18 12a2 2 0 000 4h4v-4z"/></symbol><symbol id="i-crown" viewBox="0 0 24 24"><path d="M2 18l2-11 5 5 3-8 3 8 5-5 2 11zM4 21h16"/></symbol><symbol id="i-medal" viewBox="0 0 24 24"><path d="M7.2 2h9.6l2.2 6H5zM12 22a6 6 0 100-12 6 6 0 000 12z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol><symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.7 3L3 8M3 3v5h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0116 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></symbol><symbol id="i-tag" viewBox="0 0 24 24"><path d="M20 12l-8 8-9-9V3h8zM7.5 7.5h.01"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 007 0l3-3a5 5 0 00-7-7l-1 1M14 11a5 5 0 00-7 0l-3 3a5 5 0 007 7l1-1"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 003.4 0"/></symbol><symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 010-6h20v6a3 3 0 000 6v6H2v-6a3 3 0 000-6zM13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17H3v-5l2-5h14l2 5v5h-2M5 17a2 2 0 104 0M15 17a2 2 0 104 0M9 17h6M3 12h18"/></symbol><symbol id="i-laptop" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3L8 14.2 3 9.3l6.9-1z"/></symbol><symbol id="i-game" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/></symbol><symbol id="i-fork" viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 003 3v10M4 2v7M10 2v7M17 22V2c-2 1-4 4-4 8s2 5 4 5"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol><symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2A2.8 2.2 0 0012 8c-1.4 0-2.6.8-2.6 2s1.1 1.6 2.6 2 2.6.8 2.6 2-1.2 2-2.6 2a2.8 2.2 0 01-2.5-1.2M12 6v2M12 16v2"/></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 010 5"/></symbol><symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol><symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7l-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></symbol><symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></symbol><symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h4"/></symbol><symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol></defs></svg>
 <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
 <div class="app">
 <aside class="side">
@@ -251,13 +262,16 @@ select.in2 option{background:var(--surface);color:var(--text)}
   <div class="sh">General</div>
   <nav class="pnav" id="pnav" aria-label="Secciones del panel">
     <a href="#resumen" data-v="resumen"><svg class="i" aria-hidden="true"><use href="#i-store"/></svg>Resumen</a>
+    <a href="#pos" data-v="pos"><svg class="i" aria-hidden="true"><use href="#i-calc"/></svg>Caja (POS)</a>
     <a href="#clientes" data-v="clientes"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg>Clientes<span class="cnt" id="c-cli">0</span></a>
     <a href="#recompensas" data-v="recompensas"><svg class="i" aria-hidden="true"><use href="#i-crown"/></svg>Recompensas</a>
     <a href="#transacciones" data-v="transacciones"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg>Transacciones</a>
     <a href="#cupones" data-v="cupones"><svg class="i" aria-hidden="true"><use href="#i-ticket"/></svg>Cupones</a>
-    <a href="#cobros" data-v="cobros"><svg class="i" aria-hidden="true"><use href="#i-link"/></svg>Links de cobro</a>
-    <a href="#reportes" data-v="reportes"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg>Reportes</a>
+    <a href="#cobros" data-v="cobros" class="adm-only"><svg class="i" aria-hidden="true"><use href="#i-link"/></svg>Links de cobro</a>
+    <a href="#reportes" data-v="reportes" class="adm-only"><svg class="i" aria-hidden="true"><use href="#i-card"/></svg>Reportes</a>
+    <a href="#config" data-v="config" class="adm-only"><svg class="i" aria-hidden="true"><use href="#i-sliders"/></svg>Reglas &amp; Sedes</a>
   </nav>
+  <div class="rcard" id="rcard"><div class="rc-h"><span>Reglas EM.R activas</span><span class="mono em" id="rc-min"></span></div><span id="rc-p"></span></div>
   <div class="pnav sbot"><a href="index.html"><svg class="i" aria-hidden="true"><use href="#i-left"/></svg>Volver al sitio</a><a href="dashboard.html"><svg class="i" aria-hidden="true"><use href="#i-wallet"/></svg>Mi Billetera</a></div>
 </aside>
 <div class="main">
@@ -266,7 +280,9 @@ select.in2 option{background:var(--surface);color:var(--text)}
   <span class="sp"></span>
   <select class="sel" id="range" aria-label="Rango de fechas"><option value="7">&Uacute;ltimos 7 d&iacute;as</option><option value="14" selected>&Uacute;ltimos 14 d&iacute;as</option><option value="30">&Uacute;ltimos 30 d&iacute;as</option></select>
   <button class="cta" type="button" id="new-cons"><svg class="i" aria-hidden="true"><use href="#i-qr"/></svg><span class="tx">Registrar consumo</span></button>
-  <div class="who"><span class="av">MR</span><div><b>Mar&iacute;a Rojas</b><small>Administradora</small></div></div>
+  <span class="pill p-em" id="net" role="status"><span class="dot2"></span><span class="net-t">En l&iacute;nea</span></span>
+  <div class="seg2" role="group" aria-label="Rol de usuario"><button type="button" data-role="admin">Admin</button><button type="button" data-role="staff">Cajero</button></div>
+  <div class="who"><span class="av" id="who-av">MR</span><div><b id="who-n">Mar&iacute;a Rojas</b><small id="who-r">Administradora</small></div></div>
 </header>
 <main class="cnt-main">
 
@@ -275,19 +291,41 @@ select.in2 option{background:var(--surface);color:var(--text)}
   <div class="note" id="demo-note"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg><span>Demo con datos de ejemplo. Si inicias sesi&oacute;n o creas una cuenta, aparece como cliente &ldquo;Tu cuenta&rdquo; y lo que registres se ve en <a href="dashboard.html" style="text-decoration:underline">Mi Billetera</a>.</span></div>
   <section class="kg" id="kpis"></section>
   <section class="row2">
-    <div class="glass gc card"><div class="ch"><div><h3>Ventas registradas por d&iacute;a</h3><div class="s">Monto de consumos, cupones y cobros</div></div><span class="pill p-em" id="rng-l">14 d&iacute;as</span></div><svg id="rev" viewBox="0 0 640 220" style="width:100%;height:220px;overflow:visible" role="img" aria-label="Gr&aacute;fico de ventas por d&iacute;a"></svg></div>
+    <div class="glass gc card"><div class="ch"><div><h3>Ventas registradas por d&iacute;a</h3><div class="s">Monto de consumos, cupones y cobros</div></div><span class="pill p-em" id="rng-l">14 d&iacute;as</span></div><div class="s" id="rev-sum" style="margin:0 0 10px;font-size:12px"></div><svg id="rev" viewBox="0 0 640 220" style="width:100%;height:220px;overflow:visible" role="img" aria-label="Gr&aacute;fico de ventas por d&iacute;a"></svg></div>
     <div class="glass gc card"><h3>Pipeline de fidelizaci&oacute;n</h3><div class="s">Clientes por nivel de tarjeta</div><div class="pipe" id="pipe"></div>
-      <div style="margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06)"><span style="font-size:11.5px;color:var(--faint)">Cerca de completar tarjeta</span><span class="pill p-em" id="near">0</span></div></div>
+      <div style="margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06)"><span style="font-size:11.5px;color:var(--faint)">Cerca de completar (&ge; 7 sellos)</span><span class="pill p-em" id="near">0</span></div></div>
   </section>
   <section class="row2b">
     <div class="stamp" id="stamp"><span class="n" style="top:-11px"></span><span class="n" style="bottom:-11px"></span></div>
-    <div class="glass gc card" style="display:flex;flex-direction:column;justify-content:space-between"><div><h3>Ticket promedio</h3><div class="s" style="margin-bottom:14px">Cliente recurrente vs. cliente nuevo</div></div><div style="display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap"><div><div class="mono" style="font-size:26px;font-weight:700;color:var(--em)" id="tk-r">S/ 0.00</div><div style="font-size:11px;color:var(--faint)">Cliente recurrente</div></div><div><div class="mono" style="font-size:26px;font-weight:700;color:var(--dim)" id="tk-n">S/ 0.00</div><div style="font-size:11px;color:var(--faint)">Cliente nuevo</div></div></div></div>
+    <div class="glass gc card" style="display:flex;flex-direction:column;justify-content:space-between"><div><h3>Ticket promedio</h3><div class="s" style="margin-bottom:14px">Cliente recurrente vs. cliente nuevo</div></div><div style="display:flex;gap:22px;align-items:flex-end;flex-wrap:wrap"><div><div class="mono" style="font-size:26px;font-weight:700;color:var(--em)" id="tk-r">S/ 0.00</div><div style="font-size:11px;color:var(--faint)">Cliente recurrente</div></div><div><div class="mono" style="font-size:26px;font-weight:700;color:var(--dim)" id="tk-n">S/ 0.00</div><div style="font-size:11px;color:var(--faint)">Cliente nuevo</div></div></div><div id="tk-foot" class="dim" style="font-size:11.5px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)"></div></div>
   </section>
   <section class="glass gc" style="border-radius:20px;overflow:hidden"><div class="thead"><div><h3 style="font-size:13px">&Uacute;ltimas transacciones</h3><div class="s" style="font-size:11.5px;color:var(--faint)">Consumos, cupones y cobros en tiempo real</div></div><a class="pill p-sl" href="#transacciones">Ver todas &rarr;</a></div><div class="tw"><table><thead><tr><th>Cliente</th><th>Tipo</th><th>Nivel</th><th>Fecha</th><th>Monto</th><th>Saldo abonado</th></tr></thead><tbody id="tb-last"></tbody></table></div></section>
 </section>
 
+<section class="view" id="v-pos" aria-label="Caja">
+  <div class="vh"><div><h1>Terminal POS (Caja)</h1><p>Registra un consumo en 3 pasos. El sello se aplica seg&uacute;n las reglas EM.R activas.</p></div></div>
+  <div class="row2b">
+    <div class="glass gc card">
+      <ol class="steps"><li id="ps1"><b>1</b>Cliente</li><li id="ps2"><b>2</b>Monto</li><li id="ps3"><b>3</b>Confirmar</li></ol>
+      <div class="mfield" style="margin-top:0"><label for="pos-q">Buscar cliente (nombre, c&oacute;digo o celular)</label><input class="in2" id="pos-q" type="search" placeholder="Ej. Camila, CR-1093 o 999 999 993" autocomplete="off"></div>
+      <div id="pos-res"></div><div id="pos-sel"></div>
+      <div class="fg mfield"><div class="fgl"><label for="pos-a">Monto del consumo (S/)</label><input class="in2" id="pos-a" type="number" min="1" step="0.5" inputmode="decimal" placeholder="Ej. 35"></div><div class="fgl"><label for="pos-sede">Sede</label><select class="in2" id="pos-sede"></select></div></div>
+      <div class="chips" style="margin-top:10px"><button type="button" class="chp" data-pos-amt="20">S/ 20</button><button type="button" class="chp" data-pos-amt="30">S/ 30</button><button type="button" class="chp" data-pos-amt="50">S/ 50</button><button type="button" class="chp" data-pos-amt="80">S/ 80</button><button type="button" class="chp" data-pos-amt="120">S/ 120</button></div>
+      <div class="prev" id="pos-prev"></div>
+      <button class="cta" type="button" id="pos-go" style="width:100%;justify-content:center;margin-top:1rem" disabled>Confirmar consumo</button>
+      <div id="pos-receipt"></div>
+    </div>
+    <div class="glass gc card">
+      <h3>QR de enrolamiento</h3><div class="s">Mu&eacute;stralo a clientes nuevos para que creen su billetera</div>
+      <div class="cell" style="margin-top:12px;align-items:flex-start;flex-wrap:wrap"><div class="enr" id="enr-qr"></div><div style="min-width:0;flex:1"><div class="lnk2" style="margin-top:0">expandemoney.com/enroll/cafe-alma-barranco</div><button class="cta ghost sm" type="button" data-enr-copy style="margin-top:10px"><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Copiar link</button></div></div>
+      <h3 style="margin-top:22px">&Uacute;ltimos registros</h3><div class="pipe" id="pos-last"></div>
+    </div>
+  </div>
+</section>
+
 <section class="view" id="v-clientes" aria-label="Clientes">
   <div class="vh"><div><h1>Clientes</h1><p>Tarjeta, saldo bloqueado y disponible de cada cliente. Registra su consumo con un clic.</p></div></div>
+  <div class="glass gc card"><div class="ch"><div><h3>Tarjeta digital del cliente</h3><div class="s">Selecciona un cliente para ver su tarjeta, sellos y saldos</div></div><span class="pill p-em">Interactivo</span></div><div class="chips" id="cv-chips" role="group" aria-label="Cliente"></div><div id="cv-card" style="margin-top:14px"></div></div>
   <div class="glass gc" style="border-radius:20px;overflow:hidden"><div class="thead"><div class="chips" id="tier-f" role="group" aria-label="Filtrar por nivel"></div><span class="dim" style="font-size:12px" id="cli-n"></span></div>
   <div class="tw"><table><thead><tr><th>Cliente</th><th>Nivel</th><th>Tarjeta</th><th>Bloqueado</th><th>Disponible</th><th>Visitas</th><th></th></tr></thead><tbody id="tb-cli"></tbody></table></div></div>
 </section>
@@ -295,7 +333,7 @@ select.in2 option{background:var(--surface);color:var(--text)}
 <section class="view" id="v-recompensas" aria-label="Recompensas">
   <div class="vh"><div><h1>Recompensas</h1><p>Reglas de saldo por nivel y configuraci&oacute;n de cumplea&ntilde;os. Las reglas se aplican autom&aacute;ticamente a cada consumo.</p></div></div>
   <div class="rules" id="rules"></div>
-  <div class="glass gc card" id="bd-cfg">
+  <div class="glass gc card adm-only" id="bd-cfg">
     <div class="rph"><h3><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-gift"/></svg></span><span>Configuraci&oacute;n de cumplea&ntilde;os<small class="s" style="display:block;font:400 12px 'Inter';color:var(--faint)">Define qu&eacute; regalo reciben tus clientes y cu&aacute;ndo se env&iacute;a</small></span></h3><span class="pill p-sl" id="cfg-st"></span></div>
     <div class="cfg-g">
       <label class="chk" style="margin-top:0"><input type="checkbox" id="cfg-on"><span>Activar saludo de cumplea&ntilde;os</span></label>
@@ -315,7 +353,7 @@ select.in2 option{background:var(--surface);color:var(--text)}
     <div class="rpbar" role="group" aria-label="Filtrar cumplea&ntilde;os">
       <button type="button" class="chp gd" data-bd="hoy">Hoy</button><button type="button" class="chp gd" data-bd="sem">Esta semana</button><button type="button" class="chp gd" data-bd="mes">Este mes</button><button type="button" class="chp gd" data-bd="todos">Todos</button>
       <select class="sel" id="bd-mes" aria-label="Ver por mes"><option value="">Ver por mes</option><option value="0">Enero</option><option value="1">Febrero</option><option value="2">Marzo</option><option value="3">Abril</option><option value="4">Mayo</option><option value="5">Junio</option><option value="6">Julio</option><option value="7">Agosto</option><option value="8">Septiembre</option><option value="9">Octubre</option><option value="10">Noviembre</option><option value="11">Diciembre</option></select>
-      <button type="button" class="cta gold sm" data-gift-all style="margin-left:auto"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg>Enviar cup&oacute;n a todos <span class="pill p-gold" id="bd-n">0</span></button>
+      <button type="button" class="cta gold sm adm-only" data-gift-all style="margin-left:auto"><svg class="i" aria-hidden="true"><use href="#i-send"/></svg>Enviar cup&oacute;n a todos <span class="pill p-gold" id="bd-n">0</span></button>
     </div>
     <div id="bd-list"></div>
   </div>
@@ -324,9 +362,9 @@ select.in2 option{background:var(--surface);color:var(--text)}
 </section>
 
 <section class="view" id="v-transacciones" aria-label="Transacciones">
-  <div class="vh"><div><h1>Transacciones</h1><p>Historial de consumos, cupones validados y cobros por link.</p></div><button class="cta ghost sm" type="button" data-csv><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Exportar CSV</button></div>
-  <div class="glass gc" style="border-radius:20px;overflow:hidden"><div class="thead"><div class="chips" id="type-f" role="group" aria-label="Filtrar por tipo"></div><span class="dim" style="font-size:12px" id="tx-n"></span></div>
-  <div class="tw"><table><thead><tr><th>Cliente</th><th>Tipo</th><th>Nivel</th><th>Fecha</th><th>Hora</th><th>Monto</th><th>Saldo abonado</th><th>Saldo bloqueado</th><th>Estado del premio</th></tr></thead><tbody id="tb-tx"></tbody></table></div></div>
+  <div class="vh"><div><h1>Transacciones</h1><p>Historial de consumos, cupones validados y cobros por link.</p></div><button class="cta ghost sm adm-only" type="button" data-csv><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Exportar CSV</button></div>
+  <div class="glass gc" style="border-radius:20px;overflow:hidden"><div class="thead"><div class="chips" id="type-f" role="group" aria-label="Filtrar por tipo"></div><span style="display:flex;gap:10px;align-items:center"><span class="dim" style="font-size:12px" id="tx-n"></span><button class="cta ghost sm" type="button" data-txmore id="tx-more" hidden>Ver m&aacute;s</button></span></div>
+  <div class="tw"><table><thead><tr><th>Cliente</th><th>Tipo</th><th>Nivel</th><th>Fecha</th><th>Hora</th><th>Sede</th><th>Monto</th><th>Saldo abonado</th><th>Sello EM.R</th><th>Saldo bloqueado</th><th>Estado del premio</th></tr></thead><tbody id="tb-tx"></tbody></table></div></div>
 </section>
 
 <section class="view" id="v-cupones" aria-label="Cupones">
@@ -346,7 +384,7 @@ select.in2 option{background:var(--surface);color:var(--text)}
 </section>
 
 <section class="view" id="v-reportes" aria-label="Reportes">
-  <div class="vh"><div><h1>Reportes</h1><p>Audiencia, visitas y horarios de mayor flujo de tus clientes. Datos de ejemplo.</p></div><div style="display:flex;gap:8px"><button class="cta ghost sm" type="button" data-csv><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Exportar CSV</button><button class="cta ghost sm" type="button" id="reset"><svg class="i" aria-hidden="true"><use href="#i-reset"/></svg>Reiniciar demo</button></div></div>
+  <div class="vh"><div><h1>Reportes</h1><p>Audiencia, visitas y horarios de mayor flujo de tus clientes. Datos de ejemplo.</p></div><div style="display:flex;gap:8px"><button class="cta ghost sm adm-only" type="button" data-csv><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Exportar CSV</button><button class="cta ghost sm adm-only" type="button" id="reset"><svg class="i" aria-hidden="true"><use href="#i-reset"/></svg>Reiniciar demo</button></div></div>
 
   <div class="glass gc card">
     <div class="rph"><h3><span class="ib"><svg class="i" aria-hidden="true"><use href="#i-users"/></svg></span>Demograf&iacute;a de Clientes</h3><span class="dim" style="font-size:12px" id="demo-n"></span></div>
@@ -375,6 +413,26 @@ select.in2 option{background:var(--surface);color:var(--text)}
   </div>
 
   <div class="glass gc card" style="max-width:720px" id="rep"></div>
+</section>
+
+
+<section class="view" id="v-config" aria-label="Reglas y sedes">
+  <div class="vh"><div><h1>Reglas EM.R &amp; Sedes</h1><p>Define cu&aacute;ndo un consumo otorga sello, los l&iacute;mites antifraude y las sedes activas. Todo cambio queda en la bit&aacute;cora.</p></div></div>
+  <div class="row2b">
+    <div class="glass gc card"><h3>Reglas de sello</h3><div class="s">Se validan en cada consumo antes de abonar saldo</div>
+      <div class="cfg-g" style="margin-top:14px;grid-template-columns:repeat(3,1fr)">
+        <div class="fgl"><label for="cf-min">Consumo m&iacute;nimo para sello (S/)</label><input class="in2" id="cf-min" type="number" min="0" max="500" step="1" inputmode="numeric"></div>
+        <div class="fgl"><label for="cf-max">Monto m&aacute;ximo por consumo (S/)</label><input class="in2" id="cf-max" type="number" min="1" max="5000" step="10" inputmode="numeric"></div>
+        <div class="fgl"><label for="cf-cool">Espera entre sellos (min)</label><input class="in2" id="cf-cool" type="number" min="0" max="720" step="5" inputmode="numeric"></div>
+      </div>
+      <p class="dim" style="font-size:12px;margin-top:12px" id="cf-info"></p>
+      <p class="dim" style="font-size:12px;margin-top:6px">Un consumo menor al m&iacute;nimo se registra como venta, sin sello ni saldo. M&iacute;nimo 0 desactiva la regla; espera 0 min la desactiva.</p>
+      <button class="cta" type="button" data-rules-save style="margin-top:14px">Guardar reglas</button></div>
+    <div class="glass gc card"><h3>Sedes</h3><div class="s">Las sedes inactivas no aparecen al registrar consumos</div>
+      <div id="sedes-list"></div>
+      <div class="fgl" style="margin-top:14px"><label for="cur-sede">Sede predeterminada de caja</label><select class="in2" id="cur-sede"></select></div></div>
+  </div>
+  <div class="glass gc" style="border-radius:20px;overflow:hidden"><div class="thead"><div><h3 style="font-size:13px">Bit&aacute;cora de actividad</h3><div class="s" style="font-size:11.5px;color:var(--faint)">&Uacute;ltimas 30 acciones: consumos, cupones, regalos, reglas y cambios de rol</div></div></div><div class="tw"><table><thead><tr><th>Fecha y hora</th><th>Usuario</th><th style="text-align:left">Acci&oacute;n</th></tr></thead><tbody id="tb-audit"></tbody></table></div></div>
 </section>
 
 </main></div></div>
@@ -626,29 +684,32 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 const {$,$$,money,esc,ic,norm,S,R}=EM;
 const PK='em_panel_v2',DAY=864e5,TYPES={consumo:'Consumo',cupon:'Cup\u00f3n',cobro:'Cobro'};
 const TIERS=EM.TIERS,tierOf=EM.tierOf,rate=life=>R.RATE[tierOf(life)];
+const RULES0={min:30,max:1000,cool:0};
 
 /* ---------- datos ---------- */
 function seed(){
   const now=Date.now(),clients=[
-   {id:'c1',name:'Carlos Mendoza',code:'CM-4821',visits:6,life:6,lock:3,disp:0},
-   {id:'c2',name:'Camila Ruiz',code:'CR-1093',visits:8,life:12,lock:5.6,disp:5},
-   {id:'c3',name:'Luc\u00eda Paredes',code:'LP-7730',visits:0,life:31,lock:0,disp:18},
-   {id:'c4',name:'Diego Salazar',code:'DS-2204',visits:2,life:2,lock:1,disp:0},
-   {id:'c5',name:'Valeria Quispe',code:'VQ-5518',visits:9,life:9,lock:4.5,disp:0},
-   {id:'c6',name:'Rosa Ch\u00e1vez',code:'RC-3320',visits:4,life:4,lock:2,disp:0},
-   {id:'c7',name:'Jorge Salas',code:'JS-9081',visits:0,life:34,lock:0,disp:9}];
+   {id:'c1',name:'Carlos Mendoza',code:'CM-4821',phone:'+51999999995',visits:6,life:6,lock:3,disp:0},
+   {id:'c2',name:'Camila Ruiz',code:'CR-1093',phone:'+51999999993',visits:8,life:12,lock:5.6,disp:5},
+   {id:'c3',name:'Luc\u00eda Paredes',code:'LP-7730',phone:'+51999999991',visits:0,life:31,lock:0,disp:18},
+   {id:'c4',name:'Diego Salazar',code:'DS-2204',phone:'+51999999996',visits:2,life:2,lock:1,disp:0},
+   {id:'c5',name:'Valeria Quispe',code:'VQ-5518',phone:'+51999999997',visits:9,life:9,lock:4.5,disp:0},
+   {id:'c6',name:'Rosa Ch\u00e1vez',code:'RC-3320',phone:'+51999999992',visits:4,life:4,lock:2,disp:0},
+   {id:'c7',name:'Jorge Salas',code:'JS-9081',phone:'+51999999994',visits:0,life:34,lock:0,disp:9}];
   let s=7;const rnd=()=>(s=(s*1103515245+12345)>>>0)/4294967296,tx=[];
   for(let d=29;d>=0;d--){const n=Math.floor(rnd()*4);
     for(let k=0;k<n;k++){const c=clients[Math.floor(rnd()*clients.length)],cup=rnd()<.2,amt=Math.round(14+rnd()*76);
-      tx.push({id:'t'+d+'_'+k,ts:now-d*DAY-Math.floor(rnd()*8)*36e5,key:c.id,name:c.name,tier:tierOf(c.life),type:cup?'cupon':'consumo',amount:amt,credit:rate(c.life),status:'ok',rec:rnd()<.72})}}
+      tx.push({id:'t'+d+'_'+k,ts:now-d*DAY-Math.floor(rnd()*8)*36e5,key:c.id,name:c.name,tier:tierOf(c.life),type:cup?'cupon':'consumo',amount:amt,credit:amt>=RULES0.min?rate(c.life):0,q:amt>=RULES0.min,min:RULES0.min,sede:['bar','bar','mir','sis'][(d+k)%4],status:'ok',rec:rnd()<.72})}}
   tx.sort((a,b)=>b.ts-a.ts);
-  return{clients,tx,links:[]};}
+  return{ver:3,clients,tx,links:[]};}
 let P=null;try{P=JSON.parse(localStorage.getItem(PK)||'null')}catch(e){}
 if(!P||!Array.isArray(P.clients)||!Array.isArray(P.tx))P=seed();
+function normP(){if(P.ver!==3){const s=seed();P.clients=s.clients;P.tx=s.tx;P.ver=3}P.links=Array.isArray(P.links)?P.links:[];P.gifts=P.gifts||{};P.audit=Array.isArray(P.audit)?P.audit:[];P.role=P.role==='staff'?'staff':'admin';P.sedes=Object.assign({bar:true,mir:true,sis:true},P.sedes||{});if(!P.sedes[P.curSede])P.curSede=['bar','mir','sis'].find(k=>P.sedes[k])||'bar';P.rules=Object.assign({},RULES0,P.rules||{})}
+normP();
 const saveP=()=>{try{localStorage.setItem(PK,JSON.stringify(P))}catch(e){}};
 
 const real=()=>(S.auth&&S.user)?S:null;
-function clients(){const l=P.clients.map(c=>({key:c.id,name:c.name,code:c.code,w:c,me:false}));const r=real();if(r)l.unshift({key:'me',name:r.user.name,code:r.user.code,w:r,me:true});return l}
+function clients(){const l=P.clients.map(c=>({key:c.id,name:c.name,code:c.code,phone:c.phone||'',w:c,me:false}));const r=real();if(r)l.unshift({key:'me',name:r.user.name,code:r.user.code,phone:'+51'+String(r.user.phone||'').replace(/\D/g,''),w:r,me:true});return l}
 const byKey=k=>clients().find(c=>c.key===k);
 const initials=n=>n.split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase();
 const tpill=t=>t==null?'<span class="dim">\u2014</span>':`<span class="pill p-t${t}">${TIERS[t]}</span>`;
@@ -662,20 +723,29 @@ function agg(offset){const[f,t]=win(offset),l=P.tx.filter(x=>inRange(x,f,t));
 function daily(fn){const d=days(),[f]=win(0),out=Array(d).fill(0);P.tx.forEach(x=>{if(x.status!=='ok'||x.ts<f)return;const i=Math.floor((x.ts-f)/DAY);if(i>=0&&i<d)out[i]+=fn(x)});return out}
 
 /* ---------- acciones ---------- */
+let lastSig={s:'',t:0};
 function register(key,amount,type,extra){
-  const c=byKey(key);if(!c)return null;const w=c.w,life0=w.life,t0=tierOf(life0);
-  const ev=EM.applyVisit(w,c.me);if(c.me)EM.save();
-  const credit=ev.filter(e=>e.k==='abono'||e.k==='oro').reduce((a,e)=>a+e.a,0),done=ev.find(e=>e.k==='tarjeta');
-  P.tx.unshift(Object.assign({id:'t'+Date.now()+Math.random().toString(36).slice(2,5),ts:Date.now(),key:c.key,name:c.name,tier:t0,type,amount,credit,status:'ok',rec:life0>0,done:done?done.a:0},extra||{}));
+  const c=byKey(key);if(!c)return null;const r=rules();extra=extra||{};
+  const sig=key+'|'+amount+'|'+type;if(sig===lastSig.s&&Date.now()-lastSig.t<800){EM.toast('Registro duplicado ignorado');return null}
+  if(type==='consumo'){
+    if(!(amount>=1&&amount<=r.max)){EM.toast('El monto debe estar entre S/ 1 y '+money(r.max));return null}
+    const cd=coolLeft(c);if(cd>0){EM.toast('Este cliente ya sumó un sello. Espera '+cd+' min');return null}}
+  lastSig={s:sig,t:Date.now()};
+  const w=c.w,life0=w.life,t0=tierOf(life0),qual=amount>=r.min;let ev=[],credit=0,done=null;
+  if(qual){ev=EM.applyVisit(w,c.me);if(c.me)EM.save();credit=ev.filter(e=>e.k==='abono'||e.k==='oro').reduce((a,e)=>a+e.a,0);done=ev.find(e=>e.k==='tarjeta')||null}
+  const sede=SEDEN[extra.sede]?extra.sede:(P.curSede||'bar');
+  P.tx.unshift(Object.assign({id:'t'+Date.now()+Math.random().toString(36).slice(2,5),ts:Date.now(),key:c.key,name:c.name,tier:t0,type,amount,credit,q:qual,min:r.min,sede,by:isAdmin()?'admin':'staff',status:'ok',rec:life0>0,done:done?done.a:0},extra,{sede}));
+  audit((type==='cupon'?'Cupón validado':'Consumo registrado')+' · '+c.name+' · '+money(amount)+' · '+SEDEN[sede]+' · '+(qual?'+1 sello':'sin sello (mínimo '+money(r.min)+')')+(done?' · tarjeta completa':''));
   P.tx=P.tx.slice(0,400);saveP();renderAll();EM.chime(!!done);EM.buzz(done?[18,40,18]:14);
-  return{ev,c,credit,done}}
+  return{ev,c,credit,done,q:qual,sede}}
 
 /* ---------- vistas ---------- */
-const VIEWS=['resumen','clientes','recompensas','transacciones','cupones','cobros','reportes'];
-function route(){const v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):'resumen';
+const VIEWS=['resumen','pos','clientes','recompensas','transacciones','cupones','cobros','reportes','config'];
+function route(){let v=VIEWS.includes(location.hash.slice(1))?location.hash.slice(1):'resumen';
+  if(!isAdmin()&&ADM_VIEWS.includes(v)){v='resumen';history.replaceState(null,'','#resumen');EM.toast('Esa sección es solo para administradores')}
   VIEWS.forEach(x=>$('#v-'+x).classList.toggle('on',x===v));
   $$('#pnav a').forEach(a=>a.getAttribute('aria-current')&&a.removeAttribute('aria-current'));const a=$(`#pnav a[data-v="${v}"]`);a&&a.setAttribute('aria-current','page');
-  document.title=({resumen:'Resumen',clientes:'Clientes',recompensas:'Recompensas',transacciones:'Transacciones',cupones:'Cupones',cobros:'Links de cobro',reportes:'Reportes'})[v]+' \u00b7 Panel expandeMoney'}
+  document.title=({resumen:'Resumen',clientes:'Clientes',recompensas:'Recompensas',transacciones:'Transacciones',cupones:'Cupones',cobros:'Links de cobro',reportes:'Reportes',pos:'Caja',config:'Reglas y sedes'})[v]+' \u00b7 Panel expandeMoney'}
 
 function spark(data){if(!data.length)return'';const w=110,h=30,max=Math.max(...data),min=Math.min(...data),st=w/Math.max(1,data.length-1);
   const p=data.map((d,i)=>(i?'L':'M')+(i*st).toFixed(1)+','+(h-((d-min)/(max-min||1))*h).toFixed(1)).join(' ');
@@ -698,7 +768,7 @@ function renderChart(){
    +`<path d="${lp} L ${pts[n-1][0]},${pt+ih} L ${pts[0][0]},${pt+ih} Z" fill="url(#rg)"/><path d="${lp}" fill="none" stroke="#00e676" stroke-width="2.5" stroke-linecap="round"/>`
    +pts.map((p,i)=>`<circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#0b0f17" stroke="#00e676" stroke-width="2"><title>${new Date(f+i*DAY).toLocaleDateString('es-PE',{day:'2-digit',month:'short'})}: ${money(data[i])}</title></circle>`).join('')
    +pts.map((p,i)=>i%every?'':`<text x="${p[0]}" y="${h-6}" fill="#64748b" font-size="10" text-anchor="middle" font-family="Inter">${new Date(f+i*DAY).toLocaleDateString('es-PE',{day:'2-digit',month:'short'})}</text>`).join('');
-  $('#rng-l').textContent=days()+' d\u00edas'}
+  $('#rng-l').textContent=days()+' d\u00edas';const tot=data.reduce((a,b)=>a+b,0);$('#rev-sum').innerHTML=`Total en el periodo: <b class="em mono">${money(tot)}</b> \u00b7 Promedio diario: <b class="mono">${money(tot/n)}</b>`}
 function renderPipe(){
   const cl=clients(),cnt=[0,0,0];cl.forEach(c=>cnt[tierOf(c.w.life)]++);const mx=Math.max(...cnt,1),col=['linear-gradient(90deg,#8a6a3a,#c99a55)','linear-gradient(90deg,#9aa3b0,#e4e9f0)','linear-gradient(90deg,#00c764,#FFD95A)'];
   $('#pipe').innerHTML=[0,1,2].map(i=>`<div><div class="t"><span>${['\ud83e\udd49','\ud83e\udd48','\ud83e\udd47'][i]} ${TIERS[i]}</span><b>${cnt[i]}</b></div><div class="bar"><i style="width:${cnt[i]/mx*100}%;background:${col[i]}"></i></div></div>`).join('');
@@ -710,7 +780,9 @@ function renderStamp(){
    :`<div class="l"><span class="pill p-em" style="width:fit-content">M\u00e1s cerca de su premio</span><div class="cell"><span class="avs" style="width:44px;height:44px;border-radius:12px;background:var(--em);color:#04130b;font-size:14px">${esc(initials(c.name))}</span><div><div style="font:700 16px 'Plus Jakarta Sans',sans-serif">${esc(c.name)}${c.me?'<span class="me">Tu cuenta</span>':''}</div><div class="dim" style="font-size:11.5px">Nivel ${TIERS[tierOf(c.w.life)]} \u00b7 ${c.w.life} consumos en total</div></div></div><div class="dim" style="font-size:11.5px">Le ${R.CARD-c.w.visits===1?'falta':'faltan'} <b class="em">${R.CARD-c.w.visits} ${R.CARD-c.w.visits===1?'consumo':'consumos'}</b> para liberar ${money(EM.reward(tierOf(c.w.life)))}.</div></div>
     <div class="rr"><div style="font-size:10.5px;color:var(--faint);letter-spacing:.04em">TARJETA DIGITAL</div><div class="dts">${Array.from({length:R.CARD},(_,i)=>`<i class="${i<c.w.visits?'on':''}"></i>`).join('')}</div><div class="mono em" style="font-size:11px">${c.w.visits}/${R.CARD} consumos</div></div>`;
   el.innerHTML='';keep.forEach(k=>el.appendChild(k));el.insertAdjacentHTML('beforeend',body)}
-function renderTickets(){const a=agg(0).tx,r=a.filter(x=>x.rec),n=a.filter(x=>!x.rec),avg=l=>l.length?l.reduce((s,x)=>s+x.amount,0)/l.length:0;$('#tk-r').textContent=money(avg(r));$('#tk-n').textContent=money(avg(n))}
+function renderTickets(){const a=agg(0).tx,r=a.filter(x=>x.rec),n=a.filter(x=>!x.rec),avg=l=>l.length?l.reduce((s,x)=>s+x.amount,0)/l.length:0;$('#tk-r').textContent=money(avg(r));$('#tk-n').textContent=money(avg(n));
+  const k=a.filter(x=>x.key),act=new Set(k.map(x=>x.key)).size,freq=act?k.length/act*30/days():0,ret=a.length?Math.round(r.length/a.length*100):0;
+  $('#tk-foot').innerHTML=`Frecuencia media: <b>${freq.toFixed(1)} visitas/mes</b> \u00b7 Recurrentes: <b class="em">${ret}%</b> de las ventas`}
 const fday=ts=>{const a=new Date().setHours(0,0,0,0),b=new Date(ts).setHours(0,0,0,0),dd=Math.round((a-b)/DAY);return dd===0?'Hoy':dd===1?'Ayer':new Date(ts).toLocaleDateString('es-PE',{day:'2-digit',month:'short'})};
 const ftime=ts=>new Date(ts).toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit',hour12:false});
 /* consumos cuyo saldo sigue bloqueado: los últimos "visitas" de cada cliente Bronce/Plata desde su última tarjeta completa */
@@ -718,46 +790,45 @@ function pendSet(){const s=new Set();clients().forEach(c=>{const w=c.w;if(tierOf
 const prem=(x,ps)=>x.type==='cobro'?(x.status==='ok'?'Pagado':'Pendiente'):(ps.has(x.id)?'Pendiente':'Pagado');
 const txWho=x=>`<td><div class="cell"><span class="avs">${esc(x.key?initials(x.name):'LC')}</span><span style="font-weight:500">${esc(x.name)}</span></div></td><td><span class="pill ${x.type==='cobro'?'p-gold':x.type==='cupon'?'p-em':'p-sl'}">${TYPES[x.type]}</span></td><td>${tpill(x.tier)}</td>`;
 const txCred=x=>`<td class="mono ${x.credit?'em':'dim'}">${x.credit?'+'+money(x.credit):'\u2014'}${x.done?` <span class="pill p-gold" data-tip="Complet\u00f3 su tarjeta y liber\u00f3 ${money(x.done)}">\u2605</span>`:''}</td>`;
+const sello=x=>x.type==='cobro'?'<span class="dim">\u2014</span>':x.q===false?`<span class="pill p-sl" data-tip="El consumo no alcanz\u00f3 el m\u00ednimo para sello">&lt; ${money(x.min||rules().min)}</span>`:(x.tier===2?'<span class="pill p-t2">Instant\u00e1neo</span>':'<span class="pill p-em">+1 sello</span>');
 const txRow=(x,full,ps)=>{
   if(!full)return`<tr class="h">${txWho(x)}<td class="mono dim">${fdt(x.ts)}</td><td class="mono" style="font-weight:600">${money(x.amount)}</td>${txCred(x)}</tr>`;
   const p=prem(x,ps),pend=p==='Pendiente'&&x.type!=='cobro';
-  return`<tr class="h">${txWho(x)}<td class="mono dim">${fday(x.ts)}</td><td class="mono">${ftime(x.ts)}</td><td class="mono" style="font-weight:600">${money(x.amount)}</td>${txCred(x)}<td class="mono" ${pend?'style="color:var(--gold-b)"':'class="mono dim"'}>${pend?money(x.credit):'\u2014'}</td><td><span class="pill ${p==='Pagado'?'p-em':'p-gold'}" data-tip="${p==='Pagado'?(x.type==='cobro'?'Cobro acreditado':'Premio liberado al saldo disponible'):'Saldo bloqueado hasta completar la tarjeta'}">${p}</span></td></tr>`};
+  return`<tr class="h">${txWho(x)}<td class="mono dim">${fday(x.ts)}</td><td class="mono">${ftime(x.ts)}</td><td class="dim">${esc(SEDEN[x.sede]||'Barranco')}</td><td class="mono" style="font-weight:600">${money(x.amount)}</td>${txCred(x)}<td>${sello(x)}</td><td class="mono" ${pend?'style="color:var(--gold-b)"':'class="mono dim"'}>${pend?money(x.credit):'\u2014'}</td><td><span class="pill ${p==='Pagado'?'p-em':'p-gold'}" data-tip="${p==='Pagado'?(x.type==='cobro'?'Cobro acreditado':x.q===false?'Venta cobrada: sin premio por no alcanzar el m\u00ednimo':'Premio liberado al saldo disponible'):'Saldo bloqueado hasta completar la tarjeta'}">${p}</span></td></tr>`};
 function renderLast(){$('#tb-last').innerHTML=P.tx.filter(x=>x.status==='ok').slice(0,6).map(x=>txRow(x,false)).join('')||'<tr><td colspan="6" class="empty">A\u00fan no hay transacciones.</td></tr>'}
-let tierF='all',typeF='all';
+let tierF='all',typeF='all',txLim=60;
 const q=()=>norm($('#gq').value);
 function renderClients(){
   $('#tier-f').innerHTML=[['all','Todos'],['0','Bronce'],['1','Plata'],['2','Oro']].map(([k,l])=>`<button type="button" class="chp ${tierF===k?'on':''}" data-tf="${k}" aria-pressed="${tierF===k}">${l}</button>`).join('');
-  const l=clients().filter(c=>(tierF==='all'||String(tierOf(c.w.life))===tierF)&&(!q()||norm(c.name+' '+c.code).includes(q())));
+  const l=clients().filter(c=>(tierF==='all'||String(tierOf(c.w.life))===tierF)&&(!q()||norm(c.name+' '+c.code+' '+(c.phone||'')).includes(q())));
   $('#cli-n').textContent=l.length+' clientes';
-  $('#tb-cli').innerHTML=l.map(c=>{const t=tierOf(c.w.life),w=c.w;return`<tr class="h"><td><div class="cell"><span class="avs">${esc(initials(c.name))}</span><div><b style="font-weight:600">${esc(c.name)}</b>${c.me?'<span class="me">Tu cuenta</span>':''}<div class="mono dim" style="font-size:11px">${esc(c.code)}</div></div></div></td><td>${tpill(t)}</td><td>${t===2?'<span class="dim">Sin tarjeta</span>':`<span class="mini"><i style="width:${w.visits/R.CARD*100}%"></i></span><span class="mono" style="font-size:11.5px">${w.visits}/${R.CARD}</span>`}</td><td class="mono dim">${money(t===2?0:w.lock)}</td><td class="mono em">${money(w.disp)}</td><td class="mono dim">${w.life}</td><td><button class="cta ghost sm" type="button" data-reg="${c.key}" aria-label="Registrar consumo de ${esc(c.name)}">${ic('qr')}Registrar</button></td></tr>`}).join('')||'<tr><td colspan="7" class="empty">Sin resultados.</td></tr>'}
+  $('#tb-cli').innerHTML=l.map(c=>{const t=tierOf(c.w.life),w=c.w;return`<tr class="h"><td><div class="cell"><span class="avs">${esc(initials(c.name))}</span><div><b style="font-weight:600">${esc(c.name)}</b>${c.me?'<span class="me">Tu cuenta</span>':''}<div class="mono dim" style="font-size:11px">${esc(c.code)} \u00b7 ${esc(maskPhone(c.phone||''))}</div></div></div></td><td>${tpill(t)}</td><td>${t===2?'<span class="dim">Sin tarjeta</span>':`<span class="mini"><i style="width:${w.visits/R.CARD*100}%"></i></span><span class="mono" style="font-size:11.5px">${w.visits}/${R.CARD}</span>`}</td><td class="mono dim">${money(t===2?0:w.lock)}</td><td class="mono em">${money(w.disp)}</td><td class="mono dim">${w.life}</td><td><button class="cta ghost sm" type="button" data-reg="${c.key}" aria-label="Registrar consumo de ${esc(c.name)}">${ic('qr')}Registrar</button></td></tr>`}).join('')||'<tr><td colspan="7" class="empty">Sin resultados.</td></tr>'}
 function renderTx(){
   $('#type-f').innerHTML=[['all','Todos'],['consumo','Consumos'],['cupon','Cupones'],['cobro','Cobros']].map(([k,l])=>`<button type="button" class="chp ${typeF===k?'on':''}" data-yf="${k}" aria-pressed="${typeF===k}">${l}</button>`).join('');
   const l=P.tx.filter(x=>(typeF==='all'||x.type===typeF)&&(!q()||norm(x.name).includes(q())));
-  const ps=pendSet();$('#tx-n').textContent=l.length+' transacciones';$('#tb-tx').innerHTML=l.slice(0,60).map(x=>txRow(x,true,ps)).join('')||'<tr><td colspan="9" class="empty">Sin resultados.</td></tr>'}
+  const ps=pendSet();$('#tx-n').textContent=l.length+' transacciones';$('#tb-tx').innerHTML=l.slice(0,txLim).map(x=>txRow(x,true,ps)).join('')||'<tr><td colspan="11" class="empty">Sin resultados.</td></tr>';const mb=$('#tx-more');mb.hidden=l.length<=txLim;mb.textContent='Ver m\u00e1s ('+(l.length-txLim)+')'}
 function renderRules(){const T=[0,1,2];$('#rules').innerHTML=T.map(t=>`<div class="rl" style="border-color:${['rgba(233,168,103,.4)','rgba(201,209,220,.4)','rgba(255,217,90,.5)'][t]}"><h3 style="color:${['#E9A867','#C9D1DC','#FFD95A'][t]}">${TIERS[t]}</h3><div class="rg">${['0\u20139','10\u201329','+30'][t]} consumos</div><div class="big em">${money(R.RATE[t])}</div><p>${t<2?`por consumo, <b>bloqueado</b>. Al completar ${R.CARD} consumos se liberan <b class="em">${money(EM.reward(t))}</b> al saldo disponible y la tarjeta se reinicia.`:'por consumo, <b>disponible al instante</b>. Sin tarjeta ni saldo bloqueado.'}</p></div>`).join('')}
 function renderCoupons(){const r=real(),l=r?r.coupons:[];
   $('#tb-cp').innerHTML=l.length?l.map(c=>{const o=EM.OFFERS.find(x=>x.id===c.o);return`<tr class="h"><td class="mono">${esc(c.id)}</td><td>${esc(o?o.t:'Oferta')}</td><td class="mono">${c.mode==='full'?'S/ 0.00 (pagado con saldo)':money(c.pay)}</td><td><span class="pill ${c.status==='act'?'p-em':'p-sl'}">${c.status==='act'?'Activo':'Usado'}</span></td><td>${c.status==='act'?`<button class="cta ghost sm" type="button" data-vcode="${esc(c.id)}">Validar</button>`:''}</td></tr>`}).join(''):`<tr><td colspan="5" class="empty">${r?'Esta cuenta a\u00fan no tiene cupones. Canjea uno en la <a href="shop.html" style="text-decoration:underline">tienda</a>.':'Inicia sesi\u00f3n desde el sitio para ver los cupones de tu cuenta de prueba.'}</td></tr>`}
 function renderLinks(){$('#tb-ln').innerHTML=(P.links||[]).length?P.links.map(l=>`<tr class="h"><td>${esc(l.name)}</td><td class="mono dim" style="font-size:11.5px">${esc(l.url)}</td><td class="mono">${money(l.price)}</td><td class="mono em">${money(l.price*.95)}</td><td><span class="pill ${l.status==='ok'?'p-em':'p-gold'}">${l.status==='ok'?'Pagado':'Pendiente'}</span></td><td>${l.status==='ok'?'':`<button class="cta ghost sm" type="button" data-lpay="${l.id}">Simular pago</button> <button class="cta ghost sm" type="button" data-lcopy="${l.id}">${ic('copy')}</button>`}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">A\u00fan no creaste links. Genera el primero a la izquierda.</td></tr>'}
 function calcLink(){const p=Math.max(0,parseFloat($('#lp').value)||0);$('#b-g').textContent=money(p);$('#b-f').textContent='\u2013 '+money(p*.05);$('#b-n').textContent=money(p*.95);
   $('#lpv').textContent='expandemoney.com/pay/cafe-alma/'+(norm($('#ln').value||'producto').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'producto')}
-function renderAll(){renderKpis();renderChart();renderPipe();renderStamp();renderTickets();renderLast();renderClients();renderTx();renderRules();renderCoupons();renderLinks();renderReport();renderBd();
+function renderAll(){renderKpis();renderChart();renderPipe();renderStamp();renderTickets();renderLast();renderClients();renderTx();renderRules();renderCoupons();renderLinks();renderReport();renderBd();renderPos();renderCardViz();renderSettings();renderSide();
   $('#demo-note').style.display=real()?'none':''}
 
 /* ---------- registrar consumo (modal) ---------- */
 const CM={key:'',amt:''};
-function cmPrev(){const c=byKey(CM.key);if(!c)return'';const w=c.w,t=tierOf(w.life),r=R.RATE[t];
-  if(t===2)return`Sumar\u00e1 <b class="em">${money(r)}</b> disponibles al instante (nivel Oro).`;
-  const fin=w.visits+1>=R.CARD;return`Sumar\u00e1 <b class="em">${money(r)}</b> bloqueados (${Math.min(w.visits+1,R.CARD)}/${R.CARD}).`+(fin?` <b>\u00a1Completa su tarjeta!</b> Libera ${money(EM.reward(t))} a su saldo disponible.`:'')}
+function cmPrev(){return prevFor(CM.key,CM.amt).html}
 function cmHTML(){const cl=clients();return`<div class="mh"><div><h2 id="mtitle">Registrar consumo</h2><small>Suma saldo a la tarjeta del cliente seg\u00fan su nivel.</small></div>${EM.XBTN}</div><div class="mb">
  <div class="mfield"><label for="cm-c">Cliente</label><select class="in2" id="cm-c">${cl.map(c=>`<option value="${c.key}" ${c.key===CM.key?'selected':''}>${esc(c.name)} \u00b7 ${esc(c.code)} \u00b7 ${TIERS[tierOf(c.w.life)]}</option>`).join('')}</select></div>
  <div class="mfield"><label for="cm-a">Monto del consumo (S/)</label><input class="in2" id="cm-a" type="number" min="1" max="5000" step="0.5" inputmode="decimal" placeholder="Ej. 35" value="${esc(CM.amt)}"></div>
- <div class="prev" id="cm-p">${cmPrev()}</div><div class="res" id="cm-e" role="alert"></div>
+ <div class="mfield"><label for="cm-s">Sede</label><select class="in2" id="cm-s">${sedeOpts(P.curSede)}</select></div><div class="prev" id="cm-p">${cmPrev()}</div><div class="res" id="cm-e" role="alert"></div>
  <button class="cta" type="button" data-cm-go style="width:100%;justify-content:center;margin-top:1rem">Confirmar consumo</button></div>`}
 function openCM(key){CM.key=key||(clients()[0]||{}).key||'';CM.amt='';if(!CM.key)return;EM.modal.show(cmHTML,'#cm-a')}
-function doCM(){const amt=parseFloat($('#cm-a').value),e=$('#cm-e');
-  if(!(amt>=1&&amt<=5000)){e.className='res bad';e.textContent='Ingresa un monto entre S/ 1 y S/ 5,000.';return}
-  const r=register($('#cm-c').value,Math.round(amt*100)/100,'consumo');EM.modal.close();if(!r)return;
-  const f=r.c.name.split(' ')[0];EM.toast(r.done?`\u00a1Tarjeta completa! ${money(r.done.a)} liberados para ${f}`:`+${money(r.credit)} ${tierOf(r.c.w.life-1)===2?'disponibles':'sumados a la tarjeta'} de ${f}`)}
+function doCM(){const amt=parseFloat($('#cm-a').value),e=$('#cm-e'),pv=prevFor($('#cm-c').value,$('#cm-a').value);
+  if(!pv.ok){e.className='res bad';e.innerHTML=pv.html;return}
+  const r=register($('#cm-c').value,Math.round(amt*100)/100,'consumo',{sede:$('#cm-s').value});EM.modal.close();if(!r)return;
+  const f=r.c.name.split(' ')[0];EM.toast(!r.q?`Venta registrada sin sello (mínimo ${money(rules().min)})`:r.done?`¡Tarjeta completa! ${money(r.done.a)} liberados para ${f}`:`+${money(r.credit)} ${tierOf(r.c.w.life-1)===2?'disponibles':'sumados a la tarjeta'} de ${f}`)}
 
 /* ---------- cupones y links ---------- */
 function validate(code){code=(code||$('#vc').value).trim().toUpperCase();const res=$('#vres'),r=real();
@@ -766,17 +837,115 @@ function validate(code){code=(code||$('#vc').value).trim().toUpperCase();const r
   if(!cp){res.className='res bad';res.textContent=r?'No encontramos ese cup\u00f3n en la cuenta activa.':'Inicia sesi\u00f3n desde el sitio para validar los cupones de tu cuenta de prueba.';return}
   if(cp.status!=='act'){res.className='res bad';res.textContent='Este cup\u00f3n ya fue usado.';return}
   const o=EM.OFFERS.find(x=>x.id===cp.o);cp.status='used';
-  const out=register('me',o?o.price:cp.pay,'cupon');
+  const out=register('me',o?o.price:cp.pay,'cupon');EM.save();
   res.className='res ok';res.innerHTML=`<b>Cup\u00f3n v\u00e1lido:</b> ${esc(o?o.t:'')}.<br>${cp.mode==='full'?'Pagado con saldo: no cobres nada en el local.':`Cobra en el local: <b>${money(cp.pay)}</b> (saldo aplicado ${money(cp.use)}).`}`;
   $('#vc').value='';EM.toast('Cup\u00f3n validado. '+(out?out.ev.map(e=>e.m).join(' \u00b7 '):''))}
-function mkLink(){const n=$('#ln').value.trim(),p=parseFloat($('#lp').value);
+function mkLink(){if(!needAdmin())return;const n=$('#ln').value.trim(),p=parseFloat($('#lp').value);
   if(n.length<2||!(p>=1)){EM.toast('Completa el producto y un precio de al menos S/ 1');return}
-  const id='l'+Date.now();P.links=P.links||[];P.links.unshift({id,name:n,price:Math.round(p*100)/100,url:$('#lpv').textContent+'-'+id.slice(-4),status:'pend',ts:Date.now()});saveP();renderLinks();$('#ln').value='';$('#lp').value='';calcLink();EM.toast('Link generado. C\u00f3pialo y comp\u00e1rtelo por WhatsApp')}
-function payLink(id){const l=(P.links||[]).find(x=>x.id===id);if(!l||l.status==='ok')return;l.status='ok';
+  const id='l'+Date.now();P.links=P.links||[];P.links.unshift({id,name:n,price:Math.round(p*100)/100,url:$('#lpv').textContent+'-'+id.slice(-4),status:'pend',ts:Date.now()});audit('Link de cobro creado: '+n+' · '+money(p));saveP();renderLinks();$('#ln').value='';$('#lp').value='';calcLink();EM.toast('Link generado. C\u00f3pialo y comp\u00e1rtelo por WhatsApp')}
+function payLink(id){if(!needAdmin())return;const l=(P.links||[]).find(x=>x.id===id);if(!l||l.status==='ok')return;l.status='ok';audit('Cobro por link pagado: '+l.name+' · '+money(l.price));
   P.tx.unshift({id:'t'+Date.now(),ts:Date.now(),key:null,name:'Cliente por link \u00b7 '+l.name,tier:null,type:'cobro',amount:l.price,credit:0,status:'ok',rec:false,done:0});saveP();renderAll();EM.chime();EM.toast(`Cobro recibido: ${money(l.price*.95)} netos en 24 h`)}
-function csv(){const ps=pendSet(),rows=[['fecha','hora','cliente','tipo','nivel','monto_S','saldo_abonado_S','saldo_bloqueado_S','estado_premio']].concat(P.tx.map(x=>{const p=prem(x,ps);return[new Date(x.ts).toLocaleDateString('en-CA'),ftime(x.ts),x.name,TYPES[x.type],x.tier==null?'':TIERS[x.tier],x.amount.toFixed(2),x.credit.toFixed(2),(p==='Pendiente'&&x.type!=='cobro'?x.credit:0).toFixed(2),p]}));
+function csv(){if(!needAdmin())return;const ps=pendSet(),rows=[['fecha','hora','cliente','tipo','nivel','sede','monto_S','saldo_abonado_S','sello','saldo_bloqueado_S','estado_premio']].concat(P.tx.map(x=>{const p=prem(x,ps);return[new Date(x.ts).toLocaleDateString('en-CA'),ftime(x.ts),x.name,TYPES[x.type],x.tier==null?'':TIERS[x.tier],SEDEN[x.sede]||'Barranco',x.amount.toFixed(2),x.credit.toFixed(2),x.type==='cobro'?'':(x.q===false?'no califica':'1'),(p==='Pendiente'&&x.type!=='cobro'?x.credit:0).toFixed(2),p]}));
   const t=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""').replace(/^[=+\-@]/,"'$&")+'"').join(',')).join('\n'),a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob(['\ufeff'+t],{type:'text/csv;charset=utf-8'}));a.download='expandemoney-transacciones.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);EM.toast('CSV descargado')}
+  a.href=URL.createObjectURL(new Blob(['\ufeff'+t],{type:'text/csv;charset=utf-8'}));a.download='expandemoney-transacciones.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);audit('Exportación CSV de transacciones');saveP();EM.toast('CSV descargado')}
+
+/* ===== REGLAS EM.R, ROLES Y SECUENCIAS ===== */
+const SEDES=[['bar','Barranco'],['mir','Miraflores'],['sis','San Isidro']],SEDEN=Object.fromEntries(SEDES),ADM_VIEWS=['cobros','reportes','config'];
+function isAdmin(){return P.role!=='staff'}
+function needAdmin(){if(isAdmin())return true;EM.toast('Acción disponible solo para administradores');return false}
+function rules(){return Object.assign({},RULES0,P.rules||{})}
+function audit(act){P.audit=P.audit||[];P.audit.unshift({ts:Date.now(),by:isAdmin()?'María Rojas · Admin':'Caja · Staff',act});P.audit=P.audit.slice(0,100)}
+const maskPhone=p=>isAdmin()?p:String(p).replace(/(\+51\d{3})\d{3}(\d{3})/,'$1•••$2');
+const sedeOpts=sel=>SEDES.filter(s=>P.sedes[s[0]]||s[0]===sel).map(s=>`<option value="${s[0]}" ${s[0]===sel?'selected':''}>${s[1]}</option>`).join('');
+function coolLeft(c){const r=rules();if(!(r.cool>0))return 0;const x=P.tx.find(t=>t.key===c.key&&t.type!=='cobro'&&t.q!==false&&t.status==='ok');if(!x)return 0;return Math.max(0,Math.ceil(r.cool-(Date.now()-x.ts)/6e4))}
+/* secuencia de validación de un consumo: cliente > monto > antifraude > califica? > efecto en la tarjeta */
+function prevFor(key,amtStr){const c=byKey(key);if(!c)return{ok:false,html:'Selecciona un cliente.'};
+  const a=parseFloat(amtStr),r=rules(),w=c.w,t=tierOf(w.life),rt=R.RATE[t];
+  if(!(a>0))return{ok:false,html:'Ingresa el monto del consumo.'};
+  if(a<1||a>r.max)return{ok:false,html:`El monto debe estar entre S/ 1 y ${money(r.max)}.`};
+  const cd=coolLeft(c);if(cd>0)return{ok:false,html:`Este cliente ya sumó un sello. Espera <b>${cd} min</b> para otro.`};
+  if(a<r.min)return{ok:true,q:false,html:`<b>No califica para sello</b>: el mínimo es ${money(r.min)} (faltan ${money(r.min-a)}). Se registra la venta sin saldo.`};
+  if(t===2)return{ok:true,q:true,html:`Sumará <b class="em">${money(rt)}</b> disponibles al instante (nivel Oro).`};
+  const fin=w.visits+1>=R.CARD;
+  return{ok:true,q:true,html:`+1 sello (${Math.min(w.visits+1,R.CARD)}/${R.CARD}) · <b class="em">${money(rt)}</b> bloqueados.`+(fin?` <b>¡Completa su tarjeta!</b> Libera ${money(EM.reward(t))} a su saldo disponible.`:'')}}
+
+/* roles y estado de conexión (los permisos reales deben aplicarse también en el servidor) */
+function applyRole(){const a=isAdmin();document.body.dataset.rol=a?'admin':'staff';
+  $$('button[data-role]').forEach(b=>{const on=b.dataset.role===(a?'admin':'staff');b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
+  $('#who-av').textContent=a?'MR':'CJ';$('#who-n').textContent=a?'María Rojas':'Caja · Turno';$('#who-r').textContent=a?'Administradora':'Cajero (staff)';
+  $('#hello').textContent=a?'Hola, María — así va Café Alma hoy':'Turno de caja — Café Alma'}
+function netUI(){const on=navigator.onLine!==false,el=$('#net');el.className='pill '+(on?'p-em':'p-red');el.querySelector('.net-t').textContent=on?'En línea · sinc. '+ftime(Date.now()):'Sin conexión · modo local'}
+addEventListener('online',netUI);addEventListener('offline',()=>{netUI();EM.toast('Sin conexión: los registros se guardan en este dispositivo')});
+addEventListener('storage',e=>{if(e.key===PK&&e.newValue){try{P=JSON.parse(e.newValue);normP();applyRole();fillCfg();fillRules();renderAll();netUI()}catch(err){}}});
+function renderSide(){const r=rules();$('#rc-min').textContent=r.min?'≥ '+money(r.min):'Sin mínimo';
+  $('#rc-p').textContent='1 sello por consumo calificado. Al llegar a '+R.CARD+' sellos se libera el premio del nivel.'+(r.cool?' Espera de '+r.cool+' min entre sellos.':'')}
+
+/* --- Caja (POS): cliente > monto > confirmar --- */
+const POS={key:'',amt:'',q:''};
+function posList(){const t=norm(POS.q),d=POS.q.replace(/\D/g,'');return clients().filter(c=>!t||norm(c.name+' '+c.code).includes(t)||(d.length>=3&&String(c.phone).replace(/\D/g,'').includes(d))).slice(0,6)}
+function renderPos(){const sel=byKey(POS.key);if(POS.key&&!sel)POS.key='';
+  $('#pos-res').innerHTML=sel?'':`<div class="pl">${posList().map(c=>`<button type="button" data-pos-pick="${c.key}"><span class="avs">${esc(initials(c.name))}</span><span><b>${esc(c.name)}</b>${c.me?'<span class="me">Tu cuenta</span>':''}<small class="dim" style="display:block;font-size:11px">${esc(c.code)} · ${esc(maskPhone(c.phone||''))} · ${TIERS[tierOf(c.w.life)]}</small></span></button>`).join('')||'<div class="empty" style="padding:1rem">Sin resultados.</div>'}</div>`;
+  $('#pos-sel').innerHTML=sel?`<div class="pl"><button type="button" class="on" data-pos-clear aria-label="Cambiar cliente"><span class="avs">${esc(initials(sel.name))}</span><span><b>${esc(sel.name)}</b><small class="dim" style="display:block;font-size:11px">${esc(sel.code)} · ${TIERS[tierOf(sel.w.life)]} · ${sel.w.visits}/${R.CARD} sellos</small></span><span class="dim" style="margin-left:auto;font-size:12px">Cambiar</span></button></div>`:'';
+  const pv=prevFor(POS.key,POS.amt),hasA=parseFloat(POS.amt)>0;
+  $('#ps1').className=sel?'ok':'on';$('#ps2').className=!sel?'':(hasA?'ok':'on');$('#ps3').className=(sel&&pv.ok)?'on':'';
+  $('#pos-prev').innerHTML=pv.html;$('#pos-go').disabled=!(sel&&pv.ok);$('#pos-sede').innerHTML=sedeOpts(P.curSede);
+  $('#pos-last').innerHTML=P.tx.filter(x=>x.type!=='cobro').slice(0,5).map(x=>`<div class="cell" style="justify-content:space-between;gap:8px"><div class="cell"><span class="avs">${esc(initials(x.name))}</span><div><b style="font-weight:600">${esc(x.name)}</b><div class="dim" style="font-size:11px">${fday(x.ts)} · ${ftime(x.ts)} · ${esc(SEDEN[x.sede]||'')}</div></div></div><span class="mono">${money(x.amount)}</span></div>`).join('')||'<div class="empty">Sin registros.</div>'}
+function doPos(){const pv=prevFor(POS.key,POS.amt);if(!POS.key||!pv.ok)return;const amt=Math.round(parseFloat(POS.amt)*100)/100,sede=$('#pos-sede').value;
+  const r=register(POS.key,amt,'consumo',{sede});if(!r)return;
+  const w=r.c.w,t0=tierOf(r.q?w.life-1:w.life),L=[];
+  L.push(['ok',`Cliente validado: <b>${esc(r.c.name)}</b> · nivel ${TIERS[t0]}`]);
+  L.push(['ok',`Consumo de <b>${money(amt)}</b> registrado en ${esc(SEDEN[sede])} · ${ftime(Date.now())}`]);
+  if(!r.q)L.push(['no',`<b>No califica para sello</b>: el mínimo es ${money(rules().min)}. La venta queda registrada sin saldo.`]);
+  else{L.push(['ok',t0===2?`Cashback Oro: <b>+${money(R.RATE[2])}</b> disponible al instante`:`+1 sello (${r.done?R.CARD:w.visits}/${R.CARD}) · <b>${money(R.RATE[t0])}</b> bloqueados`]);
+    if(r.done)L.push(['ok',`¡Tarjeta completa! <b>${money(r.done.a)}</b> pasaron a saldo disponible`]);
+    else if(t0<2&&tierOf(w.life)===t0)L.push(['ok',`Faltan <b>${R.CARD-w.visits}</b> consumos para el premio de ${money(EM.reward(t0))}`]);
+    r.ev.filter(e=>e.k==='lvl').forEach(e=>L.push(['ok','<b>'+esc(e.m)+'</b>']))}
+  $('#pos-receipt').innerHTML=`<div class="prev" style="margin-top:1rem"><b>Último registro</b><ol class="seq">${L.map(x=>`<li class="${x[0]}">${ic(x[0]==='ok'?'check':'info')}<span>${x[1]}</span></li>`).join('')}</ol></div>`;
+  POS.key='';POS.amt='';POS.q='';$('#pos-a').value='';$('#pos-q').value='';renderPos();$('#pos-q').focus()}
+
+/* --- Tarjeta digital del cliente --- */
+const CV={key:''};
+function renderCardViz(){const cl=clients();if(!cl.length)return;if(!byKey(CV.key))CV.key=cl[0].key;
+  $('#cv-chips').innerHTML=cl.map(c=>{const t=tierOf(c.w.life);return`<button type="button" class="chp ${c.key===CV.key?'on':''}" data-cv="${c.key}" aria-pressed="${c.key===CV.key}">${esc(c.name.split(' ')[0])} <span class="mono" style="opacity:.7;font-size:10.5px">${t===2?'VIP':c.w.visits+'/'+R.CARD}</span></button>`}).join('');
+  const c=byKey(CV.key),w=c.w,t=tierOf(w.life),left=R.CARD-w.visits,amt=Math.max(35,rules().min);
+  const stamps=t===2?`<div class="note" style="color:var(--gold-b);border-color:rgba(245,197,66,.35);background:rgba(245,197,66,.06)">Nivel Oro: sin tarjeta. Cada consumo que califica suma ${money(R.RATE[2])} disponibles al instante.</div>`
+   :`<div class="stm">${Array.from({length:R.CARD},(_,i)=>i<w.visits?`<i class="on">${ic('check')}</i>`:(i===R.CARD-1?`<i class="gift">${ic('gift')}</i>`:'<i></i>')).join('')}</div><div class="bar" style="margin-top:12px"><i style="width:${w.visits/R.CARD*100}%;background:linear-gradient(90deg,var(--gold-b),var(--em))"></i></div><div class="dim" style="font-size:11.5px;margin-top:6px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><span class="em">${left<=3?`¡A solo ${left} consumo${left>1?'s':''} de liberar premio!`:`Faltan ${left} consumos para el premio`}</span><span>${Math.round(w.visits/R.CARD*100)}% completado</span></div>`;
+  $('#cv-card').innerHTML=`<div class="cell" style="justify-content:space-between;flex-wrap:wrap;gap:12px"><div class="cell"><span class="avs" style="width:46px;height:46px;border-radius:13px;font-size:14px">${esc(initials(c.name))}</span><div><b style="font:700 16px 'Plus Jakarta Sans',sans-serif">${esc(c.name)}</b>${c.me?'<span class="me">Tu cuenta</span>':''}<div class="dim mono" style="font-size:11px">${esc(maskPhone(c.phone||''))} · ${w.life} consumos acumulados</div></div></div>${tpill(t)}</div>
+   <div style="margin-top:14px">${stamps}</div>
+   <div class="bal2" style="margin-top:14px"><div><span class="dim" style="font-size:11px">Saldo bloqueado</span><b style="color:var(--gold-b)">${money(t===2?0:w.lock)}</b><small class="dim" style="font-size:10.5px">Se libera al completar ${R.CARD} sellos</small></div><div><span class="dim" style="font-size:11px">Saldo disponible</span><b class="em">${money(w.disp)}</b><small class="dim" style="font-size:10.5px">Listo para canjear</small></div></div>
+   <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="dim" style="font-size:12px">Prueba el motor de fidelización (mínimo ${money(rules().min)}):</span><button class="cta sm" type="button" data-cv-sim>${ic('bolt')}Simular +1 consumo (${money(amt)})</button></div>`}
+
+/* --- Reglas EM.R y sedes (solo admin) --- */
+function fillRules(){const r=rules();$('#cf-min').value=r.min;$('#cf-max').value=r.max;$('#cf-cool').value=r.cool}
+function saveRules(){if(!needAdmin())return;const n=(id,lo,hi,d)=>{const v=parseFloat($(id).value);return Math.min(hi,Math.max(lo,isNaN(v)?d:v))};
+  const min=Math.round(n('#cf-min',0,500,30)),max=Math.max(Math.round(n('#cf-max',1,5000,1000)),min,1),cool=Math.round(n('#cf-cool',0,720,0));
+  P.rules={min,max,cool};audit(`Reglas EM.R: mínimo ${money(min)} · máximo ${money(max)} · espera ${cool} min`);saveP();fillRules();renderAll();EM.toast('Reglas EM.R guardadas')}
+function renderSettings(){
+  $('#sedes-list').innerHTML=SEDES.map(([k,n])=>`<label class="chk" style="margin-top:10px"><input type="checkbox" data-sede="${k}" ${P.sedes[k]?'checked':''}><span>${n}${k===P.curSede?' <span class="pill p-em">Caja actual</span>':''}</span></label>`).join('');
+  $('#cur-sede').innerHTML=sedeOpts(P.curSede);
+  $('#cf-info').innerHTML=`Tarjeta de <b>${R.CARD}</b> sellos · Bronce ${money(R.RATE[0])} y Plata ${money(R.RATE[1])} por sello (bloqueado hasta completar) · Oro ${money(R.RATE[2])} instantáneo.`;
+  $('#tb-audit').innerHTML=(P.audit||[]).slice(0,30).map(a=>`<tr class="h"><td class="mono dim">${fday(a.ts)} · ${ftime(a.ts)}</td><td>${esc(a.by)}</td><td style="white-space:normal;text-align:left">${esc(a.act)}</td></tr>`).join('')||'<tr><td colspan="3" class="empty">Sin actividad registrada.</td></tr>'}
+
+document.addEventListener('click',e=>{const t=e.target;let el;
+  if(el=t.closest('button[data-role]')){const nr=el.dataset.role;if(nr===P.role)return;audit('Cambio de rol a '+(nr==='staff'?'Cajero (staff)':'Administrador'));P.role=nr;saveP();applyRole();route();renderAll();EM.toast(nr==='staff'?'Modo cajero: acciones y datos sensibles restringidos':'Modo administrador')}
+  else if(el=t.closest('[data-pos-pick]')){POS.key=el.dataset.posPick;renderPos();$('#pos-a').focus()}
+  else if(t.closest('[data-pos-clear]')){POS.key='';renderPos();$('#pos-q').focus()}
+  else if(el=t.closest('[data-pos-amt]')){POS.amt=el.dataset.posAmt;$('#pos-a').value=POS.amt;renderPos()}
+  else if(t.closest('#pos-go'))doPos();
+  else if(el=t.closest('[data-cv]')){CV.key=el.dataset.cv;renderCardViz()}
+  else if(t.closest('[data-cv-sim]')){const r=register(CV.key,Math.max(35,rules().min),'consumo',{sede:P.curSede});if(r)EM.toast(r.q?'Consumo simulado: +1 sello':'Consumo simulado sin sello')}
+  else if(t.closest('[data-rules-save]'))saveRules();
+  else if(t.closest('[data-txmore]')){txLim+=60;renderTx()}
+  else if(t.closest('[data-enr-copy]')){try{navigator.clipboard.writeText('https://expandemoney.com/enroll/cafe-alma-barranco');EM.toast('Link copiado')}catch(err){EM.toast('expandemoney.com/enroll/cafe-alma-barranco')}}});
+document.addEventListener('change',e=>{const id=e.target.id;
+  if(id==='pos-sede'||id==='cm-s'||id==='cur-sede'){P.curSede=e.target.value;if(id==='cur-sede'){if(!needAdmin()){renderSettings();return}audit('Sede predeterminada: '+SEDEN[P.curSede])}saveP();renderPos();renderSettings()}
+  else if(e.target.matches&&e.target.matches('[data-sede]')){if(!needAdmin()){renderSettings();return}const k=e.target.dataset.sede,on=e.target.checked;
+    if(!on&&SEDES.filter(s=>P.sedes[s[0]]).length<=1){EM.toast('Debe quedar al menos una sede activa');renderSettings();return}
+    P.sedes[k]=on;if(!on&&P.curSede===k)P.curSede=SEDES.find(s=>P.sedes[s[0]])[0];audit('Sede '+SEDEN[k]+(on?' activada':' desactivada'));saveP();renderAll()}});
+document.addEventListener('input',e=>{const id=e.target.id;
+  if(id==='pos-q'){POS.q=e.target.value;POS.key='';renderPos()}
+  else if(id==='pos-a'){POS.amt=e.target.value;renderPos()}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='pos-a'){e.preventDefault();doPos()}});
 
 /* ===== REPORTES AVANZADOS ===== */
 const DAYN=['domingo','lunes','martes','mi\u00e9rcoles','jueves','viernes','s\u00e1bado'],MESN=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
@@ -850,19 +1019,19 @@ function renderBd(){autoGift();const c=cfg(),L=bdList(),G=P.gifts||{},pend=L.fil
   $$('[data-bd]').forEach(b=>{const on=RP.bm===''&&b.dataset.bd===RP.bd;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
   $('#bd-mes').value=RP.bm;$('[data-gift-all]').disabled=off||!pend;$('#bd-n').textContent=pend;
   $('#bd-list').innerHTML=(off?'<div class="note" style="margin-top:6px">Los saludos de cumplea\u00f1os est\u00e1n desactivados. Act\u00edvalos en la configuraci\u00f3n de arriba.</div>':'')+(L.length?L.map(x=>{const t=tierOf(x.life),bdg=t===2?'<span class="pill p-t2">Oro</span>':`<span class="pill p-t${t}">Tarjeta ${Math.floor(x.life/10)+1}\u00aa</span>`;
-    return`<div class="bd-row"><span class="gi">${ic('gift')}</span><div><div class="nm">${esc(x.name)} ${bdg}</div><div class="mt">${flong(x.d)}${x.off===0?' \u00b7 <b class="em">hoy</b>':''} \u00b7 DNI: ${x.dni}</div><div class="mt">${ic('coin')} Saldo ${money(x.disp)}</div></div><div class="ac">${G[x.id]?'<span class="pill p-em">Regalado \u2713</span>':`<button class="cta gold sm" type="button" data-gift="${x.id}" ${off?'disabled':''}>${ic('gift')}Regalar</button>`}</div></div>`}).join(''):'<div class="empty">No hay cumplea\u00f1os en este periodo.</div>')}
+    return`<div class="bd-row"><span class="gi">${ic('gift')}</span><div><div class="nm">${esc(x.name)} ${bdg}</div><div class="mt">${flong(x.d)}${x.off===0?' \u00b7 <b class="em">hoy</b>':''} \u00b7 DNI: ${isAdmin()?x.dni:x.dni.slice(0,2)+'\u2022\u2022\u2022\u2022'+x.dni.slice(-2)}</div><div class="mt">${ic('coin')} Saldo ${money(x.disp)}</div></div><div class="ac">${G[x.id]?'<span class="pill p-em">Regalado \u2713</span>':`<button class="cta gold sm adm-only" type="button" data-gift="${x.id}" ${off?'disabled':''}>${ic('gift')}Regalar</button>`}</div></div>`}).join(''):'<div class="empty">No hay cumplea\u00f1os en este periodo.</div>')}
 /* configuraci\u00f3n */
 function cfgSum(){const c=cfg(),o=giftOpts().find(g=>g[0]===c.kind);$('#cfg-st').className='pill '+(c.on?(c.auto?'p-em':'p-gold'):'p-sl');$('#cfg-st').textContent=c.on?(c.auto?'Autom\u00e1tico':'Manual'):'Desactivado';
   $('#cfg-sum').innerHTML=c.on?`Regalo predeterminado: <b class="em">${o[1]}</b> \u00b7 vigencia ${c.vig} d\u00edas \u00b7 ${c.auto?(c.days?c.days+(c.days>1?' d\u00edas':' d\u00eda')+' antes del cumplea\u00f1os':'se env\u00eda el mismo d\u00eda'):'env\u00edo manual desde la lista'}.`:'El saludo de cumplea\u00f1os est\u00e1 desactivado: no se enviar\u00e1n regalos.'}
 function fillCfg(){const c=cfg();$('#cfg-on').checked=c.on;$('#cfg-auto').checked=c.auto;$('#cfg-kind').value=c.kind;$('#cfg-cup').value=c.cup;$('#cfg-sal').value=c.sal;$('#cfg-days').value=String(c.days);$('#cfg-vig').value=c.vig;cfgSum()}
-function saveCfg(){const n=(id,lo,hi,d)=>Math.min(hi,Math.max(lo,parseFloat($(id).value)||d));
+function saveCfg(){if(!needAdmin())return;const n=(id,lo,hi,d)=>Math.min(hi,Math.max(lo,parseFloat($(id).value)||d));
   P.bdcfg={on:$('#cfg-on').checked,auto:$('#cfg-auto').checked,kind:$('#cfg-kind').value,cup:Math.round(n('#cfg-cup',5,50,15)),sal:Math.round(n('#cfg-sal',1,50,5)*2)/2,days:+$('#cfg-days').value,vig:Math.round(n('#cfg-vig',7,90,30))};
-  saveP();fillCfg();renderBd();EM.toast('Configuraci\u00f3n de cumplea\u00f1os guardada')}
+  audit('Configuración de cumpleaños actualizada');saveP();fillCfg();renderBd();EM.toast('Configuraci\u00f3n de cumplea\u00f1os guardada')}
 function giftHTML(){const L=bdList().filter(x=>GF.target==='all'?!(P.gifts||{})[x.id]:x.id===GF.target);
   return`<div class="mh"><div><h2 id="mtitle">${GF.target==='all'?'Enviar regalo a '+L.length+' clientes':'Regalar a '+esc(L[0]?L[0].name:'')}</h2><small>Elige el regalo de cumplea\u00f1os.</small></div>${EM.XBTN}</div><div class="mb"><div class="pms" role="radiogroup">${giftOpts().map(g=>`<label class="pm"><input type="radio" name="gk" value="${g[0]}" ${GF.kind===g[0]?'checked':''}><span>${g[1]}<small>${g[2]}</small></span></label>`).join('')}</div><button class="btn btn-e" type="button" data-gift-go>${ic('gift')} Confirmar regalo</button></div>`}
-function doGift(){const r=document.querySelector('input[name=gk]:checked'),k=r?r.value:GF.kind;P.gifts=P.gifts||{};
+function doGift(){if(!needAdmin())return;const r=document.querySelector('input[name=gk]:checked'),k=r?r.value:GF.kind;P.gifts=P.gifts||{};
   const ids=bdList().filter(x=>GF.target==='all'?!P.gifts[x.id]:x.id===GF.target).map(x=>x.id);
-  ids.forEach(id=>P.gifts[id]={k,ts:Date.now()});saveP();EM.modal.close();renderBd();EM.chime();EM.toast(ids.length===1?'Regalo enviado':'Regalo enviado a '+ids.length+' clientes')}
+  ids.forEach(id=>P.gifts[id]={k,ts:Date.now()});audit('Regalo de cumpleaños enviado a '+ids.length+' cliente(s)');saveP();EM.modal.close();renderBd();EM.chime();EM.toast(ids.length===1?'Regalo enviado':'Regalo enviado a '+ids.length+' clientes')}
 
 /* --- Reportes: resumen original + nuevos --- */
 function renderReport(){const a=agg(0),cob=a.tx.filter(x=>x.type==='cobro'),fee=cob.reduce((s,x)=>s+x.amount*.05,0),cards=a.tx.filter(x=>x.done).length;
@@ -890,19 +1059,19 @@ document.addEventListener('click',e=>{const t=e.target;let el;
   else if(el=t.closest('[data-reg]'))openCM(el.dataset.reg);
   else if(t.closest('[data-cm-go]'))doCM();
   else if(el=t.closest('[data-tf]')){tierF=el.dataset.tf;renderClients()}
-  else if(el=t.closest('[data-yf]')){typeF=el.dataset.yf;renderTx()}
+  else if(el=t.closest('[data-yf]')){typeF=el.dataset.yf;txLim=60;renderTx()}
   else if(t.closest('#vgo'))validate();
   else if(el=t.closest('[data-vcode]')){$('#vc').value=el.dataset.vcode;validate()}
   else if(t.closest('#mklink'))mkLink();
   else if(el=t.closest('[data-lpay]'))payLink(el.dataset.lpay);
   else if(el=t.closest('[data-lcopy]')){const l=P.links.find(x=>x.id===el.dataset.lcopy);try{navigator.clipboard.writeText('https://'+l.url);EM.toast('Link copiado')}catch(err){EM.toast(l.url)}}
   else if(t.closest('[data-csv]'))csv();
-  else if(t.closest('#reset')){P=seed();saveP();renderAll();fillCfg();EM.toast('Datos de demo reiniciados')}});
+  else if(t.closest('#reset')){if(!needAdmin())return;const rl=P.role;P=seed();P.role=rl;normP();audit('Datos de demo reiniciados');saveP();renderAll();fillCfg();fillRules();EM.toast('Datos de demo reiniciados')}});
 document.addEventListener('change',e=>{if(e.target.id==='cm-c'){CM.key=e.target.value;$('#cm-p').innerHTML=cmPrev()}});
 document.addEventListener('input',e=>{const id=e.target.id;
-  if(id==='cm-a')CM.amt=e.target.value;
+  if(id==='cm-a'){CM.amt=e.target.value;$('#cm-p').innerHTML=cmPrev()}
   else if(id==='vc')e.target.value=e.target.value.toUpperCase();
-  else if(id==='gq'){renderClients();renderTx()}
+  else if(id==='gq'){txLim=60;renderClients();renderTx()}
   else if(id==='ln'||id==='lp')calcLink()});
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&e.target.id==='vc'){e.preventDefault();validate()}
@@ -912,7 +1081,7 @@ $('#range').addEventListener('change',()=>{renderKpis();renderChart();renderTick
 addEventListener('hashchange',route);
 EM.on(()=>{if(!EM.modal.isOpen())renderAll()});
 
-route();renderAll();calcLink();fillCfg();
+applyRole();route();renderAll();calcLink();fillCfg();fillRules();netUI();$('#enr-qr').innerHTML=EM.qr('enroll-cafe-alma-barranco');
 setTimeout(()=>{skel=false;renderKpis()},500);
 })();
 </script>
